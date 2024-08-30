@@ -1,101 +1,358 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>Alan Vourc'h - Data Analysis Portfolio</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Alan Vourc'h, a Financial Data Analyst specializing in data analysis, financial modeling, and machine learning.">
+    <title>Alan Vourc'h - Financial Data Analyst</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #f4f4f8;
+            --text-color: #333333;
+            --headline-color: #1a1a1a;
+            --accent-color: #3d5afe;
+            --secondary-color: #ffffff;
+            --tertiary-color: #e0e0e0;
+        }
+        body, html {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            scroll-behavior: smooth;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('https://images.unsplash.com/photo-1608037580875-df901b196878?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+            position: relative;
+            color: var(--secondary-color);
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.55); /* semi-transparent overlay */
+            z-index: 1;
+        }
+        header .container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            color: var(--headline-color);
+        }
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+        }
+        section {
+            padding: 100px 0;
+            text-align: center; /* Center text horizontally */
+        }
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 2rem auto;
+            object-fit: cover;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            justify-content: center; /* Center projects grid */
+        }
+        .project {
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        .project-thumb {
+            width: 100%;
+            height: 200px;
+            background-color: var(--tertiary-color);
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            font-weight: bold;
+        }
+        .project-info {
+            padding: 20px;
+        }
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Center skills */
+            gap: 10px;
+            margin-top: 1rem;
+        }
+        .skill {
+            background-color: var(--tertiary-color);
+            color: var(--text-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
 
-		<!-- Wrapper -->
-		<div id="wrapper" class="fade-in">
+				.social-buttons {
+				    margin-top: 20px;
+				    display: flex;
+				    justify-content: center;
+				    gap: 15px;
+				    flex-wrap: wrap; /* Allows wrapping to multiple lines on smaller screens */
+				}
 
-			<!-- Intro -->
-			<div id="intro">
-				<h1>Alan Vourc'h</h1><br />
-				<h2>Financial Data Analyst</h2>
-				<p>Welcome to my portfolio showcasing my expertise in data analysis and visualization, with a special focus on the movie industry.</p>
-				<ul class="actions">
-					<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
-				</ul>
-			</div>
+				.social-buttons .btn {
+				    background: linear-gradient(135deg, #3d5afe, #1a73e8);
+				    color: var(--secondary-color);
+				    text-decoration: none;
+				    padding: 10px 25px;
+				    border-radius: 50px; /* Fully rounded corners */
+				    font-weight: 700;
+				    text-transform: uppercase;
+				    letter-spacing: 1px;
+				    transition: all 0.3s ease;
+				    display: flex;
+				    align-items: center;
+				    gap: 10px;
+				    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Subtle shadow */
+				    border: none;
+				    font-size: 1rem;
+				    /*flex: 1;  Makes the buttons take up equal width */
+				    max-width: 300px; /* Prevents buttons from becoming too wide */
+				    text-align: center; /* Centers the text and icon */
+				}
 
-			<!-- Header -->
-			<header id="header">
-				<a href="index.html" class="logo">Alan Vourc'h</a>
-			</header>
+				.social-buttons .btn:hover {
+				    background: linear-gradient(135deg, #1a73e8, #3d5afe);
+				    transform: translateY(-3px);
+				    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+				}
 
-			<!-- Nav -->
-			<nav id="nav">
-				<ul class="links">
-					<li class="active"><a href="index.html">Home</a></li>
-					<li><a href="projects.html">Projects</a></li>
-					<li><a href="about.html">About Me</a></li>
-					<li><a href="contact.html">Contact</a></li>
-				</ul>
-				<ul class="icons">
-					<li><a href="https://twitter.com/yourtwitter" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-					<li><a href="https://facebook.com/yourfacebook" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-					<li><a href="https://instagram.com/yourinstagram" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-					<li><a href="https://github.com/yourgithub" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-				</ul>
-			</nav>
+				.social-buttons .btn i {
+				    font-size: 1.2rem; /* Adjust icon size */
+				}
 
-			<!-- Main -->
-			<div id="main">
+				.social-buttons .btn:active {
+				    transform: translateY(0); /* Button presses down on click */
+				    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Reduce shadow on click */
+				}
 
-				<!-- Featured Analysis -->
-				<article class="post featured">
-					<header class="major">
-						<h2>Analysis of Box Office Trends</h2>
-						<p>Discover the trends in box office earnings over the past decades and how different genres have performed.</p>
-					</header>
-					<a href="box-office-trends.html" class="image main"><img src="images/box-office-trends.jpg" alt="Box Office Trends" /></a>
-					<ul class="actions special">
-						<li><a href="box-office-trends.html" class="button large">Read More</a></li>
-					</ul>
-				</article>
+				/* Media query for mobile responsiveness */
+				@media (max-width: 768px) {
+				    /* Ensure the container doesn't exceed the screen width */
+				    .container {
+				        max-width: 100%;
+				        padding: 0 10px; /* Adjust padding for mobile to prevent overflow */
+				        box-sizing: border-box;
+				    }
 
-				<!-- Posters Section -->
-				<section class="posts">
-					<header>
-						<h2 style="margin-bottom: 10px;">Upcoming A24 movies</h2>
-					</header>
-					<iframe src="posters.html" style="width: 100%; height: 800px; border: none; margin-top: 0;"></iframe>
-				</section>
-				
-				<!-- Projects -->
-				<section class="posts">
-					<!-- Existing content here -->
-				</section>
+				    /* Social Buttons */
+				    .social-buttons .btn {
+				        width: 100%; /* Make buttons take full width on mobile */
+				        margin: 0 auto; /* Center buttons horizontally */
+				        box-sizing: border-box;
+				    }
 
-				<!-- Footer -->
-				<footer>
-					<!-- Existing footer content here -->
-				</footer>
-			</div>
+				    /* Contact Form */
+				    .contact-form {
+				        padding: 0 10px; /* Add padding to avoid touching screen edges on mobile */
+				        box-sizing: border-box;
+				    }
 
-			<!-- Contact Form -->
-			<footer id="footer">
-				<!-- Existing contact form content here -->
-			</footer>
+				    .contact-form input, .contact-form textarea, .contact-form button {
+				        width: 100%; /* Full width inputs and button */
+				        box-sizing: border-box; /* Prevents overflow due to padding */
+				    }
+				}
 
-			<!-- Copyright -->
-			<div id="copyright">
-				<ul><li>&copy; Alan Vourc'h</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
-			</div>
-		</div>
+        .contact-form {
+            display: grid;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left; /* Keep form fields left-aligned for usability */
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--tertiary-color);
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        button {
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        button:hover {
+            background-color: #304ffe;
+            transform: translateY(-2px);
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 20px auto 0;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Alan Vourc'h</h1>
+            <p class="subtitle">Financial Data Analyst</p>
+            <a href="#about"><button>Explore My Work</button></a>
+        </div>
+    </header>
 
-		<!-- Scripts -->
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/jquery.scrollex.min.js"></script>
-		<script src="assets/js/jquery.scrolly.min.js"></script>
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
+    <main class="container">
+        <section id="about">
+            <h2 class="section-title">About Me</h2>
+            <img src="C:\Users\snip1\Documents\GitHub\EdDantes13.github.io\images\profile_small.JPG" alt="Alan Vourc'h" class="profile-pic">
+            <p>As a Financial Data Analyst, I blend analytical rigor with creative problem-solving to uncover insights that drive strategic decisions. With a passion for turning complex data into clear, actionable recommendations, I've helped organizations optimize their financial performance and mitigate risks.</p>
+            <div class="skills">
+                <span class="skill">Data Analysis</span>
+                <span class="skill">Financial Modeling</span>
+                <span class="skill">Machine Learning</span>
+                <span class="skill">Python</span>
+                <span class="skill">SQL</span>
+                <span class="skill">Tableau</span>
+            </div>
 
-	</body>
+						<div class="social-buttons">
+						    <a href="https://linkedin.com/in/alan-vourch" target="_blank" class="btn">
+						        <i class="fab fa-linkedin"></i> LinkedIn
+						    </a>
+						    <a href="https://kaggle.com/alanvourch" target="_blank" class="btn">
+						        <i class="fab fa-kaggle"></i> Kaggle
+						    </a>
+						    <a href="C:\Users\snip1\Documents\CV\Alan Vourc'h - resume.pdf" target="_blank" class="btn">
+						        <i class="fas fa-file-pdf"></i> Resume
+						    </a>
+						    <a href="mailto:alan.vourch@gmail.com" class="btn">
+						        <i class="fas fa-envelope"></i> Email Me
+						    </a>
+						</div>
+
+        </section>
+
+        <section id="projects">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects">
+                <div class="project">
+                    <div class="project-thumb" style="background-image: url('path/to/project1-thumbnail.jpg');">
+                        <!-- If there's no image, keep the placeholder text -->
+                        Project 1
+                    </div>
+                    <div class="project-info">
+                        <h3>Predictive Financial Forecasting</h3>
+                        <p>Developed an advanced ML model that improved quarterly earnings predictions by 15%, enabling more accurate financial planning and resource allocation.</p>
+                        <a href="#" aria-label="View Case Study for Predictive Financial Forecasting">View Case Study</a>
+                    </div>
+                </div>
+                <div class="project">
+                    <div class="project-thumb" style="background-image: url('path/to/project2-thumbnail.jpg');">
+                        Project 2
+                    </div>
+                    <div class="project-info">
+                        <h3>Interactive Risk Dashboard</h3>
+                        <p>Created a dynamic Tableau dashboard that visualizes real-time risk factors across investment portfolios, enhancing decision-making for fund managers.</p>
+                        <a href="#" aria-label="Explore Dashboard for Interactive Risk Dashboard">Explore Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2 class="section-title">Get In Touch</h2>
+            <!-- <form class="contact-form">
+                <input type="text" placeholder="Name" required aria-label="Name">
+                <input type="email" placeholder="Email" required aria-label="Email">
+                <textarea placeholder="Your Message" required rows="5" aria-label="Your Message"></textarea>
+                <button type="submit">Send Message</button> -->
+
+                <form class="contact-form" method="post" action="https://formspree.io/f/mblrwbby">
+                    <input type="text" name="name" placeholder="Name" required aria-label="Name">
+                    <input type="email" name="email" placeholder="Email" required aria-label="Email">
+                    <textarea name="message" placeholder="Your Message" required rows="5" aria-label="Your Message"></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+
+            </form>
+        </section>
+    </main>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
 </html>

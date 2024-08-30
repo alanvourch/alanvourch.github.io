@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Alan Vourc'h, a Financial Data Analyst specializing in data analysis, financial modeling, and machine learning.">
+    <title>Alan Vourc'h - Financial Data Analyst</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f4f4f8;
+            --text-color: #333333;
+            --headline-color: #1a1a1a;
+            --accent-color: #3d5afe;
+            --secondary-color: #ffffff;
+            --tertiary-color: #e0e0e0;
+        }
+        body, html {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            scroll-behavior: smooth;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('https://images.unsplash.com/photo-1608037580875-df901b196878?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+            position: relative;
+            color: var(--secondary-color);
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.55); /* semi-transparent overlay */
+            z-index: 1;
+        }
+        header .container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            color: var(--headline-color);
+        }
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+        }
+        section {
+            padding: 100px 0;
+            text-align: center; /* Center text horizontally */
+        }
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 2rem auto;
+            object-fit: cover;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            justify-content: center; /* Center projects grid */
+        }
+        .project {
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        .project-thumb {
+            width: 100%;
+            height: 200px;
+            background-color: var(--tertiary-color);
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            font-weight: bold;
+        }
+        .project-info {
+            padding: 20px;
+        }
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Center skills */
+            gap: 10px;
+            margin-top: 1rem;
+        }
+        .skill {
+            background-color: var(--tertiary-color);
+            color: var(--text-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        .contact-form {
+            display: grid;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left; /* Keep form fields left-aligned for usability */
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--tertiary-color);
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        button {
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        button:hover {
+            background-color: #304ffe;
+            transform: translateY(-2px);
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 20px auto 0;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Alan Vourc'h</h1>
+            <p class="subtitle">Financial Data Analyst</p>
+            <a href="#about"><button>Explore My Work</button></a>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="about">
+            <h2 class="section-title">About Me</h2>
+            <img src="C:\Users\snip1\Pictures\ID\Alan Vourc'h 2 - small.JPG" alt="Alan Vourc'h" class="profile-pic">
+            <p>As a Financial Data Analyst, I blend analytical rigor with creative problem-solving to uncover insights that drive strategic decisions. With a passion for turning complex data into clear, actionable recommendations, I've helped organizations optimize their financial performance and mitigate risks.</p>
+            <div class="skills">
+                <span class="skill">Data Analysis</span>
+                <span class="skill">Financial Modeling</span>
+                <span class="skill">Machine Learning</span>
+                <span class="skill">Python</span>
+                <span class="skill">SQL</span>
+                <span class="skill">Tableau</span>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects">
+                <div class="project">
+                    <div class="project-thumb" style="background-image: url('path/to/project1-thumbnail.jpg');">
+                        <!-- If there's no image, keep the placeholder text -->
+                        Project 1
+                    </div>
+                    <div class="project-info">
+                        <h3>Predictive Financial Forecasting</h3>
+                        <p>Developed an advanced ML model that improved quarterly earnings predictions by 15%, enabling more accurate financial planning and resource allocation.</p>
+                        <a href="#" aria-label="View Case Study for Predictive Financial Forecasting">View Case Study</a>
+                    </div>
+                </div>
+                <div class="project">
+                    <div class="project-thumb" style="background-image: url('path/to/project2-thumbnail.jpg');">
+                        Project 2
+                    </div>
+                    <div class="project-info">
+                        <h3>Interactive Risk Dashboard</h3>
+                        <p>Created a dynamic Tableau dashboard that visualizes real-time risk factors across investment portfolios, enhancing decision-making for fund managers.</p>
+                        <a href="#" aria-label="Explore Dashboard for Interactive Risk Dashboard">Explore Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2 class="section-title">Get In Touch</h2>
+            <form class="contact-form">
+                <input type="text" placeholder="Name" required aria-label="Name">
+                <input type="email" placeholder="Email" required aria-label="Email">
+                <textarea placeholder="Your Message" required rows="5" aria-label="Your Message"></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
