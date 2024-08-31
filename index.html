@@ -19,7 +19,7 @@
         }
         body, html {
             font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
+            line-height: 1.5;
             color: var(--text-color);
             margin: 0;
             padding: 0;
@@ -35,10 +35,12 @@
             height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start; /* Align content to the left */
             background: url('https://images.unsplash.com/photo-1608037580875-df901b196878?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
-            position: relative;
-            color: var(--secondary-color);
+            padding-left: 50px; /* Add padding to move the text away from the edge */
+            perspective: 1px;
+            transform-style: preserve-3d;
+            box-sizing: border-box; /* Ensure padding is considered in the width */
         }
         header::before {
             content: '';
@@ -47,27 +49,83 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.55); /* semi-transparent overlay */
+            background-color: rgba(255, 255, 255, 0.3); /* semi-transparent overlay */
             z-index: 1;
+            transform: translateZ(-1px) scale(2);
         }
         header .container {
-            position: relative;
-            z-index: 2;
-            text-align: center;
+            max-width: 600px; /* Limit the width to control the text block */
+            margin-left: 50px; /* Align the container to the left */
+            padding: 0; /* Remove any extra padding */
+            text-align: left; /* Ensure text is aligned to the left */
         }
-        h1, h2, h3 {
+        /* h1, h2, h3 {
             color: var(--headline-color);
-        }
+        } */
         h1 {
             font-size: 3.5rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
+            margin-bottom: 0.2rem;
+            font-weight: 600;
+            color: AntiqueWhite	;
+            font-family: 'Altone', sans-serif;
+            opacity: 0;
+            animation: fadeInLeft 1s ease-out forwards; /* Smooth fade-in from the left */
         }
         .subtitle {
-            font-size: 1.5rem;
+            font-size: 2.0rem;
+            margin-top: 0rem; /* Reduce space above the subtitle */
             margin-bottom: 2rem;
-            color: var(--accent-color);
+            color: AntiqueWhite	;
+            font-family: 'Altone', sans-serif;
+            opacity: 0;
+            animation: fadeInLeft 1s ease-out forwards; /* Smooth fade-in from the left */
+            animation-delay: 0.5s; /* Delays the button animation */
         }
+        button {
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(20px); /* Start button slightly lower */
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 1s; /* Delays the button animation */
+            margin-top: 1rem; /* Reduce space above the button */
+        }
+
+        button:hover {
+            background-color: #304ffe;
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px); /* Starts from the left */
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0); /* Ends at its final position */
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px); /* Starts slightly below */
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0); /* Ends at its final position */
+            }
+        }
+
         section {
             padding: 100px 0;
             text-align: center; /* Center text horizontally */
@@ -127,50 +185,48 @@
             font-size: 0.9rem;
         }
 
-				.social-buttons {
-				    margin-top: 20px;
-				    display: flex;
-				    justify-content: center;
-				    gap: 15px;
-				    flex-wrap: wrap; /* Allows wrapping to multiple lines on smaller screens */
-				}
+/* Social Buttons */
+        .social-buttons {
+            display: flex;
+            justify-content: center; /* Center the buttons */
+            flex-wrap: wrap; /* Allow wrapping if the screen is too narrow */
+            gap: 15px; /* Space between buttons */
+            margin-top: 20px;
+        }
 
-				.social-buttons .btn {
-				    background: linear-gradient(135deg, #3d5afe, #1a73e8);
-				    color: var(--secondary-color);
-				    text-decoration: none;
-				    padding: 10px 25px;
-				    border-radius: 50px; /* Fully rounded corners */
-				    font-weight: 700;
-				    text-transform: uppercase;
-				    letter-spacing: 1px;
-				    transition: all 0.3s ease;
-				    display: flex;
-				    align-items: center;
-				    gap: 10px;
-				    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Subtle shadow */
-				    border: none;
-				    font-size: 1rem;
-				    /*flex: 1;  Makes the buttons take up equal width */
-				    max-width: 300px; /* Prevents buttons from becoming too wide */
-				    text-align: center; /* Centers the text and icon */
-				}
+        .social-buttons .btn {
+            display: inline-flex; /* Inline-flex to keep them on the same line */
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #3d5afe, #1a73e8);
+            color: var(--secondary-color);
+            text-decoration: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            border: none;
+            font-size: 1rem;
+            gap: 10px;
+        }
 
-				.social-buttons .btn:hover {
-				    background: linear-gradient(135deg, #1a73e8, #3d5afe);
-				    transform: translateY(-3px);
-				    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
-				}
+        .social-buttons .btn:hover {
+            background: linear-gradient(135deg, #1a73e8, #3d5afe);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
 
-				.social-buttons .btn i {
-				    font-size: 1.2rem; /* Adjust icon size */
-				}
+        .social-buttons .btn i {
+            font-size: 1.2rem; /* Adjust icon size */
+        }
 
-				.social-buttons .btn:active {
-				    transform: translateY(0); /* Button presses down on click */
-				    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Reduce shadow on click */
-				}
-
+        .social-buttons .btn:active {
+            transform: translateY(0); /* Button presses down on click */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Reduce shadow on click */
+        }
 				/* Media query for mobile responsiveness */
 				@media (max-width: 768px) {
 				    /* Ensure the container doesn't exceed the screen width */
@@ -257,6 +313,61 @@
                 font-size: 2rem;
             }
         }
+
+        /* About Me Section */
+        #about {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 0;
+            flex-wrap: wrap; /* Ensures responsiveness */
+            gap: 20px; /* Adds space between the image and text */
+            transition: all 0.3s ease-in-out; /* Smooth transition */
+        }
+
+        #about:hover {
+            transform: scale(1.02); /* Slightly enlarges the section on hover */
+        }
+
+        .profile-pic {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            margin-bottom: 0;
+            object-fit: cover;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease-in-out; /* Smooth image transition */
+        }
+
+        #about:hover .profile-pic {
+            transform: scale(1.1); /* Enlarges profile picture on hover */
+        }
+
+        .about-text {
+            max-width: 600px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        #about:hover .about-text {
+            color: var(--accent-color); /* Changes text color on hover */
+        }
+
+        /* Responsive layout adjustments */
+        @media (max-width: 768px) {
+            #about {
+                flex-direction: column;
+                text-align: center; /* Centers text on small screens */
+            }
+
+            .profile-pic {
+                margin-bottom: 20px;
+            }
+
+            .about-text {
+                text-align: center;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -269,70 +380,121 @@
     </header>
 
     <main class="container">
-        <section id="about">
-            <h2 class="section-title">About Me</h2>
-            <img src="images/profile_small.JPG" alt="Alan Vourc'h" class="profile-pic">
-            <p>As a Financial Data Analyst, I blend analytical rigor with creative problem-solving to uncover insights that drive strategic decisions. With a passion for turning complex data into clear, actionable recommendations, I've helped organizations optimize their financial performance and mitigate risks.</p>
-            <div class="skills">
-                <span class="skill">Data Analysis</span>
-                <span class="skill">Financial Modeling</span>
-                <span class="skill">Machine Learning</span>
-                <span class="skill">Python</span>
-                <span class="skill">SQL</span>
-                <span class="skill">Tableau</span>
-            </div>
+      <section id="about">
+          <img src="images/profile_small.JPG" alt="Alan Vourc'h" class="profile-pic">
+          <div class="about-text">
+              <h2 class="section-title">About Me</h2>
+              <p>Hi, I'm Alan. As a Financial Data Analyst, I turn complex data into clear insights. I help companies make smarter financial decisions and manage risks better. Passionate about finding data-driven solutions that make a real impact.</p>
+              <div class="skills">
+                  <span class="skill">Data Analysis</span>
+                  <span class="skill">Financial Modeling</span>
+                  <span class="skill">Machine Learning</span>
+                  <span class="skill">Power BI</span>
+                  <span class="skill">Tableau</span>
+                  <span class="skill">Python</span>
+                  <span class="skill">SQL</span>
+              </div>
+              <div class="social-buttons">
+                  <a href="https://linkedin.com/in/alan-vourch" target="_blank" class="btn">
+                      <i class="fab fa-linkedin"></i> LinkedIn
+                  </a>
+                  <a href="https://kaggle.com/alanvourch" target="_blank" class="btn">
+                      <i class="fab fa-kaggle"></i> Kaggle
+                  </a>
+                  <a href="docs/favicon.icoCV\Alan Vourc'h - resume.pdf" target="_blank" class="btn">
+                      <i class="fas fa-file-pdf"></i> Resume
+                  </a>
+                  <a href="mailto:alan.vourch@gmail.com" class="btn">
+                      <i class="fas fa-envelope"></i> Email Me
+                  </a>
+              </div>
+          </div>
+      </section>
 
-						<div class="social-buttons">
-						    <a href="https://linkedin.com/in/alan-vourch" target="_blank" class="btn">
-						        <i class="fab fa-linkedin"></i> LinkedIn
-						    </a>
-						    <a href="https://kaggle.com/alanvourch" target="_blank" class="btn">
-						        <i class="fab fa-kaggle"></i> Kaggle
-						    </a>
-						    <a href="C:\Users\snip1\Documents\CV\Alan Vourc'h - resume.pdf" target="_blank" class="btn">
-						        <i class="fas fa-file-pdf"></i> Resume
-						    </a>
-						    <a href="mailto:alan.vourch@gmail.com" class="btn">
-						        <i class="fas fa-envelope"></i> Email Me
-						    </a>
-						</div>
 
-        </section>
+      <section id="projects">
+          <h2 class="section-title">Featured Projects</h2>
+          <div class="projects">
 
-        <section id="projects">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="projects">
-                <div class="project">
-                    <div class="project-thumb" style="background-image: url('path/to/project1-thumbnail.jpg');">
-                        <!-- If there's no image, keep the placeholder text -->
-                        Project 1
-                    </div>
-                    <div class="project-info">
-                        <h3>Predictive Financial Forecasting</h3>
-                        <p>Developed an advanced ML model that improved quarterly earnings predictions by 15%, enabling more accurate financial planning and resource allocation.</p>
-                        <a href="#" aria-label="View Case Study for Predictive Financial Forecasting">View Case Study</a>
-                    </div>
-                </div>
-                <div class="project">
-                    <div class="project-thumb" style="background-image: url('path/to/project2-thumbnail.jpg');">
-                        Project 2
-                    </div>
-                    <div class="project-info">
-                        <h3>Interactive Risk Dashboard</h3>
-                        <p>Created a dynamic Tableau dashboard that visualizes real-time risk factors across investment portfolios, enhancing decision-making for fund managers.</p>
-                        <a href="#" aria-label="Explore Dashboard for Interactive Risk Dashboard">Explore Dashboard</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+              <div class="project">
+                  <div class="project-thumb" style="background-image: url('images/projects/project1-thumbnail.jpg');">
+                      <!-- If there's no image, keep the placeholder text -->
+                      <!-- Project 1 -->
+                  </div>
+                  <div class="project-info">
+                      <h3>Professional FP&A Dashboard</h3>
+                      <p>Here are some of the data visuals I developed as the FP&A Manager at a major event company. For confidentiality, I used synthetic data. I also created the live databases (Business follow-up and Payroll). To view the dashboard in full-screen mode, click the icon in the bottom right corner.</p>
+                      <a href=https://app.powerbi.com/view?r=eyJrIjoiMTE5ZTY0MWQtYzg3Yy00Mjg1LThlNTktNmZkODI2ZDc0MWE2IiwidCI6Ijg5NTkwMmNlLTUzMWMtNDJjNi05YTMwLTA3YjRkZjUxYzNiMyJ9&embedImagePlaceholder=true
+                       aria-label="View Dashboard">Explore Power BI Dashboard</a>
+                  </div>
+              </div>
+
+              <div class="project">
+                  <div class="project-thumb" style="background-image: url('images/projects/a24-2.jpg');">
+                      <!-- Project 2 -->
+                  </div>
+                  <div class="project-info">
+                      <h3>A24 Movies Analysis</h3>
+                      <p>In my analysis of A24 movies, I used the TMDB dataset I created to explore various aspects of the studio's filmography. The analysis covers box office performance, critical reception, and thematic trends across A24's releases, highlighting what sets it apart in the film industry.</p>
+                      <a href="https://www.kaggle.com/code/alanvourch/a24-movies-analysis"
+                      aria-label="Explore Dashboard for Interactive Risk Dashboard">Explore Notebook</a>
+                  </div>
+              </div>
+
+              <div class="project">
+                  <div class="project-thumb" style="background-image: url('images/projects/sql_tech.jpg');">
+                      <!-- Project 2 -->
+                  </div>
+                  <div class="project-info">
+                      <h3>SQL Data Cleaning + EDA</h3>
+                      <p>Concise project demonstrating my SQL skills, using a public dataset of tech company layoffs for data cleaning, transformation, and exploratory data analysis.</p>
+                      <a href="https://better-lobster-21e.notion.site/SQL-Data-Cleaning-EDA-Layoffs-data-dbd0891e61454310901253c8faa767d3"
+                      aria-label="Explore SQL Data Cleaning">Explore Notion Page</a>
+                  </div>
+              </div>
+
+              <div class="project">
+                  <div class="project-thumb" style="background-image: url('images/projects/tmdb_dataset.jpg'); background-position: center -40px ;">
+                      <!-- Project 2 -->
+                  </div>
+                  <div class="project-info">
+                      <h3>Ultimate Movies Dataset</h3>
+                      <p>I created this dataset by web scraping public data from the TMDB (The Movie Database) website and set up an automatic daily update to keep it current. It gained recognition on Kaggle and I use it for all my analyses of the movie industry, production companies, and box office trends.</p>
+                      <a href="https://www.kaggle.com/datasets/alanvourch/tmdb-movies-daily-updates/data"
+                      aria-label="Explore Kaggle Dataset">Explore Kaggle Dataset</a>
+                  </div>
+              </div>
+
+              <div class="project">
+                  <div class="project-thumb" style="background-image: url('images/projects/update.jpg');">
+                      <!-- Project 2 -->
+                  </div>
+                  <div class="project-info">
+                      <h3>Movies Dataset Automatic Update</h3>
+                      <p>This code runs daily to automatically update my TMDB Movies Dataset. It retrieves all data updates from the previous day and adds them to the dataset. Additionally, a check-up function compares the initial list from my dataset to the latest list of IDs from TMDB to identify and retrieve any missing</p>
+                      <a href="https://www.kaggle.com/code/alanvourch/tmdb-movies-daily-update/notebook"
+                      aria-label="Explore Daily Update Notebook">Explore Notebook</a>
+                  </div>
+              </div>
+
+              <div class="project">
+                  <div class="project-thumb" style="background-image: url('images/projects/extraction.jpg');">
+                      <!-- Project 2 -->
+                  </div>
+                  <div class="project-info">
+                      <h3>Movies Data Extraction</h3>
+                      <p>This is the process I used to create the initial TMDB Movies dataset, which includes details for about 1M movies with 30 fields each. I experimented with various approaches to achieve the desired level of detail and fine-tuned the process for optimal efficiency.</p>
+                      <a href="https://www.kaggle.com/code/alanvourch/tmdb-movies-daily-update/notebook"
+                      aria-label="Explore Movies Data Extraction Notebook">Explore Notebook</a>
+                  </div>
+              </div>
+
+
+          </div>
+      </section>
 
         <section id="contact">
             <h2 class="section-title">Get In Touch</h2>
-            <!-- <form class="contact-form">
-                <input type="text" placeholder="Name" required aria-label="Name">
-                <input type="email" placeholder="Email" required aria-label="Email">
-                <textarea placeholder="Your Message" required rows="5" aria-label="Your Message"></textarea>
-                <button type="submit">Send Message</button> -->
 
                 <form class="contact-form" method="post" action="https://formspree.io/f/mblrwbby">
                     <input type="text" name="name" placeholder="Name" required aria-label="Name">
