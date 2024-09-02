@@ -13,7 +13,7 @@
     <title>Alan Vourc'h Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/favicon.png" type="image/x-icon">
     <style>
         :root {
             --bg-color: #f4f4f8;
@@ -70,25 +70,31 @@
         } */
         h1 {
             font-size: 3.5rem;
-            margin-bottom: 0.2rem;
-            font-weight: 600;
-            color: AntiqueWhite	;
-            font-family: 'Altone', sans-serif;
+            margin-bottom: 0.1rem;
+            font-weight: 700;
+            color: white	;
+            font-family: 'Poppins', sans-serif;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7); /* Add a soft, deep shadow */
             opacity: 0;
             animation: fadeInLeft 1s ease-out forwards; /* Smooth fade-in from the left */
+            /* background: linear-gradient(45deg, #ffffff, #c0c0c0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; */
         }
         .subtitle {
-            font-size: 2.0rem;
+            font-size: 2rem;
             margin-top: 0rem; /* Reduce space above the subtitle */
-            margin-bottom: 2rem;
-            color: AntiqueWhite	;
+            margin-bottom: 0.5rem;
+            color: white	;
             font-family: 'Altone', sans-serif;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Add a soft shadow for a sleek effect */
             opacity: 0;
             animation: fadeInLeft 1s ease-out forwards; /* Smooth fade-in from the left */
-            animation-delay: 0.5s; /* Delays the button animation */
+            animation-delay: 0.2s; /* Delays the button animation */
         }
         button {
             background-color: var(--accent-color);
+            text-align: center;
             color: var(--secondary-color);
             border: none;
             padding: 12px 24px;
@@ -97,6 +103,8 @@
             font-weight: 700;
             font-size: 1rem;
             text-transform: uppercase;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); /* Add a soft shadow for a sleek effect */
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
             letter-spacing: 1px;
             opacity: 0;
             transform: translateY(20px); /* Start button slightly lower */
@@ -407,7 +415,7 @@
                   <a href="https://kaggle.com/alanvourch" target="_blank" class="btn">
                       <i class="fab fa-kaggle"></i> Kaggle
                   </a>
-                  <a href="docs/favicon.icoCV\Alan Vourc'h - resume.pdf" target="_blank" class="btn">
+                  <a href="docs/Alan Vourc'h - resume.pdf" target="_blank" class="btn">
                       <i class="fas fa-file-pdf"></i> Resume
                   </a>
                   <a href="mailto:alan.vourch@gmail.com" class="btn">
