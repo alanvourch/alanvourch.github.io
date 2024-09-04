@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alan Vourc'h - Financial Data Analyst</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .bg-gradient {
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
+        }
+
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(to right, #4e54c8, #8f94fb);
+        }
+
+        .skill-bar {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 8px;
+            background-color: #4e54c8;
+            border-radius: 9999px;
+            transition: width 1s ease-out;
+        }
+
+        .section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-white shadow-md">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4 md:justify-start md:space-x-10">
+                <div class="flex justify-start lg:w-0 lg:flex-1">
+                    <a href="#" class="text-xl font-bold text-gray-800 hover:text-gray-900">Alan Vourc'h</a>
+                </div>
+                <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+                    <a href="#about" class="nav-link text-base font-medium text-gray-500 hover:text-gray-900 mx-3">About</a>
+                    <a href="#projects" class="nav-link text-base font-medium text-gray-500 hover:text-gray-900 mx-3">Projects</a>
+                    <a href="#contact" class="nav-link text-base font-medium text-gray-500 hover:text-gray-900 mx-3">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-gradient text-white min-h-screen flex items-center">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center sm:text-left">
+                <h1 id="hero-title" class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-4">Alan Vourc'h</h1>
+                <h2 id="hero-subtitle" class="text-2xl sm:text-3xl md:text-4xl font-bold mb-8">Financial Data Analyst</h2>
+                <a href="#projects" id="hero-cta" class="bg-white text-blue-600 py-3 px-8 rounded-full font-bold text-lg hover:bg-blue-100 transition duration-300 inline-block">Explore My Work</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <section id="about" class="section mb-32">
+            <h2 class="text-3xl font-bold mb-8 text-center text-gradient">About Me</h2>
+            <div class="flex flex-col md:flex-row items-center">
+                <img src="images/profile_small.JPG" alt="Alan Vourc'h" class="w-64 h-64 object-cover rounded-full mb-8 md:mb-0 md:mr-8">
+                <div>
+                    <p class="mb-4">Hi, I'm Alan. As a Financial Data Analyst, I turn complex data into clear insights. I help companies make smarter financial decisions and manage risks better. Passionate about finding data-driven solutions that make a real impact.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="skill-item flex items-center">
+                            <div>
+                                <h4 class="font-bold text-lg">Data Analysis</h4>
+                                <p>Expert in deriving insights from data.</p>
+                            </div>
+                        </div>
+                        <div class="skill-item flex items-center">
+                            <div>
+                                <h4 class="font-bold text-lg">Financial Modeling</h4>
+                                <p>Proficient in building financial models.</p>
+                            </div>
+                        </div>
+                        <div class="skill-item flex items-center">
+                            <div>
+                                <h4 class="font-bold text-lg">Machine Learning</h4>
+                                <p>Skilled in applying ML to financial data.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section mb-32">
+            <h2 class="text-3xl font-bold mb-8 text-center text-gradient">Featured Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="images/projects/project1-thumbnail.jpg" alt="Professional FP&A Dashboard" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">Professional FP&A Dashboard</h3>
+                        <p class="mb-4">Data visuals developed as FP&A Manager at a major event company. Uses synthetic data for confidentiality.</p>
+                        <a href="https://app.powerbi.com/view?r=eyJrIjoiMTE5ZTY0MWQtYzg3Yy00Mjg1LThlNTktNmZkODI2ZDc0MWE2IiwidCI6Ijg5NTkwMmNlLTUzMWMtNDJjNi05YTMwLTA3YjRkZjUxYzNiMyJ9&embedImagePlaceholder=true" class="text-blue-600 hover:text-blue-800" target="_blank">Explore Dashboard</a>
+                    </div>
+                </div>
+                <!-- Add more project cards here -->
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <h2 class="text-3xl font-bold mb-8 text-center text-gradient">Get In Touch</h2>
+            <div class="flex flex-col md:flex-row">
+                <div class="w-full md:w-1/2 mb-8 md:mb-0">
+                    <form>
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                            <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Message</label>
+                            <textarea id="message" name="message" rows="4" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="w-full md:w-1/2 md:pl-8">
+                    <div class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8">
+                        <h3 class="text-xl font-bold mb-4">Connect with me</h3>
+                        <div class="flex space-x-4 mb-4">
+                            <a href="https://linkedin.com/in/alan-vourch" class="text-blue-600 hover:text-blue-800" target="_blank">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z" clip-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                            <a href="https://kaggle.com/alanvourch" class="text-blue-600 hover:text-blue-800" target="_blank">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.374v5.111c0 .235-.117.352-.351.352H5.505c-.236 0-.354-.117-.354-.352V.353c0-.233.118-.353.354-.353h2.431c.234 0 .351.12.351.353v14.343l6.203-6.272c.165-.165.33-.246.495-.246h3.239c.144 0 .236.06.285.18.046.149.034.255-.036.315l-6.555 6.344 6.836 8.507c.095.104.117.208.07.358"></path>
+                                </svg>
+                            </a>
+                            <a href="mailto:alan.vourch@gmail.com" class="text-blue-600 hover:text-blue-800">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </a>
+                            <a href="docs/Alan%20Vourc'h%20-%20resume.pdf" class="text-blue-600 hover:text-blue-800" target="_blank">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <p>Feel free to reach out for collaborations or just to say hi!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-8">
+        <p>&copy; 2024 Alan Vourc'h. All rights reserved.</p>
+    </footer>
+
+    <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                const sections = document.querySelectorAll('.section');
+                const skillBars = document.querySelectorAll('.skill-progress');
+
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.1
+                };
+
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            if (entry.target.classList.contains('skill-progress')) {
+                                entry.target.style.width = entry.target.dataset.width;
+                            }
+                        }
+                    });
+                }, observerOptions);
+
+                sections.forEach(section => {
+                    observer.observe(section);
+                });
+
+                skillBars.forEach(bar => {
+                    observer.observe(bar);
+                });
+
+                // Smooth scrolling for navigation links
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        document.querySelector(this.getAttribute('href')).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    });
+                });
+            });
+        </script>
+    </body>
+    </html>

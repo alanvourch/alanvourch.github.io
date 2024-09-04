@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alan Vourc'h - Financial Data Analyst</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .bg-blur {
+            backdrop-filter: blur(5px);
+        }
+        .project-card {
+            transition: transform 0.3s ease-in-out;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        .skill-item {
+            transition: transform 0.3s ease-in-out;
+        }
+        .skill-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .header-title, .header-subtitle, .header-button {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .header-visible .header-title,
+        .header-visible .header-subtitle,
+        .header-visible .header-button {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #4e54c8;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .social-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+        }
+
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <nav class="fixed top-0 left-0 right-0 bg-white bg-opacity-90 backdrop-filter backdrop-blur-sm shadow-sm z-50 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex justify-start lg:w-0 lg:flex-1">
+                    <a href="#" class="text-xl font-bold text-gray-800 hover:text-blue-600 transition duration-300">
+                        Alan Vourc'h
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0 space-x-6">
+                    <a href="#about" class="nav-link text-sm font-medium text-gray-600 hover:text-blue-600 transition duration-300">
+                        About
+                    </a>
+                    <a href="#skills" class="nav-link text-sm font-medium text-gray-600 hover:text-blue-600 transition duration-300">
+                        Skills
+                    </a>
+                    <a href="#projects" class="nav-link text-sm font-medium text-gray-600 hover:text-blue-600 transition duration-300">
+                        Projects
+                    </a>
+                    <a href="#contact" class="nav-link text-sm font-medium text-gray-600 hover:text-blue-600 transition duration-300">
+                        Contact
+                    </a>
+                    <div class="flex items-center space-x-4">
+                        <a href="https://linkedin.com/in/alan-vourch" target="_blank" class="text-gray-600 hover:text-blue-600 transition duration-300">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a href="https://kaggle.com/alanvourch" target="_blank" class="text-gray-600 hover:text-blue-600 transition duration-300">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.374v5.111c0 .235-.117.352-.351.352H5.505c-.236 0-.354-.117-.354-.352V.353c0-.233.118-.353.354-.353h2.431c.234 0 .351.12.351.353v14.343l6.203-6.272c.165-.165.33-.246.495-.246h3.239c.144 0 .236.06.285.18.046.149.034.255-.036.315l-6.555 6.344 6.836 8.507c.095.104.117.208.07.358"/>
+                            </svg>
+                        </a>
+                        <a href="mailto:alan.vourch@gmail.com" class="text-gray-600 hover:text-blue-600 transition duration-300">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                        </a>
+                        <a href="docs/Alan%20Vourc'h%20-%20resume.pdf" target="_blank" class="text-gray-600 hover:text-blue-600 transition duration-300">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <header id="header" class="bg-blue-600 text-white h-screen flex items-center" style="background: linear-gradient(to right, #4e54c8, #8f94fb);">
+        <div class="max-w-screen-lg mx-auto px-6 relative z-10">
+            <h1 class="text-5xl font-bold mb-2 header-title">Alan Vourc'h</h1>
+            <h2 class="text-3xl mb-8 header-subtitle">Financial Data Analyst</h2>
+            <a href="#projects" class="bg-white text-blue-600 py-2 px-4 rounded-full font-bold hover:bg-blue-100 transition duration-300 header-button">Explore My Work</a>
+        </div>
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+    </header>
+
+    <main class="max-w-screen-lg mx-auto px-6 py-16">
+        <section id="about" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">About Me</h2>
+            <div class="flex flex-col md:flex-row items-center">
+                <img src="images/profile_small.JPG" alt="Alan Vourc'h" class="w-64 h-64 object-cover rounded-full mb-8 md:mb-0 md:mr-8">
+                <div>
+                    <p class="text-lg mb-6">Hi, I'm Alan. As a Financial Data Analyst, I turn complex data into clear insights. I help companies make smarter financial decisions and manage risks better. Passionate about finding data-driven solutions that make a real impact.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="skill-item flex items-center">
+                            <i class="fas fa-chart-line text-blue-600 text-3xl mr-4"></i>
+                            <div>
+                                <h4 class="font-bold text-lg">Data Analysis</h4>
+                                <p class="text-gray-600">Expert in deriving insights from data.</p>
+                            </div>
+                        </div>
+                        <div class="skill-item flex items-center">
+                            <i class="fas fa-cogs text-blue-600 text-3xl mr-4"></i>
+                            <div>
+                                <h4 class="font-bold text-lg">Financial Modeling</h4>
+                                <p class="text-gray-600">Proficient in building financial models.</p>
+                            </div>
+                        </div>
+                        <div class="skill-item flex items-center">
+                            <i class="fas fa-robot text-blue-600 text-3xl mr-4"></i>
+                            <div>
+                                <h4 class="font-bold text-lg">Machine Learning</h4>
+                                <p class="text-gray-600">Skilled in applying ML to financial data.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">Featured Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="images/projects/project1-thumbnail.jpg" alt="Professional FP&A Dashboard" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">Professional FP&A Dashboard</h3>
+                        <p class="text-gray-700 mb-4">Data visuals developed as FP&A Manager at a major event company. Uses synthetic data for confidentiality.</p>
+                        <a href="https://app.powerbi.com/view?r=eyJrIjoiMTE5ZTY0MWQtYzg3Yy00Mjg1LThlNTktNmZkODI2ZDc0MWE2IiwidCI6Ijg5NTkwMmNlLTUzMWMtNDJjNi05YTMwLTA3YjRkZjUxYzNiMyJ9&embedImagePlaceholder=true" target="_blank" class="text-blue-600 hover:text-blue-800">Explore Dashboard</a>
+                    </div>
+                </div>
+                <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="images/projects/hr.jpg" alt="HR Insights with Machine Learning" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">HR Insights with Machine Learning</h3>
+                        <p class="text-gray-700 mb-4">Predictive model for employee attrition forecasting. Includes detailed code notebook and summary report.</p>
+                        <a href="https://www.kaggle.com/code/alanvourch/salifort-motors-hr-analysis" target="_blank" class="text-blue-600 hover:text-blue-800">Explore Notebook</a>
+                    </div>
+                </div>
+                <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="images/projects/a24-2.jpg" alt="A24 Movies Analysis" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">A24 Movies Analysis</h3>
+                        <p class="text-gray-700 mb-4">Analysis of A24 movies using TMDB dataset. Covers box office performance, critical reception, and thematic trends.</p>
+                        <a href="https://www.kaggle.com/code/alanvourch/a24-movies-analysis" target="_blank" class="text-blue-600 hover:text-blue-800">Explore Notebook</a>
+                    </div>
+                </div>
+                <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="images/projects/sql_tech.jpg" alt="SQL Data Cleaning + EDA" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">SQL Data Cleaning + EDA</h3>
+                        <p class="text-gray-700 mb-4">Concise project demonstrating SQL skills, using a public dataset of tech company layoffs for data cleaning and analysis.</p>
+                        <a href="https://better-lobster-21e.notion.site/SQL-Data-Cleaning-EDA-Layoffs-data-dbd0891e61454310901253c8faa767d3" target="_blank" class="text-blue-600 hover:text-blue-800">Explore Notion Page</a>
+                    </div>
+                </div>
+                <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="images/projects/tmdb_dataset.jpg" alt="Ultimate Movies Dataset" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">Ultimate Movies Dataset</h3>
+                        <p class="text-gray-700 mb-4">Created by web scraping TMDB data with automatic daily updates. Used for movie industry and box office trend analyses.</p>
+                        <a href="https://www.kaggle.com/datasets/alanvourch/tmdb-movies-daily-updates/data" target="_blank" class="text-blue-600 hover:text-blue-800">Explore Kaggle Dataset</a>
+                    </div>
+                </div>
+                <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="images/projects/update.jpg" alt="Movies Dataset Automatic Update" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">Movies Dataset Automatic Update</h3>
+                        <p class="text-gray-700 mb-4">Code for daily automatic updates of the TMDB Movies Dataset, including retrieval of new data and consistency checks.</p>
+                        <a href="https://www.kaggle.com/code/alanvourch/tmdb-movies-daily-update/notebook" target="_blank" class="text-blue-600 hover:text-blue-800">Explore Notebook</a>
+                    </div>
+                </div>
+                <div class="project-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="images/projects/extraction.jpg" alt="Movies Data Extraction" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">Movies Data Extraction</h3>
+                        <p class="text-gray-700 mb-4">Process used to create the initial TMDB Movies dataset, including details for about 1M movies with 30 fields each.</p>
+                        <a href="https://www.kaggle.com/code/alanvourch/tmdb-movies-daily-update/notebook" target="_blank" class="text-blue-600 hover:text-blue-800">Explore Notebook</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">Get In Touch</h2>
+            <div class="flex flex-col md:flex-row">
+                <div class="w-full md:w-1/2 mb-8 md:mb-0">
+                    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+                                Name
+                            </label>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Your Name">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                                Email
+                            </label>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Your Email">
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="message">
+                                Message
+                            </label>
+                            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="message" placeholder="Your Message" rows="4"></textarea>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="w-full md:w-1/2 md:pl-8">
+                    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                        <h3 class="text-xl font-bold mb-4">Connect with me</h3>
+                        <div class="flex space-x-4 mb-4">
+                            <a href="https://linkedin.com/in/alan-vourch" target="_blank" class="text-blue-600 hover:text-blue-800">
+                                <i class="fab fa-linkedin fa-2x"></i>
+                            </a>
+                            <a href="https://kaggle.com/alanvourch" target="_blank" class="text-blue-600 hover:text-blue-800">
+                                <i class="fab fa-kaggle fa-2x"></i>
+                            </a>
+                            <a href="mailto:alan.vourch@gmail.com" class="text-blue-600 hover:text-blue-800">
+                                <i class="fas fa-envelope fa-2x"></i>
+                            </a>
+                            <a href="docs/Alan%20Vourc'h%20-%20resume.pdf" target="_blank" class="text-blue-600 hover:text-blue-800">
+                                <i class="fas fa-file-pdf fa-2x"></i>
+                            </a>
+                        </div>
+                        <p class="text-gray-700">Feel free to reach out for collaborations or just to say hi!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-screen-lg mx-auto px-6 text-center">
+            <p>&copy; 2024 Alan Vourc'h. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS (Animate on Scroll)
+        AOS.init({
+            duration: 1000,
+            once: true,
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer for fade-in effect
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Add active class to navigation links on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 60) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-blue-500');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('text-blue-500');
+                }
+            });
+        });
+
+        // Ensure header animations run on page load
+        window.addEventListener('load', () => {
+            document.querySelector('header').classList.add('header-visible');
+        });
+    </script>
+</body>
+</html>

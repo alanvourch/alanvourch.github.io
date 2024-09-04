@@ -4,10 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portfolio of Alan Vourc'h, a Financial Data Analyst specializing in data analysis, financial modeling, and FP&A.">
+    <meta property="og:title" content="Alan Vourc'h Portfolio">
+    <meta property="og:description" content="Portfolio of Alan Vourc'h, a Financial Data Analyst specializing in data analysis, financial modeling, and FP&A.">
+    <meta property="og:url" content="https://eddantes13.github.io/">
+    <meta property="og:image" content="https://eddantes13.github.io/images/thumbnail.jpg">
+    <meta property="og:image:width" content="1280"> <!-- Recommended width -->
+    <meta property="og:image:height" content="720"> <!-- Recommended height -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Alan Vourc'h Portfolio">
     <title>Alan Vourc'h Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/favicon.png" type="image/x-icon">
     <style>
         :root {
             --bg-color: #f4f4f8;
@@ -19,7 +27,7 @@
         }
         body, html {
             font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
+            line-height: 1.5;
             color: var(--text-color);
             margin: 0;
             padding: 0;
@@ -35,10 +43,12 @@
             height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start; /* Align content to the left */
             background: url('https://images.unsplash.com/photo-1608037580875-df901b196878?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
-            position: relative;
-            color: var(--secondary-color);
+            padding-left: 50px; /* Add padding to move the text away from the edge */
+            perspective: 1px;
+            transform-style: preserve-3d;
+            box-sizing: border-box; /* Ensure padding is considered in the width */
         }
         header::before {
             content: '';
@@ -47,27 +57,91 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.55); /* semi-transparent overlay */
+            background-color: rgba(255, 255, 255, 0.3); /* semi-transparent overlay */
             z-index: 1;
+            transform: translateZ(-1px) scale(2);
         }
         header .container {
-            position: relative;
-            z-index: 2;
-            text-align: center;
+            max-width: 600px; /* Limit the width to control the text block */
+            margin-left: 50px; /* Align the container to the left */
+            padding: 0; /* Remove any extra padding */
+            text-align: left; /* Ensure text is aligned to the left */
         }
-        h1, h2, h3 {
+        /* h1, h2, h3 {
             color: var(--headline-color);
-        }
+        } */
         h1 {
             font-size: 3.5rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.1rem;
             font-weight: 700;
+            color: white	;
+            font-family: 'Poppins', sans-serif;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7); /* Add a soft, deep shadow */
+            opacity: 0;
+            animation: fadeInLeft 1s ease-out forwards; /* Smooth fade-in from the left */
+            /* background: linear-gradient(45deg, #ffffff, #c0c0c0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; */
         }
         .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            color: var(--accent-color);
+            font-size: 2rem;
+            margin-top: 0rem; /* Reduce space above the subtitle */
+            margin-bottom: 0.5rem;
+            color: white	;
+            font-family: 'Altone', sans-serif;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Add a soft shadow for a sleek effect */
+            opacity: 0;
+            animation: fadeInLeft 1s ease-out forwards; /* Smooth fade-in from the left */
+            animation-delay: 0.2s; /* Delays the button animation */
         }
+        button {
+            background-color: var(--accent-color);
+            text-align: center;
+            color: var(--secondary-color);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); /* Add a soft shadow for a sleek effect */
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(20px); /* Start button slightly lower */
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 1s; /* Delays the button animation */
+            margin-top: 1rem; /* Reduce space above the button */
+        }
+
+        button:hover {
+            background-color: #304ffe;
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px); /* Starts from the left */
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0); /* Ends at its final position */
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px); /* Starts slightly below */
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0); /* Ends at its final position */
+            }
+        }
+
         section {
             padding: 100px 0;
             text-align: center; /* Center text horizontally */
@@ -326,7 +400,7 @@
           <img src="images/profile_small.JPG" alt="Alan Vourc'h" class="profile-pic">
           <div class="about-text">
               <h2 class="section-title">About Me</h2>
-              <p>Hi, I'm Alan Vourc'h. As a Financial Data Analyst, I turn complex numbers into clear insights. I help companies make smarter financial decisions and manage risks better. Passionate about finding data-driven solutions that make a real impact.</p>
+              <p>Hi, I'm Alan. As a Financial Data Analyst, I turn complex data into clear insights. I help companies make smarter financial decisions and manage risks better. Passionate about finding data-driven solutions that make a real impact.</p>
               <div class="skills">
                   <span class="skill">Data Analysis</span>
                   <span class="skill">Financial Modeling</span>
@@ -343,7 +417,7 @@
                   <a href="https://kaggle.com/alanvourch" target="_blank" class="btn">
                       <i class="fab fa-kaggle"></i> Kaggle
                   </a>
-                  <a href="C:\Users\snip1\Documents\CV\Alan Vourc'h - resume.pdf" target="_blank" class="btn">
+                  <a href="docs/Alan Vourc'h - resume.pdf" target="_blank" class="btn">
                       <i class="fas fa-file-pdf"></i> Resume
                   </a>
                   <a href="mailto:alan.vourch@gmail.com" class="btn">
@@ -354,40 +428,100 @@
       </section>
 
 
-        <section id="projects">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="projects">
-                <div class="project">
-                    <div class="project-thumb" style="background-image: url('path/to/project1-thumbnail.jpg');">
-                        <!-- If there's no image, keep the placeholder text -->
-                        Project 1
-                    </div>
-                    <div class="project-info">
-                        <h3>Predictive Financial Forecasting</h3>
-                        <p>Developed an advanced ML model that improved quarterly earnings predictions by 15%, enabling more accurate financial planning and resource allocation.</p>
-                        <a href="#" aria-label="View Case Study for Predictive Financial Forecasting">View Case Study</a>
-                    </div>
-                </div>
-                <div class="project">
-                    <div class="project-thumb" style="background-image: url('path/to/project2-thumbnail.jpg');">
-                        Project 2
-                    </div>
-                    <div class="project-info">
-                        <h3>Interactive Risk Dashboard</h3>
-                        <p>Created a dynamic Tableau dashboard that visualizes real-time risk factors across investment portfolios, enhancing decision-making for fund managers.</p>
-                        <a href="#" aria-label="Explore Dashboard for Interactive Risk Dashboard">Explore Dashboard</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <section id="projects">
+          <h2 class="section-title">Featured Projects</h2>
+          <div class="projects">
+
+            <!-- Project 1 -->
+              <div class="project">
+                  <div class="project-thumb" style="background-image: url('images/projects/project1-thumbnail.jpg');">
+                  </div>
+                  <div class="project-info">
+                      <h3>Professional FP&A Dashboard</h3>
+                      <p>Here are some of the data visuals I developed as the FP&A Manager at a major event company. For confidentiality, I used synthetic data. I also created the live databases (Business follow-up and Payroll). To view the dashboard in full-screen mode, click the icon in the bottom right corner.</p>
+                      <a href=https://app.powerbi.com/view?r=eyJrIjoiMTE5ZTY0MWQtYzg3Yy00Mjg1LThlNTktNmZkODI2ZDc0MWE2IiwidCI6Ijg5NTkwMmNlLTUzMWMtNDJjNi05YTMwLTA3YjRkZjUxYzNiMyJ9&embedImagePlaceholder=true
+                       aria-label="View Dashboard">Explore Power BI Dashboard</a>
+                  </div>
+              </div>
+
+              <!-- Project 7 -->
+              <div class="project">
+                  <div class="project-thumb" style="background-image: url('images/projects/hr.jpg');">
+                  </div>
+                  <div class="project-info">
+                      <h3>HR Insights with Machine Learning</h3>
+                      <p>I built a predictive model to help a synthetic HR department forecast employee attrition and uncover factors driving turnover. The project includes a detailed code notebook and a summary report, demonstrating the model's evaluation and actionable insights for HR decisions.</p>
+                      <a href="https://www.kaggle.com/code/alanvourch/salifort-motors-hr-analysis"
+                      aria-label="Explore HR Insights Notebook">Explore Notebook</a>
+                  </div>
+              </div>
+
+              <!-- Project 2 -->
+              <div class="project">
+                  <div class="project-thumb" style="background-image: url('images/projects/a24-2.jpg');">
+                  </div>
+                  <div class="project-info">
+                      <h3>A24 Movies Analysis</h3>
+                      <p>In my analysis of A24 movies, I used the TMDB dataset I created to explore various aspects of the studio's filmography. The analysis covers box office performance, critical reception, and thematic trends across A24's releases, highlighting what sets it apart in the film industry.</p>
+                      <a href="https://www.kaggle.com/code/alanvourch/a24-movies-analysis"
+                      aria-label="Explore Dashboard for Interactive Risk Dashboard">Explore Notebook</a>
+                  </div>
+              </div>
+
+              <!-- Project 3 -->
+              <div class="project">
+                  <div class="project-thumb" style="background-image: url('images/projects/sql_tech.jpg');">
+                  </div>
+                  <div class="project-info">
+                      <h3>SQL Data Cleaning + EDA</h3>
+                      <p>Concise project demonstrating my SQL skills, using a public dataset of tech company layoffs for data cleaning, transformation, and exploratory data analysis.</p>
+                      <a href="https://better-lobster-21e.notion.site/SQL-Data-Cleaning-EDA-Layoffs-data-dbd0891e61454310901253c8faa767d3"
+                      aria-label="Explore SQL Data Cleaning">Explore Notion Page</a>
+                  </div>
+              </div>
+
+              <!-- Project 4 -->
+              <div class="project">
+                  <div class="project-thumb" style="background-image: url('images/projects/tmdb_dataset.jpg'); background-position: center -40px ;">
+                  </div>
+                  <div class="project-info">
+                      <h3>Ultimate Movies Dataset</h3>
+                      <p>I created this dataset by web scraping public data from the TMDB (The Movie Database) website and set up an automatic daily update to keep it current. It gained recognition on Kaggle and I use it for all my analyses of the movie industry, production companies, and box office trends.</p>
+                      <a href="https://www.kaggle.com/datasets/alanvourch/tmdb-movies-daily-updates/data"
+                      aria-label="Explore Kaggle Dataset">Explore Kaggle Dataset</a>
+                  </div>
+              </div>
+
+              <!-- Project 5 -->
+              <div class="project">
+                  <div class="project-thumb" style="background-image: url('images/projects/update.jpg');">
+                  </div>
+                  <div class="project-info">
+                      <h3>Movies Dataset Automatic Update</h3>
+                      <p>This code runs daily to automatically update my TMDB Movies Dataset. It retrieves all data updates from the previous day and adds them to the dataset. Additionally, a check-up function compares the initial list from my dataset to the latest list of IDs from TMDB to identify and retrieve any missing</p>
+                      <a href="https://www.kaggle.com/code/alanvourch/tmdb-movies-daily-update/notebook"
+                      aria-label="Explore Daily Update Notebook">Explore Notebook</a>
+                  </div>
+              </div>
+
+              <!-- Project 6 -->
+              <div class="project">
+                  <div class="project-thumb" style="background-image: url('images/projects/extraction.jpg');">
+                  </div>
+                  <div class="project-info">
+                      <h3>Movies Data Extraction</h3>
+                      <p>This is the process I used to create the initial TMDB Movies dataset, which includes details for about 1M movies with 30 fields each. I experimented with various approaches to achieve the desired level of detail and fine-tuned the process for optimal efficiency.</p>
+                      <a href="https://www.kaggle.com/code/alanvourch/tmdb-movies-daily-update/notebook"
+                      aria-label="Explore Movies Data Extraction Notebook">Explore Notebook</a>
+                  </div>
+              </div>
+
+
+          </div>
+      </section>
 
         <section id="contact">
             <h2 class="section-title">Get In Touch</h2>
-            <!-- <form class="contact-form">
-                <input type="text" placeholder="Name" required aria-label="Name">
-                <input type="email" placeholder="Email" required aria-label="Email">
-                <textarea placeholder="Your Message" required rows="5" aria-label="Your Message"></textarea>
-                <button type="submit">Send Message</button> -->
 
                 <form class="contact-form" method="post" action="https://formspree.io/f/mblrwbby">
                     <input type="text" name="name" placeholder="Name" required aria-label="Name">
