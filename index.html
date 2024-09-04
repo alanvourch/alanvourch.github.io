@@ -83,10 +83,39 @@
             transform: translateY(-3px);
         }
 
-        .project:hover {
-            transform: translateY(-10px);
+        /* Responsive hover and layout improvements */
+        .project-card {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            background-color: #fff;
+            border-radius: 10px;
+            overflow:hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .project img {
+            width: 100%;         /* Ensures the image takes up the full width of the container */
+            aspect-ratio: 16/9;        /* Maintains the aspect ratio of the image */
+            object-fit: cover;   /* Ensures the image covers the area without stretching */
+            display: block;      /* Removes any extra space below the image */
+            border-radius: 0;    /* Remove any rounding from the image itself */
+        }
+
+        /* Modern scaling text */
+        .project-card h3 {
+            /* font-size: clamp(1.25rem, 2vw, 1.75rem); /* Scales text */ */
+            font-size: clamp(1rem, 1.5vw, 1.25rem); /* Scales text */
+
+        }
+
+        .project-card p {
+            /* font-size: clamp(1rem, 1.5vw, 1.25rem); /* Scales text */ */
+            font-size: clamp(0.75rem, 1vw, 1rem); /* Scales text */
+
         }
 
     </style>
@@ -102,7 +131,7 @@
       <div class="absolute inset-0 bg-white bg-opacity-10"></div>
 
       <!-- Header content -->
-      <div class="container mx-auto max-w-1xl px-4 relative z-10 pl-24 text-left">
+      <div class="container mx-auto max-w-1xl px-4 relative z-10 pl-24 pb-20 text-left">
           <h1 class="text-white text-5xl font-bold" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); opacity: 0; animation: fadeInLeft 1s ease-out forwards;">Alan Vourc'h</h1>
           <p class="text-white text-2xl font-semibold mt-2" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);opacity: 0; animation: fadeInLeft 1s ease-out forwards 0.2s;">Financial Data Analyst</p>
           <a href="#about"
@@ -117,7 +146,7 @@
     <!-- Main Content -->
     <main class="container mx-auto px-4">
         <!-- About Section -->
-        <section id="about" class=" section flex flex-col items-center justify-center py-24 text-center md:text-left md:flex-row md:space-x-24">
+        <section id="about" class=" section flex flex-col items-center justify-center pt-24 pb-12 text-center md:text-left md:flex-row md:space-x-24">
             <!-- Profile Picture -->
             <img src="images/profile_small.JPG" alt="Alan Vourc'h" class="w-64 h-64 rounded-full shadow-lg object-cover transform transition-transform duration-300 hover:scale-110">
 
@@ -148,8 +177,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto max-w-7xl">
 
                 <!-- Project 1 FP&A Dashboard-->
-                <div class="project bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl aspect-[1/1.2]">
-                    <div class="h-1/2 bg-cover bg-center" style="background-image: url('images/projects/project1-thumbnail.jpg');"></div>
+                <div class="project-card h-full">
+                  <img src="images/projects/project1-thumbnail.jpg" alt="Project Thumbnail"class="object-cover h-60 w-full">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2">Professional FP&A Dashboard</h3>
                         <p class="text-gray-700 mb-4">Here are some of the data visuals I developed as the FP&A Manager at a major event company. For confidentiality, I used synthetic data.</p>
@@ -158,18 +187,18 @@
                 </div>
 
                 <!-- Project 2 HR Analysis Notebook -->
-                <div class="project bg-white rounded-lg shadow-lg overflow-hidden aspect-[1/1.2]">
-                    <div class="h-1/2 bg-cover bg-center" style="background-image: url('images/projects/hr.jpg');"></div>
+                <div class="project-card h-full">
+                  <img src="images/projects/hr.jpg" alt="Project Thumbnail">
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">HR Insights with Machine Learning</h3>
+                        <h3 class="text-xl font-semibold mb-2">HR Insights & Predictive Model</h3>
                         <p class="text-gray-700 mb-4">I built a predictive model to help a synthetic HR department forecast employee attrition and uncover factors driving turnover.</p>
                         <a href="https://www.kaggle.com/code/alanvourch/salifort-motors-hr-analysis" class="text-blue-600 font-semibold hover:underline" target="_blank" rel="noopener noreferrer" aria-label="Explore HR Insights Notebook">Explore Notebook</a>
                     </div>
                 </div>
 
                 <!-- Project 4 SQL Data Cleaning + Analysis-->
-                <div class="project bg-white rounded-lg shadow-lg overflow-hidden aspect-[1/1.2]">
-                    <div class="h-1/2 bg-cover bg-center" style="background-image: url('images/projects/sql_tech.jpg');"></div>
+                <div class="project-card h-full">
+                  <img src="images/projects/sql_tech.jpg" alt="Project Thumbnail">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2">SQL Data Cleaning + Analysis </h3>
                         <p class="text-gray-700 mb-4">Concise project demonstrating my SQL skills, using a public dataset of tech company layoffs for data cleaning, transformation, and exploratory data analysis.</p>
@@ -178,8 +207,8 @@
                 </div>
 
                 <!-- Project 5 Ultimate Movies Dataset -->
-                <div class="project bg-white rounded-lg shadow-lg overflow-hidden aspect-[1/1.2]">
-                    <div class="h-1/2 bg-cover bg-center" style="background-image: url('images/projects/tmdb_dataset.jpg');background-position: center -40px"></div>
+                <div class="project-card h-full">
+                  <img src="images/projects/tmdb_dataset.jpg" alt="Project Thumbnail" class="object-cover h-60 w-full" style="object-position: center -40px;">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2">Ultimate Movies Dataset</h3>
                         <p class="text-gray-700 mb-4">I built a dynamic, daily updated Movies Dataset that's gained attention online. It's now my go-to resource for analyzing the movie industry, production companies, and box office trends.</p>
@@ -188,8 +217,8 @@
                 </div>
 
                 <!-- Project 3 A24 Analysis-->
-                <div class="project bg-white rounded-lg shadow-lg overflow-hidden aspect-[1/1.2]">
-                    <div class="h-1/2 bg-cover bg-center" style="background-image: url('images/projects/a24-2.jpg');"></div>
+                <div class="project-card h-full">
+                  <img src="images/projects/a24-2.jpg" alt="Project Thumbnail">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2">A24 Movies Analysis</h3>
                         <p class="text-gray-700 mb-4">In my analysis of A24 movies, I used my Movies Dataset to explore various aspects of the studio's filmography.</p>
@@ -198,8 +227,8 @@
                 </div>
 
                 <!-- Project 6 Movies Dataset Automatic Update -->
-                <div class="project bg-white rounded-lg shadow-lg overflow-hidden aspect-[1/1.2]">
-                    <div class="h-1/2 bg-cover bg-center" style="background-image: url('images/projects/update.jpg');"></div>
+                <div class="project-card h-full">
+                  <img src="images/projects/update.jpg" alt="Project Thumbnail">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2">Movies Dataset Daily Update</h3>
                         <p class="text-gray-700 mb-4">The code automatically refreshes my Ultimate Movies Dataset every day, pulling in the latest updates and IMDB ratings to keep everything up-to-date and ready for analysis.</p>
@@ -208,8 +237,8 @@
                 </div>
 
                 <!-- Project 7 Movies Data Extraction-->
-                <div class="project bg-white rounded-lg shadow-lg overflow-hidden aspect-[1/1.2]">
-                    <div class="h-1/2 bg-cover bg-center" style="background-image: url('images/projects/extraction.jpg');"></div>
+                <div class="project-card h-full">
+                  <img src="images/projects/extraction.jpg" alt="Project Thumbnail">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2">Movies Data Extraction</h3>
                         <p class="text-gray-700 mb-4">I developed the Ultimate Movies Dataset with details on 1 Million Movies across 30 fields each. Through experimentation, I refined the process for maximum detail and efficiency.</p>
@@ -217,8 +246,6 @@
                     </div>
                 </div>
 
-            </div>
-        </section>
             </div>
         </section>
 
@@ -271,7 +298,7 @@
                             </a>
                             <a href="https://linkedin.com/in/alan-vourch" class="flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 px-5 rounded-full shadow-md font-semibold  tracking-wider hover:bg-blue-600 transition-all duration-300" target="_blank">
                                 <!-- LinkedIn SVG -->
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z" clip-rule="evenodd" />
                                 </svg>
                                 <span>LinkedIn</span>
@@ -297,45 +324,44 @@
 
             </div>
         </section>
-    </main>
 
-    <footer class="bg-gray-100 text-gray-600 py-10 border-t border-gray-300">
-      <div class="container mx-auto flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
-        <div class="text-center md:text-left">
-          <p class="text-sm">&copy; 2024 Alan Vourc'h. All rights reserved.</p>
-        </div>
 
-        <div class="flex space-x-6">
-          <a href="mailto:alan.vourch@gmail.com" class="social-icon text-black-600 hover:text-blue-600">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-              </svg>
-          </a>
-          <a href="https://linkedin.com/in/alan-vourch" target="_blank" class="social-icon text-black-600 hover:text-blue-600">
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z" clip-rule="evenodd" />
-              </svg>
-          </a>
-          <a href="docs/Alan%20Vourc'h%20-%20resume.pdf" target="_blank" class="social-icon text-black-600 hover:text-blue-600">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-              </svg>
-          </a>
-          <a href="https://kaggle.com/alanvourch" target="_blank" class="social-icon text-black-600 hover:text-blue-600">
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.374v5.111c0 .235-.117.352-.351.352H5.505c-.236 0-.354-.117-.354-.352V.353c0-.233.118-.353.354-.353h2.431c.234 0 .351.12.351.353v14.343l6.203-6.272c.165-.165.33-.246.495-.246h3.239c.144 0 .236.06.285.18.046.149.034.255-.036.315l-6.555 6.344 6.836 8.507c.095.104.117.208.07.358"/>
-              </svg>
-          </a>
-        </div>
+        <footer class="bg-gray-100 text-gray-600 py-10 border-t border-gray-300">
+          <div class="container mx-auto flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
+            <div class="text-center md:text-left">
+              <p class="text-sm">&copy; 2024 Alan Vourc'h. All rights reserved.</p>
+            </div>
 
-        <div class="text-center md:text-right">
-          <a href="privacy.html" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Privacy Policy</a>
-          <span class="mx-2">|</span>
-          <a href="terms.html" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Terms of Service</a>
-        </div>
-      </div>
-    </footer>
+            <div class="flex space-x-6">
+              <a href="mailto:alan.vourch@gmail.com" class="social-icon text-black-600 hover:text-blue-600">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                  </svg>
+              </a>
+              <a href="https://linkedin.com/in/alan-vourch" target="_blank" class="social-icon text-black-600 hover:text-blue-600">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z" clip-rule="evenodd" />
+                  </svg>
+              </a>
+              <a href="docs/Alan%20Vourc'h%20-%20resume.pdf" target="_blank" class="social-icon text-black-600 hover:text-blue-600">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                  </svg>
+              </a>
+              <a href="https://kaggle.com/alanvourch" target="_blank" class="social-icon text-black-600 hover:text-blue-600">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.374v5.111c0 .235-.117.352-.351.352H5.505c-.236 0-.354-.117-.354-.352V.353c0-.233.118-.353.354-.353h2.431c.234 0 .351.12.351.353v14.343l6.203-6.272c.165-.165.33-.246.495-.246h3.239c.144 0 .236.06.285.18.046.149.034.255-.036.315l-6.555 6.344 6.836 8.507c.095.104.117.208.07.358"/>
+                  </svg>
+              </a>
+            </div>
 
+            <div class="text-center md:text-right">
+              <a href="privacy.html" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Privacy Policy</a>
+              <span class="mx-2">|</span>
+              <a href="terms.html" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Terms of Service</a>
+            </div>
+          </div>
+        </footer>
     </main>
 
     <!-- Smooth Scroll Script -->
