@@ -118,6 +118,38 @@
 
         }
 
+        /* Nav bar */
+        /* Ensure smooth transition for the navbar when scrolling */
+        .nav {
+          transform: translateY(0);  /* Initial position */
+          transition: transform 0.3s ease;
+        }
+
+        /* When scrolling up */
+        .nav-link {
+          position: relative;
+        }
+
+        .nav-link::after {
+          content: '';
+          position: absolute;
+          width: 0;
+          height: 2px;
+          bottom: -4px;
+          left: 0;
+          background-color: #4e54c8;
+          transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+          width: 100%;
+        }
+
+        nav {
+          transform: translateY(0);  /* Initial state */
+          transition: transform 0.4s ease;  /* Smooth transition */
+        }
+
     </style>
 
 </head>
@@ -125,8 +157,31 @@
 
 <body class="bg-gray-100 text-gray-800 font-roboto leading-relaxed">
 
+  <nav class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between items-center py-4 md:justify-start md:space-x-10">
+              <div class="flex justify-start lg:w-0 lg:flex-1">
+                  <a href="#header" class="text-xl font-bold text-gray-700 hover:text-gray-900">
+                      Alan Vourc'h
+                  </a>
+              </div>
+              <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+                  <a href="#about" class="nav-link text-base font-medium text-gray-500 hover:text-gray-900 mx-3">
+                      About
+                  </a>
+                  <a href="#projects" class="nav-link text-base font-medium text-gray-500 hover:text-gray-900 mx-3">
+                      Projects
+                  </a>
+                  <a href="#contact" class="nav-link text-base font-medium text-gray-500 hover:text-gray-900 mx-3">
+                      Contact
+                  </a>
+              </div>
+          </div>
+      </div>
+  </nav>
+
   <!-- Header Section -->
-  <header class="relative flex items-center justify-start h-screen bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1608037580875-df901b196878?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+  <header id=header class="relative flex items-center justify-start h-screen bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1608037580875-df901b196878?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
       <!-- Semi-transparent overlay -->
       <div class="absolute inset-0 bg-white bg-opacity-10"></div>
 
@@ -392,6 +447,62 @@
         sections.forEach(section => {
             observer.observe(section);
         });
+
+// nav bar script scroll up
+
+        // Select the nav element
+        const nav = document.querySelector('nav');
+        let lastScrollY = window.scrollY;
+        let isAutoScrolling = false;  // Track if the scroll is triggered by link click
+
+        // Function to handle scroll behavior
+        function handleScroll() {
+          if (!isAutoScrolling) {
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+              // User is scrolling down, hide the navbar if scrolled beyond 100px
+              nav.style.transform = 'translateY(-100%)';
+            } else {
+              // User is scrolling up, show the navbar
+              nav.style.transform = 'translateY(0)';
+            }
+
+            // Update the last scroll position to the current one
+            lastScrollY = currentScrollY;
+          }
+        }
+
+        // Listen for the scroll event
+        window.addEventListener('scroll', handleScroll);
+
+        // Handle clicks on internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function (e) {
+            e.preventDefault();  // Prevent default link behavior to control the scroll manually
+
+            // Get the target element
+            const targetElement = document.querySelector(this.getAttribute('href'));
+
+            if (targetElement) {
+              // Scroll to the target element smoothly
+              isAutoScrolling = true;
+              window.scrollTo({
+                top: targetElement.offsetTop,
+                behavior: 'smooth'
+              });
+
+              // After the scroll finishes, allow hiding the navbar on manual scroll
+              setTimeout(() => {
+                isAutoScrolling = false;
+              }, 1000);  // Timeout duration based on scroll duration
+            }
+
+            // Make sure the navbar stays visible after clicking the link
+            nav.style.transform = 'translateY(0)';
+          });
+        });
+
     </script>
 </body>
 </html>
