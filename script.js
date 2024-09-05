@@ -56,8 +56,8 @@
 
     // Toggle the mobile menu panel
     function toggleMobileMenu() {
-      // Slide the panel in and out by toggling Tailwind classes
-      mobileMenuPanel.classList.toggle('-translate-x-full');
+      // Slide the panel in and out
+      mobileMenuPanel.classList.toggle('translate-x-full');
       mobileMenuPanel.classList.toggle('translate-x-0');
 
       // Toggle hamburger and close icons
