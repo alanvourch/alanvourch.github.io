@@ -122,12 +122,28 @@
 
         /* Updated styles for the navigation */
         #navbar {
+          background-color: transparent;
           transition: background-color 0.3s ease;
+        }
+
+        /* Opaque navbar when scrolled */
+        .navbar-opaque {
+          background-color: rgba(0, 0, 0, 0.85); /* You can change this color to suit your needs */
         }
 
         .nav-link {
           transition: color 0.3s ease;
           position: relative;
+        }
+
+        /* Hide the mobile menu initially */
+        #mobile-menu {
+          display: none;
+        }
+
+        /* Hamburger icon active state (optional styling) */
+        .hamburger-active {
+          color: #3B82F6;
         }
 
         .nav-link::after {
@@ -153,18 +169,33 @@
 
 <body class="bg-gray-100 text-gray-800 font-roboto leading-relaxed">
 
-  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-end items-center py-4 md:space-x-10">
-        <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-          <a href="#header" class="nav-link text-base font-medium text-white hover:text-gray-200 mx-3 transition-colors">Home</a>
-          <a href="#about" class="nav-link text-base font-medium text-white hover:text-gray-200 mx-3 transition-colors">About</a>
-          <a href="#projects" class="nav-link text-base font-medium text-white hover:text-gray-200 mx-3 transition-colors">Projects</a>
-          <a href="#contact" class="nav-link text-base font-medium text-white hover:text-gray-200 mx-3 transition-colors">Contact</a>
+ <!-- Nav bar -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4">
+          <!-- Hamburger Icon for Mobile -->
+          <button id="hamburger-btn" class="text-white block md:hidden focus:outline-none">
+            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+
+          <!-- Desktop Navigation Links -->
+          <div id="nav-links" class="hidden md:flex space-x-6 justify-end w-full">
+            <a href="#header" class="nav-link text-white hover:text-gray-300">Home</a>
+            <a href="#about" class="nav-link text-white hover:text-gray-300">About</a>
+            <a href="#projects" class="nav-link text-white hover:text-gray-300">Projects</a>
+            <a href="#contact" class="nav-link text-white hover:text-gray-300">Contact</a>
+          </div>
         </div>
-      </div>
-    </div>
-  </nav>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 text-white space-y-2 py-4">
+          <a href="#header" class="block px-4 py-2 hover:bg-gray-700">Home</a>
+          <a href="#about" class="block px-4 py-2 hover:bg-gray-700">About</a>
+          <a href="#projects" class="block px-4 py-2 hover:bg-gray-700">Projects</a>
+          <a href="#contact" class="block px-4 py-2 hover:bg-gray-700">Contact</a>
+        </div>
+    </nav>
 
   <!-- Header Section -->
   <header id=header class="relative flex items-center justify-start h-screen bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1608037580875-df901b196878?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
@@ -320,27 +351,33 @@
             </div>
 
             <div class="flex space-x-6">
-              <a href="mailto:alan.vourch@gmail.com" class="social-icon text-black-600 hover:text-blue-600">
-                  <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                  </svg>
-              </a>
-              <a href="https://linkedin.com/in/alan-vourch" target="_blank" class="social-icon text-black-600 hover:text-blue-600">
-                  <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                      <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z" clip-rule="evenodd" />
-                  </svg>
-              </a>
-              <a href="docs/Alan%20Vourc'h%20-%20resume.pdf" target="_blank" class="social-icon text-black-600 hover:text-blue-600">
-                  <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                  </svg>
-              </a>
-              <a href="https://kaggle.com/alanvourch" target="_blank" class="social-icon text-black-600 hover:text-blue-600">
-                  <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.374v5.111c0 .235-.117.352-.351.352H5.505c-.236 0-.354-.117-.354-.352V.353c0-.233.118-.353.354-.353h2.431c.234 0 .351.12.351.353v14.343l6.203-6.272c.165-.165.33-.246.495-.246h3.239c.144 0 .236.06.285.18.046.149.034.255-.036.315l-6.555 6.344 6.836 8.507c.095.104.117.208.07.358"/>
-                  </svg>
-              </a>
+                <a href="mailto:alan.vourch@gmail.com" class="social-icon text-black-600 hover:text-blue-600">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                </a>
+
+                <a href="https://linkedin.com/in/alan-vourch" target="_blank" class="social-icon text-black-600 hover:text-blue-600">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
+                        <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+
+                <a href="docs/Alan%20Vourc'h%20-%20resume.pdf" target="_blank" class="social-icon text-black-600 hover:text-blue-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon w-9 h-9" style="vertical-align: middle; fill: currentColor;" viewBox="0 0 1024 1024" version="1.1">
+                        <path d="M334.336 616.3456c0 11.5712 9.5232 21.0944 21.0944 21.0944h315.4944c11.5712 0 21.0944-9.5232 21.0944-21.0944s-9.5232-21.0944-21.0944-21.0944H355.4304c-11.6736 0-21.0944 9.5232-21.0944 21.0944zM670.9248 702.0544H355.4304c-11.5712 0-21.0944 9.5232-21.0944 21.0944s9.5232 21.0944 21.0944 21.0944h315.4944c11.5712 0 21.0944-9.5232 21.0944-21.0944s-9.5232-21.0944-21.0944-21.0944z"/>
+                        <path d="M586.9568 165.888H272.4864c-23.2448 0-42.1888 18.944-42.1888 42.1888v607.8464c0 23.2448 18.944 42.1888 42.1888 42.1888H751.616c23.2448 0 42.1888-18.944 42.1888-42.1888V372.736l-206.848-206.848z m27.4432 87.1424l97.1776 97.1776h-89.9072c-3.8912 0-7.2704-3.3792-7.2704-7.2704v-89.9072z m137.1136 562.7904s0 0.1024 0 0l-479.0272 0.1024s-0.1024 0-0.1024-0.1024V208.1792s0-0.1024 0.1024-0.1024h297.984l1.6384 1.6384v133.12c0 27.2384 22.3232 49.4592 49.4592 49.4592h129.9456v423.5264z"/>
+                        <path d="M428.8512 388.7104c37.1712 0 67.2768-30.1056 67.2768-67.2768 0-37.1712-30.1056-67.2768-67.2768-67.2768S361.472 284.16 361.472 321.4336c0 37.1712 30.1056 67.2768 67.3792 67.2768z m0-97.6896c16.7936 0 30.4128 13.6192 30.4128 30.4128s-13.6192 30.4128-30.4128 30.4128-30.4128-13.6192-30.4128-30.4128 13.6192-30.4128 30.4128-30.4128zM355.4304 504.7296c11.6736 0 21.0944-9.4208 21.0944-21.0944 0-22.8352 23.9616-42.1888 52.3264-42.1888s52.3264 19.2512 52.3264 42.1888c0 11.6736 9.4208 21.0944 21.0944 21.0944s21.0944-9.4208 21.0944-21.0944c0-46.4896-42.3936-84.3776-94.5152-84.3776s-94.5152 37.888-94.5152 84.3776c0 11.6736 9.4208 21.0944 21.0944 21.0944z"/>
+                    </svg>
+                </a>
+
+                <a href="https://kaggle.com/alanvourch" target="_blank" class="social-icon text-black-600 hover:text-blue-600">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
+                        <path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.374v5.111c0 .235-.117.352-.351.352H5.505c-.236 0-.354-.117-.354-.352V.353c0-.233.118-.353.354-.353h2.431c.234 0 .351.12.351.353v14.343l6.203-6.272c.165-.165.33-.246.495-.246h3.239c.144 0 .236.06.285.18.046.149.034.255-.036.315l-6.555 6.344 6.836 8.507c.095.104.117.208.07.358"/>
+                    </svg>
+                </a>
             </div>
+
 
             <div class="text-center md:text-right">
               <a href="privacy.html" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Privacy Policy</a>
@@ -398,6 +435,31 @@
             navLinks.forEach(function(link) {
               link.style.color = 'white';
             });
+          }
+        });
+
+        // Select the hamburger button and the mobile menu
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navbar = document.getElementById('navbar');
+        const header = document.getElementById('header');
+
+        // Function to toggle the mobile menu visibility
+        function toggleMobileMenu() {
+          mobileMenu.classList.toggle('hidden');
+        }
+
+        // Add event listener to the hamburger button
+        hamburgerBtn.addEventListener('click', toggleMobileMenu);
+
+        // Change navbar background on scroll
+        window.addEventListener('scroll', function () {
+          const scrollPosition = window.scrollY;
+
+          if (scrollPosition > header.offsetHeight) {
+            navbar.classList.add('navbar-opaque');
+          } else {
+            navbar.classList.remove('navbar-opaque');
           }
         });
 
