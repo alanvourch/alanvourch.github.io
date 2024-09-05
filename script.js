@@ -46,31 +46,35 @@
       }
     });
 
-    // Select the hamburger button and the mobile menu
+    // Get elements
     const hamburgerBtn = document.getElementById('hamburger-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIcon = document.getElementById('hamburger-icon');
+    const closeIcon = document.getElementById('close-icon');
+    const mobileMenuPanel = document.getElementById('mobile-menu-panel');
     const navbar = document.getElementById('navbar');
     const header = document.getElementById('header');
 
-    // Function to toggle the mobile menu visibility
+    // Toggle the mobile menu panel
     function toggleMobileMenu() {
-      if (mobileMenu.style.display === 'none' || mobileMenu.style.display === '') {
-        mobileMenu.style.display = 'block';
-      } else {
-        mobileMenu.style.display = 'none';
-      }
+      // Slide the panel in and out
+      mobileMenuPanel.classList.toggle('translate-x-full');
+      mobileMenuPanel.classList.toggle('translate-x-0');
+
+      // Toggle hamburger and close icons
+      hamburgerIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
     }
 
     // Add event listener to the hamburger button
     hamburgerBtn.addEventListener('click', toggleMobileMenu);
 
-    // Change navbar background on scroll
+    // Change hamburger color on scroll
     window.addEventListener('scroll', function () {
       const scrollPosition = window.scrollY;
 
       if (scrollPosition > header.offsetHeight) {
-        navbar.classList.add('navbar-opaque');
+        hamburgerBtn.classList.add('scrolled'); // Change color to dark gray
       } else {
-        navbar.classList.remove('navbar-opaque');
+        hamburgerBtn.classList.remove('scrolled'); // Default to white
       }
     });
