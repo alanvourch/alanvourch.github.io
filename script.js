@@ -58,7 +58,7 @@
     function toggleMobileMenu() {
       // Slide the panel in and out
       mobileMenuPanel.classList.toggle('translate-x-0');
-      
+
       // Toggle hamburger and close icons
       hamburgerIcon.classList.toggle('hidden');
       closeIcon.classList.toggle('hidden');
@@ -75,13 +75,43 @@
       link.addEventListener('click', toggleMobileMenu);
     });
 
-    // Change hamburger color on scroll
-    window.addEventListener('scroll', function () {
-      const scrollPosition = window.scrollY;
+    // // Change hamburger color on scroll
+    // window.addEventListener('scroll', function () {
+    //   const scrollPosition = window.scrollY;
+    //
+    //   if (scrollPosition > header.offsetHeight) {
+    //     hamburgerBtn.classList.add('text-gray-800');
+    //   } else {
+    //     hamburgerBtn.classList.remove('text-gray-800');
+    //   }
+    // });
 
-      if (scrollPosition > header.offsetHeight) {
-        hamburgerBtn.classList.add('text-gray-800');
-      } else {
-        hamburgerBtn.classList.remove('text-gray-800');
-      }
+  // // Change hamburger color on scroll
+    window.addEventListener('scroll', function () {
+  var navbar = document.getElementById('navbar');
+  var navLinks = document.querySelectorAll('.nav-link');
+  var hamburgerIcon = document.getElementById('hamburger-icon');
+  var scrollPosition = window.scrollY;
+  var headerHeight = document.getElementById('header').offsetHeight;
+
+  if (scrollPosition > headerHeight - 100) {
+    // Change navbar background and link colors
+    navbar.style.backgroundColor = 'rgba(255, 255, 255, ' + Math.min(scrollPosition / headerHeight, 1) + ')';
+    navLinks.forEach(function (link) {
+      link.style.color = 'rgba(0, 0, 0, ' + Math.min(scrollPosition / headerHeight, 1) + ')';
     });
+
+    // Change hamburger icon to dark gray when scrolling past the header
+    hamburgerIcon.style.color = '#333'; // Dark gray color
+
+  } else {
+    // Revert to original transparent navbar and white links
+    navbar.style.backgroundColor = 'transparent';
+    navLinks.forEach(function (link) {
+      link.style.color = 'white';
+    });
+
+    // Change hamburger icon back to white when in the header
+    hamburgerIcon.style.color = 'white'; // White color
+  }
+});

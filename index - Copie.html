@@ -17,153 +17,13 @@
     <!-- Google Fonts and FontAwesome -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
 
     <!-- Favicon -->
     <link rel="icon" href="images/favicon.png" type="image/x-icon">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <style>
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px); /* Starts from the left */
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0); /* Ends at its final position */
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px); /* Starts slightly below */
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0); /* Ends at its final position */
-            }
-        }
-
-
-        html, body {
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-        /* Sections Transition */
-        .section {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 3px;
-            background-color: #3d5afe;
-            margin: 20px auto 0;
-        }
-
-        /* Social icons Transition */
-        .social-icon {
-            transition: transform 0.3s ease;
-        }
-
-        .social-icon:hover {
-            transform: translateY(-3px);
-        }
-
-        /* Responsive hover and layout improvements */
-        .project-card {
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            background-color: #fff;
-            border-radius: 10px;
-            overflow:hidden;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .project img {
-            width: 100%;         /* Ensures the image takes up the full width of the container */
-            aspect-ratio: 16/9;        /* Maintains the aspect ratio of the image */
-            object-fit: cover;   /* Ensures the image covers the area without stretching */
-            display: block;      /* Removes any extra space below the image */
-            border-radius: 0;    /* Remove any rounding from the image itself */
-        }
-
-        /* Modern scaling text */
-        .project-card h3 {
-            /* font-size: clamp(1.25rem, 2vw, 1.75rem); /* Scales text */ */
-            font-size: clamp(1rem, 1.5vw, 1.25rem); /* Scales text */
-
-        }
-
-        .project-card p {
-            /* font-size: clamp(1rem, 1.5vw, 1.25rem); /* Scales text */ */
-            font-size: clamp(0.75rem, 1vw, 1rem); /* Scales text */
-
-        }
-
-        /* Nav bar */
-
-        /* Updated styles for the navigation */
-        #navbar {
-          background-color: transparent;
-          transition: background-color 0.3s ease;
-        }
-
-        /* Opaque navbar when scrolled */
-        .navbar-opaque {
-          background-color: rgba(0, 0, 0, 0.85); /* You can change this color to suit your needs */
-        }
-
-        .nav-link {
-          transition: color 0.3s ease;
-          position: relative;
-        }
-
-        /* Hide the mobile menu initially */
-        #mobile-menu {
-          display: none;
-        }
-
-        /* Hamburger icon active state (optional styling) */
-        .hamburger-active {
-          color: #3B82F6;
-        }
-
-        .nav-link::after {
-          content: '';
-          position: absolute;
-          width: 100%;
-          height: 2px;
-          bottom: -4px;
-          left: 0;
-          background-color: #3B82F6; /* Tailwind's blue-500 */
-          transform: scaleX(0);
-          transition: transform 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-          transform: scaleX(1);
-        }
-
-    </style>
-
 </head>
 
 
@@ -174,8 +34,11 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4">
           <!-- Hamburger Icon for Mobile -->
           <button id="hamburger-btn" class="text-white block md:hidden focus:outline-none">
-            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg id="hamburger-icon" class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+            <svg id="close-icon" class="hidden w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
             </svg>
           </button>
 
@@ -188,12 +51,14 @@
           </div>
         </div>
 
-        <!-- Mobile Navigation Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 text-white space-y-2 py-4">
-          <a href="#header" class="block px-4 py-2 hover:bg-gray-700">Home</a>
-          <a href="#about" class="block px-4 py-2 hover:bg-gray-700">About</a>
-          <a href="#projects" class="block px-4 py-2 hover:bg-gray-700">Projects</a>
-          <a href="#contact" class="block px-4 py-2 hover:bg-gray-700">Contact</a>
+        <!-- Sliding Panel for Mobile Menu -->
+        <div id="mobile-menu-panel" class="fixed top-0 left-0 h-full w-64 bg-white text-gray-800 transform -translate-x-full transition-transform duration-300 md:hidden">
+          <div class="p-4">
+            <a href="#header" class="block px-4 py-2">Home</a>
+            <a href="#about" class="block px-4 py-2">About</a>
+            <a href="#projects" class="block px-4 py-2">Projects</a>
+            <a href="#contact" class="block px-4 py-2">Contact</a>
+          </div>
         </div>
     </nav>
 
@@ -387,82 +252,6 @@
           </div>
         </footer>
     </main>
-
-    <!-- Smooth Scroll Script -->
-    <script>
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
-
-    <!-- IntersectionObserver for Section Fade-In -->
-    <script>
-        const sections = document.querySelectorAll('.section');
-        const options = {
-            threshold: 0.1
-        };
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, options);
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-
-// nav bar script
-
-        window.addEventListener('scroll', function() {
-          var navbar = document.getElementById('navbar');
-          var navLinks = document.querySelectorAll('.nav-link');
-          var scrollPosition = window.scrollY;
-          var headerHeight = document.getElementById('header').offsetHeight;
-
-          if (scrollPosition > headerHeight - 100) {
-            navbar.style.backgroundColor = 'rgba(255, 255, 255, ' + Math.min(scrollPosition / headerHeight, 1) + ')';
-            navLinks.forEach(function(link) {
-              link.style.color = 'rgba(0, 0, 0, ' + Math.min(scrollPosition / headerHeight, 1) + ')';
-            });
-          } else {
-            navbar.style.backgroundColor = 'transparent';
-            navLinks.forEach(function(link) {
-              link.style.color = 'white';
-            });
-          }
-        });
-
-        // Select the hamburger button and the mobile menu
-        const hamburgerBtn = document.getElementById('hamburger-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navbar = document.getElementById('navbar');
-        const header = document.getElementById('header');
-
-        // Function to toggle the mobile menu visibility
-        function toggleMobileMenu() {
-          mobileMenu.classList.toggle('hidden');
-        }
-
-        // Add event listener to the hamburger button
-        hamburgerBtn.addEventListener('click', toggleMobileMenu);
-
-        // Change navbar background on scroll
-        window.addEventListener('scroll', function () {
-          const scrollPosition = window.scrollY;
-
-          if (scrollPosition > header.offsetHeight) {
-            navbar.classList.add('navbar-opaque');
-          } else {
-            navbar.classList.remove('navbar-opaque');
-          }
-        });
-
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
