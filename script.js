@@ -57,24 +57,31 @@
     // Toggle the mobile menu panel
     function toggleMobileMenu() {
       // Slide the panel in and out
-      mobileMenuPanel.classList.toggle('translate-x-full');
       mobileMenuPanel.classList.toggle('translate-x-0');
-
+      
       // Toggle hamburger and close icons
       hamburgerIcon.classList.toggle('hidden');
       closeIcon.classList.toggle('hidden');
+
+      // Toggle body scroll
+      document.body.classList.toggle('overflow-hidden');
     }
 
     // Add event listener to the hamburger button
     hamburgerBtn.addEventListener('click', toggleMobileMenu);
+
+    // Close mobile menu when clicking on a link
+    mobileMenuPanel.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', toggleMobileMenu);
+    });
 
     // Change hamburger color on scroll
     window.addEventListener('scroll', function () {
       const scrollPosition = window.scrollY;
 
       if (scrollPosition > header.offsetHeight) {
-        hamburgerBtn.classList.add('scrolled'); // Change color to dark gray
+        hamburgerBtn.classList.add('text-gray-800');
       } else {
-        hamburgerBtn.classList.remove('scrolled'); // Default to white
+        hamburgerBtn.classList.remove('text-gray-800');
       }
     });
