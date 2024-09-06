@@ -51,22 +51,18 @@
     const hamburgerIcon = document.getElementById('hamburger-icon');
     const closeIcon = document.getElementById('close-icon');
     const mobileMenuPanel = document.getElementById('mobile-menu-panel');
-    const navbar = document.getElementById('navbar');
-    const header = document.getElementById('header');
+    // const navbar = document.getElementById('navbar');
+    // const header = document.getElementById('header');
+    const overlay = document.getElementById('overlay');
 
     // Toggle the mobile menu panel
     function toggleMobileMenu() {
-      // Slide the panel in and out
-      mobileMenuPanel.classList.toggle('translate-x-0');
-
-      // Toggle hamburger and close icons
+      mobileMenuPanel.classList.toggle('show');
+      overlay.classList.toggle('show');
       hamburgerIcon.classList.toggle('hidden');
       closeIcon.classList.toggle('hidden');
-
-      // Toggle body scroll
       document.body.classList.toggle('overflow-hidden');
     }
-
     // Add event listener to the hamburger button
     hamburgerBtn.addEventListener('click', toggleMobileMenu);
 
@@ -75,16 +71,14 @@
       link.addEventListener('click', toggleMobileMenu);
     });
 
-    // // Change hamburger color on scroll
-    // window.addEventListener('scroll', function () {
-    //   const scrollPosition = window.scrollY;
-    //
-    //   if (scrollPosition > header.offsetHeight) {
-    //     hamburgerBtn.classList.add('text-gray-800');
-    //   } else {
-    //     hamburgerBtn.classList.remove('text-gray-800');
-    //   }
-    // });
+    // Close mobile menu when clicking outside the panel
+    overlay.addEventListener('click', toggleMobileMenu);
+
+    // Close mobile menu when pressing the Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileMenuPanel.classList.contains('show')) {
+        toggleMobileMenu();
+      }
 
   // // Change hamburger color on scroll
     window.addEventListener('scroll', function () {
