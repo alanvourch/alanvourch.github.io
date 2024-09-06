@@ -57,7 +57,7 @@
     // Toggle the mobile menu panel
     function toggleMobileMenu() {
       // Slide the panel in and out
-      mobileMenuPanel.classList.toggle('translate-x-0');
+      mobileMenuPanel.classList.toggle('translate-y-0');
 
       // Toggle hamburger and close icons
       hamburgerIcon.classList.toggle('hidden');
@@ -103,8 +103,6 @@
 
     // Change hamburger icon to dark gray when scrolling past the header
     hamburgerIcon.style.color = '#333'; // Dark gray color
-    // Ensure close icon is always black
-    closeIcon.style.color = '#000'; // Black color
 
   } else {
     // Revert to original transparent navbar and white links
