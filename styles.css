@@ -144,7 +144,6 @@ html, body {
   position: absolute;
   top: 20px;   /* Adjust this value to control vertical position */
   right: 20px; /* Adjust this value to control horizontal position */
-  transition: all 0.3s ease; /* Smooth transition for any movement */
 }
 
 #hamburger-icon, #close-icon {
@@ -154,14 +153,13 @@ html, body {
 /* Mobile Menu Panel */
 #mobile-menu-panel {
   background-color: white;
-  position: relative;
+  position: fixed;
   top: 0;
   left: 0;
   height: 100%;
   width: 16rem;
   z-index: 50;
   box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
 }
 
 /* Transition for sliding in the panel */
