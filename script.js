@@ -65,22 +65,7 @@
 
       // Toggle body scroll
       document.body.classList.toggle('overflow-hidden');
-
-
-    // If panel is open, add an event listener to close it when clicking outside
-    if (mobileMenuPanel.classList.contains('translate-x-0')) {
-      document.addEventListener('click', closePanelOnClickOutside);
-    } else {
-      document.removeEventListener('click', closePanelOnClickOutside);
     }
-  }
-
-  // Function to close the panel when clicking outside
-  function closePanelOnClickOutside(e) {
-    if (!mobileMenuPanel.contains(e.target) && !hamburgerBtn.contains(e.target)) {
-      toggleMobileMenu(); // Close the panel
-    }
-  }
 
     // Add event listener to the hamburger button
     hamburgerBtn.addEventListener('click', toggleMobileMenu);
@@ -89,6 +74,17 @@
     mobileMenuPanel.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', toggleMobileMenu);
     });
+
+    // // Change hamburger color on scroll
+    // window.addEventListener('scroll', function () {
+    //   const scrollPosition = window.scrollY;
+    //
+    //   if (scrollPosition > header.offsetHeight) {
+    //     hamburgerBtn.classList.add('text-gray-800');
+    //   } else {
+    //     hamburgerBtn.classList.remove('text-gray-800');
+    //   }
+    // });
 
   // // Change hamburger color on scroll
     window.addEventListener('scroll', function () {
