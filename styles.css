@@ -162,6 +162,8 @@ html, body {
   top: 1rem;
   right: 1rem;
   color: #333; /* Always dark gray */
+  display: none; /* Initially hide the close icon */
+  z-index: 60; /* Ensure it's above other elements */
 }
 
 /* Transition for sliding in the panel */
@@ -179,6 +181,11 @@ html, body {
 #mobile-menu-panel a:hover {
   color: #3B82F6;
   background-color: #f3f4f6;
+}
+
+/* When the panel is open, display the close icon */
+#mobile-menu-panel.translate-x-0 #close-icon {
+  display: block; /* Show the close icon when panel is open */
 }
 
 /* Ensure no white navbar background on mobile past the header */
