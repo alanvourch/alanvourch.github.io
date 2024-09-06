@@ -57,7 +57,7 @@
     // Toggle the mobile menu panel
     function toggleMobileMenu() {
       // Slide the panel in and out
-      mobileMenuPanel.classList.toggle('translate-y-0');
+      mobileMenuPanel.classList.toggle('translate-x-0');
 
       // Toggle hamburger and close icons
       hamburgerIcon.classList.toggle('hidden');
