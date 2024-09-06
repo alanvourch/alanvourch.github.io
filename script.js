@@ -103,6 +103,8 @@
 
     // Change hamburger icon to dark gray when scrolling past the header
     hamburgerIcon.style.color = '#333'; // Dark gray color
+    // Ensure close icon is always black
+    closeIcon.style.color = '#000'; // Black color
 
   } else {
     // Revert to original transparent navbar and white links
