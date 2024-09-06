@@ -152,16 +152,18 @@ html, body {
   background-color: white;
   position: fixed;
   top: 0;
-  left: 0;
+  right: 0;
   height: 100%;
   width: 16rem;
   z-index: 50;
-  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1); /* Adjust shadow direction */
+  transform: translateX(100%); /* Initially move it outside the viewport */
+  transition: transform 0.3s ease;
 }
 
-/* Transition for sliding in the panel */
-#mobile-menu-panel.show {
-  transform: translateX(0);
+/* When the menu is open, show the panel */
+#mobile-menu-panel.translate-x-0 {
+  transform: translateX(0); /* Slide it in from the right */
 }
 
 #mobile-menu-panel a {
