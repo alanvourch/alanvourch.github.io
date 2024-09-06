@@ -139,12 +139,7 @@ html, body {
   color: #333; /* Dark gray for better visibility when scrolled */
 }
 
-#close-icon {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  color: #333; /* Always dark gray */
-}
+
 
 #hamburger-icon, #close-icon {
   transition: opacity 0.3s ease;
@@ -160,6 +155,13 @@ html, body {
   width: 16rem;
   z-index: 50;
   box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#close-icon {
+  /* position: absolute; */
+  top: 1rem;
+  right: 1rem;
+  color: #333; /* Always dark gray */
 }
 
 /* Transition for sliding in the panel */
