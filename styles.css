@@ -141,9 +141,6 @@ html, body {
 
 #close-icon {
   color: #333; /* Always dark gray */
-  position: absolute;
-  top: 20px;   /* Adjust this value to control vertical position */
-  right: 20px; /* Adjust this value to control horizontal position */
 }
 
 #hamburger-icon, #close-icon {
