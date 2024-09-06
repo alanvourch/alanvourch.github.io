@@ -75,6 +75,16 @@
       link.addEventListener('click', toggleMobileMenu);
     });
 
+    // // Change hamburger color on scroll
+    // window.addEventListener('scroll', function () {
+    //   const scrollPosition = window.scrollY;
+    //
+    //   if (scrollPosition > header.offsetHeight) {
+    //     hamburgerBtn.classList.add('text-gray-800');
+    //   } else {
+    //     hamburgerBtn.classList.remove('text-gray-800');
+    //   }
+    // });
 
   // // Change hamburger color on scroll
     window.addEventListener('scroll', function () {

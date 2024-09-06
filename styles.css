@@ -134,21 +134,18 @@ html, body {
   transition: color 0.3s ease;
 }
 
-
-#hamburger-icon, #close-icon {
-  transition: opacity 0.3s ease;
-}
-
-#hamburger-icon.hidden,
-#close-icon.hidden {
-  display: none;
-}
-
 /* Hamburger button color change when scrolling */
 #hamburger-btn.scrolled {
   color: #333; /* Dark gray for better visibility when scrolled */
 }
 
+#close-icon {
+  color: #333; /* Always dark gray */
+}
+
+#hamburger-icon, #close-icon {
+  transition: opacity 0.3s ease;
+}
 
 /* Mobile Menu Panel */
 #mobile-menu-panel {
@@ -160,15 +157,6 @@ html, body {
   width: 16rem;
   z-index: 50;
   box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
-}
-
-#close-icon {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  color: #333; /* Always dark gray */
-  /* display: none; /* Initially hide the close icon */ */
-  z-index: 60; /* Ensure it's above other elements */
 }
 
 /* Transition for sliding in the panel */
