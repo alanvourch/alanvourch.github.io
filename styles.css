@@ -141,11 +141,6 @@ html, body {
 
 #close-icon {
   color: #333; /* Always dark gray */
-  /* position: absolute; */
-  top: 16px;
-  right: 16px;
-  /* cursor: pointer; */
-
 }
 
 /* Add this class when panel is open */
