@@ -56,12 +56,12 @@ const header = document.getElementById('header');
 
 // Toggle the mobile menu panel
 function toggleMobileMenu() {
-  // Slide the panel in and out
+  // Slide the panel in and out by toggling translate-x-0 class
   mobileMenuPanel.classList.toggle('translate-x-0');
 
   // Toggle hamburger and close icons
   hamburgerIcon.classList.toggle('hidden');
-  // closeIcon.classList.toggle('hidden');
+  closeIcon.classList.toggle('hidden'); // Ensure close icon is toggled properly
 
   // Toggle body scroll
   document.body.classList.toggle('overflow-hidden');
@@ -75,55 +75,38 @@ mobileMenuPanel.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', toggleMobileMenu);
 });
 
-// When the close button is clicked
-closeBtn.addEventListener('click', () => {
-    mobileMenuPanel.style.transform = 'translateX(-100%)'; // Slide out the menu
-    setTimeout(() => {
-        mobileMenuPanel.classList.add('hidden'); // Hide the menu after sliding out
-    }, 300); // Delay to match the transition duration
-    hamburgerBtn.classList.remove('hidden'); // Show the hamburger button
-    closeBtn.classList.add('hidden'); // Hide the close button
-});
-
 // Close the menu when clicking outside of the menu panel
 document.addEventListener('click', (event) => {
-    // Check if the click target is outside the mobile menu panel and not the hamburger button
-    if (!mobileMenuPanel.contains(event.target) && event.target !== hamburgerBtn) {
-        mobileMenuPanel.style.transform = 'translateX(-100%)';  // Slide out the menu
-        setTimeout(() => {
-            mobileMenuPanel.classList.add('hidden');  // Hide the menu after sliding out
-        }, 300);  // Delay to match the transition duration
-        hamburgerBtn.classList.remove('hidden');  // Show the hamburger button
-        closeBtn.classList.add('hidden');  // Hide the close button
+    if (!mobileMenuPanel.contains(event.target) && event.target !== hamburgerBtn && !hamburgerBtn.contains(event.target)) {
+        if (mobileMenuPanel.classList.contains('translate-x-0')) {
+            toggleMobileMenu(); // Reuse the toggle function for consistency
+        }
     }
 });
 
-// // Change hamburger color on scroll
+// Change hamburger color on scroll
 window.addEventListener('scroll', function () {
-var navbar = document.getElementById('navbar');
-var navLinks = document.querySelectorAll('.nav-link');
-var hamburgerIcon = document.getElementById('hamburger-icon');
-var scrollPosition = window.scrollY;
-var headerHeight = document.getElementById('header').offsetHeight;
+    var navLinks = document.querySelectorAll('.nav-link');
+    var scrollPosition = window.scrollY;
+    var headerHeight = header.offsetHeight;
 
-if (scrollPosition > headerHeight - 100) {
-// Change navbar background and link colors
-navbar.style.backgroundColor = 'rgba(255, 255, 255, ' + Math.min(scrollPosition / headerHeight, 1) + ')';
-navLinks.forEach(function (link) {
-  link.style.color = 'rgba(0, 0, 0, ' + Math.min(scrollPosition / headerHeight, 1) + ')';
-});
+    if (scrollPosition > headerHeight - 100) {
+        // Change navbar background and link colors
+        navbar.style.backgroundColor = 'rgba(255, 255, 255, ' + Math.min(scrollPosition / headerHeight, 1) + ')';
+        navLinks.forEach(function (link) {
+            link.style.color = 'rgba(0, 0, 0, ' + Math.min(scrollPosition / headerHeight, 1) + ')';
+        });
 
-// Change hamburger icon to dark gray when scrolling past the header
-hamburgerIcon.style.color = '#333'; // Dark gray color
+        // Change hamburger icon to dark gray when scrolling past the header
+        hamburgerIcon.style.color = '#333'; // Dark gray color
+    } else {
+        // Revert to original transparent navbar and white links
+        navbar.style.backgroundColor = 'transparent';
+        navLinks.forEach(function (link) {
+            link.style.color = 'white';
+        });
 
-} else {
-// Revert to original transparent navbar and white links
-navbar.style.backgroundColor = 'transparent';
-navLinks.forEach(function (link) {
-  link.style.color = 'white';
-});
-
-// Change hamburger icon back to white when in the header
-hamburgerIcon.style.color = 'white'; // White color
-}
+        // Change hamburger icon back to white when in the header
+        hamburgerIcon.style.color = 'white'; // White color
+    }
 });
