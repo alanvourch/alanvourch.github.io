@@ -75,6 +75,29 @@ mobileMenuPanel.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', toggleMobileMenu);
 });
 
+// When the close button is clicked
+closeBtn.addEventListener('click', () => {
+    mobileMenuPanel.style.transform = 'translateX(-100%)'; // Slide out the menu
+    setTimeout(() => {
+        mobileMenuPanel.classList.add('hidden'); // Hide the menu after sliding out
+    }, 300); // Delay to match the transition duration
+    hamburgerBtn.classList.remove('hidden'); // Show the hamburger button
+    closeBtn.classList.add('hidden'); // Hide the close button
+});
+
+// Close the menu when clicking outside of the menu panel
+document.addEventListener('click', (event) => {
+    // Check if the click target is outside the mobile menu panel and not the hamburger button
+    if (!mobileMenuPanel.contains(event.target) && event.target !== hamburgerBtn) {
+        mobileMenuPanel.style.transform = 'translateX(-100%)';  // Slide out the menu
+        setTimeout(() => {
+            mobileMenuPanel.classList.add('hidden');  // Hide the menu after sliding out
+        }, 300);  // Delay to match the transition duration
+        hamburgerBtn.classList.remove('hidden');  // Show the hamburger button
+        closeBtn.classList.add('hidden');  // Hide the close button
+    }
+});
+
 // // Change hamburger color on scroll
 window.addEventListener('scroll', function () {
 var navbar = document.getElementById('navbar');
