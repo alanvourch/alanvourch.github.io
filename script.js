@@ -49,6 +49,7 @@ window.addEventListener('scroll', function() {
 // Get elements
 const hamburgerBtn = document.getElementById('hamburger-btn');
 const hamburgerIcon = document.getElementById('hamburger-icon');
+const closeBtn = document.getElementById('close-btn');
 const closeIcon = document.getElementById('close-icon');
 const mobileMenuPanel = document.getElementById('mobile-menu-panel');
 const navbar = document.getElementById('navbar');
@@ -58,11 +59,9 @@ const header = document.getElementById('header');
 function toggleMobileMenu() {
   // Slide the panel in and out by toggling translate-x-0 class
   mobileMenuPanel.classList.toggle('translate-x-0');
-
   // Toggle hamburger and close icons
   hamburgerIcon.classList.toggle('hidden');
   closeIcon.classList.toggle('hidden'); // Ensure close icon is toggled properly
-
   // Toggle body scroll
   document.body.classList.toggle('overflow-hidden');
 }
@@ -81,6 +80,35 @@ document.addEventListener('click', (event) => {
         if (mobileMenuPanel.classList.contains('translate-x-0')) {
             toggleMobileMenu(); // Reuse the toggle function for consistency
         }
+    }
+});
+
+// Close the panel when the close button is clicked
+closeBtn.addEventListener('click', () => {
+    // Slide out the menu
+    mobileMenuPanel.classList.remove('translate-x-0');
+
+    // Toggle hamburger and close icons
+    hamburgerIcon.classList.remove('hidden'); // Show hamburger icon
+    closeIcon.classList.add('hidden'); // Hide close icon
+
+    // Allow body scroll again
+    document.body.classList.remove('overflow-hidden');
+});
+
+// Close the panel if scrolling outside the panel
+window.addEventListener('scroll', (event) => {
+    // Check if the mobile menu panel is open
+    if (mobileMenuPanel.classList.contains('translate-x-0')) {
+        // Close the panel when scrolling
+        mobileMenuPanel.classList.remove('translate-x-0');
+
+        // Toggle hamburger and close icons
+        hamburgerIcon.classList.remove('hidden'); // Show hamburger icon
+        closeIcon.classList.add('hidden'); // Hide close icon
+
+        // Allow body scroll again
+        document.body.classList.remove('overflow-hidden');
     }
 });
 
