@@ -61,7 +61,7 @@ function toggleMobileMenu() {
 
   // Toggle hamburger and close icons
   hamburgerIcon.classList.toggle('hidden');
-  closeIcon.classList.toggle('hidden');
+  // closeIcon.classList.toggle('hidden');
 
   // Toggle body scroll
   document.body.classList.toggle('overflow-hidden');
