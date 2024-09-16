@@ -99,11 +99,6 @@ html, body {
   transition: background-color 0.3s ease;
 }
 
-/* Opaque navbar when scrolled */
-.navbar-opaque {
-  background-color: rgba(0, 0, 0, 0.85); /* You can change this color to suit your needs */
-}
-
 /* Nav links */
 .nav-link {
   transition: color 0.3s ease;

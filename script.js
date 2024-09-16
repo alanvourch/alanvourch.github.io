@@ -37,11 +37,13 @@ window.addEventListener('scroll', function() {
     navbar.style.backgroundColor = 'rgba(255, 255, 255, ' + Math.min(scrollPosition / headerHeight, 1) + ')';
     navLinks.forEach(function(link) {
       link.style.color = 'rgba(0, 0, 0, ' + Math.min(scrollPosition / headerHeight, 1) + ')';
+      link.style.textShadow = 'none'; // Remove shadow when navbar is opaque
     });
   } else {
     navbar.style.backgroundColor = 'transparent';
     navLinks.forEach(function(link) {
       link.style.color = 'white';
+      link.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.75)'; // Add shadow when navbar is transparent
     });
   }
 });
