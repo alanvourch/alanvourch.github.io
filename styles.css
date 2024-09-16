@@ -47,6 +47,20 @@ html, body {
     margin: 20px auto 0;
 }
 
+
+.skill {
+  background-color: #e2e8f0; /* Light gray background */
+  color: #1a202c; /* Dark gray text */
+  padding: 0.5rem 1rem; /* Padding */
+  border-radius: 9999px; /* Rounded corners */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+
+.skill:hover {
+  transform: scale(1.1); /* Slightly increase size */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Add shadow */
+}
+
 /* Social icons Transition */
 .social-icon {
     transition: transform 0.3s ease;
