@@ -193,3 +193,41 @@ html, body {
 .hamburger-active {
   color: #3B82F6;
 }
+
+
+/* Fade in transition hovering project card  */
+.project-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-image {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.project-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: opacity 0.5s ease;
+}
+
+.project-image img.hover-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.project-card:hover .project-image img {
+  opacity: 0;
+}
+
+.project-card:hover .project-image img.hover-img {
+  opacity: 1;
+}
