@@ -12,7 +12,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // <!-- IntersectionObserver for Section Fade-In -->
 const sections = document.querySelectorAll('.section');
 const options = {
-    threshold: 0.1
+    threshold: 0.05
 };
 const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
