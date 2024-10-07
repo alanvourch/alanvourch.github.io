@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning - HR Insights & Predictive Model</title>
+
+    <!-- Google Fonts and FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.png" type="image/x-icon">
+</head>
+
+<body class="bg-gray-100 text-gray-800 font-roboto leading-relaxed">
+
+<!-- Navigation Bar -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4">
+      <!-- Logo -->
+      <a href="index.html" class="text-xl font-bold text-gray-800">Alan Vourc'h</a>
+
+      <!-- Hamburger Icon for Mobile -->
+      <button id="hamburger-btn" class="text-gray-800 block md:hidden focus:outline-none">
+        <svg id="hamburger-icon" class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+
+      <!-- Desktop Navigation Links -->
+      <div id="nav-links" class="hidden md:flex space-x-6 justify-end w-full">
+        <a href="index.html" class="nav-link text-gray-800 hover:text-blue-600">Home</a>
+        <a href="projects.html" class="nav-link text-blue-600 font-semibold border-b-2 border-blue-600">Projects</a>
+        <a href="about.html" class="nav-link text-gray-800 hover:text-blue-600">About</a>
+        <a href="contact.html" class="nav-link text-gray-800 hover:text-blue-600">Contact</a>
+      </div>
+    </div>
+
+    <!-- Sliding Panel for Mobile Menu -->
+    <div id="mobile-menu-panel" class="fixed top-0 left-0 h-full w-64 bg-white text-gray-800 transform -translate-x-full transition-transform duration-300 md:hidden">
+      <!-- Close Button -->
+      <button id="close-btn" class="absolute top-4 right-4 focus:outline-none" aria-label="Close Menu">
+          <svg id="close-icon" class=" hidden w-8 h-8 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+      </button>
+      <div class="p-4">
+        <a href="index.html" class="block px-4 py-2">Home</a>
+        <a href="projects.html" class="block px-4 py-2 font-semibold text-blue-600">Projects</a>
+        <a href="about.html" class="block px-4 py-2">About</a>
+        <a href="contact.html" class="block px-4 py-2">Contact</a>
+      </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<main class="pt-24">
+    <!-- Project Section -->
+    <section id="project" class="section py-12">
+        <h1 class="section-title text-4xl font-bold text-center mb-8">Machine Learning - HR Insights & Predictive Model</h1>
+
+        <!-- Kaggle Notebook Embed -->
+        <div class="w-full flex justify-center">
+            <iframe src="https://www.kaggle.com/embed/alanvourch/salifort-motors-hr-analysis?kernelSessionId=195071959" height="800" style="margin: 0 auto; width: 100%; max-width: 950px;" frameborder="0" scrolling="auto" title="Salifort Motors: HR Analysis"></iframe>
+        </div>
+
+        <!-- Project Description -->
+        <p class="mt-6 text-center text-lg max-w-3xl mx-auto">
+            In this project, I built a model to predict employee turnover. It highlights which factors impact whether someone stays or leaves, showcasing the use of data science in HR.
+        </p>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-gray-100 text-gray-600 py-10 border-t border-gray-300">
+  <!-- Same footer content as before -->
+</footer>
+
+<!-- JavaScript -->
+<script src="script.js"></script>
+</body>
+</html>
