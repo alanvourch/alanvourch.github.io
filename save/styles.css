@@ -99,15 +99,11 @@ html, body {
   transition: background-color 0.3s ease;
 }
 
-/* Opaque navbar when scrolled */
-.navbar-opaque {
-  background-color: rgba(0, 0, 0, 0.85); /* You can change this color to suit your needs */
-}
-
 /* Nav links */
 .nav-link {
   transition: color 0.3s ease;
   position: relative;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75)
 }
 
 /* Blue underline effect */
@@ -141,6 +137,11 @@ html, body {
 
 #close-icon {
   color: #333; /* Always dark gray */
+}
+
+/* Add this class when panel is open */
+.panel-open #close-icon {
+    display: block;
 }
 
 #hamburger-icon, #close-icon {
@@ -191,4 +192,42 @@ html, body {
 /* Hamburger icon active state */
 .hamburger-active {
   color: #3B82F6;
+}
+
+
+/* Fade in transition hovering project card  */
+.project-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-image {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.project-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: opacity 0.5s ease;
+}
+
+.project-image img.hover-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.project-card:hover .project-image img {
+  opacity: 0;
+}
+
+.project-card:hover .project-image img.hover-img {
+  opacity: 1;
 }

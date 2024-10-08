@@ -140,3 +140,41 @@ window.addEventListener('scroll', function () {
         hamburgerIcon.style.color = 'white'; // White color
     }
 });
+
+document.querySelectorAll('.skill-filter').forEach(skill => {
+    skill.addEventListener('click', function() {
+        const skillName = this.dataset.skill;
+        const isActive = this.classList.contains('active');
+
+        // Reset all skill filters
+        document.querySelectorAll('.skill-filter').forEach(s => {
+            s.classList.remove('active');
+        });
+
+        // Toggle current skill
+        if (!isActive) {
+            this.classList.add('active');
+        }
+
+        // Reset all project cards with a slight delay for smooth effect
+        document.querySelectorAll('.project-card').forEach(project => {
+            project.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            project.style.opacity = 0;
+            project.style.transform = 'translateY(10px)';
+
+            setTimeout(() => {
+                if (!isActive && !project.dataset.skill.includes(skillName)) {
+                    project.style.display = 'none';
+                } else {
+                    project.style.display = 'block';
+                    requestAnimationFrame(() => {
+                        project.style.opacity = 1;
+                        project.style.transform = 'translateY(0)';
+                    });
+                }
+            }, 300);
+        });
+    });
+});
+
+

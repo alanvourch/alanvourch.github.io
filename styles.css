@@ -80,13 +80,13 @@ html, body {
 
 /* Modern scaling text */
 .project-card h3 {
-    /* font-size: clamp(1.25rem, 2vw, 1.75rem); /* Scales text */ */
+    /* font-size: clamp(1.25rem, 2vw, 1.75rem); /* Scales text */ 
     font-size: clamp(1rem, 1.5vw, 1.25rem); /* Scales text */
 
 }
 
 .project-card p {
-    /* font-size: clamp(1rem, 1.5vw, 1.25rem); /* Scales text */ */
+    /* font-size: clamp(1rem, 1.5vw, 1.25rem); /* Scales text */ 
     font-size: clamp(0.75rem, 1vw, 1rem); /* Scales text */
 
 }
@@ -230,4 +230,21 @@ html, body {
 
 .project-card:hover .project-image img.hover-img {
   opacity: 1;
+}
+
+.skill-filter {
+  background-color: #e5e7eb; /* Gray-200 */
+  color: #1f2937; /* Gray-800 */
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.skill-filter:hover {
+  background-color: #2563eb; /* Blue-600 */
+  color: #ffffff; /* White */
+}
+
+.skill-filter.active {
+  background-color: #2563eb; /* Blue-600 */
+  color: #ffffff; /* White */
 }
