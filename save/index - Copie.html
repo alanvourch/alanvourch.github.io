@@ -9,7 +9,7 @@
     <meta property="og:url" content="https://eddantes13.github.io/">
     <meta property="og:image" content="https://eddantes13.github.io/images/thumbnail.jpg">
     <meta property="og:image:width" content="1280">
-    <meta property="og:image:height" content="720">
+    <meta property="og:image:height" content="720"> 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Alan Vourc'h Portfolio">
     <title>Alan Vourc'h Portfolio</title>
@@ -24,6 +24,7 @@
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
 </head>
 
 
@@ -68,10 +69,6 @@
 
   <!-- Header Section -->
   <header id=header class="relative flex items-center justify-start h-screen bg-cover bg-center bg-fixed" style="background-image: url('images/background.webp');">
-  <!-- <header id=header class="relative flex items-center justify-start h-screen bg-cover bg-center bg-fixed" -->
-   <!-- style="background-image: url('https://w.wallhaven.cc/full/6d/wallhaven-6d6rjx.png');"> -->
-
-
 
       <!-- Semi-transparent overlay -->
       <div class="absolute inset-0 bg-black bg-opacity-10"></div>
@@ -103,15 +100,15 @@
                 <p class="mt-4 text-lg">Hi, I'm Alan. I work as a Financial Data Analyst, turning complex data into clear insights. I help companies make better financial decisions and manage risks. My projects range from building FP&A dashboards to creating predictive models. Take a look at my work to learn more.</p>
                 <!-- Skills List -->
                 <div class="mt-8 flex flex-wrap justify-center md:justify-start gap-4">
-                    <span class="bg-gray-200 text-gray-800 py-2 px-4 rounded-full hover:bg-blue-600 hover:text-white transform transition-transform duration-300">Data Analysis</span>
-                    <span class="bg-gray-200 text-gray-800 py-2 px-4 rounded-full hover:bg-blue-600 hover:text-white transform transition-transform duration-300">Financial Modeling</span>
-                    <span class="bg-gray-200 text-gray-800 py-2 px-4 rounded-full hover:bg-blue-600 hover:text-white transform transition-transform duration-300">Machine Learning</span>
-                    <span class="bg-gray-200 text-gray-800 py-2 px-4 rounded-full hover:bg-blue-600 hover:text-white transform transition-transform duration-300">Power BI</span>
-                    <span class="bg-gray-200 text-gray-800 py-2 px-4 rounded-full hover:bg-blue-600 hover:text-white transform transition-transform duration-300">Tableau</span>
-                    <span class="bg-gray-200 text-gray-800 py-2 px-4 rounded-full hover:bg-blue-600 hover:text-white transform transition-transform duration-300">Python</span>
-                    <span class="bg-gray-200 text-gray-800 py-2 px-4 rounded-full hover:bg-blue-600 hover:text-white transform transition-transform duration-300">SQL</span>
+                    <span class="skill-filter bg-gray-200 text-gray-800 py-2 px-4 rounded-full hover:bg-blue-600 hover:text-white transform transition-transform duration-300" data-skill="Data Analysis">Data Analysis</span>
+                    <span class="skill-filter bg-gray-200 text-gray-800 py-2 px-4 rounded-full hover:bg-blue-600 hover:text-white transform transition-transform duration-300" data-skill="Financial Modeling">Financial Modeling</span>
+                    <span class="skill-filter bg-gray-200 text-gray-800 py-2 px-4 rounded-full hover:bg-blue-600 hover:text-white transform transition-transform duration-300" data-skill="Machine Learning">Machine Learning</span>
+                    <span class="skill-filter bg-gray-200 text-gray-800 py-2 px-4 rounded-full hover:bg-blue-600 hover:text-white transform transition-transform duration-300" data-skill="Power BI">Power BI</span>
+                    <span class="skill-filter bg-gray-200 text-gray-800 py-2 px-4 rounded-full hover:bg-blue-600 hover:text-white transform transition-transform duration-300" data-skill="Tableau">Tableau</span>
+                    <span class="skill-filter bg-gray-200 text-gray-800 py-2 px-4 rounded-full hover:bg-blue-600 hover:text-white transform transition-transform duration-300" data-skill="Python">Python</span>
+                    <span class="skill-filter bg-gray-200 text-gray-800 py-2 px-4 rounded-full hover:bg-blue-600 hover:text-white transform transition-transform duration-300" data-skill="SQL">SQL</span>
                 </div>
-
+                
             </div>
         </section>
 
@@ -123,7 +120,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto max-w-7xl">
 
                 <!-- Project 1 FP&A Dashboard-->
-                <div class="project-card h-full">
+                <div class="project-card h-full" data-skill="Power BI, Data Analysis, Financial Modeling">
                   <!-- <img src="images/projects/project1-thumbnail.jpg" alt="Project Thumbnail"class="object-cover h-60 w-full"> -->
                   <div class="project-image">
                       <img src="images/projects/imitationgame.webp" alt="Project Thumbnail">
@@ -138,7 +135,7 @@
 
 
                 <!-- Project 2 HR Analysis Notebook -->
-                <div class="project-card h-full">
+                <div class="project-card h-full" data-skill="Python,Machine Learning, Data Analysis, Financial Modeling">
                   <img src="images/projects/hr.jpg" alt="Project Thumbnail">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2">Machine Learning - HR Insights & Predictive Model</h3>
@@ -148,7 +145,7 @@
                 </div>
 
                 <!-- Project 4 SQL Data Cleaning + Analysis-->
-                <div class="project-card h-full">
+                <div class="project-card h-full" data-skill="SQL, Data Analysis, Financial Modeling">
                   <img src="images/projects/sql_tech.jpg" alt="Project Thumbnail">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2">SQL - Data Cleaning + Analysis </h3>
@@ -158,7 +155,7 @@
                 </div>
 
                 <!-- Project 5 Ultimate Movies Dataset -->
-                <div class="project-card h-full">
+                <div class="project-card h-full" data-skill="Python,Data Analysis">
                   <img src="images/projects/tmdb_dataset.jpg" alt="Project Thumbnail" class="object-cover h-60 w-full" style="object-position: center -40px;">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2">Python - Ultimate Movies Dataset</h3>
@@ -166,21 +163,9 @@
                         <a href="https://www.kaggle.com/datasets/alanvourch/tmdb-movies-daily-updates/data" class="text-blue-600 font-semibold hover:underline" target="_blank" rel="noopener noreferrer" aria-label="Explore Movies Dataset">Explore Kaggle Dataset</a>
                     </div>
                 </div>
-                <!-- Project 9 Top 20 Movies Tableau -->
-                <!-- <div class="project-card h-full">
-                  <div class="project-image">
-                      <img src="images/projects/a_beautiful_mind.jpg" alt="Project Thumbnail">
-                      <img src="images/projects/tableau_boxoffice.png" alt="Hover Image" class="hover-img">
-                  </div>
-                  <div class="p-6">
-                      <h3 class="text-xl font-semibold mb-2">Box Office and IMDb Trends</h3>
-                      <p class="text-gray-700 mb-4">This Tableau visualization highlights Top 20 Box Office movies by genre and decade, comparing revenue and IMDb ratings to reveal key trends over time.</p>
-                      <a href="https://public.tableau.com/app/profile/alan.vourch/viz/BoxOfficeHitsbyGenreandDecade/Dashboard" class="text-blue-600 font-semibold hover:underline" target="_blank" rel="noopener noreferrer" aria-label="Explore Tableau Box Office">Explore Tableau Report</a>
-                  </div>
-                </div> -->
 
                 <!-- Project 9 Top 20 Movies Tableau -->
-                <div class="project-card h-full">
+                <div class="project-card h-full" data-skill="Tableau,Data Analysis">
                   <div class="project-image">
                       <img src="images/projects/cinemas_boxoffice.jpg" alt="Project Thumbnail">
                       <img src="images/projects/tableau_boxoffice.png" alt="Hover Image" class="hover-img">
@@ -193,17 +178,7 @@
                 </div>
 
                 <!-- Project 8 Movies Power BI-->
-                <!-- <div class="project-card h-full">
-                  <img src="images/projects/moneyball.webp" alt="Project Thumbnail">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Cinema Dashboard</h3>
-                        <p class="text-gray-700 mb-4">This Power BI report uses live box office data and IMDb ratings from my Movies Dataset to deliver various analysis, including box office trends, studio performance, and genre breakdowns, all presented through dynamic visuals.</p>
-                        <a href="https://app.powerbi.com/view?r=eyJrIjoiN2MzZjI5OTgtNmI2OC00ZDkzLWJjM2YtMWZmYmIyYzQzMWMzIiwidCI6Ijg5NTkwMmNlLTUzMWMtNDJjNi05YTMwLTA3YjRkZjUxYzNiMyJ9" class="text-blue-600 font-semibold hover:underline" target="_blank" rel="noopener noreferrer" aria-label="Explore Power BI Cinema">Explore Power BI Dashboard</a>
-                    </div>
-                </div> -->
-
-                <!-- Project 8 Movies Power BI-->
-                <div class="project-card h-full">
+                <div class="project-card h-full" data-skill="Power BI,Data Analysis">
                   <div class="project-image">
                     <img src="images/projects/moneyball.webp" alt="Project Thumbnail">
                     <img src="images/projects/pbi_cinema.png" alt="Hover Image" class="hover-img">
@@ -216,7 +191,7 @@
                 </div>
 
                 <!-- Project 3 A24 Analysis-->
-                <div class="project-card h-full">
+                <div class="project-card h-full" data-skill="Python, Data Analysis, Financial Modeling">
                   <img src="images/projects/a24-2.jpg" alt="Project Thumbnail">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2">Python - A24 Movies Analysis</h3>
@@ -226,7 +201,7 @@
                 </div>
 
                 <!-- Project 6 Movies Dataset Automatic Update -->
-                <div class="project-card h-full">
+                <div class="project-card h-full" data-skill="Python, Data Analysis">
                   <div class="project-image">
                     <img src="images/projects/update.jpg" alt="Project Thumbnail">
                     <img src="images/projects/tmdb_movie_update3.png" alt="Hover Image" class="hover-img">
@@ -239,7 +214,7 @@
                 </div>
 
                 <!-- Project 7 Movies Data Extraction-->
-                <div class="project-card h-full">
+                <div class="project-card h-full" data-skill="Python, Data Analysis">
                   <img src="images/projects/extraction.jpg" alt="Project Thumbnail">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2">Python - Movies Data Extraction</h3>
