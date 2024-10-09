@@ -157,12 +157,15 @@ document.querySelectorAll('.skill-filter').forEach(skill => {
         }
 
         // Reset all project cards with a slight delay for smooth effect
-        document.querySelectorAll('.project-card').forEach(project => {
-            project.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach(project => {
+            project.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
             project.style.opacity = 0;
-            project.style.transform = 'translateY(10px)';
+            project.style.transform = 'translateY(20px)';
+        });
 
-            setTimeout(() => {
+        setTimeout(() => {
+            projectCards.forEach(project => {
                 if (!isActive && !project.dataset.skill.includes(skillName)) {
                     project.style.display = 'none';
                 } else {
@@ -172,9 +175,17 @@ document.querySelectorAll('.skill-filter').forEach(skill => {
                         project.style.transform = 'translateY(0)';
                     });
                 }
-            }, 300);
-        });
+            });
+        }, 500);
     });
 });
 
 
+// Create a new image object
+const img = new Image();
+img.src = 'images/background.png'; // The original image path
+
+// When the image is loaded, change the background
+img.onload = function() {
+    document.getElementById('header').style.backgroundImage = "url('images/background.png')";
+};
