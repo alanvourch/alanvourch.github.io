@@ -236,22 +236,35 @@ html, body {
   background-color: #e5e7eb; /* Gray-200 */
   color: #1f2937; /* Gray-800 */
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  padding: 0.5rem 1rem; /* Equivalent to py-2 px-4 */
+  border-radius: 9999px; /* Fully rounded (rounded-full) */
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s;
+  display: inline-block;
+  /* Optional: Add transform styles if needed */
 }
 
-@media (hover: hover) {
+/* Apply hover styles only on devices that support hover (typically desktops) */
+@media (hover: hover) and (pointer: fine) {
   .skill-filter:hover {
     background-color: #2563eb; /* Blue-600 */
     color: #ffffff; /* White */
   }
+
+  .skill-filter.active:hover {
+    background-color: #1e40af; /* Blue-800 */
+    color: #ffffff; /* White */
+  }
 }
 
+/* Active state styles */
 .skill-filter.active {
   background-color: #2563eb; /* Blue-600 */
   color: #ffffff; /* White */
 }
 
-.skill-filter.active:hover {
-  background-color: #1e40af;
-  color: #ffffff;
+/* Optional: If you have transform effects on active state */
+.skill-filter.active {
+  /* Example transform: scale up slightly */
+  transform: scale(1.05);
 }
+
