@@ -239,9 +239,11 @@ html, body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.skill-filter:hover {
-  background-color: #2563eb; /* Blue-600 */
-  color: #ffffff; /* White */
+@media (hover: hover) {
+  .skill-filter:hover {
+    background-color: #2563eb; /* Blue-600 */
+    color: #ffffff; /* White */
+  }
 }
 
 .skill-filter.active {
@@ -252,13 +254,4 @@ html, body {
 .skill-filter.active:hover {
   background-color: #1e40af;
   color: #ffffff;
-}
-
-.skill-filter:focus {
-  outline: none;
-}
-
-.skill-filter:active {
-  background-color: #e5e7eb; /* Reset to default gray */
-  color: #1f2937; /* Reset to default text color */
 }
