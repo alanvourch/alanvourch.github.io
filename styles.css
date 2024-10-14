@@ -249,7 +249,7 @@ html, body {
   color: #ffffff; /* White */
 }
 
-/* .skill-filter.active:hover {
+.skill-filter.active:hover {
   background-color: #1e40af;
   color: #ffffff;
-} */
+}
