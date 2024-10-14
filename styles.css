@@ -253,3 +253,12 @@ html, body {
   background-color: #1e40af;
   color: #ffffff;
 }
+
+.skill-filter:focus {
+  outline: none;
+}
+
+.skill-filter:active {
+  background-color: #e5e7eb; /* Reset to default gray */
+  color: #1f2937; /* Reset to default text color */
+}
