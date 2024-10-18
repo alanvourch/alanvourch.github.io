@@ -179,3 +179,13 @@ document.querySelectorAll('.skill-filter').forEach(skill => {
         }, 500);
     });
 });
+
+
+// Create a new image object
+const img = new Image();
+img.src = 'images/background.png'; // The original image path
+
+// When the image is loaded, change the background
+img.onload = function() {
+    document.getElementById('header').style.backgroundImage = "url('images/background.png')";
+};
