@@ -140,3 +140,52 @@ window.addEventListener('scroll', function () {
         hamburgerIcon.style.color = 'white'; // White color
     }
 });
+
+document.querySelectorAll('.skill-filter').forEach(skill => {
+    skill.addEventListener('click', function() {
+        const skillName = this.dataset.skill;
+        const isActive = this.classList.contains('active');
+
+        // Reset all skill filters
+        document.querySelectorAll('.skill-filter').forEach(s => {
+            s.classList.remove('active');
+        });
+
+        // Toggle current skill
+        if (!isActive) {
+            this.classList.add('active');
+        }
+
+        // Reset all project cards with a slight delay for smooth effect
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach(project => {
+            project.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            project.style.opacity = 0;
+            project.style.transform = 'translateY(20px)';
+        });
+
+        setTimeout(() => {
+            projectCards.forEach(project => {
+                if (!isActive && !project.dataset.skill.includes(skillName)) {
+                    project.style.display = 'none';
+                } else {
+                    project.style.display = 'block';
+                    requestAnimationFrame(() => {
+                        project.style.opacity = 1;
+                        project.style.transform = 'translateY(0)';
+                    });
+                }
+            });
+        }, 500);
+    });
+});
+
+
+// Create a new image object
+const img = new Image();
+img.src = 'images/background.png'; // The original image path
+
+// When the image is loaded, change the background
+img.onload = function() {
+    document.getElementById('header').style.backgroundImage = "url('images/background.png')";
+};

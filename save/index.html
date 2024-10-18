@@ -24,6 +24,7 @@
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
 </head>
 
 
@@ -68,10 +69,6 @@
 
   <!-- Header Section -->
   <header id=header class="relative flex items-center justify-start h-screen bg-cover bg-center bg-fixed" style="background-image: url('images/background.webp');">
-  <!-- <header id=header class="relative flex items-center justify-start h-screen bg-cover bg-center bg-fixed" -->
-   <!-- style="background-image: url('https://w.wallhaven.cc/full/6d/wallhaven-6d6rjx.png');"> -->
-
-
 
       <!-- Semi-transparent overlay -->
       <div class="absolute inset-0 bg-black bg-opacity-10"></div>
@@ -103,15 +100,15 @@
                 <p class="mt-4 text-lg">Hi, I'm Alan. I work as a Financial Data Analyst, turning complex data into clear insights. I help companies make better financial decisions and manage risks. My projects range from building FP&A dashboards to creating predictive models. Take a look at my work to learn more.</p>
                 <!-- Skills List -->
                 <div class="mt-8 flex flex-wrap justify-center md:justify-start gap-4">
-                    <span class="bg-gray-200 text-gray-800 py-2 px-4 rounded-full hover:bg-blue-600 hover:text-white transform transition-transform duration-300">Data Analysis</span>
-                    <span class="bg-gray-200 text-gray-800 py-2 px-4 rounded-full hover:bg-blue-600 hover:text-white transform transition-transform duration-300">Financial Modeling</span>
-                    <span class="bg-gray-200 text-gray-800 py-2 px-4 rounded-full hover:bg-blue-600 hover:text-white transform transition-transform duration-300">Machine Learning</span>
-                    <span class="bg-gray-200 text-gray-800 py-2 px-4 rounded-full hover:bg-blue-600 hover:text-white transform transition-transform duration-300">Power BI</span>
-                    <span class="bg-gray-200 text-gray-800 py-2 px-4 rounded-full hover:bg-blue-600 hover:text-white transform transition-transform duration-300">Tableau</span>
-                    <span class="bg-gray-200 text-gray-800 py-2 px-4 rounded-full hover:bg-blue-600 hover:text-white transform transition-transform duration-300">Python</span>
-                    <span class="bg-gray-200 text-gray-800 py-2 px-4 rounded-full hover:bg-blue-600 hover:text-white transform transition-transform duration-300">SQL</span>
-                </div>
-
+                  <span class="skill-filter" data-skill="Data Analysis">Data Analysis</span>
+                  <span class="skill-filter" data-skill="Financial Modeling">Financial Modeling</span>
+                  <span class="skill-filter" data-skill="Machine Learning">Machine Learning</span>
+                  <span class="skill-filter" data-skill="Power BI">Power BI</span>
+                  <span class="skill-filter" data-skill="Tableau">Tableau</span>
+                  <span class="skill-filter" data-skill="Python">Python</span>
+                  <span class="skill-filter" data-skill="SQL">SQL</span>
+              </div>
+                
             </div>
         </section>
 
@@ -122,137 +119,138 @@
             <!-- Projects Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto max-w-7xl">
 
-                <!-- Project 1 FP&A Dashboard-->
-                <div class="project-card h-full">
-                  <!-- <img src="images/projects/project1-thumbnail.jpg" alt="Project Thumbnail"class="object-cover h-60 w-full"> -->
-                  <div class="project-image">
-                      <img src="images/projects/imitationgame.webp" alt="Project Thumbnail">
-                      <img src="images/projects/pbi_fpa.png" alt="Hover Image" class="hover-img">
+                <!-- Project 1 FP&A Dashboard -->
+                <div class="project-card h-full flex flex-col bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-lg" data-skill="Power BI, Data Analysis, Financial Modeling">
+                  <div class="project-image-container relative w-full pt-[56.25%] overflow-hidden">
+                      <img src="images/projects/imitationgame.webp" alt="Power BI - Professional FP&A Dashboard Thumbnail" class="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500">
+                      <img src="images/projects/pbi_fpa.png" alt="Power BI - Professional FP&A Dashboard Hover Image" class="absolute top-0 left-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 hover:opacity-100">
                   </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Power BI - Professional FP&A Dashboard</h3>
-                        <p class="text-gray-700 mb-4">This dashboard was developed during my time as an FP&A Manager at a major event company. It uses synthetic data for confidentiality and shows how I structure financial data to support decision-making.</p>
-                        <a href="https://app.powerbi.com/view?r=eyJrIjoiM2VjMmRkMjItN2IxYS00MDliLWIxM2QtYmIzYjAzNmMxMWVkIiwidCI6Ijg5NTkwMmNlLTUzMWMtNDJjNi05YTMwLTA3YjRkZjUxYzNiMyJ9" target="_blank" rel="noopener noreferrer" class="text-blue-600 font-semibold hover:underline" aria-label="View Dashboard">Explore Power BI Dashboard</a>
-                    </div>
+                  <div class="p-6 flex flex-col flex-1">
+                      <h3 class="text-xl font-semibold mb-2">Power BI - Professional FP&A Dashboard</h3>
+                      <p class="text-gray-700 mb-4 flex-grow">This dashboard was developed during my time as an FP&A Manager at a major event company. It uses synthetic data for confidentiality and shows how I structure financial data to support decision-making.</p>
+                      <a href="https://app.powerbi.com/view?r=eyJrIjoiM2VjMmRkMjItN2IxYS00MDliLWIxM2QtYmIzYjAzNmMxMWVkIiwidCI6Ijg5NTkwMmNlLTUzMWMtNDJjNi05YTMwLTA3YjRkZjUxYzNiMyJ9" target="_blank" rel="noopener noreferrer" class="text-blue-600 font-semibold hover:underline mt-auto" aria-label="View Dashboard">Explore Power BI Dashboard</a>
+                  </div>
                 </div>
-
 
                 <!-- Project 2 HR Analysis Notebook -->
-                <div class="project-card h-full">
-                  <img src="images/projects/hr.jpg" alt="Project Thumbnail">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Machine Learning - HR Insights & Predictive Model</h3>
-                        <p class="text-gray-700 mb-4">In this project, I built a model to predict employee turnover. It highlights which factors impact whether someone stays or leaves, showcasing the use of data science in HR.</p>
-                        <a href="https://www.kaggle.com/code/alanvourch/salifort-motors-hr-analysis" class="text-blue-600 font-semibold hover:underline" target="_blank" rel="noopener noreferrer" aria-label="Explore HR Insights Notebook">Explore Notebook</a>
-                    </div>
+                <div class="project-card h-full flex flex-col bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-lg" data-skill="Python,Machine Learning, Data Analysis, Financial Modeling">
+                  <div class="project-image-container relative w-full pt-[56.25%] overflow-hidden">
+                      <img src="images/projects/hr.jpg" alt="Machine Learning - HR Insights & Predictive Model Thumbnail" class="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500">
+                      <img src="images/projects/hr2.png" alt="Machine Learning - HR Insights & Predictive Model Hover Image" class="absolute top-0 left-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 hover:opacity-100">
+                  </div>
+                  <div class="p-6 flex flex-col flex-1">
+                      <h3 class="text-xl font-semibold mb-2">Machine Learning - HR Insights & Predictive Model</h3>
+                      <p class="text-gray-700 mb-4 flex-grow">In this project, I built a model to predict employee turnover. It highlights which factors impact whether someone stays or leaves, showcasing the use of data science in HR.</p>
+                      <a href="https://www.kaggle.com/code/alanvourch/salifort-motors-hr-analysis" class="text-blue-600 font-semibold hover:underline mt-auto" target="_blank" rel="noopener noreferrer" aria-label="Explore HR Insights Notebook">Explore Notebook</a>
+                  </div>
                 </div>
 
-                <!-- Project 4 SQL Data Cleaning + Analysis-->
-                <div class="project-card h-full">
-                  <img src="images/projects/sql_tech.jpg" alt="Project Thumbnail">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">SQL - Data Cleaning + Analysis </h3>
-                        <p class="text-gray-700 mb-4">Using a public dataset on tech company layoffs, I cleaned the data and performed an analysis using SQL to uncover key insights.</p>
-                        <a href="https://better-lobster-21e.notion.site/SQL-Data-Cleaning-EDA-Layoffs-data-dbd0891e61454310901253c8faa767d3" class="text-blue-600 font-semibold hover:underline" target="_blank" rel="noopener noreferrer" aria-label="Explore SQL Data Analysis Notion Page">Explore Notion Page</a>
-                    </div>
+                <!-- Project 4 SQL Data Cleaning + Analysis -->
+                <div class="project-card h-full flex flex-col bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-lg" data-skill="SQL, Data Analysis, Financial Modeling">
+                  <div class="project-image-container relative w-full pt-[56.25%] overflow-hidden">
+                      <img src="images/projects/sql_tech.jpg" alt="SQL - Data Cleaning + Analysis Thumbnail" class="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500">
+                      <img src="images/projects/sql2.png" alt="SQL - Data Cleaning + Analysis Hover Image" class="absolute top-0 left-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 hover:opacity-100">
+                  </div>
+                  <div class="p-6 flex flex-col flex-1">
+                      <h3 class="text-xl font-semibold mb-2">SQL - Tech Layoffs Analysis</h3>
+                      <p class="text-gray-700 mb-4 flex-grow">Using a public dataset on tech company layoffs, I cleaned the data and performed an analysis using SQL to uncover key insights.</p>
+                      <a href="https://better-lobster-21e.notion.site/SQL-Data-Cleaning-EDA-Layoffs-data-dbd0891e61454310901253c8faa767d3" class="text-blue-600 font-semibold hover:underline mt-auto" target="_blank" rel="noopener noreferrer" aria-label="Explore SQL Data Analysis Notion Page">Explore Notion Page</a>
+                  </div>
                 </div>
 
-                <!-- Project 5 Ultimate Movies Dataset -->
-                <div class="project-card h-full">
-                  <img src="images/projects/tmdb_dataset.jpg" alt="Project Thumbnail" class="object-cover h-60 w-full" style="object-position: center -40px;">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Python - Ultimate Movies Dataset</h3>
-                        <p class="text-gray-700 mb-4">I created a comprehensive, daily-updated movies dataset that tracks industry trends, production strategies, and box office performance, showcasing my skills in large-scale data management.</p>
-                        <a href="https://www.kaggle.com/datasets/alanvourch/tmdb-movies-daily-updates/data" class="text-blue-600 font-semibold hover:underline" target="_blank" rel="noopener noreferrer" aria-label="Explore Movies Dataset">Explore Kaggle Dataset</a>
-                    </div>
+                <!-- Project - SQL Top Paying Data Analyst Jobs -->
+                <div class="project-card h-full flex flex-col bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-lg" data-skill="SQL, Data Analysis">
+                  <div class="project-image-container relative w-full pt-[56.25%] overflow-hidden">
+                      <img src="images/projects/remote.jpg" alt="SQL - Top Paying Data Jobs Thumbnail" class="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500">
+                      <img src="images/projects/job_salaries_chart.png" alt="SQL - Top Paying Data Analyst Jobs Hover Image" class="absolute top-0 left-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 hover:opacity-100">
+                  </div>
+                  <div class="p-6 flex flex-col flex-1">
+                      <h3 class="text-xl font-semibold mb-2">SQL - Top Paying Remote Data Jobs</h3>
+                      <p class="text-gray-700 mb-4 flex-grow">This project uses SQL queries to analyze the top paying remote Data Analyst jobs by salary, skills required, and demand in 2023, providing insights into the current job market.</p>
+                      <a href="https://github.com/alanvourch/SQL-Project" target="_blank" rel="noopener noreferrer" class="text-blue-600 font-semibold hover:underline mt-auto" aria-label="Explore SQL Top Paying Data Analyst Jobs">Explore GitHub Repository</a>
+                  </div>
                 </div>
-                <!-- Project 9 Top 20 Movies Tableau -->
-                <!-- <div class="project-card h-full">
-                  <div class="project-image">
-                      <img src="images/projects/a_beautiful_mind.jpg" alt="Project Thumbnail">
-                      <img src="images/projects/tableau_boxoffice.png" alt="Hover Image" class="hover-img">
-                  </div>
-                  <div class="p-6">
-                      <h3 class="text-xl font-semibold mb-2">Box Office and IMDb Trends</h3>
-                      <p class="text-gray-700 mb-4">This Tableau visualization highlights Top 20 Box Office movies by genre and decade, comparing revenue and IMDb ratings to reveal key trends over time.</p>
-                      <a href="https://public.tableau.com/app/profile/alan.vourch/viz/BoxOfficeHitsbyGenreandDecade/Dashboard" class="text-blue-600 font-semibold hover:underline" target="_blank" rel="noopener noreferrer" aria-label="Explore Tableau Box Office">Explore Tableau Report</a>
-                  </div>
-                </div> -->
 
-                <!-- Project 9 Top 20 Movies Tableau -->
-                <div class="project-card h-full">
-                  <div class="project-image">
-                      <img src="images/projects/cinemas_boxoffice.jpg" alt="Project Thumbnail">
-                      <img src="images/projects/tableau_boxoffice.png" alt="Hover Image" class="hover-img">
+
+                <!-- Project 5 Python - Ultimate Movies Dataset -->
+                <div class="project-card h-full flex flex-col bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-lg" data-skill="Python,Data Analysis">
+                  <div class="project-image-container relative w-full pt-[56.25%] overflow-hidden">
+                      <img src="images/projects/dataset1.jpg" alt="Python - Ultimate Movies Dataset Thumbnail" class="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500" style="object-position: center -40px;">
+                      <img src="images/projects/dataset4.png" alt="Python - Ultimate Movies Dataset Hover Image" class="absolute top-0 left-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 hover:opacity-100 " style="object-position: center -40px;">
                   </div>
-                  <div class="p-6">
+                  <div class="p-6 flex flex-col flex-1">
+                      <h3 class="text-xl font-semibold mb-2">Python - Ultimate Movies Dataset</h3>
+                      <p class="text-gray-700 mb-4 flex-grow">I created a comprehensive, daily-updated movies dataset that tracks industry trends, production strategies, and box office performance, showcasing my skills in large-scale data management.</p>
+                      <a href="https://www.kaggle.com/datasets/alanvourch/tmdb-movies-daily-updates/data" class="text-blue-600 font-semibold hover:underline mt-auto" target="_blank" rel="noopener noreferrer" aria-label="Explore Movies Dataset">Explore Kaggle Dataset</a>
+                  </div>
+                </div>
+
+                <!-- Project 9 Tableau - Box Office -->
+                <div class="project-card h-full flex flex-col bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-lg" data-skill="Tableau,Data Analysis">
+                  <div class="project-image-container relative w-full pt-[56.25%] overflow-hidden">
+                      <img src="images/projects/cinemas_boxoffice.jpg" alt="Tableau - Box Office and IMDb Trends Thumbnail" class="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500">
+                      <img src="images/projects/tableaubo2.png" alt="Tableau - Box Office and IMDb Trends Hover Image" class="absolute top-0 left-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 hover:opacity-100">
+                  </div>
+                  <div class="p-6 flex flex-col flex-1">
                       <h3 class="text-xl font-semibold mb-2">Tableau - Box Office and IMDb Trends</h3>
-                      <p class="text-gray-700 mb-4">This Tableau visualization highlights Top 20 Box Office movies by genre and decade, comparing revenue and IMDb ratings to reveal key trends over time.</p>
-                      <a href="https://public.tableau.com/app/profile/alan.vourch/viz/BoxOfficeHitsbyGenreandDecade/Dashboard" class="text-blue-600 font-semibold hover:underline" target="_blank" rel="noopener noreferrer" aria-label="Explore Tableau Box Office">Explore Tableau Report</a>
+                      <p class="text-gray-700 mb-4 flex-grow">This Tableau visualization highlights Top 20 Box Office movies by genre and decade, comparing revenue and IMDb ratings to reveal key trends over time.</p>
+                      <a href="https://public.tableau.com/app/profile/alan.vourch/viz/BoxOfficeHitsbyGenreandDecade/Dashboard" class="text-blue-600 font-semibold hover:underline mt-auto" target="_blank" rel="noopener noreferrer" aria-label="Explore Tableau Box Office">Explore Tableau Report</a>
                   </div>
                 </div>
 
-                <!-- Project 8 Movies Power BI-->
-                <!-- <div class="project-card h-full">
-                  <img src="images/projects/moneyball.webp" alt="Project Thumbnail">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Cinema Dashboard</h3>
-                        <p class="text-gray-700 mb-4">This Power BI report uses live box office data and IMDb ratings from my Movies Dataset to deliver various analysis, including box office trends, studio performance, and genre breakdowns, all presented through dynamic visuals.</p>
-                        <a href="https://app.powerbi.com/view?r=eyJrIjoiN2MzZjI5OTgtNmI2OC00ZDkzLWJjM2YtMWZmYmIyYzQzMWMzIiwidCI6Ijg5NTkwMmNlLTUzMWMtNDJjNi05YTMwLTA3YjRkZjUxYzNiMyJ9" class="text-blue-600 font-semibold hover:underline" target="_blank" rel="noopener noreferrer" aria-label="Explore Power BI Cinema">Explore Power BI Dashboard</a>
-                    </div>
-                </div> -->
-
-                <!-- Project 8 Movies Power BI-->
-                <div class="project-card h-full">
-                  <div class="project-image">
-                    <img src="images/projects/moneyball.webp" alt="Project Thumbnail">
-                    <img src="images/projects/pbi_cinema.png" alt="Hover Image" class="hover-img">
+                <!-- Project 8 Movies Power BI -->
+                <div class="project-card h-full flex flex-col bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-lg" data-skill="Power BI,Data Analysis">
+                  <div class="project-image-container relative w-full pt-[56.25%] overflow-hidden">
+                      <img src="images/projects/popcorn.jpg" alt="Power BI - Cinema Dashboard Thumbnail" class="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500">
+                      <img src="images/projects/pbi_cinema.png" alt="Power BI - Cinema Dashboard Hover Image" class="absolute top-0 left-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 hover:opacity-100">
                   </div>
-                  <div class="p-6">
-                    <h3 class="text-xl font-semibold mb-2">Power BI - Cinema Dashboard</h3>
-                    <p class="text-gray-700 mb-4">This Power BI report uses live box office data and IMDb ratings from my Movies Dataset to deliver various analysis, including box office trends, studio performance, and genre breakdowns, all presented through dynamic visuals.</p>
-                    <a href="https://app.powerbi.com/view?r=eyJrIjoiN2MzZjI5OTgtNmI2OC00ZDkzLWJjM2YtMWZmYmIyYzQzMWMzIiwidCI6Ijg5NTkwMmNlLTUzMWMtNDJjNi05YTMwLTA3YjRkZjUxYzNiMyJ9" class="text-blue-600 font-semibold hover:underline" target="_blank" rel="noopener noreferrer" aria-label="Explore Power BI Cinema">Explore Power BI Dashboard</a>
+                  <div class="p-6 flex flex-col flex-1">
+                      <h3 class="text-xl font-semibold mb-2">Power BI - Cinema Dashboard</h3>
+                      <p class="text-gray-700 mb-4 flex-grow">This Power BI report uses live box office data and IMDb ratings from my Movies Dataset to deliver various analysis, including box office trends, studio performance, and genre breakdowns, all presented through dynamic visuals.</p>
+                      <a href="https://app.powerbi.com/view?r=eyJrIjoiN2MzZjI5OTgtNmI2OC00ZDkzLWJjM2YtMWZmYmIyYzQzMWMzIiwidCI6Ijg5NTkwMmNlLTUzMWMtNDJjNi05YTMwLTA3YjRkZjUxYzNiMyJ9" class="text-blue-600 font-semibold hover:underline mt-auto" target="_blank" rel="noopener noreferrer" aria-label="Explore Power BI Cinema">Explore Power BI Dashboard</a>
                   </div>
                 </div>
 
-                <!-- Project 3 A24 Analysis-->
-                <div class="project-card h-full">
-                  <img src="images/projects/a24-2.jpg" alt="Project Thumbnail">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Python - A24 Movies Analysis</h3>
-                        <p class="text-gray-700 mb-4">This analysis explores the filmography of A24 using my Movies Dataset to provide insights into the studio's unique characteristics.</p>
-                      <a href="https://www.kaggle.com/code/alanvourch/a24-movies-analysis" class="text-blue-600 font-semibold hover:underline" target="_blank" rel="noopener noreferrer" aria-label="Explore A24 Movies Notebook">Explore Notebook</a>
-                    </div>
-                </div>
-
-                <!-- Project 6 Movies Dataset Automatic Update -->
-                <div class="project-card h-full">
-                  <div class="project-image">
-                    <img src="images/projects/update.jpg" alt="Project Thumbnail">
-                    <img src="images/projects/tmdb_movie_update3.png" alt="Hover Image" class="hover-img">
+                <!-- Project 3 A24 Analysis -->
+                <div class="project-card h-full flex flex-col" data-skill="Python, Data Analysis, Financial Modeling">
+                  <div class="project-image-container relative w-full pt-[56.25%] overflow-hidden">
+                    <img src="images/projects/a24.jpg" alt="A24 Movies Analysis Thumbnail" class="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500">
+                    <img src="images/projects/a241.png" alt="A24 Movies Analysis Hover Image" class="absolute top-0 left-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 hover:opacity-100">
                   </div>
-                  <div class="p-6">
-                      <h3 class="text-xl font-semibold mb-2">Python - Movies Dataset Daily Update</h3>
-                      <p class="text-gray-700 mb-4">I automated the daily refresh of my Ultimate Movies Dataset, ensuring it stays current with the latest updates and IMDB ratings for immediate analysis.</p>
-                      <a href="https://www.kaggle.com/code/alanvourch/tmdb-movies-daily-update/notebook" class="text-blue-600 font-semibold hover:underline" target="_blank" rel="noopener noreferrer" aria-label="Explore Movies Daily Update Notebook">Explore Notebook</a>
+                  <div class="p-6 flex flex-col flex-1">  
+                    <h3 class="text-xl font-semibold mb-2">Python - A24 Movies Analysis</h3>
+                    <p class="text-gray-700 mb-4 flex-grow">This analysis explores the filmography of A24 using my Movies Dataset to provide insights into the studio's unique characteristics.</p>
+                    <a href="https://www.kaggle.com/code/alanvourch/a24-movies-analysis" class="text-blue-600 font-semibold hover:underline mt-auto" target="_blank" rel="noopener noreferrer" aria-label="Explore A24 Movies Notebook">Explore Notebook</a>
                   </div>
                 </div>
 
-                <!-- Project 7 Movies Data Extraction-->
-                <div class="project-card h-full">
-                  <img src="images/projects/extraction.jpg" alt="Project Thumbnail">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Python - Movies Data Extraction</h3>
-                        <p class="text-gray-700 mb-4">I developed a process to build the Ultimate Movies Dataset, detailing 1 million movies across 30 fields, refining it for maximum detail and efficiency.</p>
-                        <a href="https://www.kaggle.com/code/alanvourch/tmdb-movies-data-extraction/notebook" class="text-blue-600 font-semibold hover:underline" target="_blank" rel="noopener noreferrer" aria-label="Explore Movies Extraction Notebook">Explore Notebook</a>
-                    </div>
+                <!-- Project 4 Update -->
+                <div class="project-card h-full flex flex-col" data-skill="Python, Data Analysis">
+                  <div class="project-image-container relative w-full pt-[56.25%] overflow-hidden">
+                    <img src="images/projects/update.jpg" alt="Update Project Thumbnail" class="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500">
+                     <img src="images/projects/update1.png" alt="Update Project Hover Image" class="absolute top-0 left-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 hover:opacity-100">
+                  </div>
+                  <div class="p-6 flex flex-col flex-1">
+                    <h3 class="text-xl font-semibold mb-2">Python - Movies Dataset Daily Update</h3>
+                    <p class="text-gray-700 mb-4 flex-grow">I automated the daily refresh of my Ultimate Movies Dataset, ensuring it stays current with the latest updates and IMDB ratings for immediate analysis.</p>
+                    <a href="https://www.kaggle.com/code/alanvourch/tmdb-movies-daily-update/notebook" class="text-blue-600 font-semibold hover:underline mt-auto" target="_blank" rel="noopener noreferrer" aria-label="Explore Update Project Notebook">Explore Notebook</a>
+                  </div>
                 </div>
 
+                <!-- Project 7 Movies Data Extraction -->
+                <div class="project-card h-full flex flex-col" data-skill="Python, Data Analysis">
+                  <div class="project-image-container relative w-full pt-[56.25%] overflow-hidden">
+                    <img src="images/projects/extraction.jpg" alt="Movies Data Extraction Thumbnail" class="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500">
+                    <img src="images/projects/extraction1.png" alt="Movies Data Extraction Hover Image" class="absolute top-0 left-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 hover:opacity-100">
+                  </div>
+                  <div class="p-6 flex flex-col flex-1">
+                    <h3 class="text-xl font-semibold mb-2">Python - Movies Data Extraction</h3>
+                    <p class="text-gray-700 mb-4 flex-grow">I developed a process to build the Ultimate Movies Dataset, detailing 1 million movies across 30 fields, refining it for maximum detail and efficiency.</p>
+                    <a href="https://www.kaggle.com/code/alanvourch/tmdb-movies-data-extraction/notebook" class="text-blue-600 font-semibold hover:underline mt-auto" target="_blank" rel="noopener noreferrer" aria-label="Explore Movies Extraction Notebook">Explore Notebook</a>
+                  </div>
+                </div>
             </div>
-
-        </div>
         </section>
-
         <!-- Contact Section -->
         <section id="contact" class="section pb-20 mx-auto max-w-7xl flex flex-col justify-center items-center">
             <h2 class="section-title text-4xl font-bold mb-8 text-center text-gradient">Get In Touch</h2>

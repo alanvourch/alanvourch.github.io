@@ -1,25 +1,50 @@
+/* styles.css */
+
+/* Text Shadow Utility */
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Fade In Left Animation */
+.fadeInLeft {
+  opacity: 0;
+  animation: fadeInLeft 1s ease-out forwards;
+}
+
+.fadeInLeft.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.fadeInUp {
+  opacity: 0;
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.fadeInUp.delay-500 {
+  animation-delay: 0.5s;
+}
+
 @keyframes fadeInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-50px); /* Starts from the left */
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0); /* Ends at its final position */
-    }
+  from {
+      opacity: 0;
+      transform: translateX(-50px);
+  }
+  to {
+      opacity: 1;
+      transform: translateX(0);
+  }
 }
 
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px); /* Starts slightly below */
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0); /* Ends at its final position */
-    }
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
 }
-
 
 html, body {
     margin: 0;
@@ -58,11 +83,8 @@ html, body {
 
 /* Responsive hover and layout improvements */
 .project-card {
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    /* Existing Tailwind classes handle most styling */
     transition: transform 0.3s, box-shadow 0.3s;
-    background-color: #fff;
-    border-radius: 10px;
-    overflow:hidden;
 }
 
 .project-card:hover {
@@ -77,19 +99,6 @@ html, body {
     display: block;      /* Removes any extra space below the image */
     border-radius: 0;    /* Remove any rounding from the image itself */
 }
-
-/*Modern scaling text
-.project-card h3 {
-    /* font-size: clamp(1.25rem, 2vw, 1.75rem); /* Scales text */ 
-   /* font-size: clamp(1rem, 1.5vw, 1.25rem); /* Scales text */
-
-/*}
-
-.project-card p {
-    /* font-size: clamp(1rem, 1.5vw, 1.25rem); /* Scales text */ 
-   /* font-size: clamp(0.75rem, 1vw, 1rem); /* Scales text */
-
-/*}
 
 /* Nav bar */
 
@@ -195,12 +204,6 @@ html, body {
 }
 
 
-/* Fade in transition hovering project card  */
-.project-card {
-  position: relative;
-  overflow: hidden;
-}
-
 .project-image {
   position: relative;
   width: 100%;
@@ -224,13 +227,6 @@ html, body {
   transition: opacity 0.5s ease;
 }
 
-.project-card:hover .project-image img {
-  opacity: 0;
-}
-
-.project-card:hover .project-image img.hover-img {
-  opacity: 1;
-}
 
 .skill-filter {
   background-color: #e5e7eb; /* Gray-200 */

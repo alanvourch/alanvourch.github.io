@@ -22,6 +22,10 @@
     <!-- Favicon -->
     <link rel="icon" href="images/favicon.png" type="image/x-icon">
 
+    <!-- Preload the background image -->
+    <link rel="preload" as="image" href="images/background.webp" type="image/webp" />
+
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -68,22 +72,21 @@
     </nav>
 
   <!-- Header Section -->
-  <header id=header class="relative flex items-center justify-start h-screen bg-cover bg-center bg-fixed" style="background-image: url('images/bg_compressed.png');">
+  <header id=header class="relative flex items-center justify-start h-screen bg-cover bg-center bg-fixed" style="background-image: url('images/background.webp');">
 
       <!-- Semi-transparent overlay -->
       <div class="absolute inset-0 bg-black bg-opacity-10"></div>
 
-      <!-- Header content -->
+      <!-- Header Content -->
       <div class="container mx-auto max-w-1xl px-4 relative z-10 pl-24 pb-20 text-left">
-          <h1 class="text-white text-5xl font-bold" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); opacity: 0; animation: fadeInLeft 1s ease-out forwards;">Alan Vourc'h</h1>
-          <p class="text-white text-2xl font-semibold mt-2" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);opacity: 0; animation: fadeInLeft 1s ease-out forwards 0.2s;">Financial Data Analyst</p>
-          <a href="#about"
-             class="mt-8 inline-block bg-blue-600 text-white py-3 px-6 rounded-lg shadow-md uppercase font-semibold tracking-wider transition-transform duration-300 ease-out hover:bg-blue-700 hover:scale-105 hover:shadow-lg"
-             style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); opacity: 0; animation: fadeInUp 1s ease-out forwards 0.5s;"
-             >
-             Explore My Work
-          </a>
+        <h1 class="text-white text-5xl font-bold text-shadow fadeInLeft">Alan Vourc'h</h1>
+        <p class="text-white text-2xl font-semibold mt-2 text-shadow fadeInLeft delay-200">Financial Data Analyst</p>
+        <a href="#about"
+          class="mt-8 inline-block bg-blue-600 text-white py-3 px-6 rounded-lg shadow-md uppercase font-semibold tracking-wider transition-transform duration-300 ease-out hover:bg-blue-700 hover:scale-105 hover:shadow-lg text-shadow fadeInUp delay-500">
+          Explore My Work
+        </a>
       </div>
+
   </header>
 
     <!-- Main Content -->
