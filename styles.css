@@ -268,3 +268,9 @@ html, body {
   transform: scale(1.05);
 }
 
+@media (max-device-width: 1024px) {
+  header {
+    background-attachment: scroll;
+  }
+}
+
