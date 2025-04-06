@@ -180,12 +180,13 @@ document.querySelectorAll('.skill-filter').forEach(skill => {
     });
 });
 
-
-// Create a new image object
-const img = new Image();
-img.src = 'images/background.png'; // The original image path
-
-// When the image is loaded, change the background
-img.onload = function() {
-    document.getElementById('header').style.backgroundImage = "url('images/background.png')";
-};
+// iOS specific code to prevent background change on scroll
+(function() {
+    const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    if (!isiOS) {
+        const header = document.getElementById('header');
+        if (header && !header.classList.contains('bg-fixed')) {
+            header.classList.add('bg-fixed');
+        }
+    }
+})();
