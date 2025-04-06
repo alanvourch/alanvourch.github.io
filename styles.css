@@ -1,112 +1,115 @@
 @keyframes fadeInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-50px); /* Starts from the left */
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0); /* Ends at its final position */
-    }
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px); /* Starts slightly below */
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0); /* Ends at its final position */
-    }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
+/* Fade-in animation classes for maintainability */
+.fade-in-left {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  animation: fadeInLeft 1s ease-out forwards;
+}
+.fade-in-left.delay-0-2 {
+  animation-delay: 0.2s;
+}
+.fade-in-up {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  animation: fadeInUp 1s ease-out forwards;
+}
+.fade-in-up.delay-0-5 {
+  animation-delay: 0.5s;
+}
 
+/* Reset and layout */
 html, body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
+
 /* Sections Transition */
 .section {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .section.visible {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .section-title::after {
-    content: '';
-    display: block;
-    width: 50px;
-    height: 3px;
-    background-color: #3d5afe;
-    margin: 20px auto 0;
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background-color: #3d5afe;
+  margin: 20px auto 0;
 }
 
 /* Social icons Transition */
 .social-icon {
-    transition: transform 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .social-icon:hover {
-    transform: translateY(-3px);
+  transform: translateY(-3px);
 }
 
-/* Responsive hover and layout improvements */
+/* Project Card Styles */
 .project-card {
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-    background-color: #fff;
-    border-radius: 10px;
-    overflow:hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
 }
 
 .project-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
 .project img {
-    width: 100%;         /* Ensures the image takes up the full width of the container */
-    aspect-ratio: 16/9;        /* Maintains the aspect ratio of the image */
-    object-fit: cover;   /* Ensures the image covers the area without stretching */
-    display: block;      /* Removes any extra space below the image */
-    border-radius: 0;    /* Remove any rounding from the image itself */
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
 }
 
-/*Modern scaling text
-.project-card h3 {
-    /* font-size: clamp(1.25rem, 2vw, 1.75rem); /* Scales text */ 
-   /* font-size: clamp(1rem, 1.5vw, 1.25rem); /* Scales text */
-
-/*}
-
-.project-card p {
-    /* font-size: clamp(1rem, 1.5vw, 1.25rem); /* Scales text */ 
-   /* font-size: clamp(0.75rem, 1vw, 1rem); /* Scales text */
-
-/*}
-
-/* Nav bar */
-
-/* Updated styles for the navigation */
+/* Navigation */
 #navbar {
   background-color: transparent;
   transition: background-color 0.3s ease;
 }
 
-/* Nav links */
 .nav-link {
   transition: color 0.3s ease;
   position: relative;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75)
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
 }
 
-/* Blue underline effect */
 .nav-link::after {
   content: '';
   position: absolute;
@@ -114,7 +117,7 @@ html, body {
   height: 2px;
   bottom: -4px;
   left: 0;
-  background-color: #3B82F6; /* Tailwind's blue-500 */
+  background-color: #3B82F6;
   transform: scaleX(0);
   transition: transform 0.3s ease;
 }
@@ -123,32 +126,17 @@ html, body {
   transform: scaleX(1);
 }
 
-/* Hamburger button and icons */
+/* Hamburger and Mobile Menu */
 #hamburger-btn {
   position: relative;
   z-index: 60;
   transition: color 0.3s ease;
 }
 
-/* Hamburger button color change when scrolling */
-#hamburger-btn.scrolled {
-  color: #333; /* Dark gray for better visibility when scrolled */
-}
-
-#close-icon {
-  color: #333; /* Always dark gray */
-}
-
-/* Add this class when panel is open */
-.panel-open #close-icon {
-    display: block;
-}
-
 #hamburger-icon, #close-icon {
   transition: opacity 0.3s ease;
 }
 
-/* Mobile Menu Panel */
 #mobile-menu-panel {
   background-color: white;
   position: fixed;
@@ -158,11 +146,6 @@ html, body {
   width: 16rem;
   z-index: 50;
   box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Transition for sliding in the panel */
-#mobile-menu-panel.show {
-  transform: translateX(0);
 }
 
 #mobile-menu-panel a {
@@ -177,94 +160,36 @@ html, body {
   background-color: #f3f4f6;
 }
 
-/* Ensure no white navbar background on mobile past the header */
 @media (max-width: 768px) {
   #navbar {
     background-color: transparent !important;
   }
 }
 
-/* Hide the mobile menu panel initially */
-#mobile-menu {
-  display: none;
-}
-
-/* Hamburger icon active state */
-.hamburger-active {
-  color: #3B82F6;
-}
-
-
-/* Fade in transition hovering project card  */
-.project-card {
-  position: relative;
-  overflow: hidden;
-}
-
-.project-image {
-  position: relative;
-  width: 100%;
-  height: auto;
-}
-
-.project-image img {
-  width: 100%;
-  height: auto;
-  display: block;
-  transition: opacity 0.5s ease;
-}
-
-.project-image img.hover-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.project-card:hover .project-image img {
-  opacity: 0;
-}
-
-.project-card:hover .project-image img.hover-img {
-  opacity: 1;
-}
-
+/* Skill Filter */
 .skill-filter {
-  background-color: #e5e7eb; /* Gray-200 */
-  color: #1f2937; /* Gray-800 */
+  background-color: #e5e7eb;
+  color: #1f2937;
   cursor: pointer;
-  padding: 0.5rem 1rem; /* Equivalent to py-2 px-4 */
-  border-radius: 9999px; /* Fully rounded (rounded-full) */
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s;
   display: inline-block;
-  /* Optional: Add transform styles if needed */
 }
 
-/* Apply hover styles only on devices that support hover (typically desktops) */
 @media (hover: hover) and (pointer: fine) {
   .skill-filter:hover {
-    background-color: #2563eb; /* Blue-600 */
-    color: #ffffff; /* White */
+    background-color: #2563eb;
+    color: #ffffff;
   }
-
   .skill-filter.active:hover {
-    background-color: #1e40af; /* Blue-800 */
-    color: #ffffff; /* White */
+    background-color: #1e40af;
+    color: #ffffff;
   }
 }
 
-/* Active state styles */
 .skill-filter.active {
-  background-color: #2563eb; /* Blue-600 */
-  color: #ffffff; /* White */
-}
-
-/* Optional: If you have transform effects on active state */
-.skill-filter.active {
-  /* Example transform: scale up slightly */
+  background-color: #2563eb;
+  color: #ffffff;
   transform: scale(1.05);
 }
-

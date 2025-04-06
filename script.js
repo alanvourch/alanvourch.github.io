@@ -1,192 +1,130 @@
-// <!-- Smooth Scroll Script -->
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
-
-
-// <!-- IntersectionObserver for Section Fade-In -->
-const sections = document.querySelectorAll('.section');
-const options = {
-    threshold: 0.05
-};
-const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
-    });
-}, options);
-sections.forEach(section => {
-    observer.observe(section);
-});
-
-// nav bar script
-
-window.addEventListener('scroll', function() {
-  var navbar = document.getElementById('navbar');
-  var navLinks = document.querySelectorAll('.nav-link');
-  var scrollPosition = window.scrollY;
-  var headerHeight = document.getElementById('header').offsetHeight;
-
-  if (scrollPosition > headerHeight - 100) {
-    navbar.style.backgroundColor = 'rgba(255, 255, 255, ' + Math.min(scrollPosition / headerHeight, 1) + ')';
-    navLinks.forEach(function(link) {
-      link.style.color = 'rgba(0, 0, 0, ' + Math.min(scrollPosition / headerHeight, 1) + ')';
-      link.style.textShadow = 'none'; // Remove shadow when navbar is opaque
-    });
-  } else {
-    navbar.style.backgroundColor = 'transparent';
-    navLinks.forEach(function(link) {
-      link.style.color = 'white';
-      link.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.75)'; // Add shadow when navbar is transparent
-    });
-  }
-});
-
-// Get elements
+// Cache common elements for performance
+const navbar = document.getElementById('navbar');
+const header = document.getElementById('header');
+const navLinks = document.querySelectorAll('.nav-link');
 const hamburgerBtn = document.getElementById('hamburger-btn');
 const hamburgerIcon = document.getElementById('hamburger-icon');
 const closeBtn = document.getElementById('close-btn');
 const closeIcon = document.getElementById('close-icon');
 const mobileMenuPanel = document.getElementById('mobile-menu-panel');
-const navbar = document.getElementById('navbar');
-const header = document.getElementById('header');
 
-// Toggle the mobile menu panel
+/* Smooth Scroll */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+/* IntersectionObserver for Section Fade-In */
+const sections = document.querySelectorAll('.section');
+const observerOptions = { threshold: 0.05 };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+sections.forEach(section => observer.observe(section));
+
+/* Unified Scroll Handler for Navbar */
+function updateNavbar() {
+  const scrollPosition = window.scrollY;
+  const headerHeight = header.offsetHeight;
+  const opacity = Math.min(scrollPosition / headerHeight, 1);
+
+  if (scrollPosition > headerHeight - 100) {
+    navbar.style.backgroundColor = `rgba(255, 255, 255, ${opacity})`;
+    navLinks.forEach(link => {
+      link.style.color = `rgba(0, 0, 0, ${opacity})`;
+      link.style.textShadow = 'none';
+    });
+    hamburgerIcon.style.color = '#333';
+  } else {
+    navbar.style.backgroundColor = 'transparent';
+    navLinks.forEach(link => {
+      link.style.color = 'white';
+      link.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.75)';
+    });
+    hamburgerIcon.style.color = 'white';
+  }
+}
+
+window.addEventListener('scroll', updateNavbar);
+
+/* Close mobile menu on scroll if open */
+window.addEventListener('scroll', () => {
+  if (mobileMenuPanel.classList.contains('translate-x-0')) {
+    mobileMenuPanel.classList.remove('translate-x-0');
+    hamburgerIcon.classList.remove('hidden');
+    closeIcon.classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
+  }
+});
+
+/* Mobile Menu Toggle */
 function toggleMobileMenu() {
-  // Slide the panel in and out by toggling translate-x-0 class
   mobileMenuPanel.classList.toggle('translate-x-0');
-  // Toggle hamburger and close icons
   hamburgerIcon.classList.toggle('hidden');
-  closeIcon.classList.toggle('hidden'); // Ensure close icon is toggled properly
-  // Toggle body scroll
+  closeIcon.classList.toggle('hidden');
   document.body.classList.toggle('overflow-hidden');
 }
 
-// Add event listener to the hamburger button
 hamburgerBtn.addEventListener('click', toggleMobileMenu);
+mobileMenuPanel.querySelectorAll('a').forEach(link => link.addEventListener('click', toggleMobileMenu));
 
-// Close mobile menu when clicking on a link
-mobileMenuPanel.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', toggleMobileMenu);
-});
-
-// Close the menu when clicking outside of the menu panel
 document.addEventListener('click', (event) => {
-    if (!mobileMenuPanel.contains(event.target) && event.target !== hamburgerBtn && !hamburgerBtn.contains(event.target)) {
-        if (mobileMenuPanel.classList.contains('translate-x-0')) {
-            toggleMobileMenu(); // Reuse the toggle function for consistency
-        }
-    }
-});
-
-// Close the panel when the close button is clicked
-closeBtn.addEventListener('click', () => {
-    // Slide out the menu
-    mobileMenuPanel.classList.remove('translate-x-0');
-
-    // Toggle hamburger and close icons
-    hamburgerIcon.classList.remove('hidden'); // Show hamburger icon
-    closeIcon.classList.add('hidden'); // Hide close icon
-
-    // Allow body scroll again
-    document.body.classList.remove('overflow-hidden');
-});
-
-// Close the panel if scrolling outside the panel
-window.addEventListener('scroll', (event) => {
-    // Check if the mobile menu panel is open
+  if (!mobileMenuPanel.contains(event.target) && !hamburgerBtn.contains(event.target)) {
     if (mobileMenuPanel.classList.contains('translate-x-0')) {
-        // Close the panel when scrolling
-        mobileMenuPanel.classList.remove('translate-x-0');
-
-        // Toggle hamburger and close icons
-        hamburgerIcon.classList.remove('hidden'); // Show hamburger icon
-        closeIcon.classList.add('hidden'); // Hide close icon
-
-        // Allow body scroll again
-        document.body.classList.remove('overflow-hidden');
+      toggleMobileMenu();
     }
+  }
 });
 
-// Change hamburger color on scroll
-window.addEventListener('scroll', function () {
-    var navLinks = document.querySelectorAll('.nav-link');
-    var scrollPosition = window.scrollY;
-    var headerHeight = header.offsetHeight;
-
-    if (scrollPosition > headerHeight - 100) {
-        // Change navbar background and link colors
-        navbar.style.backgroundColor = 'rgba(255, 255, 255, ' + Math.min(scrollPosition / headerHeight, 1) + ')';
-        navLinks.forEach(function (link) {
-            link.style.color = 'rgba(0, 0, 0, ' + Math.min(scrollPosition / headerHeight, 1) + ')';
-        });
-
-        // Change hamburger icon to dark gray when scrolling past the header
-        hamburgerIcon.style.color = '#333'; // Dark gray color
-    } else {
-        // Revert to original transparent navbar and white links
-        navbar.style.backgroundColor = 'transparent';
-        navLinks.forEach(function (link) {
-            link.style.color = 'white';
-        });
-
-        // Change hamburger icon back to white when in the header
-        hamburgerIcon.style.color = 'white'; // White color
-    }
+closeBtn.addEventListener('click', () => {
+  mobileMenuPanel.classList.remove('translate-x-0');
+  hamburgerIcon.classList.remove('hidden');
+  closeIcon.classList.add('hidden');
+  document.body.classList.remove('overflow-hidden');
 });
 
+/* Skill Filter Toggle */
 document.querySelectorAll('.skill-filter').forEach(skill => {
-    skill.addEventListener('click', function() {
-        const skillName = this.dataset.skill;
-        const isActive = this.classList.contains('active');
+  skill.addEventListener('click', function () {
+    const skillName = this.dataset.skill;
+    const isActive = this.classList.contains('active');
 
-        // Reset all skill filters
-        document.querySelectorAll('.skill-filter').forEach(s => {
-            s.classList.remove('active');
-        });
+    document.querySelectorAll('.skill-filter').forEach(s => s.classList.remove('active'));
+    if (!isActive) this.classList.add('active');
 
-        // Toggle current skill
-        if (!isActive) {
-            this.classList.add('active');
-        }
-
-        // Reset all project cards with a slight delay for smooth effect
-        const projectCards = document.querySelectorAll('.project-card');
-        projectCards.forEach(project => {
-            project.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            project.style.opacity = 0;
-            project.style.transform = 'translateY(20px)';
-        });
-
-        setTimeout(() => {
-            projectCards.forEach(project => {
-                if (!isActive && !project.dataset.skill.includes(skillName)) {
-                    project.style.display = 'none';
-                } else {
-                    project.style.display = 'block';
-                    requestAnimationFrame(() => {
-                        project.style.opacity = 1;
-                        project.style.transform = 'translateY(0)';
-                    });
-                }
-            });
-        }, 500);
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach(project => {
+      project.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      project.style.opacity = 0;
+      project.style.transform = 'translateY(20px)';
     });
+
+    setTimeout(() => {
+      projectCards.forEach(project => {
+        if (!isActive && !project.dataset.skill.includes(skillName)) {
+          project.style.display = 'none';
+        } else {
+          project.style.display = 'block';
+          requestAnimationFrame(() => {
+            project.style.opacity = 1;
+            project.style.transform = 'translateY(0)';
+          });
+        }
+      });
+    }, 500);
+  });
 });
 
-// iOS specific code to prevent background change on scroll
-(function() {
-    const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    if (!isiOS) {
-        const header = document.getElementById('header');
-        if (header && !header.classList.contains('bg-fixed')) {
-            header.classList.add('bg-fixed');
-        }
-    }
+/* iOS-specific: Conditionally add bg-fixed to header on non-iOS devices */
+(function () {
+  const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  if (!isiOS && header && !header.classList.contains('bg-fixed')) {
+    header.classList.add('bg-fixed');
+  }
 })();

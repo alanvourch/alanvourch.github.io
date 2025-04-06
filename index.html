@@ -2,41 +2,37 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-    content="Portfolio of Alan Vourc'h, a Financial Data Analyst specializing in data analysis, financial modeling, and FP&A.">
-  <meta property="og:title" content="Alan Vourc'h Portfolio">
-  <meta property="og:description"
-    content="Portfolio of Alan Vourc'h, a Financial Data Analyst specializing in data analysis, financial modeling, and FP&A.">
-  <meta property="og:url" content="https://alanvourch.github.io/">
-  <meta property="og:image" content="https://alanvourch.github.io/images/thumbnail.jpg">
-  <meta property="og:image:width" content="1280">
-  <meta property="og:image:height" content="720">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Alan Vourc'h Portfolio">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio of Alan Vourc'h, a Financial Data Analyst specializing in data analysis, financial modeling, and FP&A." />
+  <meta property="og:title" content="Alan Vourc'h Portfolio" />
+  <meta property="og:description" content="Portfolio of Alan Vourc'h, a Financial Data Analyst specializing in data analysis, financial modeling, and FP&A." />
+  <meta property="og:url" content="https://alanvourch.github.io/" />
+  <meta property="og:image" content="https://alanvourch.github.io/images/thumbnail.jpg" />
+  <meta property="og:image:width" content="1280" />
+  <meta property="og:image:height" content="720" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Alan Vourc'h Portfolio" />
   <title>Alan Vourc'h Portfolio</title>
 
   <!-- Google Fonts and FontAwesome -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css" />
 
   <!-- Favicon -->
-  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon" />
 
-  <!-- Preload the background image -->
+  <!-- Preload background image -->
   <link rel="preload" as="image" href="images/background.webp" type="image/webp" />
 
-
-  <!-- Tailwind CSS -->
+  <!-- Tailwind CSS (Consider using a production build for performance) -->
   <script src="https://cdn.tailwindcss.com"></script>
-
 </head>
 
-
 <body class="bg-gray-100 text-gray-800 font-roboto leading-relaxed">
-
   <!-- Nav bar -->
   <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4">
@@ -58,12 +54,10 @@
     </div>
 
     <!-- Sliding Panel for Mobile Menu -->
-    <div id="mobile-menu-panel"
-      class="fixed top-0 left-0 h-full w-64 bg-white text-gray-800 transform -translate-x-full transition-transform duration-300 md:hidden">
-
+    <div id="mobile-menu-panel" class="fixed top-0 left-0 h-full w-64 bg-white text-gray-800 transform -translate-x-full transition-transform duration-300 md:hidden">
       <!-- Close Button -->
       <button id="close-btn" class="absolute top-4 right-4 focus:outline-none" aria-label="Close Menu">
-        <svg id="close-icon" class=" hidden w-8 h-8 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none"
+        <svg id="close-icon" class="hidden w-8 h-8 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none"
           viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
@@ -78,23 +72,20 @@
   </nav>
 
   <!-- Header Section -->
-  <header id=header class="relative flex items-center justify-start h-screen bg-cover bg-center"
+  <header id="header" class="relative flex items-center justify-start h-screen bg-cover bg-center"
     style="background-image: url('images/background.webp');">
-
     <!-- Semi-transparent overlay -->
     <div class="absolute inset-0 bg-black bg-opacity-10"></div>
 
     <!-- Header content -->
     <div class="container mx-auto max-w-1xl px-4 relative z-10 pl-24 pb-20 text-left">
-      <h1 class="text-white text-5xl font-bold"
-        style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); opacity: 0; animation: fadeInLeft 1s ease-out forwards;">
-        Alan Vourc'h</h1>
-      <p class="text-white text-2xl font-semibold mt-2"
-        style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);opacity: 0; animation: fadeInLeft 1s ease-out forwards 0.2s;">
-        Financial Data Analyst</p>
-      <a href="#about"
-        class="mt-8 inline-block bg-blue-600 text-white py-3 px-6 rounded-lg shadow-md uppercase font-semibold tracking-wider transition-transform duration-300 ease-out hover:bg-blue-700 hover:scale-105 hover:shadow-lg"
-        style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); opacity: 0; animation: fadeInUp 1s ease-out forwards 0.5s;">
+      <h1 class="text-white text-5xl font-bold fade-in-left">
+        Alan Vourc'h
+      </h1>
+      <p class="text-white text-2xl font-semibold mt-2 fade-in-left delay-0-2">
+        Financial Data Analyst
+      </p>
+      <a href="#about" class="mt-8 inline-block bg-blue-600 text-white py-3 px-6 rounded-lg shadow-md uppercase font-semibold tracking-wider transition-transform duration-300 ease-out hover:bg-blue-700 hover:scale-105 hover:shadow-lg fade-in-up delay-0-5">
         Explore My Work
       </a>
     </div>
@@ -103,19 +94,15 @@
   <!-- Main Content -->
   <main class="container mx-auto px-4">
     <!-- About Section -->
-    <section id="about"
-      class=" section flex flex-col items-center justify-center pt-24 pb-8 text-center md:text-left md:flex-row md:space-x-24">
+    <section id="about" class="section flex flex-col items-center justify-center pt-24 pb-8 text-center md:text-left md:flex-row md:space-x-24">
       <!-- Profile Picture -->
-      <img src="images/profile_small.JPG" alt="Alan Vourc'h"
-        class="w-64 h-64 rounded-full shadow-lg object-cover transform transition-transform duration-300 hover:scale-110">
-
+      <img src="images/profile_small.JPG" alt="Alan Vourc'h" class="w-64 h-64 rounded-full shadow-lg object-cover transform transition-transform duration-300 hover:scale-110">
       <!-- About Me Text -->
       <div class="mt-8 md:mt-0 max-w-lg">
         <h2 class="section-title text-4xl font-bold text-center md:text-center pb-4">About Me</h2>
-        <!-- <p class="mt-4 text-lg">Hi, I'm Alan. As a Financial Data Analyst, I turn complex data into clear insights. I help companies make smarter financial decisions and manage risks better. Passionate about finding data-driven solutions that make a real impact.</p> -->
-        <p class="mt-4 text-lg">Hi, I'm Alan. I work as a Financial Data Analyst, turning complex data into clear
-          insights. I help companies make better financial decisions and manage risks. My projects range from building
-          FP&A dashboards to creating predictive models. Take a look at my work to learn more.</p>
+        <p class="mt-4 text-lg">
+          Hi, I'm Alan. I work as a Financial Data Analyst, turning complex data into clear insights. I help companies make better financial decisions and manage risks. My projects range from building FP&A dashboards to creating predictive models. Take a look at my work to learn more.
+        </p>
         <!-- Skills List -->
         <div class="mt-8 flex flex-wrap justify-center md:justify-start gap-4">
           <span class="skill-filter" data-skill="Data Analysis">Data Analysis</span>
@@ -126,16 +113,13 @@
           <span class="skill-filter" data-skill="Python">Python</span>
           <span class="skill-filter" data-skill="SQL">SQL</span>
           <span class="skill-filter" data-skill="Web Development">Web Development</span>
-
         </div>
-
       </div>
     </section>
 
     <!-- Projects Section -->
     <section id="projects" class="section py-20">
       <h2 class="section-title text-4xl font-bold text-center mb-12 pb-4">Featured Projects</h2>
-
       <!-- Projects Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto max-w-7xl">
 
@@ -365,6 +349,7 @@
         </div>
       </div>
     </section>
+
     <!-- Contact Section -->
     <section id="contact" class="section pb-20 mx-auto max-w-7xl flex flex-col justify-center items-center">
       <h2 class="section-title text-4xl font-bold mb-8 text-center text-gradient">Get In Touch</h2>
@@ -372,36 +357,27 @@
         <form action="https://formspree.io/f/mblrwbby" method="POST" class="flex flex-col w-full items-center">
           <div class="mb-4 w-full">
             <label for="name" class="block text-gray-700 font-bold mb-2">Name</label>
-            <input type="text" id="name" name="name"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required>
+            <input type="text" id="name" name="name" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required />
           </div>
           <div class="mb-4 w-full">
             <label for="email" class="block text-gray-700 font-bold mb-2">Email</label>
-            <input type="email" id="email" name="email"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required>
+            <input type="email" id="email" name="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required />
           </div>
           <div class="mb-4 w-full">
             <label for="message" class="block text-gray-700 font-bold mb-2">Message</label>
-            <textarea id="message" name="message" rows="4"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required></textarea>
+            <textarea id="message" name="message" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
           </div>
-          <button type="submit"
-            class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300">Send
-            Message</button>
+          <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300">Send Message</button>
         </form>
       </div>
     </section>
 
-
+    <!-- Footer -->
     <footer class="bg-gray-100 text-gray-600 py-10 border-t border-gray-300">
       <div class="container mx-auto flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
         <div class="text-center md:text-left">
           <p class="text-sm">&copy; 2025 Alan Vourc'h. All rights reserved.</p>
         </div>
-
         <div class="flex items-center space-x-6">
           <a href="mailto:alan.vourch@gmail.com" class="social-icon text-black-600 hover:text-blue-600">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -443,8 +419,6 @@
             </svg>
           </a>
         </div>
-
-
         <div class="text-center md:text-right">
           <a href="privacy.html" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">Privacy Policy</a>
           <span class="mx-2">|</span>
