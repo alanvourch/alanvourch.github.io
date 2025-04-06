@@ -122,9 +122,9 @@ document.querySelectorAll('.skill-filter').forEach(skill => {
 });
 
 /* iOS-specific: Conditionally add bg-fixed to header on non-iOS devices */
-(function () {
-  const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-  if (!isiOS && header && !header.classList.contains('bg-fixed')) {
-    header.classList.add('bg-fixed');
-  }
-})();
+// (function () {
+//   const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+//   if (!isiOS && header && !header.classList.contains('bg-fixed')) {
+//     header.classList.add('bg-fixed');
+//   }
+// })();
