@@ -1,32 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Netflix Movies Analysis | Alan Vourc'h Portfolio</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
-  <!-- Prism CSS -->
-<link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet" />
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Analysis Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f9f9f9;
+            color: #111;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2 {
+            color: #d81f26;
+        }
+
+        iframe {
+            border: none;
+            width: 100%;
+            height: 600px;
+            margin-bottom: 3rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        section {
+            margin-bottom: 5rem;
+        }
+
+        .code-container {
+            background-color: #f4f4f4;
+            border-left: 4px solid #d81f26;
+            padding: 1rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        button.toggle-btn {
+            background-color: #d81f26;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            margin-bottom: 0.5rem;
+            border-radius: 4px;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 text-gray-800 font-roboto">
-  <main class="max-w-6xl mx-auto px-4 py-12">
-    <h1 class="text-4xl font-bold text-center text-red-600 mb-6">📊 Netflix Movies Analysis</h1>
-    <p class="text-center text-lg max-w-3xl mx-auto mb-12">
-      This page contains a series of interactive Plotly visualizations built from my Netflix data analysis project. Each chart highlights unique trends across genres, runtimes, countries, and ratings.
-    </p>
+
+<body>
+    <h1>🎥 Netflix Movies: Data Analysis</h1>
+
+    <div style="text-align: center;">
+        <img src="https://gyanok.com/wp-content/uploads/2024/02/can-you-guess-the-netflix-show-by-the-emojis.jpg"
+            width="853" height="479">
+    </div>
+
+    <section>
+        <h2>📌 Introduction</h2>
+        <p><strong>Exploring Movies Available on Netflix: Insights from TMDB Data</strong></p>
+        <p>
+            Welcome to my deep-dive analysis of <strong>movies currently available on Netflix</strong>, using a
+            <a href="https://www.kaggle.com/datasets/alanvourch/tmdb-movies-daily-updates" target="_blank">large
+                dataset</a>
+            I created from The Movie Database (TMDB). This dataset is updated daily and filtered to focus on titles that
+            are
+            <strong>available on Netflix</strong>, regardless of whether Netflix produced them.
+        </p>
+        <h3>Context</h3>
+        <p>
+            Netflix has fundamentally transformed the entertainment industry, shifting the paradigm from
+            theatrical-first to streaming-first.
+            With a global subscriber base of over 300 million users and a yearly content budget surpassing $17 billion,
+            Netflix is not just
+            a platform—it’s a global content distributor. While box office figures don’t fully reflect its performance,
+            Netflix's content
+            strategy blends original IP, local content, and global licensing deals.
+        </p>
+        <h3>Objectives</h3>
+        <p>This notebook aims to uncover content patterns, audience behavior, and creative signals from Netflix's
+            current catalog through a series of data-driven visual explorations:</p>
+        <ul>
+            <li><strong>Genre Trends</strong>: Which genres dominate in volume, rating, and engagement?</li>
+            <li><strong>Origin Language</strong>: How do content characteristics and performance vary by language?</li>
+            <li><strong>Runtime Optimization</strong>: What runtimes correlate with better ratings and more viewer
+                engagement?</li>
+            <li><strong>Content Performance Quadrants</strong>: Clustering movies based on IMDb votes and rating to
+                identify hits, hidden gems, and more.</li>
+            <li><strong>Talent Analysis</strong>: Who are the top-performing directors, producers, writers, and
+                composers based on audience engagement and critical acclaim?</li>
+            <li><strong>Production Companies</strong>: Which companies consistently produce popular or highly-rated
+                content on the platform?</li>
+        </ul>
+        <h3>Note</h3>
+        <p>
+            TMDB is a community-driven platform, and its data may vary in completeness or accuracy—especially for
+            streaming services like Netflix.
+            The <strong>revenue and budget data refer to theatrical box office metrics</strong>, which are not relevant
+            for most Netflix titles.
+            As a result, this analysis focuses on more <strong>actionable variables such as ratings, vote counts,
+                runtime, origin, and talent</strong>.
+        </p>
+        <p>
+            This notebook is built for content strategy exploration and does not cover marketing impact or subscriber
+            growth,
+            though these are key elements in Netflix's overall strategy.
+        </p>
+    </section>
+
+
+    <!-- Section: Dataset Setup -->
+    <section class="section py-16" id="setup">
+        <div class="max-w-4xl mx-auto px-4 text-left">
+            <h2 class="text-3xl font-bold mb-4">1. Dataset Setup</h2>
+            <p class="mb-6">
+                This analysis uses two main datasets:
+            <ul class="list-disc list-inside mb-4">
+                <li><strong>TMDB_all_movies.csv</strong> — My full TMDB dataset with 1Million+ titles</li>
+                <li><strong>data.csv</strong> — Filtered list of movies currently available on Netflix</li>
+            </ul>
+            By merging both and applying quality filters (IMDb votes > 1000, proper runtime, etc.), we isolate a
+            reliable sample of Netflix movies suitable for analysis.
+            </p>
+
+            <div class="mb-4">
+                <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                    onclick="toggleCode(this)">Show Code</button>
+                <div class="code-container" style="display: none;">
+                    <pre class="code-block hidden"><code class="language-python">
+  # Load datasets
+  df_all = pd.read_csv("/kaggle/input/tmdb-movies-daily-updates/TMDB_all_movies.csv")
+  df_netflix = pd.read_csv('/kaggle/input/full-netflix-dataset/data.csv')
+  
+  # Match Netflix movies
+  imdb_id_list = df_netflix[df_netflix['type'] == 'movie']['imdbId'].tolist()
+  df_all = df_all.dropna(subset=['imdb_id'])
+  df = df_all[df_all['imdb_id'].isin(imdb_id_list)]
+  
+  # Apply quality filters
+  df = df[
+      (df['imdb_votes'] > 1000) &
+      (df['status'] == 'Released') &
+      (df['imdb_id'].notna()) &
+      (df['runtime'] >= 40) &
+      (df['runtime'] < 300)
+  ]
+  df.shape
+        </code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="bg-gray-100 p-4 rounded shadow mt-6 mb-6 text-sm">
+            <br>
+            <strong>📊 Dataset Shape:</strong> 8,620 rows × 28 columns<br>
+            <strong>📁 Selected Columns:</strong> title, release_date, budget, revenue, imdb_votes, imdb_id, production_companies
+          </div>
+    </section>
+
+    <!-- Section: Data Preprocessing -->
+    <section class="section py-16" id="preprocessing">
+        <div class="max-w-4xl mx-auto px-4 text-left">
+            <h2 class="text-3xl font-bold mb-4">2. Data Preprocessing</h2>
+            <p class="mb-6">
+                We begin by parsing key fields like <code>release_year</code> and <code>decade</code> to explore the
+                evolution of Netflix’s catalog over time. Only titles with a valid release date are retained.
+            </p>
+
+            <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" onclick="toggleCode(this)">Show
+                Code</button>
+            <div class="code-container" style="display: none;">
+                <pre class="code-block"><code class="language-python">
+  # Extract decade and release year
+  df['release_year'] = pd.to_datetime(df['release_date'], errors='coerce').dt.year
+  df['decade'] = (df['release_year'] // 10) * 10
+  
+  # Count movies by decade
+  movie_count_by_decade = df.groupby('decade').size().reset_index(name='movie_count')
+  movie_count_by_decade
+        </code></pre>
+            </div>
+        </div>
+        <iframe src="tables/movie_count_by_decade.html" width="100%" height="400" class="rounded shadow my-6 border border-gray-200"></iframe>
+
+    </section>
+
+
 
     <section>
         <h2>🎬 IMDb Votes Distribution by Genre</h2>
         <p>
-          High outliers (blockbusters) appear across most genres, but <strong>Action</strong>, <strong>Fantasy</strong>, and <strong>Science Fiction</strong> stand out with the widest vote ranges and top outliers — typical of globally appealing, franchise-heavy content. The log scale highlights the range of audience engagement, from niche titles to mainstream hits.
+            High outliers (blockbusters) appear across most genres, but <strong>Action</strong>,
+            <strong>Fantasy</strong>, and <strong>Science Fiction</strong> stand out with the widest vote ranges and top
+            outliers — typical of globally appealing, franchise-heavy content. The log scale highlights the range of
+            audience engagement, from niche titles to mainstream hits.
         </p>
-           
+
         <button onclick="toggleCode(this)" class="code-toggle">Show Code</button>
         <div class="code-container" style="display: none;">
-        <pre class="language-python"><code class="language-python">
-      # Filter to non-null genres, ratings, and votes
+            <pre class="language-python"><code class="language-python"># Filter to non-null genres, ratings, and votes
       df_filtered = df[
           df["main_genre"].notnull() &
           df["imdb_votes"].notnull() &
@@ -58,35 +234,36 @@
       )
       fig_votes.update_layout(xaxis_title="Genre", yaxis_title="IMDb Votes")
     </code></pre>
-</div>
-    <iframe src="charts/boxplot_genre_vote.html" width="100%" height="600px"></iframe>
-      </section>
-      
+        </div>
+        <iframe src="charts/boxplot_genre_vote.html" width="100%" height="600px"></iframe>
+    </section>
+
 
     <section class="mb-16">
-      <h2 class="text-2xl font-semibold mb-4">⭐ IMDb Ratings Distribution by Genre</h2>
-      <iframe src="charts/boxplot_genre_rating.html" class="w-full h-[600px] border rounded shadow"></iframe>
+        <h2 class="text-2xl font-semibold mb-4">⭐ IMDb Ratings Distribution by Genre</h2>
+        <iframe src="charts/boxplot_genre_rating.html" class="w-full h-[600px] border rounded shadow"></iframe>
     </section>
 
     <section class="mb-16">
-      <h2 class="text-2xl font-semibold mb-4">📈 Runtime vs IMDb Rating</h2>
-      <iframe src="charts/runtime_vs_rating.html" class="w-full h-[600px] border rounded shadow"></iframe>
+        <h2 class="text-2xl font-semibold mb-4">📈 Runtime vs IMDb Rating</h2>
+        <iframe src="charts/runtime_vs_rating.html" class="w-full h-[600px] border rounded shadow"></iframe>
     </section>
 
     <section class="mb-16">
-      <h2 class="text-2xl font-semibold mb-4">🌍 Genre Preferences by Language</h2>
-      <iframe src="charts/genre_language_heatmap.html" class="w-full h-[600px] border rounded shadow"></iframe>
+        <h2 class="text-2xl font-semibold mb-4">🌍 Genre Preferences by Language</h2>
+        <iframe src="charts/genre_language_heatmap.html" class="w-full h-[600px] border rounded shadow"></iframe>
     </section>
 
     <section class="mb-16">
-      <h2 class="text-2xl font-semibold mb-4">🧭 Genre Popularity vs Quality Quadrants</h2>
-      <iframe src="charts/genre_quadrants.html" class="w-full h-[600px] border rounded shadow"></iframe>
+        <h2 class="text-2xl font-semibold mb-4">🧭 Genre Popularity vs Quality Quadrants</h2>
+        <iframe src="charts/genre_quadrants.html" class="w-full h-[600px] border rounded shadow"></iframe>
     </section>
-  </main>
-  <script src="script.js"></script>
-  <!-- Prism JS -->
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+    </main>
+    <script src="script.js"></script>
+    <!-- Prism JS -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
 
 </body>
+
 </html>
