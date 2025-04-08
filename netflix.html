@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Netflix Movies Analysis | Alan Vourc'h Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
+  <!-- Prism CSS -->
+<link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet" />
+
+</head>
+<body class="bg-gray-100 text-gray-800 font-roboto">
+  <main class="max-w-6xl mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold text-center text-red-600 mb-6">📊 Netflix Movies Analysis</h1>
+    <p class="text-center text-lg max-w-3xl mx-auto mb-12">
+      This page contains a series of interactive Plotly visualizations built from my Netflix data analysis project. Each chart highlights unique trends across genres, runtimes, countries, and ratings.
+    </p>
+
+    <section>
+        <h2>🎬 IMDb Votes Distribution by Genre</h2>
+        <p>
+          High outliers (blockbusters) appear across most genres, but <strong>Action</strong>, <strong>Fantasy</strong>, and <strong>Science Fiction</strong> stand out with the widest vote ranges and top outliers — typical of globally appealing, franchise-heavy content. The log scale highlights the range of audience engagement, from niche titles to mainstream hits.
+        </p>
+           
+        <button onclick="toggleCode(this)" class="code-toggle">Show Code</button>
+        <div class="code-container" style="display: none;">
+        <pre class="language-python"><code class="language-python">
+      # Filter to non-null genres, ratings, and votes
+      df_filtered = df[
+          df["main_genre"].notnull() &
+          df["imdb_votes"].notnull() &
+          df["imdb_rating"].notnull()
+      ].copy()
+      
+      # Round imdb_votes
+      df_filtered["imdb_votes"] = df_filtered["imdb_votes"].round(0).astype(int)
+      
+      # Sort genres by avg imdb_votes
+      sorted_genres_votes = (
+          df_filtered.groupby("main_genre")["imdb_votes"]
+          .mean()
+          .sort_values(ascending=False)
+          .index
+      )
+      
+      # Boxplot: IMDb votes by main genre
+      fig_votes = px.box(
+          df_filtered,
+          x="main_genre",
+          y="imdb_votes",
+          title="IMDb Votes Distribution by Genre (Sorted by Avg Votes)",
+          points="outliers",
+          log_y=True,
+          hover_data=["title", "imdb_rating", "release_year"],
+          color="main_genre",
+          category_orders={"main_genre": list(sorted_genres_votes)}
+      )
+      fig_votes.update_layout(xaxis_title="Genre", yaxis_title="IMDb Votes")
+    </code></pre>
+</div>
+    <iframe src="charts/boxplot_genre_vote.html" width="100%" height="600px"></iframe>
+      </section>
+      
+
+    <section class="mb-16">
+      <h2 class="text-2xl font-semibold mb-4">⭐ IMDb Ratings Distribution by Genre</h2>
+      <iframe src="charts/boxplot_genre_rating.html" class="w-full h-[600px] border rounded shadow"></iframe>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="text-2xl font-semibold mb-4">📈 Runtime vs IMDb Rating</h2>
+      <iframe src="charts/runtime_vs_rating.html" class="w-full h-[600px] border rounded shadow"></iframe>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="text-2xl font-semibold mb-4">🌍 Genre Preferences by Language</h2>
+      <iframe src="charts/genre_language_heatmap.html" class="w-full h-[600px] border rounded shadow"></iframe>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="text-2xl font-semibold mb-4">🧭 Genre Popularity vs Quality Quadrants</h2>
+      <iframe src="charts/genre_quadrants.html" class="w-full h-[600px] border rounded shadow"></iframe>
+    </section>
+  </main>
+  <script src="script.js"></script>
+  <!-- Prism JS -->
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+
+</body>
+</html>

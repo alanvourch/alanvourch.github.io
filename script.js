@@ -121,6 +121,14 @@ document.querySelectorAll('.skill-filter').forEach(skill => {
   });
 });
 
+function toggleCode(button) {
+  const codeBlock = button.nextElementSibling;
+  const isVisible = codeBlock.style.display === 'block';
+  codeBlock.style.display = isVisible ? 'none' : 'block';
+  button.textContent = isVisible ? 'Show Code' : 'Hide Code';
+}
+
+
 /* iOS-specific: Conditionally add bg-fixed to header on non-iOS devices */
 // (function () {
 //   const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
