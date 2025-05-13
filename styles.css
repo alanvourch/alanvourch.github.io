@@ -192,6 +192,31 @@ html, body {
   object-position: center 5%;    /* adjust % until title is clear */
 }
 
+#proj-fpa-dashboard .project-image-container img {
+  object-position: center 1%;    /* adjust % until title is clear */
+}
+
+#proj-hr-predictor .project-image-container img {
+  object-position: center 1%;    /* adjust % until title is clear */
+}
+
+#proj-sql-remote .project-image-container img {
+  object-position: center 25%;/* adjust % until title is clear */
+}
+#proj-sql-tech .project-image-container img {
+  object-position: center 5%;/* adjust % until title is clear */
+}
+#proj-tableau-boxoffice .project-image-container img {
+  object-position: center 5%;/* adjust % until title is clear */
+}
+
+#proj-movies-dataset .project-image-container img {
+  object-position: center 5%;/* adjust % until title is clear */
+}
+#proj-pbi-cinema .project-image-container img {
+  object-position: center 5%;/* adjust % until title is clear */
+}
+
 
 @media (max-width: 768px) {
   #navbar {
