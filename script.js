@@ -136,7 +136,7 @@ const projects = [
   {
     id: 'moviemate',
     title: 'MovieMate: Movie Web App',
-    description: 'I made a React web app built from my own custom database of 50,000 movies. Users can filter titles, check box office results, see upcoming releases, and read the latest movie news. The app is designed for movie enthusiasts and data analysts alike, showcasing my skills in web development and data management.',
+    description: 'I made a React web app built from my own custom database of 50,000 movies. Users can filter titles, check box office results, see upcoming releases, and read the latest movie news.',
     skills: ['Web Development', 'Data Analysis'],
     thumb: 'images/projects/moviemate-thumb.webp',
     hover: 'images/projects/moviemate_hover.webp',
@@ -146,7 +146,7 @@ const projects = [
   {
     id: 'fpa-dashboard',
     title: 'Power BI - FP&A Dashboard',
-    description: 'A Power BI dashboard built during my time as FP&A Manager at a major event company. It uses structured financial data to track performance and help guide decision-making. The dashboard includes key metrics, visualizations, and interactive elements to provide a comprehensive view of the company’s financial health.',
+    description: 'A Power BI dashboard I built while working as FP&A Manager at a major event company. It connects business and payroll databases to track performance and support decision-making for senior leadership and operational managers.',
     skills: ['Power BI', 'Data Analysis', 'Financial Modeling'],
     thumb: 'images/projects/fpadash.webp',
     hover: 'images/projects/pbi_fpa.webp',
@@ -166,7 +166,7 @@ const projects = [
   {
     id: 'netflix',
     title: 'Netflix Content Strategy Analysis',
-    description: 'An analysis of Netflix’s movie catalogue that looks at audience trends and viewing patterns. It uses data visualizations to show how genres, regions, and viewer preferences influence Netflix’s content strategy. This project highlights my ability to analyze large datasets and extract actionable insights.',
+    description: 'An analysis of Netflix’s movie catalog exploring how audience trends, genres, and regional preferences shape its content strategy. Through data visualizations, the project uncovers patterns in what people watch and how that guides investment decisions.',
     skills: ['Data Analysis', 'Data Visualization', 'Python'],
     thumb: 'images/projects/netflix.jpg',
     hover: 'images/projects/netflix-verso.png',
@@ -176,7 +176,7 @@ const projects = [
   {
     id: 'sql-tech',
     title: 'SQL - Tech Layoffs Analysis',
-    description: 'Using SQL, I cleaned and analyzed public datasets on recent tech layoffs. The project highlights key trends and insights into how companies manage their workforce during industry changes.',
+    description: 'Using SQL, I explored public datasets on recent tech layoffs to surface trends around workforce shifts. The project sheds light on how companies adapt their staffing strategies during periods of change.',
     skills: ['SQL', 'Data Analysis', 'Financial Modeling'],
     thumb: 'images/projects/sql-tech.webp',
     hover: 'images/projects/sql2.webp',
@@ -186,7 +186,7 @@ const projects = [
   {
     id: 'retail-forecast',
     title: 'Time Series Forecasting',
-    description: 'A forecasting project using real retail sales data. It explains different forecasting methods, from basic trend models to hybrid approaches combining machine learning. The project shows how businesses can plan ahead by identifying patterns and predicting sales.',
+    description: 'A forecasting project based on real retail sales data, walking through methods from simple trend models to machine learning hybrids. It shows how businesses can identify patterns and forecast sales to make more informed decisions.',
     skills: ['Python', 'Machine Learning', 'Data Analysis', 'Financial Modeling'],
     thumb: 'images/projects/forecast.webp',
     hover: 'images/projects/forecast2.webp',
@@ -196,7 +196,7 @@ const projects = [
   {
     id: 'sql-remote',
     title: 'SQL - Top Paying Remote Data Jobs',
-    description: 'Leveraging SQL analysis on current job market data, this project identifies high-paying remote data analyst roles. It highlights salary trends, in-demand skills, and industry demand to help analysts strategically target career opportunities.',
+    description: 'A SQL-based analysis of the current job market to identify top-paying remote data roles. The project highlights salary ranges, key skills, and hiring trends to help analysts better navigate career opportunities.',
     skills: ['SQL', 'Data Analysis'],
     thumb: 'images/projects/sql-remote.webp',
     hover: 'images/projects/job_salaries_chart.png',
@@ -206,7 +206,7 @@ const projects = [
   {
     id: 'movies-dataset',
     title: 'Ultimate Movies Dataset',
-    description: 'I made this daily updated dataset of 1 million movies tracking trends, box office results, and production strategies in the global film industry. It shows my ability to manage and analyze large-scale data effectively.',
+    description: 'A daily-updated dataset of 1 million movies, tracking global trends, box office results, and production strategies. Built to support deep film analysis and demonstrate large-scale data handling.',
     skills: ['Python', 'Data Analysis'],
     thumb: 'images/projects/moviedataset.webp',
     hover: 'images/projects/dataset4.webp',
@@ -216,7 +216,7 @@ const projects = [
   {
     id: 'tableau-boxoffice',
     title: 'Tableau - Box Office & IMDb Trends',
-    description: 'This Tableau report visualizes top box office hits by genre and decade, comparing revenues and IMDb ratings to highlight evolving audience tastes and market dynamics over time.',
+    description: 'A Tableau report exploring box office hits by genre and decade, comparing revenues and IMDb ratings to reveal how audience preferences and market trends have evolved over time.',
     skills: ['Tableau', 'Data Analysis'],
     thumb: 'images/projects/tableaucine.webp',
     hover: 'images/projects/tableaubo2.webp',
@@ -226,7 +226,7 @@ const projects = [
   {
     id: 'pbi-cinema',
     title: 'Power BI - Cinema Dashboard',
-    description: 'An interactive Power BI dashboard that integrates live box office and IMDb data from my movies dataset. It offers dynamic visuals highlighting trends, studio performances, and detailed genre analyses.',
+    description: 'An interactive Power BI dashboard built on my movie dataset, combining live box office and IMDb data. It highlights key trends, studio performance, and genre breakdowns through clear, dynamic visuals.',
     skills: ['Power BI', 'Data Analysis'],
     thumb: 'images/projects/pbi-movie.webp',
     hover: 'images/projects/pbi_cinema.webp',
@@ -247,7 +247,7 @@ const projects = [
   {
     id: 'movies-update',
     title: 'Movies Dataset Daily Update',
-    description: 'Built an automated Python pipeline that updates my movie dataset daily with the latest IMDb ratings and new releases, keeping it ready for up-to-date analysis.',
+    description: 'I built an automated Python pipeline that updates my movie dataset daily with the latest IMDb ratings and new releases, keeping it ready for up-to-date analysis.',
     skills: ['Python', 'Data Analysis'],
     thumb: 'images/projects/update.webp',
     hover: 'images/projects/update1.webp',
