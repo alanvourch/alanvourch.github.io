@@ -133,15 +133,19 @@ function toggleCode(button) {
 // Project data array: add/remove/edit entries here
 
 const projects = [
+
+
   {
-    id: 'moviemate',
-    title: 'MovieMate: Movie Web App',
-    description: 'I made a React web app built from my own custom database of 50,000 movies. Users can filter titles, check box office results, see upcoming releases, and read the latest movie news.',
-    skills: ['Web Development', 'Data Analysis'],
-    thumb: 'images/projects/moviemate-thumb.webp',
-    hover: 'images/projects/moviemate_hover.webp',
-    link: 'https://themoviemate.vercel.app/',
-    linkLabel: 'Explore MovieMate'
+    id: 'scaleup-expenses',
+    title: ' FP&A Business Case - FinTech Scaleup',
+    description: `This business case replicates the real-life responsibilities of an FP&A Expenses Manager in a FinTech scaleup.
+    It covers P&L modeling, 
+     cost-to-serve analysis, management reporting, budget planning, and exec-ready slides.`,
+    skills: ['Financial Modeling', 'Data Analysis'],
+    thumb: 'images/projects/businesscase_thumb.webp',
+    hover: 'images/projects/businesscase_hover.webp',
+    link: 'https://better-lobster-21e.notion.site/Business-Case-Strategic-Workforce-Planning-for-a-Hypergrowth-Fintech-239a918b45eb8089a6c6fdb737f6cd5f',
+    linkLabel: 'Explore Business Case on Notion'
   },
   {
     id: 'fpa-dashboard',
@@ -153,7 +157,27 @@ const projects = [
     link: 'https://app.powerbi.com/view?r=eyJrIjoiM2VjMmRkMjItN2IxYS00MDliLWIxM2QtYmIzYjAzNmMxMWVkIiwidCI6Ijg5NTkwMmNlLTUzMWMtNDJjNi05YTMwLTA3YjRkZjUxYzNiMyJ9',
     linkLabel: 'Explore Power BI Dashboard'
   },
-  {
+    {
+    id: 'sql-tech',
+    title: 'SQL - Tech Layoffs Analysis',
+    description: 'Using SQL, I explored public datasets on recent tech layoffs to surface trends around workforce shifts. The project sheds light on how companies adapt their staffing strategies during periods of change.',
+    skills: ['SQL', 'Data Analysis', 'Financial Modeling'],
+    thumb: 'images/projects/sql-tech.webp',
+    hover: 'images/projects/sql2.webp',
+    link: 'https://better-lobster-21e.notion.site/SQL-Data-Cleaning-EDA-Layoffs-data-dbd0891e61454310901253c8faa767d3',
+    linkLabel: 'Explore Notion Page'
+  },
+    {
+    id: 'retail-forecast',
+    title: 'Time Series Forecasting',
+    description: 'A forecasting project based on real retail sales data, walking through methods from simple trend models to machine learning hybrids. It shows how businesses can identify patterns and forecast sales to make more informed decisions.',
+    skills: ['Python', 'Machine Learning', 'Data Analysis', 'Financial Modeling'],
+    thumb: 'images/projects/forecast.webp',
+    hover: 'images/projects/forecast2.webp',
+    link: 'https://medium.com/@alan.vourch/forecasting-a-practical-guide-6173f421c1ed',
+    linkLabel: 'Explore Medium Article'
+  },
+    {
     id: 'hr-predictor',
     title: 'HR Insights & Predictive Model',
     description: 'A project that uses machine learning to predict employee turnover and identify the main factors behind it. It shows how predictive analytics can be applied to real HR challenges.',
@@ -162,6 +186,16 @@ const projects = [
     hover: 'images/projects/hr2.webp',
     link: 'https://www.kaggle.com/code/alanvourch/salifort-motors-hr-analysis',
     linkLabel: 'Explore HR Insights Notebook'
+  },
+  {
+    id: 'moviemate',
+    title: 'MovieMate: Movie Web App',
+    description: 'I made a React web app built from my own custom database of 50,000 movies. Users can filter titles, check box office results, see upcoming releases, and read the latest movie news.',
+    skills: ['Web Development', 'Data Analysis'],
+    thumb: 'images/projects/moviemate-thumb.webp',
+    hover: 'images/projects/moviemate_hover.webp',
+    link: 'https://themoviemate.vercel.app/',
+    linkLabel: 'Explore MovieMate'
   },
   {
     id: 'netflix',
@@ -173,26 +207,7 @@ const projects = [
     link: 'https://medium.com/@alan.vourch/netflix-by-the-numbers-a-content-strategy-perspective-4fb88789f476',
     linkLabel: 'Explore Medium Article'
   },
-  {
-    id: 'sql-tech',
-    title: 'SQL - Tech Layoffs Analysis',
-    description: 'Using SQL, I explored public datasets on recent tech layoffs to surface trends around workforce shifts. The project sheds light on how companies adapt their staffing strategies during periods of change.',
-    skills: ['SQL', 'Data Analysis', 'Financial Modeling'],
-    thumb: 'images/projects/sql-tech.webp',
-    hover: 'images/projects/sql2.webp',
-    link: 'https://better-lobster-21e.notion.site/SQL-Data-Cleaning-EDA-Layoffs-data-dbd0891e61454310901253c8faa767d3',
-    linkLabel: 'Explore Notion Page'
-  },
-  {
-    id: 'retail-forecast',
-    title: 'Time Series Forecasting',
-    description: 'A forecasting project based on real retail sales data, walking through methods from simple trend models to machine learning hybrids. It shows how businesses can identify patterns and forecast sales to make more informed decisions.',
-    skills: ['Python', 'Machine Learning', 'Data Analysis', 'Financial Modeling'],
-    thumb: 'images/projects/forecast.webp',
-    hover: 'images/projects/forecast2.webp',
-    link: 'https://medium.com/@alan.vourch/forecasting-a-practical-guide-6173f421c1ed',
-    linkLabel: 'Explore Medium Article'
-  },
+
   {
     id: 'sql-remote',
     title: 'SQL - Top Paying Remote Data Jobs',
