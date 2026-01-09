@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letterboxd Stats - Enhanced Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #e4e4e7;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00d4ff, #7c3aed, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #a1a1aa;
+            font-size: 1.1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card:nth-child(1) .stat-number { color: #00d4ff; }
+        .stat-card:nth-child(2) .stat-number { color: #f472b6; }
+        .stat-card:nth-child(3) .stat-number { color: #fbbf24; }
+        .stat-card:nth-child(4) .stat-number { color: #34d399; }
+        .stat-card:nth-child(5) .stat-number { color: #a78bfa; }
+        .stat-card:nth-child(6) .stat-number { color: #fb923c; }
+
+        .stat-label {
+            color: #a1a1aa;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .chart-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chart-card h2 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        .lists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .list-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .list-card h2 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .movie-list {
+            list-style: none;
+        }
+
+        .movie-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .movie-name {
+            font-weight: 500;
+        }
+
+        .movie-count {
+            color: #a1a1aa;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            color: #71717a;
+        }
+
+        footer a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <header>
+            <h1>Letterboxd Stats</h1>
+            <p class="subtitle">Enhanced Dashboard with TMDB Data</p>
+        </header>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">1994</div>
+                <div class="stat-label">Films Watched</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">590</div>
+                <div class="stat-label">Films Rated</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3.55</div>
+                <div class="stat-label">Average Rating</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1122</div>
+                <div class="stat-label">Films Liked</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">83</div>
+                <div class="stat-label">Rewatches</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">109</div>
+                <div class="stat-label">In Watchlist</div>
+            </div>
+        </div>
+        
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h2>Top Genres</h2>
+                <div class="chart-container">
+                    <canvas id="genresChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h2>Films Watched Per Year</h2>
+                <div class="chart-container">
+                    <canvas id="yearlyChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h2>Top Actors</h2>
+                <div class="chart-container">
+                    <canvas id="actorsChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h2>Top Directors</h2>
+                <div class="chart-container">
+                    <canvas id="directorsChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h2>Runtime Distribution</h2>
+                <div class="chart-container">
+                    <canvas id="runtimeChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h2>Monthly Activity</h2>
+                <div class="chart-container">
+                    <canvas id="monthlyChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <div class="lists-grid">
+            <div class="list-card">
+                <h2>Top Actors</h2>
+                <ul class="movie-list"><li><span class="movie-name">Brad Pitt</span><span class="movie-count">30 films</span></li><li><span class="movie-name">Robert De Niro</span><span class="movie-count">28 films</span></li><li><span class="movie-name">Tom Hanks</span><span class="movie-count">27 films</span></li><li><span class="movie-name">Willem Dafoe</span><span class="movie-count">25 films</span></li><li><span class="movie-name">Ralph Fiennes</span><span class="movie-count">24 films</span></li><li><span class="movie-name">Christian Bale</span><span class="movie-count">23 films</span></li><li><span class="movie-name">Samuel L. Jackson</span><span class="movie-count">23 films</span></li><li><span class="movie-name">Bruce Willis</span><span class="movie-count">23 films</span></li><li><span class="movie-name">Josh Brolin</span><span class="movie-count">23 films</span></li><li><span class="movie-name">Woody Harrelson</span><span class="movie-count">23 films</span></li></ul>
+            </div>
+            <div class="list-card">
+                <h2>Top Directors</h2>
+                <ul class="movie-list"><li><span class="movie-name">Steven Spielberg</span><span class="movie-count">26 films</span></li><li><span class="movie-name">Martin Scorsese</span><span class="movie-count">20 films</span></li><li><span class="movie-name">Wes Anderson</span><span class="movie-count">18 films</span></li><li><span class="movie-name">Christopher Nolan</span><span class="movie-count">16 films</span></li><li><span class="movie-name">Ridley Scott</span><span class="movie-count">14 films</span></li><li><span class="movie-name">Michael Mann</span><span class="movie-count">14 films</span></li><li><span class="movie-name">Tim Burton</span><span class="movie-count">14 films</span></li><li><span class="movie-name">Robert Zemeckis</span><span class="movie-count">13 films</span></li><li><span class="movie-name">James Mangold</span><span class="movie-count">13 films</span></li><li><span class="movie-name">Akira Kurosawa</span><span class="movie-count">12 films</span></li></ul>
+            </div>
+            <div class="list-card">
+                <h2>Favorite Genres</h2>
+                <ul class="movie-list"><li><span class="movie-name">Drama</span><span class="movie-count">923 films</span></li><li><span class="movie-name">Comedy</span><span class="movie-count">618 films</span></li><li><span class="movie-name">Action</span><span class="movie-count">552 films</span></li><li><span class="movie-name">Thriller</span><span class="movie-count">516 films</span></li><li><span class="movie-name">Adventure</span><span class="movie-count">423 films</span></li><li><span class="movie-name">Science Fiction</span><span class="movie-count">368 films</span></li><li><span class="movie-name">Crime</span><span class="movie-count">361 films</span></li><li><span class="movie-name">Horror</span><span class="movie-count">272 films</span></li><li><span class="movie-name">Fantasy</span><span class="movie-count">257 films</span></li><li><span class="movie-name">Romance</span><span class="movie-count">215 films</span></li></ul>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Enhanced with data from <a href="https://www.themoviedb.org" target="_blank">The Movie Database (TMDB)</a></p>
+            <p>Built with Letterboxd Stats v2.0</p>
+        </footer>
+    </div>
+    
+    <script>
+        Chart.defaults.color = '#a1a1aa';
+        Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+
+        // Genres Chart
+        new Chart(document.getElementById('genresChart'), {"type": "doughnut", "data": {"labels": ["Drama", "Comedy", "Action", "Thriller", "Adventure", "Science Fiction", "Crime", "Horror", "Fantasy", "Romance"], "datasets": [{"data": [923, 618, 552, 516, 423, 368, 361, 272, 257, 215], "backgroundColor": ["rgba(0, 212, 255, 0.8)", "rgba(124, 58, 237, 0.8)", "rgba(244, 114, 182, 0.8)", "rgba(251, 191, 36, 0.8)", "rgba(52, 211, 153, 0.8)", "rgba(251, 146, 60, 0.8)", "rgba(167, 139, 250, 0.8)", "rgba(248, 113, 113, 0.8)", "rgba(96, 165, 250, 0.8)", "rgba(74, 222, 128, 0.8)"], "borderWidth": 0}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"position": "right", "labels": {"padding": 15, "usePointStyle": true}}}}});
+
+        // Yearly Chart
+        new Chart(document.getElementById('yearlyChart'), {"type": "bar", "data": {"labels": ["2019", "2021", "2022", "2023", "2024", "2025", "2026"], "datasets": [{"label": "Films Watched", "data": [4, 3, 28, 220, 159, 180, 5], "backgroundColor": "rgba(0, 212, 255, 0.8)", "borderRadius": 6}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"y": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "x": {"grid": {"display": false}}}}});
+
+        // Actors Chart
+        new Chart(document.getElementById('actorsChart'), {"type": "bar", "data": {"labels": ["Brad Pitt", "Robert De Niro", "Tom Hanks", "Willem Dafoe", "Ralph Fiennes", "Christian Bale", "Samuel L. Jackson", "Bruce Willis", "Josh Brolin", "Woody Harrelson", "Tom Cruise", "Scarlett Johansson", "Jim Carrey", "Keanu Reeves", "Laurence Fishburne"], "datasets": [{"label": "Films", "data": [30, 28, 27, 25, 24, 23, 23, 23, 23, 23, 23, 22, 22, 21, 21], "backgroundColor": "rgba(124, 58, 237, 0.8)", "borderRadius": 6}]}, "options": {"indexAxis": "y", "responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"x": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "y": {"grid": {"display": false}}}}});
+
+        // Directors Chart
+        new Chart(document.getElementById('directorsChart'), {"type": "bar", "data": {"labels": ["Steven Spielberg", "Martin Scorsese", "Wes Anderson", "Christopher Nolan", "Ridley Scott", "Michael Mann", "Tim Burton", "Robert Zemeckis", "James Mangold", "Akira Kurosawa", "Quentin Tarantino", "David Fincher", "Billy Wilder", "Paul Thomas Anderson", "Quentin Dupieux"], "datasets": [{"label": "Films", "data": [26, 20, 18, 16, 14, 14, 14, 13, 13, 12, 11, 11, 11, 11, 11], "backgroundColor": "rgba(251, 146, 60, 0.8)", "borderRadius": 6}]}, "options": {"indexAxis": "y", "responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"x": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "y": {"grid": {"display": false}}}}});
+
+        // Runtime Chart
+        new Chart(document.getElementById('runtimeChart'), {"type": "bar", "data": {"labels": ["<90", "90-120", "120-150", "150-180", "180+"], "datasets": [{"label": "Films", "data": [268, 1061, 571, 114, 30], "backgroundColor": "rgba(52, 211, 153, 0.8)", "borderRadius": 6}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"y": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "x": {"grid": {"display": false}, "title": {"display": true, "text": "Runtime (minutes)"}}}}});
+
+        // Monthly Chart
+        new Chart(document.getElementById('monthlyChart'), {"type": "line", "data": {"labels": ["2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01"], "datasets": [{"label": "Films", "data": [12, 16, 10, 11, 8, 7, 15, 9, 18, 20, 11, 10, 15, 10, 6, 15, 12, 16, 5, 13, 25, 25, 28, 5], "borderColor": "rgba(244, 114, 182, 0.8)", "backgroundColor": "rgba(244, 114, 182, 0.1)", "fill": true, "tension": 0.4}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"y": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "x": {"grid": {"display": false}}}}});
+    </script>
+</body>
+</html>
