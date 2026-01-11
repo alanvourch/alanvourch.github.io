@@ -1,4 +1,4 @@
-# Letterboxd Stats Visualizer v2.0
+# Letterboxd Stats Visualizer v3.0
 
 A Python-based tool that generates beautiful, interactive HTML visualizations of your Letterboxd movie watching data, enhanced with metadata from The Movie Database (TMDB).
 
@@ -29,37 +29,70 @@ requirements.txt          # Python dependencies
 
 ## Features
 
+### Dashboard Navigation (v3.0)
+The dashboard uses a tabbed interface with 5 main sections:
+1. **Overview** - Key stats and watched vs liked comparisons
+2. **[Year] Wrap** - Previous year wrap-up (Spotify Wrapped style)
+3. **[Year] Live** - Current year stats, updated on each run
+4. **People** - Interactive actor/director cards with click-to-expand film lists
+5. **Discovery** - Genre distribution, countries, rating trends
+
 ### Basic Statistics
 - Total films watched
 - Total films rated
 - Average rating
-- Total liked films
+- Total liked films (with like ratio %)
 - Rewatch count
 - Watchlist size
 
 ### TMDB-Enhanced Statistics
-- **Actor Analysis**: Top 20 actors by appearance count, favorite actors by rating
-- **Director Analysis**: Top 15 directors by film count, favorite directors by rating
-- **Genre Analysis**: Genre distribution, favorite genres, genre-rating correlations
+- **Actor Analysis**: Top actors by watch count AND like count, with full filmography
+- **Director Analysis**: Top directors by watch count AND like count, with full filmography
+- **Genre Analysis**: Genre distribution, watched vs liked comparison
 - **Runtime Analysis**: Average runtime, distribution by length categories
 - **Geography**: Top production countries, original language distribution
 - **Temporal Patterns**: Viewing activity by year, month, and weekday
 
-### Visualizations
-1. **Top Genres** - Doughnut chart
-2. **Films Watched Per Year** - Bar chart
-3. **Top Actors** - Horizontal bar chart
-4. **Top Directors** - Horizontal bar chart
-5. **Runtime Distribution** - Histogram
-6. **Monthly Activity** - Line chart showing last 24 months
-7. **Rating Evolution** - How your ratings change over time
-8. **Top Countries** - Production country distribution
+### Year Wrap-up Features (NEW in v3.0)
+Each year section includes:
+- Total films logged that year
+- Total films liked that year
+- Average rating for the year
+- Most active month
+- Top actor of the year (with poster filmstrip)
+- Top director of the year (with poster filmstrip)
+- Top 5 highest rated films (with posters)
+- Top 5 lowest rated films (with posters)
 
-### Lists & Tables
-- Top actors by film count
-- Top directors by film count
-- Favorite genres by average rating
-- Recent diary entries
+### Watched vs Liked Analysis (NEW in v3.0)
+- Dual-bar charts comparing watched count vs liked count
+- Available for: Genres, Actors, Directors
+- Like ratio visualization on person cards
+- Helps identify which actors/directors you truly love vs just watch often
+
+### Visualizations
+1. **Genres: Watched vs Liked** - Dual horizontal bar chart
+2. **Actors: Watched vs Liked** - Dual horizontal bar chart
+3. **Directors: Watched vs Liked** - Dual horizontal bar chart
+4. **Films Watched Per Year** - Bar chart
+5. **Monthly Activity** - Line chart (last 24 months)
+6. **Runtime Distribution** - Histogram
+7. **Top Genres** - Doughnut chart
+8. **Top Countries** - Horizontal bar chart
+9. **Rating Evolution** - Line chart over time
+
+### Interactive Features (NEW in v3.0)
+- **Click on Actor/Director cards** - Opens modal with all their films
+- **Film modals show**: Poster, title, year, your rating
+- **Poster images** - Loaded from TMDB (w185 size for performance)
+- **Tab navigation** - Switch between dashboard sections
+- **Keyboard support** - ESC to close modals
+
+### Movie Posters
+- Poster size: `w185` (185px wide, ~10-15KB each)
+- Lazy loading for performance
+- SVG placeholder for missing posters
+- Used in: Year wrap-ups, film modals, top/bottom rated sections
 
 ## Setup
 
@@ -114,9 +147,9 @@ python -m letterboxd_stats.main
 
 The script will:
 1. Load your Letterboxd CSV data
-2. Enrich films with TMDB metadata (actors, directors, genres, etc.)
+2. Enrich films with TMDB metadata (actors, directors, genres, posters, etc.)
 3. Cache TMDB data for faster subsequent runs
-4. Calculate comprehensive statistics
+4. Calculate comprehensive statistics including yearly breakdowns
 5. Generate `letterboxd_stats.html` (interactive dashboard)
 6. Generate `letterboxd_stats_data.json` (raw data for web apps)
 
@@ -130,6 +163,7 @@ All settings can be configured via environment variables or the `.env` file:
 - `DATA_DIR` - Letterboxd export directory
 - `CACHE_FILE` - TMDB cache file location (default: `tmdb_cache.json`)
 - `CACHE_EXPIRY_DAYS` - How long to cache TMDB data (default: 30 days)
+- `POSTER_SIZE` - TMDB poster size (default: `w185`, options: w92, w154, w185, w342, w500, w780)
 - `TOP_ACTORS_COUNT` - Number of top actors to show (default: 20)
 - `TOP_DIRECTORS_COUNT` - Number of top directors to show (default: 15)
 - `TOP_GENRES_COUNT` - Number of top genres to show (default: 10)
@@ -150,6 +184,7 @@ The caching system:
 - Shows progress bar during enrichment
 - Logs unmatched films to `unmatched_films.log`
 - Provides detailed summary of match success rate
+- Includes poster_path - no extra API calls needed for images
 
 ## Data Sources
 
@@ -176,16 +211,19 @@ For each film, the TMDB API provides:
 ## Design
 
 The HTML output features:
-- Modern gradient background (dark blue to purple)
-- Glassmorphism UI elements with backdrop blur
+- Modern dark theme (cinematic feel)
+- Tabbed navigation interface
+- CSS custom properties for easy theming
 - Responsive grid layouts
 - Interactive Chart.js visualizations
+- Modal dialogs for film lists
 - Hover effects and smooth transitions
 - Mobile-friendly responsive design
 
 Color scheme:
-- Primary gradient: Blues and purples (#1a1a2e, #16213e, #0f3460)
-- Accent colors: Cyan, Pink, Yellow, Green, Purple, Orange
+- Background: Deep dark (#0d0d14, #14141f)
+- Accent colors: Cyan, Purple, Pink, Yellow, Green, Orange
+- Liked indicator: Red (#ef4444)
 - Typography: Inter font family
 
 ## Technical Notes
@@ -196,6 +234,7 @@ Color scheme:
 - **Rate limiting**: Respects TMDB API limits
 - **Error handling**: Graceful degradation if API fails
 - **Progress tracking**: Real-time progress bars for long operations
+- **Windows compatible**: ASCII-safe console output
 
 ## TMDB Matching
 
@@ -205,6 +244,17 @@ Films are matched using title + year:
 - **Validation**: Client-side validation of match quality
 - **Success rate**: Typically 95%+ match rate
 - **Unmatched films**: Logged to `unmatched_films.log` for review
+
+## Dynamic Year Detection
+
+The dashboard automatically determines:
+- **Last full year**: `current_year - 1` (e.g., 2025)
+- **Current year**: `current_year` (e.g., 2026)
+
+This means:
+- Year tabs automatically update each January
+- No code changes needed for yearly rollover
+- Current year stats update with each run
 
 ## Future Web App Features
 
@@ -225,6 +275,7 @@ GET  /api/stats/overview
 GET  /api/stats/genres
 GET  /api/stats/actors
 GET  /api/stats/directors
+GET  /api/stats/year/:year
 GET  /api/films?genre=Action&year=2020
 POST /api/enrich (upload & process)
 ```
@@ -249,6 +300,11 @@ POST /api/enrich (upload & process)
 - Progress bar shows current status
 - Subsequent runs use cache and are instant
 
+### Posters not loading
+- Check your internet connection
+- TMDB image CDN may be temporarily unavailable
+- Placeholder SVG will show for missing posters
+
 ## Dependencies
 
 - pandas >= 2.0.0 - Data processing
@@ -259,6 +315,7 @@ POST /api/enrich (upload & process)
 External (CDN):
 - Chart.js - Interactive charts
 - Google Fonts (Inter) - Typography
+- TMDB Image CDN - Movie posters
 
 ## License
 
@@ -269,3 +326,24 @@ This project uses data from TMDB. Make sure to comply with TMDB's terms of servi
 - Data sourced from [Letterboxd](https://letterboxd.com)
 - Film metadata from [The Movie Database (TMDB)](https://www.themoviedb.org)
 - Built with Python, pandas, and Chart.js
+
+## Changelog
+
+### v3.0 (2026-01)
+- Complete dashboard redesign with tabbed navigation
+- Added year wrap-up sections (previous year + current year)
+- Added watched vs liked comparison charts
+- Added movie posters throughout the dashboard
+- Added click-to-expand film modals for actors/directors
+- Added like ratio metric and visualization
+- Removed redundant duplicate lists
+- Improved mobile responsiveness
+- Fixed Windows console encoding issues
+
+### v2.0
+- Initial TMDB integration
+- Basic statistics and charts
+- Glassmorphism design
+
+### v1.0
+- Basic Letterboxd data visualization
