@@ -3,286 +3,1452 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Letterboxd Stats - Enhanced Dashboard</title>
+    <title>Letterboxd Stats Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+:root {
+    --bg-primary: #0d0d14;
+    --bg-secondary: #14141f;
+    --bg-card: rgba(255, 255, 255, 0.03);
+    --bg-card-hover: rgba(255, 255, 255, 0.06);
+    --border-color: rgba(255, 255, 255, 0.08);
+    --text-primary: #f4f4f5;
+    --text-secondary: #a1a1aa;
+    --text-muted: #71717a;
+    --accent-cyan: #00d4ff;
+    --accent-purple: #7c3aed;
+    --accent-pink: #f472b6;
+    --accent-yellow: #fbbf24;
+    --accent-green: #34d399;
+    --accent-orange: #fb923c;
+    --accent-red: #ef4444;
+    --liked-color: #ef4444;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+}
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            min-height: 100vh;
-            color: #e4e4e7;
-            padding: 2rem;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    line-height: 1.5;
+}
 
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+.app {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
 
-        h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #00d4ff, #7c3aed, #f472b6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-        }
+/* Header */
+.header {
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-bottom: 1rem;
+}
 
-        .subtitle {
-            color: #a1a1aa;
-            font-size: 1.1rem;
-        }
+.header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
+.header .subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
 
-        .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 1.5rem;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s;
-        }
+/* Navigation */
+.nav {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
 
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
+.nav-btn {
+    flex: 1;
+    min-width: fit-content;
+    padding: 0.75rem 1.25rem;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
 
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
+.nav-btn:hover {
+    background: var(--bg-card-hover);
+    color: var(--text-primary);
+}
 
-        .stat-card:nth-child(1) .stat-number { color: #00d4ff; }
-        .stat-card:nth-child(2) .stat-number { color: #f472b6; }
-        .stat-card:nth-child(3) .stat-number { color: #fbbf24; }
-        .stat-card:nth-child(4) .stat-number { color: #34d399; }
-        .stat-card:nth-child(5) .stat-number { color: #a78bfa; }
-        .stat-card:nth-child(6) .stat-number { color: #fb923c; }
+.nav-btn.active {
+    background: var(--accent-purple);
+    color: white;
+}
 
-        .stat-label {
-            color: #a1a1aa;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+.nav-btn .year-badge {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    background: rgba(255,255,255,0.15);
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
+}
 
-        .charts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
+/* Tab content */
+.tab-content {
+    display: none;
+}
 
-        .chart-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
 
-        .chart-card h2 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            color: #fff;
-        }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-        .chart-container {
-            position: relative;
-            height: 300px;
-        }
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
 
-        .lists-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
+.stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    text-align: center;
+    transition: all 0.2s;
+}
 
-        .list-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+.stat-card:hover {
+    background: var(--bg-card-hover);
+    transform: translateY(-2px);
+}
 
-        .list-card h2 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            color: #fff;
-        }
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
 
-        .movie-list {
-            list-style: none;
-        }
+.stat-label {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
 
-        .movie-list li {
-            padding: 0.75rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            justify-content: space-between;
-        }
+.stat-card.cyan .stat-number { color: var(--accent-cyan); }
+.stat-card.purple .stat-number { color: var(--accent-purple); }
+.stat-card.pink .stat-number { color: var(--accent-pink); }
+.stat-card.yellow .stat-number { color: var(--accent-yellow); }
+.stat-card.green .stat-number { color: var(--accent-green); }
+.stat-card.orange .stat-number { color: var(--accent-orange); }
+.stat-card.red .stat-number { color: var(--liked-color); }
 
-        .movie-name {
-            font-weight: 500;
-        }
+/* Section */
+.section {
+    margin-bottom: 2.5rem;
+}
 
-        .movie-count {
-            color: #a1a1aa;
-        }
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
 
-        footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding: 2rem;
-            color: #71717a;
-        }
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
 
-        footer a {
-            color: #00d4ff;
-            text-decoration: none;
-        }
-    </style>
+.section-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+/* Charts Grid */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 500px) {
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.chart-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+}
+
+.chart-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.chart-container {
+    position: relative;
+    height: 280px;
+}
+
+/* People Grid (Actors/Directors) */
+.people-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.person-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.person-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--accent-purple);
+    transform: translateY(-2px);
+}
+
+.person-card .name {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.person-card .meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.person-card .meta .watched {
+    color: var(--accent-cyan);
+}
+
+.person-card .meta .liked {
+    color: var(--liked-color);
+}
+
+.person-card .like-ratio {
+    margin-top: 0.5rem;
+    height: 4px;
+    background: var(--bg-secondary);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.person-card .like-ratio-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--liked-color));
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+/* Film Posters Grid */
+.posters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.poster-card {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    aspect-ratio: 2/3;
+    background: var(--bg-secondary);
+    transition: transform 0.2s;
+}
+
+.poster-card:hover {
+    transform: scale(1.05);
+}
+
+.poster-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.poster-card .overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.75rem 0.5rem 0.5rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+}
+
+.poster-card .title {
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.poster-card .year {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+}
+
+.poster-card .rating {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: rgba(0,0,0,0.7);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.poster-card .rating.high { color: var(--accent-green); }
+.poster-card .rating.mid { color: var(--accent-yellow); }
+.poster-card .rating.low { color: var(--liked-color); }
+
+.poster-card .liked-badge {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    color: var(--liked-color);
+    font-size: 0.9rem;
+}
+
+/* Year Wrap Section */
+.year-wrap {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(244, 114, 182, 0.1));
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.year-wrap .year-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.year-wrap .year-number {
+    font-size: 4rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.year-wrap .year-label {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+.year-highlight {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.highlight-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    text-align: center;
+}
+
+.highlight-card .icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.highlight-card .value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--accent-cyan);
+}
+
+.highlight-card .label {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.top-person-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.top-person-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+}
+
+.top-person-card h4 {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.75rem;
+}
+
+.top-person-card .person-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.top-person-card .person-count {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.top-person-card .mini-posters {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+}
+
+.top-person-card .mini-poster {
+    width: 60px;
+    height: 90px;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* Modal */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-xl);
+    max-width: 900px;
+    max-height: 85vh;
+    width: 100%;
+    overflow: hidden;
+    animation: modalIn 0.3s ease;
+}
+
+@keyframes modalIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.modal-header .meta {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.modal-close {
+    background: var(--bg-card);
+    border: none;
+    color: var(--text-primary);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.25rem;
+    transition: background 0.2s;
+}
+
+.modal-close:hover {
+    background: var(--bg-card-hover);
+}
+
+.modal-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+    max-height: calc(85vh - 100px);
+}
+
+.modal-films-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+}
+
+.modal-film {
+    text-align: center;
+}
+
+.modal-film img {
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.5rem;
+}
+
+.modal-film .film-title {
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.modal-film .film-year {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+}
+
+.modal-film .film-rating {
+    font-size: 0.7rem;
+    color: var(--accent-yellow);
+    margin-top: 0.25rem;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.footer a {
+    color: var(--accent-cyan);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* Utility classes */
+.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .two-col {
+        grid-template-columns: 1fr;
+    }
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-secondary);
+}
+</style>
 </head>
 <body>
-    <div class="container">
+    <div class="app">
         
-        <header>
-            <h1>Letterboxd Stats</h1>
-            <p class="subtitle">Enhanced Dashboard with TMDB Data</p>
-        </header>
+<header class="header">
+    <h1>Letterboxd Stats</h1>
+    <p class="subtitle">1994 films watched</p>
+</header>
         
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number">1994</div>
-                <div class="stat-label">Films Watched</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">590</div>
-                <div class="stat-label">Films Rated</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">3.55</div>
-                <div class="stat-label">Average Rating</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">1122</div>
-                <div class="stat-label">Films Liked</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">83</div>
-                <div class="stat-label">Rewatches</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">109</div>
-                <div class="stat-label">In Watchlist</div>
-            </div>
+<nav class="nav">
+    <button class="nav-btn active" data-tab="overview">Overview</button>
+    <button class="nav-btn" data-tab="year-last">2025<span class="year-badge">Wrap</span></button>
+    <button class="nav-btn" data-tab="year-current">2026<span class="year-badge">Live</span></button>
+    <button class="nav-btn" data-tab="people">People</button>
+    <button class="nav-btn" data-tab="discovery">Discovery</button>
+</nav>
+        <main class="main-content">
+            
+<div id="overview" class="tab-content active">
+    <div class="stats-grid">
+        <div class="stat-card cyan">
+            <div class="stat-number">1994</div>
+            <div class="stat-label">Films Watched</div>
         </div>
-        
+        <div class="stat-card red">
+            <div class="stat-number">1122</div>
+            <div class="stat-label">Films Liked</div>
+        </div>
+        <div class="stat-card pink">
+            <div class="stat-number">56.3%</div>
+            <div class="stat-label">Like Ratio</div>
+        </div>
+        <div class="stat-card yellow">
+            <div class="stat-number">3.55</div>
+            <div class="stat-label">Avg Rating</div>
+        </div>
+        <div class="stat-card green">
+            <div class="stat-number">590</div>
+            <div class="stat-label">Rated</div>
+        </div>
+        <div class="stat-card orange">
+            <div class="stat-number">109</div>
+            <div class="stat-label">Watchlist</div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Watched vs Liked</h2>
+            <span class="section-subtitle">How much do you really love what you watch?</span>
+        </div>
         <div class="charts-grid">
             <div class="chart-card">
-                <h2>Top Genres</h2>
+                <h3>Genres: Watched vs Liked</h3>
                 <div class="chart-container">
-                    <canvas id="genresChart"></canvas>
+                    <canvas id="genresWatchedLikedChart"></canvas>
                 </div>
             </div>
             <div class="chart-card">
-                <h2>Films Watched Per Year</h2>
+                <h3>Actors: Watched vs Liked</h3>
+                <div class="chart-container">
+                    <canvas id="actorsWatchedLikedChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Activity</h2>
+        </div>
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3>Films Per Year</h3>
                 <div class="chart-container">
                     <canvas id="yearlyChart"></canvas>
                 </div>
             </div>
             <div class="chart-card">
-                <h2>Top Actors</h2>
-                <div class="chart-container">
-                    <canvas id="actorsChart"></canvas>
-                </div>
-            </div>
-            <div class="chart-card">
-                <h2>Top Directors</h2>
-                <div class="chart-container">
-                    <canvas id="directorsChart"></canvas>
-                </div>
-            </div>
-            <div class="chart-card">
-                <h2>Runtime Distribution</h2>
-                <div class="chart-container">
-                    <canvas id="runtimeChart"></canvas>
-                </div>
-            </div>
-            <div class="chart-card">
-                <h2>Monthly Activity</h2>
+                <h3>Monthly Activity (Last 24 Months)</h3>
                 <div class="chart-container">
                     <canvas id="monthlyChart"></canvas>
                 </div>
             </div>
         </div>
-        
-        <div class="lists-grid">
-            <div class="list-card">
-                <h2>Top Actors</h2>
-                <ul class="movie-list"><li><span class="movie-name">Brad Pitt</span><span class="movie-count">30 films</span></li><li><span class="movie-name">Robert De Niro</span><span class="movie-count">28 films</span></li><li><span class="movie-name">Tom Hanks</span><span class="movie-count">27 films</span></li><li><span class="movie-name">Willem Dafoe</span><span class="movie-count">25 films</span></li><li><span class="movie-name">Ralph Fiennes</span><span class="movie-count">24 films</span></li><li><span class="movie-name">Christian Bale</span><span class="movie-count">23 films</span></li><li><span class="movie-name">Samuel L. Jackson</span><span class="movie-count">23 films</span></li><li><span class="movie-name">Bruce Willis</span><span class="movie-count">23 films</span></li><li><span class="movie-name">Josh Brolin</span><span class="movie-count">23 films</span></li><li><span class="movie-name">Woody Harrelson</span><span class="movie-count">23 films</span></li></ul>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Directors: Watched vs Liked</h2>
+        </div>
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3>Top Directors Comparison</h3>
+                <div class="chart-container">
+                    <canvas id="directorsWatchedLikedChart"></canvas>
+                </div>
             </div>
-            <div class="list-card">
-                <h2>Top Directors</h2>
-                <ul class="movie-list"><li><span class="movie-name">Steven Spielberg</span><span class="movie-count">26 films</span></li><li><span class="movie-name">Martin Scorsese</span><span class="movie-count">20 films</span></li><li><span class="movie-name">Wes Anderson</span><span class="movie-count">18 films</span></li><li><span class="movie-name">Christopher Nolan</span><span class="movie-count">16 films</span></li><li><span class="movie-name">Ridley Scott</span><span class="movie-count">14 films</span></li><li><span class="movie-name">Michael Mann</span><span class="movie-count">14 films</span></li><li><span class="movie-name">Tim Burton</span><span class="movie-count">14 films</span></li><li><span class="movie-name">Robert Zemeckis</span><span class="movie-count">13 films</span></li><li><span class="movie-name">James Mangold</span><span class="movie-count">13 films</span></li><li><span class="movie-name">Akira Kurosawa</span><span class="movie-count">12 films</span></li></ul>
-            </div>
-            <div class="list-card">
-                <h2>Favorite Genres</h2>
-                <ul class="movie-list"><li><span class="movie-name">Drama</span><span class="movie-count">923 films</span></li><li><span class="movie-name">Comedy</span><span class="movie-count">618 films</span></li><li><span class="movie-name">Action</span><span class="movie-count">552 films</span></li><li><span class="movie-name">Thriller</span><span class="movie-count">516 films</span></li><li><span class="movie-name">Adventure</span><span class="movie-count">423 films</span></li><li><span class="movie-name">Science Fiction</span><span class="movie-count">368 films</span></li><li><span class="movie-name">Crime</span><span class="movie-count">361 films</span></li><li><span class="movie-name">Horror</span><span class="movie-count">272 films</span></li><li><span class="movie-name">Fantasy</span><span class="movie-count">257 films</span></li><li><span class="movie-name">Romance</span><span class="movie-count">215 films</span></li></ul>
+            <div class="chart-card">
+                <h3>Runtime Distribution</h3>
+                <div class="chart-container">
+                    <canvas id="runtimeChart"></canvas>
+                </div>
             </div>
         </div>
+    </section>
+</div>
+            
+<div id="year-last" class="tab-content">
+    <div class="year-wrap">
+        <div class="year-header">
+            <div class="year-number">2025</div>
+            <div class="year-label">Year in Review</div>
+        </div>
+
+        <div class="year-highlight">
+            <div class="highlight-card">
+                <div class="icon">🎬</div>
+                <div class="value">180</div>
+                <div class="label">Films Logged</div>
+            </div>
+            <div class="highlight-card">
+                <div class="icon">❤️</div>
+                <div class="value">88</div>
+                <div class="label">Films Liked</div>
+            </div>
+            <div class="highlight-card">
+                <div class="icon">⭐</div>
+                <div class="value">3.44</div>
+                <div class="label">Avg Rating</div>
+            </div>
+            <div class="highlight-card">
+                <div class="icon">📅</div>
+                <div class="value">December</div>
+                <div class="label">Most Active Month</div>
+            </div>
+        </div>
+
+        <div class="top-person-section">
+            
+<div class="top-person-card">
+    <h4>Most Watched Actor</h4>
+    <div class="person-name">Mark Hamill</div>
+    <div class="person-count">9 films this year</div>
+    <div class="mini-posters"><img class="mini-poster" src="https://image.tmdb.org/t/p/w185/oumprkO9bThExP8NwxBIBnvBu2v.jpg" alt="The Life of Chuck" loading="lazy"><img class="mini-poster" src="https://image.tmdb.org/t/p/w185/wobVTa99eW0ht6c1rNNzLkazPtR.jpg" alt="The Long Walk" loading="lazy"><img class="mini-poster" src="https://image.tmdb.org/t/p/w185/hT4ehUteagUrhUOHAtmYiY7mp5l.jpg" alt="Batman: Mask of the Phantasm" loading="lazy"><img class="mini-poster" src="https://image.tmdb.org/t/p/w185/6FfCtAuVAW8XJjZ7eWeLibRLWTw.jpg" alt="Star Wars" loading="lazy"><img class="mini-poster" src="https://image.tmdb.org/t/p/w185/nNAeTmF4CtdSgMDplXTDPOpYzsX.jpg" alt="The Empire Strikes Back" loading="lazy"></div>
+</div>
+            
+<div class="top-person-card">
+    <h4>Most Watched Director</h4>
+    <div class="person-name">Ridley Scott</div>
+    <div class="person-count">3 films this year</div>
+    <div class="mini-posters"><img class="mini-poster" src="https://image.tmdb.org/t/p/w185/3ndAx3weG6KDkJIRMCi5vXX6Dyb.jpg" alt="The Martian" loading="lazy"><img class="mini-poster" src="https://image.tmdb.org/t/p/w185/ytFOXyghxLzAM4KZyazDdEkM66q.jpg" alt="Napoleon" loading="lazy"><img class="mini-poster" src="https://image.tmdb.org/t/p/w185/2cxhvwyEwRlysAmRH4iodkvo0z5.jpg" alt="Gladiator II" loading="lazy"></div>
+</div>
+        </div>
+
+        <div class="two-col">
+            
+<div class="section">
+    <h3 class="section-title">Highest Rated</h3>
+    <div class="posters-grid">
+<div class="poster-card">
+    <img src="https://image.tmdb.org/t/p/w185/pySivdR845Hom4u4T2WNkJxe6Ad.jpg" alt="Wind River" loading="lazy">
+    <span class="liked-badge">❤️</span>
+    <span class="rating high">★★★★★</span>
+    <div class="overlay">
+        <div class="title">Wind River</div>
+        <div class="year">2017</div>
+    </div>
+</div>
+<div class="poster-card">
+    <img src="https://image.tmdb.org/t/p/w185/3ndAx3weG6KDkJIRMCi5vXX6Dyb.jpg" alt="The Martian" loading="lazy">
+    <span class="liked-badge">❤️</span>
+    <span class="rating high">★★★★★</span>
+    <div class="overlay">
+        <div class="title">The Martian</div>
+        <div class="year">2015</div>
+    </div>
+</div>
+<div class="poster-card">
+    <img src="https://image.tmdb.org/t/p/w185/eTM3qtGhDU8cvjpoa6KEt5E2auU.jpg" alt="Armageddon" loading="lazy">
+    <span class="liked-badge">❤️</span>
+    <span class="rating high">★★★★★</span>
+    <div class="overlay">
+        <div class="title">Armageddon</div>
+        <div class="year">1998</div>
+    </div>
+</div>
+<div class="poster-card">
+    <img src="https://image.tmdb.org/t/p/w185/umSVjVdbVwtx5ryCA2QXL44Durm.jpg" alt="Heat" loading="lazy">
+    <span class="liked-badge">❤️</span>
+    <span class="rating high">★★★★★</span>
+    <div class="overlay">
+        <div class="title">Heat</div>
+        <div class="year">1995</div>
+    </div>
+</div>
+<div class="poster-card">
+    <img src="https://image.tmdb.org/t/p/w185/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg" alt="Interstellar" loading="lazy">
+    <span class="liked-badge">❤️</span>
+    <span class="rating high">★★★★★</span>
+    <div class="overlay">
+        <div class="title">Interstellar</div>
+        <div class="year">2014</div>
+    </div>
+</div></div>
+</div>
+            
+<div class="section">
+    <h3 class="section-title">Lowest Rated</h3>
+    <div class="posters-grid">
+<div class="poster-card">
+    <img src="https://image.tmdb.org/t/p/w185/qCOGGi8JBVEZMc3DVby8rUivyXz.jpg" alt="Wake Up Dead Man" loading="lazy">
+    
+    <span class="rating low">★½</span>
+    <div class="overlay">
+        <div class="title">Wake Up Dead Man</div>
+        <div class="year">2025</div>
+    </div>
+</div>
+<div class="poster-card">
+    <img src="https://image.tmdb.org/t/p/w185/jjcAOhtGuX4p8XvlVn1WXUT1jWi.jpg" alt="Prince of Darkness" loading="lazy">
+    
+    <span class="rating low">★★</span>
+    <div class="overlay">
+        <div class="title">Prince of Darkness</div>
+        <div class="year">1987</div>
+    </div>
+</div>
+<div class="poster-card">
+    <img src="https://image.tmdb.org/t/p/w185/sI2NiMU8o65hmIMY0JI9CjJ0p7f.jpg" alt="The Electric State" loading="lazy">
+    
+    <span class="rating low">★★</span>
+    <div class="overlay">
+        <div class="title">The Electric State</div>
+        <div class="year">2025</div>
+    </div>
+</div>
+<div class="poster-card">
+    <img src="https://image.tmdb.org/t/p/w185/wpSDzTBfF0Eeo5lzu2w9FTujGqd.jpg" alt="Wolf Man" loading="lazy">
+    
+    <span class="rating low">★★</span>
+    <div class="overlay">
+        <div class="title">Wolf Man</div>
+        <div class="year">2025</div>
+    </div>
+</div>
+<div class="poster-card">
+    <img src="https://image.tmdb.org/t/p/w185/2cxhvwyEwRlysAmRH4iodkvo0z5.jpg" alt="Gladiator II" loading="lazy">
+    
+    <span class="rating low">★★</span>
+    <div class="overlay">
+        <div class="title">Gladiator II</div>
+        <div class="year">2024</div>
+    </div>
+</div></div>
+</div>
+        </div>
+    </div>
+</div>
+            
+<div id="year-current" class="tab-content">
+    <div class="year-wrap">
+        <div class="year-header">
+            <div class="year-number">2026</div>
+            <div class="year-label">Year in Progress</div>
+        </div>
+
+        <div class="year-highlight">
+            <div class="highlight-card">
+                <div class="icon">🎬</div>
+                <div class="value">5</div>
+                <div class="label">Films Logged</div>
+            </div>
+            <div class="highlight-card">
+                <div class="icon">❤️</div>
+                <div class="value">3</div>
+                <div class="label">Films Liked</div>
+            </div>
+            <div class="highlight-card">
+                <div class="icon">⭐</div>
+                <div class="value">3.83</div>
+                <div class="label">Avg Rating</div>
+            </div>
+            <div class="highlight-card">
+                <div class="icon">📅</div>
+                <div class="value">January</div>
+                <div class="label">Most Active Month</div>
+            </div>
+        </div>
+
+        <div class="top-person-section">
+            
+<div class="top-person-card">
+    <h4>Most Watched Actor</h4>
+    <div class="person-name">Patton Oswalt</div>
+    <div class="person-count">1 films this year</div>
+    <div class="mini-posters"><img class="mini-poster" src="https://image.tmdb.org/t/p/w185/t3vaWRPSf6WjDSamIkKDs1iQWna.jpg" alt="Ratatouille" loading="lazy"></div>
+</div>
+            
+<div class="top-person-card">
+    <h4>Most Watched Director</h4>
+    <div class="person-name">Brad Bird</div>
+    <div class="person-count">1 films this year</div>
+    <div class="mini-posters"><img class="mini-poster" src="https://image.tmdb.org/t/p/w185/t3vaWRPSf6WjDSamIkKDs1iQWna.jpg" alt="Ratatouille" loading="lazy"></div>
+</div>
+        </div>
+
+        <div class="two-col">
+            
+<div class="section">
+    <h3 class="section-title">Highest Rated</h3>
+    <div class="posters-grid">
+<div class="poster-card">
+    <img src="https://image.tmdb.org/t/p/w185/w03EiJVHP8Un77boQeE7hg9DVdU.jpg" alt="Singin' in the Rain" loading="lazy">
+    <span class="liked-badge">❤️</span>
+    <span class="rating high">★★★★★</span>
+    <div class="overlay">
+        <div class="title">Singin' in the Rain</div>
+        <div class="year">1952</div>
+    </div>
+</div>
+<div class="poster-card">
+    <img src="https://image.tmdb.org/t/p/w185/cf7hE1ifY4UNbS25tGnaTyyDrI2.jpg" alt="Avatar: Fire and Ash" loading="lazy">
+    
+    <span class="rating mid">★★★½</span>
+    <div class="overlay">
+        <div class="title">Avatar: Fire and Ash</div>
+        <div class="year">2025</div>
+    </div>
+</div>
+<div class="poster-card">
+    <img src="https://image.tmdb.org/t/p/w185/zaZFMNxJST0TtPd68yF7fNt1he8.jpg" alt="Throne of Blood" loading="lazy">
+    
+    <span class="rating mid">★★★</span>
+    <div class="overlay">
+        <div class="title">Throne of Blood</div>
+        <div class="year">1957</div>
+    </div>
+</div></div>
+</div>
+            <div class="section"><h3 class="section-title">Lowest Rated</h3><p class="empty-state">No films</p></div>
+        </div>
+    </div>
+</div>
+            
+<div id="people" class="tab-content">
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Top Actors</h2>
+            <span class="section-subtitle">Click to see films</span>
+        </div>
+        <div class="people-grid">
+<div class="person-card" data-person-type="actor" data-person-index="0">
+    <div class="name">Brad Pitt</div>
+    <div class="meta">
+        <span class="watched">30 watched</span>
+        <span class="liked">❤️ 19 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 63.3%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="actor" data-person-index="1">
+    <div class="name">Robert De Niro</div>
+    <div class="meta">
+        <span class="watched">28 watched</span>
+        <span class="liked">❤️ 17 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 60.7%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="actor" data-person-index="2">
+    <div class="name">Tom Hanks</div>
+    <div class="meta">
+        <span class="watched">27 watched</span>
+        <span class="liked">❤️ 14 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 51.9%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="actor" data-person-index="3">
+    <div class="name">Willem Dafoe</div>
+    <div class="meta">
+        <span class="watched">25 watched</span>
+        <span class="liked">❤️ 9 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 36.0%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="actor" data-person-index="4">
+    <div class="name">Ralph Fiennes</div>
+    <div class="meta">
+        <span class="watched">24 watched</span>
+        <span class="liked">❤️ 9 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 37.5%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="actor" data-person-index="5">
+    <div class="name">Christian Bale</div>
+    <div class="meta">
+        <span class="watched">23 watched</span>
+        <span class="liked">❤️ 10 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 43.5%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="actor" data-person-index="6">
+    <div class="name">Samuel L. Jackson</div>
+    <div class="meta">
+        <span class="watched">23 watched</span>
+        <span class="liked">❤️ 15 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 65.2%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="actor" data-person-index="7">
+    <div class="name">Bruce Willis</div>
+    <div class="meta">
+        <span class="watched">23 watched</span>
+        <span class="liked">❤️ 16 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 69.6%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="actor" data-person-index="8">
+    <div class="name">Josh Brolin</div>
+    <div class="meta">
+        <span class="watched">23 watched</span>
+        <span class="liked">❤️ 13 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 56.5%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="actor" data-person-index="9">
+    <div class="name">Woody Harrelson</div>
+    <div class="meta">
+        <span class="watched">23 watched</span>
+        <span class="liked">❤️ 7 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 30.4%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="actor" data-person-index="10">
+    <div class="name">Tom Cruise</div>
+    <div class="meta">
+        <span class="watched">23 watched</span>
+        <span class="liked">❤️ 17 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 73.9%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="actor" data-person-index="11">
+    <div class="name">Scarlett Johansson</div>
+    <div class="meta">
+        <span class="watched">22 watched</span>
+        <span class="liked">❤️ 11 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 50.0%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="actor" data-person-index="12">
+    <div class="name">Jim Carrey</div>
+    <div class="meta">
+        <span class="watched">22 watched</span>
+        <span class="liked">❤️ 10 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 45.5%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="actor" data-person-index="13">
+    <div class="name">Keanu Reeves</div>
+    <div class="meta">
+        <span class="watched">21 watched</span>
+        <span class="liked">❤️ 8 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 38.1%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="actor" data-person-index="14">
+    <div class="name">Laurence Fishburne</div>
+    <div class="meta">
+        <span class="watched">21 watched</span>
+        <span class="liked">❤️ 9 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 42.9%"></div>
+    </div>
+</div></div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Top Directors</h2>
+            <span class="section-subtitle">Click to see films</span>
+        </div>
+        <div class="people-grid">
+<div class="person-card" data-person-type="director" data-person-index="0">
+    <div class="name">Steven Spielberg</div>
+    <div class="meta">
+        <span class="watched">26 watched</span>
+        <span class="liked">❤️ 13 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 50.0%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="director" data-person-index="1">
+    <div class="name">Martin Scorsese</div>
+    <div class="meta">
+        <span class="watched">20 watched</span>
+        <span class="liked">❤️ 13 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 65.0%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="director" data-person-index="2">
+    <div class="name">Wes Anderson</div>
+    <div class="meta">
+        <span class="watched">18 watched</span>
+        <span class="liked">❤️ 12 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 66.7%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="director" data-person-index="3">
+    <div class="name">Christopher Nolan</div>
+    <div class="meta">
+        <span class="watched">16 watched</span>
+        <span class="liked">❤️ 11 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 68.8%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="director" data-person-index="4">
+    <div class="name">Ridley Scott</div>
+    <div class="meta">
+        <span class="watched">14 watched</span>
+        <span class="liked">❤️ 6 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 42.9%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="director" data-person-index="5">
+    <div class="name">Michael Mann</div>
+    <div class="meta">
+        <span class="watched">14 watched</span>
+        <span class="liked">❤️ 11 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 78.6%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="director" data-person-index="6">
+    <div class="name">Tim Burton</div>
+    <div class="meta">
+        <span class="watched">14 watched</span>
+        <span class="liked">❤️ 9 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 64.3%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="director" data-person-index="7">
+    <div class="name">Robert Zemeckis</div>
+    <div class="meta">
+        <span class="watched">13 watched</span>
+        <span class="liked">❤️ 7 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 53.8%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="director" data-person-index="8">
+    <div class="name">James Mangold</div>
+    <div class="meta">
+        <span class="watched">13 watched</span>
+        <span class="liked">❤️ 9 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 69.2%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="director" data-person-index="9">
+    <div class="name">Akira Kurosawa</div>
+    <div class="meta">
+        <span class="watched">12 watched</span>
+        <span class="liked">❤️ 6 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 50.0%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="director" data-person-index="10">
+    <div class="name">Quentin Tarantino</div>
+    <div class="meta">
+        <span class="watched">11 watched</span>
+        <span class="liked">❤️ 11 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 100.0%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="director" data-person-index="11">
+    <div class="name">David Fincher</div>
+    <div class="meta">
+        <span class="watched">11 watched</span>
+        <span class="liked">❤️ 8 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 72.7%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="director" data-person-index="12">
+    <div class="name">Billy Wilder</div>
+    <div class="meta">
+        <span class="watched">11 watched</span>
+        <span class="liked">❤️ 8 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 72.7%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="director" data-person-index="13">
+    <div class="name">Paul Thomas Anderson</div>
+    <div class="meta">
+        <span class="watched">11 watched</span>
+        <span class="liked">❤️ 8 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 72.7%"></div>
+    </div>
+</div>
+<div class="person-card" data-person-type="director" data-person-index="14">
+    <div class="name">Quentin Dupieux</div>
+    <div class="meta">
+        <span class="watched">11 watched</span>
+        <span class="liked">❤️ 7 liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: 63.6%"></div>
+    </div>
+</div></div>
+    </section>
+</div>
+            
+<div id="discovery" class="tab-content">
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Genre Distribution</h2>
+        </div>
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3>Top Genres</h3>
+                <div class="chart-container">
+                    <canvas id="genresChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>Top Countries</h3>
+                <div class="chart-container">
+                    <canvas id="countriesChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Rating Trends</h2>
+        </div>
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3>Rating Evolution Over Time</h3>
+                <div class="chart-container">
+                    <canvas id="ratingEvolutionChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+        </main>
         
-        <footer>
-            <p>Enhanced with data from <a href="https://www.themoviedb.org" target="_blank">The Movie Database (TMDB)</a></p>
-            <p>Built with Letterboxd Stats v2.0</p>
-        </footer>
+<footer class="footer">
+    <p>Data from <a href="https://letterboxd.com" target="_blank">Letterboxd</a> |
+       Enhanced with <a href="https://www.themoviedb.org" target="_blank">TMDB</a></p>
+    <p>Letterboxd Stats v3.0</p>
+</footer>
     </div>
     
-    <script>
-        Chart.defaults.color = '#a1a1aa';
-        Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+<div class="modal-overlay" id="filmModal">
+    <div class="modal">
+        <div class="modal-header">
+            <div>
+                <h2 id="modalTitle">Person Name</h2>
+                <span class="meta" id="modalMeta">X films</span>
+            </div>
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-films-grid" id="modalFilmsGrid"></div>
+        </div>
+    </div>
+</div>
+    
+<script>
+// Data for modals
+const actorsData = [{"name": "Brad Pitt", "count": 30, "liked_count": 19, "like_ratio": 63.3, "films": [{"title": "F1", "year": 2025, "rating": 3.5, "liked": false, "poster_path": "/vqBmyAj0Xm9LnS1xe1MSlMAJyHq.jpg", "character": "Sonny Hayes"}, {"title": "Wolfs", "year": 2024, "rating": 0.5, "liked": false, "poster_path": "/vOX1Zng472PC2KnS0B9nRfM8aaZ.jpg", "character": "Pam's Man"}, {"title": "Bullet Train", "year": 2022, "rating": null, "liked": false, "poster_path": "/j8szC8OgrejDQjjMKSVXyaAjw3V.jpg", "character": "Ladybug"}, {"title": "Babylon", "year": 2022, "rating": 4.0, "liked": true, "poster_path": "/wjOHjWCUE0YzDiEzKv8AfqHj3ir.jpg", "character": "Jack Conrad"}, {"title": "Once Upon a Time... in Hollywood", "year": 2019, "rating": null, "liked": true, "poster_path": "/8j58iEBw9pOXFD2L0nt0ZXeHviB.jpg", "character": "Cliff Booth"}, {"title": "Ad Astra", "year": 2019, "rating": null, "liked": false, "poster_path": "/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg", "character": "Roy McBride"}, {"title": "Allied", "year": 2016, "rating": 3.5, "liked": false, "poster_path": "/sV4lXM32quwminL3TP36nlNPp7Q.jpg", "character": "Max Vatan"}, {"title": "The Big Short", "year": 2015, "rating": null, "liked": true, "poster_path": "/scVEaJEwP8zUix8vgmMoJJ9Nq0w.jpg", "character": "Ben Rickert"}, {"title": "Hitting the Apex", "year": 2015, "rating": null, "liked": true, "poster_path": "/lvtyQcHuUc4xh392DeoqPVyUqZk.jpg", "character": "Narrator (voice)"}, {"title": "Fury", "year": 2014, "rating": null, "liked": true, "poster_path": "/pfte7wdMobMF4CVHuOxyu6oqeeA.jpg", "character": "Don 'Wardaddy' Collier"}, {"title": "12 Years a Slave", "year": 2013, "rating": null, "liked": false, "poster_path": "/xdANQijuNrJaw1HA61rDccME4Tm.jpg", "character": "Samuel Bass"}, {"title": "World War Z", "year": 2013, "rating": null, "liked": false, "poster_path": "/aCnVdvExw6UWSeQfr0tUH3jr4qG.jpg", "character": "Gerry Lane"}, {"title": "Moneyball", "year": 2011, "rating": null, "liked": true, "poster_path": "/4yIQq1e6iOcaZ5rLDG3lZBP3j7a.jpg", "character": "Billy Beane"}, {"title": "Megamind", "year": 2010, "rating": null, "liked": true, "poster_path": "/uZ9ytt3sPTx62XTfN56ILSuYWRe.jpg", "character": "Metro Man (voice)"}, {"title": "Inglourious Basterds", "year": 2009, "rating": null, "liked": true, "poster_path": "/7sfbEnaARXDDhKm0CZ7D7uc2sbo.jpg", "character": "LT. Aldo Raine"}, {"title": "Burn After Reading", "year": 2008, "rating": null, "liked": false, "poster_path": "/jdwSkQu3XirmX18MNj8CqFWsCk.jpg", "character": "Chad Feldheimer"}, {"title": "Ocean's Thirteen", "year": 2007, "rating": null, "liked": false, "poster_path": "/pBsZs4zYUiUTemqbikTZ76iQRaU.jpg", "character": "Rusty Ryan"}, {"title": "The Assassination of Jesse James by the Coward Robert Ford", "year": 2007, "rating": null, "liked": false, "poster_path": "/xMKn6EQS7eR5ubhPJbw5pQSBZMw.jpg", "character": "Jesse James"}, {"title": "Mr. & Mrs. Smith", "year": 2005, "rating": 3.5, "liked": true, "poster_path": "/kjD700RtyhveN3ZbOnSvUSne0Qj.jpg", "character": "John Smith"}, {"title": "Ocean's Twelve", "year": 2004, "rating": 3.0, "liked": false, "poster_path": "/pE5anFf7nf6ah7V3VRezQ1KSovi.jpg", "character": "Rusty Ryan"}, {"title": "Troy", "year": 2004, "rating": null, "liked": true, "poster_path": "/a07wLy4ONfpsjnBqMwhlWTJTcm.jpg", "character": "Achilles"}, {"title": "Ocean's Eleven", "year": 2001, "rating": 5.0, "liked": true, "poster_path": "/hQQCdZrsHtZyR6NbKH2YyCqd2fR.jpg", "character": "Rusty Ryan"}, {"title": "Snatch", "year": 2000, "rating": null, "liked": true, "poster_path": "/kJZoAHq1SLDdWjeNGtlHAnGpmFV.jpg", "character": "Mickey O'Neil"}, {"title": "Fight Club", "year": 1999, "rating": null, "liked": true, "poster_path": "/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg", "character": "Tyler Durden"}, {"title": "The Devil's Own", "year": 1997, "rating": null, "liked": true, "poster_path": "/3KIPu7H3tST0j4tpqdKpQZUBCQz.jpg", "character": "Rory Devaney"}, {"title": "Se7en", "year": 1995, "rating": null, "liked": true, "poster_path": "/191nKfP0ehp3uIvWqgPbFmI4lv9.jpg", "character": "Mills"}, {"title": "Twelve Monkeys", "year": 1995, "rating": null, "liked": true, "poster_path": "/gt3iyguaCIw8DpQZI1LIN5TohM2.jpg", "character": "Jeffrey Goines"}, {"title": "Interview with the Vampire", "year": 1994, "rating": 4.0, "liked": true, "poster_path": "/2162lAT2MP36MyJd2sttmj5du5T.jpg", "character": "Louis"}, {"title": "True Romance", "year": 1993, "rating": null, "liked": true, "poster_path": "/39lXk6ud6KiJgGbbWI2PUKS7y2.jpg", "character": "Floyd (Dick's Roommate)"}, {"title": "Thelma & Louise", "year": 1991, "rating": null, "liked": true, "poster_path": "/gQSUVGR80RVHxJywtwXm2qa1ebi.jpg", "character": "J.D."}]}, {"name": "Robert De Niro", "count": 28, "liked_count": 17, "like_ratio": 60.7, "films": [{"title": "Killers of the Flower Moon", "year": 2023, "rating": 4.0, "liked": true, "poster_path": "/dB6Krk806zeqd0YNp2ngQ9zXteH.jpg", "character": "William Hale"}, {"title": "Joker", "year": 2019, "rating": 3.0, "liked": false, "poster_path": "/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg", "character": "Murray Franklin"}, {"title": "The Irishman", "year": 2019, "rating": null, "liked": true, "poster_path": "/mbm8k3GFhXS0ROd9AD1gqYbIFbM.jpg", "character": "Frank Sheeran"}, {"title": "Silver Linings Playbook", "year": 2012, "rating": null, "liked": false, "poster_path": "/y7iOVneBvITlBdhy6tVqXVOa1Js.jpg", "character": "Pat Solatano Sr."}, {"title": "Limitless", "year": 2011, "rating": null, "liked": true, "poster_path": "/kCokPP4WCQRrrAuZ7FcpIyHr8b2.jpg", "character": "Carl Van Loon"}, {"title": "Stardust", "year": 2007, "rating": null, "liked": false, "poster_path": "/7zbFmxy3DqKYL2M8Hop6uylp2Uy.jpg", "character": "Captain Shakespeare"}, {"title": "Shark Tale", "year": 2004, "rating": null, "liked": false, "poster_path": "/r08DpyPyhXcJTfNZAICNGMzcQ8l.jpg", "character": "Don Lino (voice)"}, {"title": "Meet the Fockers", "year": 2004, "rating": null, "liked": false, "poster_path": "/59fXm6N2x7QSbvt6BaBxTNBXGL8.jpg", "character": "Jack Byrnes"}, {"title": "Meet the Parents", "year": 2000, "rating": null, "liked": false, "poster_path": "/5tXJ9ctuyEOMUFLaeqRisbXowWs.jpg", "character": "Jack Byrnes"}, {"title": "Jackie Brown", "year": 1997, "rating": null, "liked": true, "poster_path": "/rOUx7qg4KmEh1juEDwqzbDSL1Nr.jpg", "character": "Louis Gara"}, {"title": "Cop Land", "year": 1997, "rating": null, "liked": true, "poster_path": "/bUXaWZPj7qzXjKc2s3Pwdkhxh2o.jpg", "character": "Lt. Moe Tilden"}, {"title": "The Fan", "year": 1996, "rating": null, "liked": true, "poster_path": "/lu7CjP8YES5dJMCFg5O9o9jCkjl.jpg", "character": "Gil Renard"}, {"title": "Heat", "year": 1995, "rating": 5.0, "liked": true, "poster_path": "/umSVjVdbVwtx5ryCA2QXL44Durm.jpg", "character": "Neil McCauley"}, {"title": "Casino", "year": 1995, "rating": null, "liked": true, "poster_path": "/gziIkUSnYuj9ChCi8qOu2ZunpSC.jpg", "character": "Sam \"Ace\" Rothstein"}, {"title": "Cape Fear", "year": 1991, "rating": 3.5, "liked": true, "poster_path": "/ws4mrtndzgSH5QGCamOFAgilr2R.jpg", "character": "Max Cady"}, {"title": "GoodFellas", "year": 1990, "rating": null, "liked": true, "poster_path": "/9OkCLM73MIU2CrKZbqiT8Ln1wY2.jpg", "character": "James Conway"}, {"title": "Awakenings", "year": 1990, "rating": 3.5, "liked": true, "poster_path": "/9gztZXuHLG6AJ0fgqGd7Q43cWRI.jpg", "character": "Leonard Lowe"}, {"title": "Midnight Run", "year": 1988, "rating": null, "liked": false, "poster_path": "/yx0touyDQ9enWDsFgS4MbBwCSNd.jpg", "character": "John Wesley \u201cJack\u201d Walsh"}, {"title": "The Untouchables", "year": 1987, "rating": null, "liked": true, "poster_path": "/8BquGK22zCcsmBWiaIakaaPpSZb.jpg", "character": "Al Capone"}, {"title": "Angel Heart", "year": 1987, "rating": null, "liked": false, "poster_path": "/h5v3wjJQNB7q2RntEnKDLhKtTFE.jpg", "character": "Louis Cyphre"}, {"title": "Brazil", "year": 1985, "rating": null, "liked": false, "poster_path": "/aewan59WcFThBimkTVVoNf2o5Vb.jpg", "character": "Harry Tuttle"}, {"title": "Once Upon a Time in America", "year": 1984, "rating": null, "liked": true, "poster_path": "/i0enkzsL5dPeneWnjl1fCWm6L7k.jpg", "character": "David 'Noodles' Aaronson"}, {"title": "The King of Comedy", "year": 1982, "rating": null, "liked": true, "poster_path": "/3sGuQv0UxfjDODCC9IQG5S1jXK8.jpg", "character": "Rupert Pupkin"}, {"title": "Raging Bull", "year": 1980, "rating": null, "liked": false, "poster_path": "/1WV7WlTS8LI1L5NkCgjWT9GSW3O.jpg", "character": "Jake LaMotta"}, {"title": "The Deer Hunter", "year": 1978, "rating": null, "liked": true, "poster_path": "/bbGtogDZOg09bm42KIpCXUXICkh.jpg", "character": "Michael Vronsky"}, {"title": "Taxi Driver", "year": 1976, "rating": 4.0, "liked": true, "poster_path": "/ekstpH614fwDX8DUln1a2Opz0N8.jpg", "character": "Travis Bickle"}, {"title": "The Godfather Part II", "year": 1974, "rating": null, "liked": true, "poster_path": "/hek3koDUyRQk7FIhPXsa6mT2Zc3.jpg", "character": "Vito Corleone"}, {"title": "Mean Streets", "year": 1973, "rating": null, "liked": false, "poster_path": "/rzVTH9ylCw0owKkMZQVz2Eve97E.jpg", "character": "John 'Johnny Boy' Civello"}]}, {"name": "Tom Hanks", "count": 27, "liked_count": 14, "like_ratio": 51.9, "films": [{"title": "The Phoenician Scheme", "year": 2025, "rating": 3.5, "liked": false, "poster_path": "/u2jxeYLXTYfu0bqJmnLGIgZswib.jpg", "character": "Leland"}, {"title": "Here", "year": 2024, "rating": 2.5, "liked": false, "poster_path": "/79euHUJJtfgeGU63ef38KtNjXEn.jpg", "character": "Richard"}, {"title": "Asteroid City", "year": 2023, "rating": 4.0, "liked": true, "poster_path": "/rAkz95CREc3A1qTnwlSQ0jh8Zw8.jpg", "character": "Stanley Zak"}, {"title": "Elvis", "year": 2022, "rating": null, "liked": false, "poster_path": "/rva3UhKaMeiB0Vej5A2pm1leX7K.jpg", "character": "Colonel Tom Parker"}, {"title": "Borat Subsequent Moviefilm", "year": 2020, "rating": null, "liked": false, "poster_path": "/3L1Ml5RWjFVfVq3rQENvgFymT0U.jpg", "character": "Self"}, {"title": "Toy Story 4", "year": 2019, "rating": null, "liked": false, "poster_path": "/w9kR8qbmQ01HwnvK4alvnQ2ca0L.jpg", "character": "Woody (voice)"}, {"title": "The Post", "year": 2017, "rating": null, "liked": false, "poster_path": "/h4XG3g6uMMPIBPjAoQhC2QIMdkl.jpg", "character": "Ben Bradlee"}, {"title": "Sully", "year": 2016, "rating": null, "liked": false, "poster_path": "/4vs83YcJ8TsabADDtaeCJ6ZTjYY.jpg", "character": "Chesley 'Sully' Sullenberger"}, {"title": "Bridge of Spies", "year": 2015, "rating": null, "liked": false, "poster_path": "/fmOOjHAQzxr0c1sfcY4qkiSRBH6.jpg", "character": "James B. Donovan"}, {"title": "Captain Phillips", "year": 2013, "rating": null, "liked": true, "poster_path": "/8Td0kkocW6sD3uRpzwfMfkqMWhx.jpg", "character": "Captain Richard Phillips"}, {"title": "Cloud Atlas", "year": 2012, "rating": null, "liked": false, "poster_path": "/8naVv2Xu3rWI5JKHz0vCujx6GaJ.jpg", "character": "Dr. Henry Goose / Hotel Manager / Isaac Sachs / Dermot Hoggins / Cavendish Look-a-Like Actor / Zachry"}, {"title": "Toy Story 3", "year": 2010, "rating": null, "liked": false, "poster_path": "/AbbXspMOwdvwWZgVN0nabZq03Ec.jpg", "character": "Woody (voice)"}, {"title": "The Terminal", "year": 2004, "rating": null, "liked": true, "poster_path": "/cPB3ZMM4UdsSAhNdS4c7ps5nypY.jpg", "character": "Viktor Navorski"}, {"title": "Catch Me If You Can", "year": 2002, "rating": null, "liked": true, "poster_path": "/sdYgEkKCDPWNU6KnoL4qd8xZ4w7.jpg", "character": "Carl Hanratty"}, {"title": "Road to Perdition", "year": 2002, "rating": 4.0, "liked": true, "poster_path": "/loSpBeirRfTPJ3cMIqpQArstGhh.jpg", "character": "Michael Sullivan"}, {"title": "Band of Brothers", "year": 2001, "rating": null, "liked": true, "poster_path": "/u9C6q5DXJRxmkEt81FaRVuhgzfF.jpg", "character": "Self"}, {"title": "Cast Away", "year": 2000, "rating": null, "liked": true, "poster_path": "/7lLJgKnAicAcR5UEuo8xhSMj18w.jpg", "character": "Chuck Noland"}, {"title": "Toy Story 2", "year": 1999, "rating": null, "liked": true, "poster_path": "/4rbcp3ng8n1MKHjpeqW0L7Fnpzz.jpg", "character": "Woody (voice)"}, {"title": "The Green Mile", "year": 1999, "rating": null, "liked": true, "poster_path": "/8VG8fDNiy50H4FedGwdSVUPoaJe.jpg", "character": "Paul Edgecomb"}, {"title": "Saving Private Ryan", "year": 1998, "rating": null, "liked": true, "poster_path": "/uqx37cS8cpHg8U35f9U5IBlrCV3.jpg", "character": "Captain Miller"}, {"title": "Toy Story", "year": 1995, "rating": null, "liked": true, "poster_path": "/uXDfjJbdP4ijW5hWSBrPrlKpxab.jpg", "character": "Woody (voice)"}, {"title": "Apollo 13", "year": 1995, "rating": null, "liked": true, "poster_path": "/tVeKscCm2fY1xDXZk8PgnZ87h9S.jpg", "character": "Jim Lovell"}, {"title": "Forrest Gump", "year": 1994, "rating": null, "liked": true, "poster_path": "/saHP97rTPS5eLmrLQEcANmKrsFl.jpg", "character": "Forrest Gump"}, {"title": "Philadelphia", "year": 1993, "rating": null, "liked": true, "poster_path": "/tFe5Yoo5zT495okA49bq1vPPkiV.jpg", "character": "Andrew Beckett"}, {"title": "Sleepless in Seattle", "year": 1993, "rating": null, "liked": false, "poster_path": "/jAXfku1u1uaLGh4cUmK0ESf1pPu.jpg", "character": "Sam Baldwin"}, {"title": "A League of Their Own", "year": 1992, "rating": null, "liked": false, "poster_path": "/7xpFXAOjgzFPE3vyVerFGfrXhFK.jpg", "character": "Jimmy Dugan"}, {"title": "Big", "year": 1988, "rating": 3.5, "liked": false, "poster_path": "/eWhCDJiwxvx3YXkAFRiHjimnF0j.jpg", "character": "Josh Baskin"}]}, {"name": "Willem Dafoe", "count": 25, "liked_count": 9, "like_ratio": 36.0, "films": [{"title": "The Legend of Ochi", "year": 2025, "rating": 3.0, "liked": false, "poster_path": "/qYyEelO4JfOwE0Ui5KsrCE0O8UA.jpg", "character": "Maxim"}, {"title": "Beetlejuice Beetlejuice", "year": 2024, "rating": 3.0, "liked": false, "poster_path": "/kKgQzkUCnQmeTPkyIwHly2t6ZFI.jpg", "character": "Jackson"}, {"title": "Nosferatu", "year": 2024, "rating": 3.5, "liked": false, "poster_path": "/5qGIxdEO841C0tdY8vOdLoRVrr0.jpg", "character": "Prof. Albin Eberhart von Franz"}, {"title": "Poor Things", "year": 2023, "rating": 3.0, "liked": false, "poster_path": "/kCGlIMHnOm8JPXq3rXM6c5wMxcT.jpg", "character": "Godwin Baxter"}, {"title": "The Northman", "year": 2022, "rating": null, "liked": false, "poster_path": "/aSSJMnHknzKjlZ6zybwD7eyJ4Po.jpg", "character": "Heimir the Fool"}, {"title": "Spider-Man: No Way Home", "year": 2021, "rating": null, "liked": false, "poster_path": "/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg", "character": "Norman Osborn / Green Goblin"}, {"title": "Nightmare Alley", "year": 2021, "rating": null, "liked": false, "poster_path": "/vfn1feL0V9HNSXuLLpaxAW8O6LO.jpg", "character": "Clem Hoatley"}, {"title": "The Lighthouse", "year": 2019, "rating": null, "liked": false, "poster_path": "/f1tIYarTbkBdIT1aW0gzelDwknv.jpg", "character": "Thomas Wake"}, {"title": "Aquaman", "year": 2018, "rating": null, "liked": false, "poster_path": "/ufl63EFcc5XpByEV2Ecdw6WJZAI.jpg", "character": "Nuidis Vulko"}, {"title": "The Florida Project", "year": 2017, "rating": null, "liked": true, "poster_path": "/bnSTP1PY2fDyat0eUa4QouuGV7F.jpg", "character": "Bobby"}, {"title": "The Grand Budapest Hotel", "year": 2014, "rating": null, "liked": true, "poster_path": "/eWdyYQreja6JGCzqHWXpWHDrrPo.jpg", "character": "Jopling"}, {"title": "John Wick", "year": 2014, "rating": null, "liked": false, "poster_path": "/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg", "character": "Marcus"}, {"title": "Out of the Furnace", "year": 2013, "rating": null, "liked": false, "poster_path": "/cOuQQ4eRpSBxb0G9OXzWE1pHPeq.jpg", "character": "John Petty"}, {"title": "John Carter", "year": 2012, "rating": null, "liked": true, "poster_path": "/lCxz1Yus07QCQQCb6I0Dr3Lmqpx.jpg", "character": "Tars Tarkas"}, {"title": "Fantastic Mr. Fox", "year": 2009, "rating": null, "liked": true, "poster_path": "/euZyZb6iGreujYKrGyZHRddhUYh.jpg", "character": "Rat (voice)"}, {"title": "Inside Man", "year": 2006, "rating": null, "liked": false, "poster_path": "/ffMUgkDZICNiyaws1Jkv8qG8uFW.jpg", "character": "John Darius"}, {"title": "The Life Aquatic with Steve Zissou", "year": 2004, "rating": null, "liked": true, "poster_path": "/qZoFLNBC78jzboWeDH6Ha0qavF2.jpg", "character": "Klaus Daimler"}, {"title": "Finding Nemo", "year": 2003, "rating": null, "liked": true, "poster_path": "/eHuGQ10FUzK1mdOY69wF5pGgEf5.jpg", "character": "Gill (voice)"}, {"title": "Spider-Man", "year": 2002, "rating": null, "liked": true, "poster_path": "/kjdJntyBeEvqm9w97QGBdxPptzj.jpg", "character": "Green Goblin / Norman Osborn"}, {"title": "American Psycho", "year": 2000, "rating": null, "liked": true, "poster_path": "/9uGHEgsiUXjCNq8wdq4r49YL8A1.jpg", "character": "Donald Kimball"}, {"title": "Speed 2: Cruise Control", "year": 1997, "rating": null, "liked": false, "poster_path": "/gnK1ocpwUTj24zAktzomOJsD2bu.jpg", "character": "Geiger"}, {"title": "Basquiat", "year": 1996, "rating": null, "liked": false, "poster_path": "/gFfVhN8BbgHhMb3ZNQRAH5xc7kq.jpg", "character": "The Electrician"}, {"title": "The Last Temptation of Christ", "year": 1988, "rating": null, "liked": false, "poster_path": "/7L4qwrC1mipZXJfU5oRgQWChLv1.jpg", "character": "Jesus"}, {"title": "Platoon", "year": 1986, "rating": null, "liked": true, "poster_path": "/m3mmFkPQKvPZq5exmh0bDuXlD9T.jpg", "character": "Sergeant Elias Grodin"}, {"title": "To Live and Die in L.A.", "year": 1985, "rating": null, "liked": false, "poster_path": "/2iW3pSihBIhXjnBQmUJ0mAiZbB5.jpg", "character": "Rick Masters"}]}, {"name": "Ralph Fiennes", "count": 24, "liked_count": 9, "like_ratio": 37.5, "films": [{"title": "Conclave", "year": 2024, "rating": 3.5, "liked": false, "poster_path": "/m5x8D0bZ3eKqIVWZ5y7TnZ2oTVg.jpg", "character": "Lawrence"}, {"title": "The Wonderful Story of Henry Sugar", "year": 2023, "rating": 4.5, "liked": true, "poster_path": "/fDUywEHwHh6nsLnVXAdPN9m4ZUG.jpg", "character": "Roald Dahl / Policeman"}, {"title": "Poison", "year": 2023, "rating": 3.5, "liked": false, "poster_path": "/IQG49DUJw5DsgcNbW0NfagiDOs.jpg", "character": "Roald Dahl"}, {"title": "The Rat Catcher", "year": 2023, "rating": 2.0, "liked": false, "poster_path": "/29WJ7dOHt48AtXK1J1rONEEvIMN.jpg", "character": "Rat Man / Roald Dahl"}, {"title": "The Swan", "year": 2023, "rating": 3.0, "liked": false, "poster_path": "/fRbx6DPdQBJrhZWyshjJABtAIyu.jpg", "character": "Roald Dahl"}, {"title": "The Menu", "year": 2022, "rating": 4.0, "liked": true, "poster_path": "/fPtUgMcLIboqlTlPrq0bQpKK8eq.jpg", "character": "Chef Slowik"}, {"title": "No Time to Die", "year": 2021, "rating": null, "liked": false, "poster_path": "/iUgygt3fscRoKWCV1d0C7FbM9TP.jpg", "character": "M"}, {"title": "The Lego Batman Movie", "year": 2017, "rating": null, "liked": false, "poster_path": "/snGwr2gag4Fcgx2OGmH9otl6ofW.jpg", "character": "Alfred Pennyworth (voice)"}, {"title": "Kubo and the Two Strings", "year": 2016, "rating": null, "liked": true, "poster_path": "/la6QA9tk4Foq8OBH2Dyh5dTcw6H.jpg", "character": "Moon King (voice)"}, {"title": "Hail, Caesar!", "year": 2016, "rating": null, "liked": false, "poster_path": "/ozY79UvbYvJUWFg2UCM1CDQ7rBl.jpg", "character": "Laurence Laurentz"}, {"title": "Spectre", "year": 2015, "rating": null, "liked": false, "poster_path": "/zj8ongFhtWNsVlfjOGo8pSr7PQg.jpg", "character": "M"}, {"title": "The Grand Budapest Hotel", "year": 2014, "rating": null, "liked": true, "poster_path": "/eWdyYQreja6JGCzqHWXpWHDrrPo.jpg", "character": "M. Gustave"}, {"title": "Skyfall", "year": 2012, "rating": null, "liked": true, "poster_path": "/d0IVecFQvsGdSbnMAHqiYsNYaJT.jpg", "character": "Gareth Mallory"}, {"title": "Harry Potter and the Deathly Hallows: Part 2", "year": 2011, "rating": null, "liked": false, "poster_path": "/c54HpQmuwXjHq2C9wmoACjxoom3.jpg", "character": "Lord Voldemort"}, {"title": "Harry Potter and the Deathly Hallows: Part 1", "year": 2010, "rating": null, "liked": false, "poster_path": "/iGoXIpQb7Pot00EEdwpwPajheZ5.jpg", "character": "Lord Voldemort"}, {"title": "Clash of the Titans", "year": 2010, "rating": null, "liked": false, "poster_path": "/6iHYLipwEyZUPNO8MM3l1yHDaFE.jpg", "character": "Hades"}, {"title": "The Hurt Locker", "year": 2008, "rating": null, "liked": true, "poster_path": "/io2dfBJhasvGbgkCX9cCGVOiA99.jpg", "character": "Contractor Team Leader"}, {"title": "In Bruges", "year": 2008, "rating": null, "liked": true, "poster_path": "/vz3Vd6nfq9YZrVvyYx5RHFaYKV3.jpg", "character": "Harry"}, {"title": "Harry Potter and the Order of the Phoenix", "year": 2007, "rating": null, "liked": false, "poster_path": "/5aOyriWkPec0zUDxmHFP9qMmBaj.jpg", "character": "Lord Voldemort"}, {"title": "Harry Potter and the Goblet of Fire", "year": 2005, "rating": null, "liked": false, "poster_path": "/fECBtHlr0RB3foNHDiCBXeg9Bv9.jpg", "character": "Lord Voldemort"}, {"title": "Red Dragon", "year": 2002, "rating": null, "liked": false, "poster_path": "/ou9ZKA2cms02b7CdCdVqGkKu0O0.jpg", "character": "Francis Dolarhyde"}, {"title": "The Prince of Egypt", "year": 1998, "rating": null, "liked": false, "poster_path": "/2xUjYwL6Ol7TLJPPKs7sYW5PWLX.jpg", "character": "Rameses (voice)"}, {"title": "Strange Days", "year": 1995, "rating": 3.5, "liked": true, "poster_path": "/rY5BrDRcYAKE0BYmmT66YG6Uy5Q.jpg", "character": "Lenny Nero"}, {"title": "Schindler's List", "year": 1993, "rating": null, "liked": true, "poster_path": "/sF1U4EUQS8YHUYjNl3pMGNIQyr0.jpg", "character": "Amon Goeth"}]}, {"name": "Christian Bale", "count": 23, "liked_count": 10, "like_ratio": 43.5, "films": [{"title": "Thor: Love and Thunder", "year": 2022, "rating": null, "liked": false, "poster_path": "/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg", "character": "Gorr"}, {"title": "Amsterdam", "year": 2022, "rating": 1.0, "liked": false, "poster_path": "/6sJcVzGCwrDCBMV0DU6eRzA2UxM.jpg", "character": "Burt Berendsen"}, {"title": "The Pale Blue Eye", "year": 2022, "rating": null, "liked": false, "poster_path": "/9xkGlFRqrN8btTLU0KQvOfn2PHr.jpg", "character": "Augustus Landor"}, {"title": "Ford v Ferrari", "year": 2019, "rating": null, "liked": true, "poster_path": "/dR1Ju50iudrOh3YgfwkAU1g2HZe.jpg", "character": "Ken Miles"}, {"title": "Vice", "year": 2018, "rating": null, "liked": true, "poster_path": "/1gCab6rNv1r6V64cwsU4oEr649Y.jpg", "character": "Dick Cheney"}, {"title": "Hostiles", "year": 2017, "rating": 3.0, "liked": false, "poster_path": "/rqoezyB51GfhiloOB5ZErg5HXas.jpg", "character": "Captain Joseph J. Blocker"}, {"title": "Knight of Cups", "year": 2015, "rating": null, "liked": false, "poster_path": "/xejFBC19Nc7Xi1MiIvcf84ZCy2g.jpg", "character": "Rick"}, {"title": "The Big Short", "year": 2015, "rating": null, "liked": true, "poster_path": "/scVEaJEwP8zUix8vgmMoJJ9Nq0w.jpg", "character": "Michael Burry"}, {"title": "American Hustle", "year": 2013, "rating": null, "liked": false, "poster_path": "/z6O1KDhfWDTm5ZBr6Ovr0eg8LqO.jpg", "character": "Irving Rosenfeld"}, {"title": "Out of the Furnace", "year": 2013, "rating": null, "liked": false, "poster_path": "/cOuQQ4eRpSBxb0G9OXzWE1pHPeq.jpg", "character": "Russell Baze"}, {"title": "The Dark Knight Rises", "year": 2012, "rating": null, "liked": true, "poster_path": "/hr0L2aueqlP2BYUblTTjmtn0hw4.jpg", "character": "Bruce Wayne"}, {"title": "The Fighter", "year": 2010, "rating": null, "liked": true, "poster_path": "/xfsFerGhO1h6rLk8vwLgMyQ8WVJ.jpg", "character": "Dicky Eklund"}, {"title": "Public Enemies", "year": 2009, "rating": null, "liked": false, "poster_path": "/3KgtekisQBrHRsm2cD5UOB6Ce3k.jpg", "character": "Melvin Purvis"}, {"title": "Terminator Salvation", "year": 2009, "rating": null, "liked": false, "poster_path": "/gw6JhlekZgtKUFlDTezq3j5JEPK.jpg", "character": "John Connor"}, {"title": "The Dark Knight", "year": 2008, "rating": null, "liked": true, "poster_path": "/qJ2tW6WMUDux911r6m7haRef0WH.jpg", "character": "Bruce Wayne"}, {"title": "3:10 to Yuma", "year": 2007, "rating": 4.5, "liked": true, "poster_path": "/voMB69AsLnPNmtfbrBl0lbeFKDH.jpg", "character": "Dan Evans"}, {"title": "The Prestige", "year": 2006, "rating": 5.0, "liked": true, "poster_path": "/bdN3gXuIZYaJP7ftKK2sU0nPtEA.jpg", "character": "Alfred Borden"}, {"title": "Rescue Dawn", "year": 2006, "rating": null, "liked": false, "poster_path": "/ymPlV2ymUBSctfRzpehFOxFmJiS.jpg", "character": "Dieter Dengler"}, {"title": "Batman Begins", "year": 2005, "rating": null, "liked": true, "poster_path": "/sPX89Td70IDDjVr85jdSBb4rWGr.jpg", "character": "Bruce Wayne / Batman"}, {"title": "The Machinist", "year": 2004, "rating": null, "liked": false, "poster_path": "/diAYqR4xdF9Hnj7qun6DEQhRrT2.jpg", "character": "Trevor Reznik"}, {"title": "American Psycho", "year": 2000, "rating": null, "liked": true, "poster_path": "/9uGHEgsiUXjCNq8wdq4r49YL8A1.jpg", "character": "Patrick Bateman"}, {"title": "Pocahontas", "year": 1995, "rating": null, "liked": false, "poster_path": "/kZ1ft0QZ4e3zDUPMBftEkwI9ftd.jpg", "character": "Thomas (voice)"}, {"title": "Empire of the Sun", "year": 1987, "rating": null, "liked": false, "poster_path": "/gEaCzjwHoPgyQFcwHql7o5YLHAU.jpg", "character": "Jim"}]}, {"name": "Samuel L. Jackson", "count": 23, "liked_count": 15, "like_ratio": 65.2, "films": [{"title": "Spider-Man: Far From Home", "year": 2019, "rating": null, "liked": true, "poster_path": "/4q2NNj4S5dG2RLF9CpXsej7yXl.jpg", "character": "Nick Fury"}, {"title": "Incredibles 2", "year": 2018, "rating": null, "liked": false, "poster_path": "/9lFKBtaVIhP7E2Pk0IY1CwTKTMZ.jpg", "character": "Lucius Best / Frozone (voice)"}, {"title": "Kong: Skull Island", "year": 2017, "rating": null, "liked": false, "poster_path": "/r2517Vz9EhDhj88qwbDVj8DCRZN.jpg", "character": "Lieutenant Colonel Preston Packard"}, {"title": "The Hitman's Bodyguard", "year": 2017, "rating": null, "liked": false, "poster_path": "/5CGjlz2vyBhW5xHW4eNOZIdgzYq.jpg", "character": "Darius Kincaid"}, {"title": "Miss Peregrine's Home for Peculiar Children", "year": 2016, "rating": null, "liked": false, "poster_path": "/CIlbMFOfYDj0MP23hsIYhFGrL6.jpg", "character": "Barron"}, {"title": "The Hateful Eight", "year": 2015, "rating": null, "liked": true, "poster_path": "/jIywvdPjia2t3eKYbjVTcwBQlG8.jpg", "character": "Major Marquis Warren"}, {"title": "Avengers: Age of Ultron", "year": 2015, "rating": null, "liked": false, "poster_path": "/4ssDuvEDkSArWEdyBl2X5EHvYKU.jpg", "character": "Nick Fury"}, {"title": "Kingsman: The Secret Service", "year": 2014, "rating": null, "liked": true, "poster_path": "/r6q9wZK5a2K51KFj4LWVID6Ja1r.jpg", "character": "Valentine"}, {"title": "Captain America: The Winter Soldier", "year": 2014, "rating": null, "liked": false, "poster_path": "/tVFRpFw3xTedgPGqxW0AOI8Qhh0.jpg", "character": "Nick Fury"}, {"title": "Django Unchained", "year": 2012, "rating": null, "liked": true, "poster_path": "/7oWY8VDWW7thTzWh3OKYRkWUlD5.jpg", "character": "Stephen"}, {"title": "Captain America: The First Avenger", "year": 2011, "rating": null, "liked": false, "poster_path": "/vSNxAJTlD0r02V9sPYpOjqDZXUK.jpg", "character": "Nick Fury"}, {"title": "Iron Man 2", "year": 2010, "rating": null, "liked": false, "poster_path": "/6WBeq4fCfn7AN0o21W9qNcRF2l9.jpg", "character": "Nick Fury"}, {"title": "The Other Guys", "year": 2010, "rating": null, "liked": true, "poster_path": "/wNEHNqo3MgHmj3BUiPSqqq5czcm.jpg", "character": "P.K. Highsmith"}, {"title": "Jumper", "year": 2008, "rating": null, "liked": true, "poster_path": "/3pPZ9JhNz3VMmASVir5SMHvTDUU.jpg", "character": "Roland"}, {"title": "Black Snake Moan", "year": 2006, "rating": null, "liked": true, "poster_path": "/8Yv7kxsqXSe4ZHl8uJEhmsPjhAP.jpg", "character": "Lazarus"}, {"title": "The Incredibles", "year": 2004, "rating": null, "liked": true, "poster_path": "/2LqaLgk4Z226KkgPJuiOQ58wvrm.jpg", "character": "Lucius Best / Frozone (voice)"}, {"title": "Unbreakable", "year": 2000, "rating": null, "liked": true, "poster_path": "/mLuehrGLiK5zFCyRmDDOH6gbfPf.jpg", "character": "Elijah Price"}, {"title": "Jackie Brown", "year": 1997, "rating": null, "liked": true, "poster_path": "/rOUx7qg4KmEh1juEDwqzbDSL1Nr.jpg", "character": "Ordell Robbie"}, {"title": "The Long Kiss Goodnight", "year": 1996, "rating": null, "liked": true, "poster_path": "/yREdXX5lMFUKhTvb0ofI7mzUHlR.jpg", "character": "Mitch Henessey"}, {"title": "Hard Eight", "year": 1996, "rating": null, "liked": true, "poster_path": "/1l5UaoP25Ak8PWCKIULQz70yF03.jpg", "character": "Jimmy"}, {"title": "Pulp Fiction", "year": 1994, "rating": null, "liked": true, "poster_path": "/vQWk5YBFWF4bZaofAbv0tShwBvQ.jpg", "character": "Jules Winnfield"}, {"title": "Jurassic Park", "year": 1993, "rating": 5.0, "liked": true, "poster_path": "/bRKmwU9eXZI5dKT11Zx1KsayiLW.jpg", "character": "Arnold"}, {"title": "True Romance", "year": 1993, "rating": null, "liked": true, "poster_path": "/39lXk6ud6KiJgGbbWI2PUKS7y2.jpg", "character": "Big Don"}]}, {"name": "Bruce Willis", "count": 23, "liked_count": 16, "like_ratio": 69.6, "films": [{"title": "Sin City: A Dame to Kill For", "year": 2014, "rating": null, "liked": false, "poster_path": "/50kALxDX4mmzIRljbNbPY0u4cie.jpg", "character": "Hartigan"}, {"title": "A Good Day to Die Hard", "year": 2013, "rating": null, "liked": false, "poster_path": "/qJ0csDXAVFMsNn0cRcjy6W6PxAK.jpg", "character": "John McClane"}, {"title": "Moonrise Kingdom", "year": 2012, "rating": null, "liked": true, "poster_path": "/y4SXcbNl6CEF2t36icuzuBioj7K.jpg", "character": "Captain Sharp"}, {"title": "Looper", "year": 2012, "rating": null, "liked": false, "poster_path": "/sNjL6SqErDBE8OUZlrDLkexfsCj.jpg", "character": "Old Joe"}, {"title": "The Expendables 2", "year": 2012, "rating": null, "liked": false, "poster_path": "/74rTIGyGoIu5KSxDVMdr8H3MtMo.jpg", "character": "Church"}, {"title": "Planet Terror", "year": 2007, "rating": null, "liked": false, "poster_path": "/3705GxG0RN9XDV5y9IiXKYHw1fK.jpg", "character": "Lieutenant Muldoon"}, {"title": "Live Free or Die Hard", "year": 2007, "rating": null, "liked": false, "poster_path": "/31TT47YjBl7a7uvJ3ff1nrirXhP.jpg", "character": "John McClane"}, {"title": "Alpha Dog", "year": 2006, "rating": null, "liked": true, "poster_path": "/t9pirEsDxe102mSQGoDZWBbdcCD.jpg", "character": "Sonny Truelove"}, {"title": "16 Blocks", "year": 2006, "rating": null, "liked": false, "poster_path": "/cBLqMVfTZpuKmMQKDLKusb93dbR.jpg", "character": "Jack Mosley"}, {"title": "Sin City", "year": 2005, "rating": null, "liked": true, "poster_path": "/i66G50wATMmPrvpP95f0XP6ZdVS.jpg", "character": "Hartigan"}, {"title": "Bandits", "year": 2001, "rating": null, "liked": true, "poster_path": "/67AUAkiT4rbgqN7SNlIJn0zWZqU.jpg", "character": "Joseph Blake"}, {"title": "Unbreakable", "year": 2000, "rating": null, "liked": true, "poster_path": "/mLuehrGLiK5zFCyRmDDOH6gbfPf.jpg", "character": "David Dunn"}, {"title": "The Whole Nine Yards", "year": 2000, "rating": null, "liked": true, "poster_path": "/rDV7ntPLY0ZDBT722Odsi80nFrn.jpg", "character": "Jimmy 'Tulip\u00e1n' Tudeski"}, {"title": "The Sixth Sense", "year": 1999, "rating": null, "liked": true, "poster_path": "/vOyfUXNFSnaTk7Vk5AjpsKTUWsu.jpg", "character": "Malcolm Crowe"}, {"title": "Armageddon", "year": 1998, "rating": 5.0, "liked": true, "poster_path": "/eTM3qtGhDU8cvjpoa6KEt5E2auU.jpg", "character": "Harry S. Stamper"}, {"title": "The Fifth Element", "year": 1997, "rating": null, "liked": true, "poster_path": "/fPtlCO1yQtnoLHOwKtWz7db6RGU.jpg", "character": "Korben Dallas"}, {"title": "Twelve Monkeys", "year": 1995, "rating": null, "liked": true, "poster_path": "/gt3iyguaCIw8DpQZI1LIN5TohM2.jpg", "character": "James Cole"}, {"title": "Pulp Fiction", "year": 1994, "rating": null, "liked": true, "poster_path": "/vQWk5YBFWF4bZaofAbv0tShwBvQ.jpg", "character": "Butch Coolidge"}, {"title": "Death Becomes Her", "year": 1992, "rating": null, "liked": true, "poster_path": "/kkWxyyyWFK5KNk9WVwQuGEC9H9H.jpg", "character": "Dr. Ernest Menville"}, {"title": "The Last Boy Scout", "year": 1991, "rating": null, "liked": true, "poster_path": "/fNkLz6ITQqTDZHBXqiCrm4kaJKJ.jpg", "character": "Joe Hallenbeck"}, {"title": "Hudson Hawk", "year": 1991, "rating": null, "liked": true, "poster_path": "/2AiR7HZuIOUdJp6LYOEOA8z7pF3.jpg", "character": "Eddie 'Hudson Hawk' Hawkins"}, {"title": "Die Hard 2", "year": 1990, "rating": null, "liked": true, "poster_path": "/ybki0UWO3OPhaM6MSniuKC7sy1R.jpg", "character": "John McClane"}, {"title": "Die Hard", "year": 1988, "rating": 5.0, "liked": true, "poster_path": "/7Bjd8kfmDSOzpmhySpEhkUyK2oH.jpg", "character": "John McClane"}]}, {"name": "Josh Brolin", "count": 23, "liked_count": 13, "like_ratio": 56.5, "films": [{"title": "Weapons", "year": 2025, "rating": 4.0, "liked": true, "poster_path": "/cpf7vsRZ0MYRQcnLWteD5jK9ymT.jpg", "character": "Archer"}, {"title": "The Running Man", "year": 2025, "rating": 2.0, "liked": false, "poster_path": "/dKL78O9zxczVgjtNcQ9UkbYLzqX.jpg", "character": "Dan Killian"}, {"title": "Wake Up Dead Man", "year": 2025, "rating": 1.5, "liked": false, "poster_path": "/qCOGGi8JBVEZMc3DVby8rUivyXz.jpg", "character": "Mons. Jefferson Wicks"}, {"title": "Dune: Part Two", "year": 2024, "rating": 4.5, "liked": true, "poster_path": "/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg", "character": "Gurney Halleck"}, {"title": "Dune", "year": 2021, "rating": 4.5, "liked": true, "poster_path": "/d5NXSklXo0qyIYkgV94XAgMIckC.jpg", "character": "Gurney Halleck"}, {"title": "Avengers: Endgame", "year": 2019, "rating": null, "liked": false, "poster_path": "/bR8ISy1O9XQxqiy0fQFw2BX72RQ.jpg", "character": "Thanos"}, {"title": "Avengers: Infinity War", "year": 2018, "rating": null, "liked": true, "poster_path": "/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg", "character": "Thanos"}, {"title": "Deadpool 2", "year": 2018, "rating": null, "liked": false, "poster_path": "/to0spRl1CMDvyUbOnbb4fTk3VAd.jpg", "character": "Cable"}, {"title": "Sicario: Day of the Soldado", "year": 2018, "rating": null, "liked": false, "poster_path": "/qcLYofEhNh51Sk1jUWjmKHLzkqw.jpg", "character": "Matt Graver"}, {"title": "Only the Brave", "year": 2017, "rating": 4.0, "liked": true, "poster_path": "/lC7WdUNLOJI3sllaDGNdFy2GT8g.jpg", "character": "Eric Marsh"}, {"title": "Hail, Caesar!", "year": 2016, "rating": null, "liked": false, "poster_path": "/ozY79UvbYvJUWFg2UCM1CDQ7rBl.jpg", "character": "Eddie Mannix"}, {"title": "Sicario", "year": 2015, "rating": null, "liked": true, "poster_path": "/lz8vNyXeidqqOdJW9ZjnDAMb5Vr.jpg", "character": "Matt Graver"}, {"title": "Everest", "year": 2015, "rating": null, "liked": true, "poster_path": "/2jKOu2bjpLP6NXJcm7Ep14bDGtA.jpg", "character": "Beck Weathers"}, {"title": "Inherent Vice", "year": 2014, "rating": null, "liked": false, "poster_path": "/pfVua7TzzttOh3RTOuBqT7xN0oY.jpg", "character": "Lt. Det. Christian F. \"Bigfoot\" Bjornsen"}, {"title": "Sin City: A Dame to Kill For", "year": 2014, "rating": null, "liked": false, "poster_path": "/50kALxDX4mmzIRljbNbPY0u4cie.jpg", "character": "Dwight"}, {"title": "Gangster Squad", "year": 2013, "rating": null, "liked": false, "poster_path": "/4Ai5uFTPE1tUXSc5wMbXyZtXkt8.jpg", "character": "John O'Mara"}, {"title": "Men in Black 3", "year": 2012, "rating": null, "liked": true, "poster_path": "/90DdoEStzeObs96fsYf4GG544iN.jpg", "character": "Young Agent K"}, {"title": "True Grit", "year": 2010, "rating": null, "liked": true, "poster_path": "/tCrB8pcjadZjsDk7rleGJaIv78k.jpg", "character": "Tom Chaney"}, {"title": "Wall Street: Money Never Sleeps", "year": 2010, "rating": null, "liked": true, "poster_path": "/sA7dP4TJdbIF6a9xNeuBeHOGioX.jpg", "character": "Bretton James"}, {"title": "No Country for Old Men", "year": 2007, "rating": null, "liked": true, "poster_path": "/6d5XOczc226jECq0LIX0siKtgHR.jpg", "character": "Llewelyn Moss"}, {"title": "Grindhouse", "year": 2007, "rating": null, "liked": true, "poster_path": "/tvMBwJlmQTIQf5EBjHzzyE9tjcN.jpg", "character": "Block (segment \"Planet Terror\")"}, {"title": "Planet Terror", "year": 2007, "rating": null, "liked": false, "poster_path": "/3705GxG0RN9XDV5y9IiXKYHw1fK.jpg", "character": "Dr. William Block"}, {"title": "The Goonies", "year": 1985, "rating": null, "liked": true, "poster_path": "/eBU7gCjTCj9n2LTxvCSIXXOvHkD.jpg", "character": "Brand"}]}, {"name": "Woody Harrelson", "count": 23, "liked_count": 7, "like_ratio": 30.4, "films": [{"title": "The Electric State", "year": 2025, "rating": 2.0, "liked": false, "poster_path": "/sI2NiMU8o65hmIMY0JI9CjJ0p7f.jpg", "character": "Mr. Peanut (voice)"}, {"title": "Now You See Me: Now You Don't", "year": 2025, "rating": 2.5, "liked": false, "poster_path": "/oD3Eey4e4Z259XLm3eD3WGcoJAh.jpg", "character": "Merritt McKinney"}, {"title": "Fly Me to the Moon", "year": 2024, "rating": 2.5, "liked": false, "poster_path": "/gjk8YdXpItoC1in53FCrZMFIuBx.jpg", "character": "Moe Berkus"}, {"title": "Triangle of Sadness", "year": 2022, "rating": null, "liked": true, "poster_path": "/k9eLozCgCed5FGTSdHu0bBElAV8.jpg", "character": "The Captain"}, {"title": "Kate", "year": 2021, "rating": null, "liked": false, "poster_path": "/uJgdT1boTSP0dDIjdTgGleg71l4.jpg", "character": "Varrick"}, {"title": "Venom: Let There Be Carnage", "year": 2021, "rating": null, "liked": false, "poster_path": "/pzKsRuKLFmYrW5Q0q8E8G78Tcgo.jpg", "character": "Cletus Kasady / Carnage"}, {"title": "Zombieland: Double Tap", "year": 2019, "rating": null, "liked": false, "poster_path": "/dtRbVsUb5O12WWO54SRpiMtHKC0.jpg", "character": "Tallahassee"}, {"title": "Solo: A Star Wars Story", "year": 2018, "rating": null, "liked": false, "poster_path": "/4oD6VEccFkorEBTEDXtpLAaz0Rl.jpg", "character": "Tobias Beckett"}, {"title": "Venom", "year": 2018, "rating": null, "liked": false, "poster_path": "/2uNW4WbgBXL25BAbXGLnLqX71Sw.jpg", "character": "Cletus Kasady / Carnage"}, {"title": "Three Billboards Outside Ebbing, Missouri", "year": 2017, "rating": 5.0, "liked": true, "poster_path": "/bRYLt8fV82tdVoDppSFTZIcJiLN.jpg", "character": "Bill Willoughby"}, {"title": "War for the Planet of the Apes", "year": 2017, "rating": null, "liked": false, "poster_path": "/mMA1qhBFgZX8O36qPPTC016kQl1.jpg", "character": "The Colonel"}, {"title": "The Edge of Seventeen", "year": 2016, "rating": null, "liked": true, "poster_path": "/iY5UEYuGxHfaYJ3vAUAWwFGMV7V.jpg", "character": "Mr. Bruner"}, {"title": "Now You See Me 2", "year": 2016, "rating": 3.0, "liked": true, "poster_path": "/A81kDB6a1K86YLlcOtZB27jriJh.jpg", "character": "Merritt McKinney / Chase McKinney"}, {"title": "Now You See Me", "year": 2013, "rating": 3.0, "liked": false, "poster_path": "/tWsNYbrqy1p1w6K9zRk0mSchztT.jpg", "character": "Merritt McKinney"}, {"title": "Out of the Furnace", "year": 2013, "rating": null, "liked": false, "poster_path": "/cOuQQ4eRpSBxb0G9OXzWE1pHPeq.jpg", "character": "Harlan DeGroat"}, {"title": "The Hunger Games", "year": 2012, "rating": null, "liked": false, "poster_path": "/yXCbOiVDCxO71zI7cuwBRXdftq8.jpg", "character": "Haymitch Abernathy"}, {"title": "Seven Psychopaths", "year": 2012, "rating": 3.5, "liked": false, "poster_path": "/4ukEYAxlSivFcDG6vLxJB6PjTjg.jpg", "character": "Charlie Costello"}, {"title": "Zombieland", "year": 2009, "rating": null, "liked": true, "poster_path": "/dUkAmAyPVqubSBNRjRqCgHggZcK.jpg", "character": "Tallahassee"}, {"title": "2012", "year": 2009, "rating": null, "liked": false, "poster_path": "/c2PkTPT5D9zB8SIm5wNlDAANEqM.jpg", "character": "Charlie Frost"}, {"title": "No Country for Old Men", "year": 2007, "rating": null, "liked": true, "poster_path": "/6d5XOczc226jECq0LIX0siKtgHR.jpg", "character": "Carson Wells"}, {"title": "The Thin Red Line", "year": 1998, "rating": 3.5, "liked": false, "poster_path": "/seMydAaoxQP6F0xbE1jOcTmn5Jr.jpg", "character": "Sgt. William Keck"}, {"title": "Natural Born Killers", "year": 1994, "rating": null, "liked": true, "poster_path": "/fEKZwT91gxvkAoyPgpNXo8W5fu0.jpg", "character": "Mickey Knox"}, {"title": "White Men Can't Jump", "year": 1992, "rating": null, "liked": false, "poster_path": "/jnI05Z2Cm9ACEJo8FGen7tdHKLl.jpg", "character": "Billy Hoyle"}]}, {"name": "Tom Cruise", "count": 23, "liked_count": 17, "like_ratio": 73.9, "films": [{"title": "Top Gun: Maverick", "year": 2022, "rating": 5.0, "liked": true, "poster_path": "/62HCnUTziyWcpDaBO2i1DX17ljH.jpg", "character": "Capt. Pete 'Maverick' Mitchell"}, {"title": "American Made", "year": 2017, "rating": 4.0, "liked": true, "poster_path": "/23ILgoPSO5ShKcTZOuiTVfqFAUB.jpg", "character": "Barry Seal"}, {"title": "Edge of Tomorrow", "year": 2014, "rating": null, "liked": true, "poster_path": "/nBM9MMa2WCwvMG4IJ3eiGUdbPe6.jpg", "character": "Cage"}, {"title": "Oblivion", "year": 2013, "rating": null, "liked": true, "poster_path": "/5Onf4TW3mZn3oLeKVr9W4FGomQQ.jpg", "character": "Jack"}, {"title": "Knight and Day", "year": 2010, "rating": 2.5, "liked": false, "poster_path": "/a7JmOBMNj5erYTgt4u1mQgvHItu.jpg", "character": "Roy Miller"}, {"title": "Tropic Thunder", "year": 2008, "rating": null, "liked": true, "poster_path": "/zAurB9mNxfYRoVrVjAJJwGV3sPg.jpg", "character": "Les Grossman"}, {"title": "Mission: Impossible III", "year": 2006, "rating": 3.5, "liked": true, "poster_path": "/vKGYCpmQyV9uHybWDzXuII8Los5.jpg", "character": "Ethan Hunt"}, {"title": "War of the Worlds", "year": 2005, "rating": null, "liked": false, "poster_path": "/6Biy7R9LfumYshur3YKhpj56MpB.jpg", "character": "Ray Ferrier"}, {"title": "Collateral", "year": 2004, "rating": null, "liked": true, "poster_path": "/nV5316WUsVij8sVXLCF1g7TFitg.jpg", "character": "Vincent"}, {"title": "The Last Samurai", "year": 2003, "rating": 4.5, "liked": true, "poster_path": "/a8jmJPs5eZBARmnuEEvZwbjwyz4.jpg", "character": "Nathan Algren"}, {"title": "Minority Report", "year": 2002, "rating": null, "liked": true, "poster_path": "/qtgFcnwh9dAFLocsDk2ySDVS8UF.jpg", "character": "Chief John Anderton"}, {"title": "Vanilla Sky", "year": 2001, "rating": null, "liked": false, "poster_path": "/cAh2pCiNPftsY3aSqJuIOde7uWr.jpg", "character": "David Aames"}, {"title": "Mission: Impossible II", "year": 2000, "rating": 3.5, "liked": true, "poster_path": "/hfnrual76gPeNFduhD4xzHWpfTw.jpg", "character": "Ethan Hunt"}, {"title": "Eyes Wide Shut", "year": 1999, "rating": 3.0, "liked": false, "poster_path": "/knEIz1eNGl5MQDbrEAVWA7iRqF9.jpg", "character": "Dr. William Harford"}, {"title": "Magnolia", "year": 1999, "rating": null, "liked": true, "poster_path": "/tpfC325Jk6S38VTe5dDWjWtoyxr.jpg", "character": "Frank T.J. Mackey"}, {"title": "Mission: Impossible", "year": 1996, "rating": null, "liked": true, "poster_path": "/l5uxY5m5OInWpcExIpKG6AR3rgL.jpg", "character": "Ethan Hunt"}, {"title": "Jerry Maguire", "year": 1996, "rating": null, "liked": true, "poster_path": "/lABvGN7fDk5ifnwZoxij6G96t2w.jpg", "character": "Jerry Maguire"}, {"title": "Interview with the Vampire", "year": 1994, "rating": 4.0, "liked": true, "poster_path": "/2162lAT2MP36MyJd2sttmj5du5T.jpg", "character": "Lestat"}, {"title": "A Few Good Men", "year": 1992, "rating": null, "liked": false, "poster_path": "/rLOk4z9zL1tTukIYV56P94aZXKk.jpg", "character": "Lt. Daniel Kaffee"}, {"title": "Days of Thunder", "year": 1990, "rating": 3.0, "liked": false, "poster_path": "/8UvcoeMJag8UWGF8sg7eYspzq0Q.jpg", "character": "Cole Trickle"}, {"title": "Rain Man", "year": 1988, "rating": null, "liked": true, "poster_path": "/iTNHwO896WKkaoPtpMMS74d8VNi.jpg", "character": "Charlie Babbitt"}, {"title": "Top Gun", "year": 1986, "rating": null, "liked": true, "poster_path": "/xUuHj3CgmZQ9P2cMaqQs4J0d4Zc.jpg", "character": "Maverick"}, {"title": "The Color of Money", "year": 1986, "rating": null, "liked": true, "poster_path": "/dVdnHmdQu3JtLAAksjTmTEF76gD.jpg", "character": "Vincent Lauria"}]}, {"name": "Scarlett Johansson", "count": 22, "liked_count": 11, "like_ratio": 50.0, "films": [{"title": "Jurassic World Rebirth", "year": 2025, "rating": 4.5, "liked": true, "poster_path": "/1RICxzeoNCAO5NpcRMIgg1XT6fm.jpg", "character": "Zora Bennett"}, {"title": "Transformers One", "year": 2024, "rating": 4.5, "liked": true, "poster_path": "/iRCgqpdVE4wyLQvGYU3ZP7pAtUc.jpg", "character": "Elita-1 (voice)"}, {"title": "Fly Me to the Moon", "year": 2024, "rating": 2.5, "liked": false, "poster_path": "/gjk8YdXpItoC1in53FCrZMFIuBx.jpg", "character": "Kelly Jones"}, {"title": "Asteroid City", "year": 2023, "rating": 4.0, "liked": true, "poster_path": "/rAkz95CREc3A1qTnwlSQ0jh8Zw8.jpg", "character": "Midge Campbell"}, {"title": "Avengers: Endgame", "year": 2019, "rating": null, "liked": false, "poster_path": "/bR8ISy1O9XQxqiy0fQFw2BX72RQ.jpg", "character": "Natasha Romanoff / Black Widow"}, {"title": "Marriage Story", "year": 2019, "rating": null, "liked": true, "poster_path": "/2JRyCKaRKyJAVpsIHeLvPw5nHmw.jpg", "character": "Nicole Barber"}, {"title": "Jojo Rabbit", "year": 2019, "rating": null, "liked": true, "poster_path": "/7GsM4mtM0worCtIVeiQt28HieeN.jpg", "character": "Rosie"}, {"title": "Avengers: Infinity War", "year": 2018, "rating": null, "liked": true, "poster_path": "/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg", "character": "Natasha Romanoff / Black Widow"}, {"title": "Captain America: Civil War", "year": 2016, "rating": null, "liked": false, "poster_path": "/rAGiXaUfPzY7CDEyNKUofk3Kw2e.jpg", "character": "Natasha Romanoff / Black Widow"}, {"title": "Hail, Caesar!", "year": 2016, "rating": null, "liked": false, "poster_path": "/ozY79UvbYvJUWFg2UCM1CDQ7rBl.jpg", "character": "DeeAnna Moran"}, {"title": "Avengers: Age of Ultron", "year": 2015, "rating": null, "liked": false, "poster_path": "/4ssDuvEDkSArWEdyBl2X5EHvYKU.jpg", "character": "Natasha Romanoff / Black Widow"}, {"title": "Captain America: The Winter Soldier", "year": 2014, "rating": null, "liked": false, "poster_path": "/tVFRpFw3xTedgPGqxW0AOI8Qhh0.jpg", "character": "Natasha Romanoff / Black Widow"}, {"title": "Chef", "year": 2014, "rating": 3.5, "liked": true, "poster_path": "/hyp8EXDmO4dSC8V6Q5jU7gD1kcg.jpg", "character": "Molly"}, {"title": "Under the Skin", "year": 2013, "rating": null, "liked": false, "poster_path": "/55wmcXJIDYITr7JDijJTdvwSaAv.jpg", "character": ""}, {"title": "Her", "year": 2013, "rating": null, "liked": true, "poster_path": "/eCOtqtfvn7mxGl6nfmq4b1exJRc.jpg", "character": "Samantha (voice)"}, {"title": "Don Jon", "year": 2013, "rating": null, "liked": false, "poster_path": "/uh8bwvgGXeUKzdL4oSul9zxyTcd.jpg", "character": "Barbara Sugarman"}, {"title": "The Avengers", "year": 2012, "rating": null, "liked": true, "poster_path": "/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg", "character": "Natasha Romanoff / Black Widow"}, {"title": "Iron Man 2", "year": 2010, "rating": null, "liked": false, "poster_path": "/6WBeq4fCfn7AN0o21W9qNcRF2l9.jpg", "character": "Natalie Rushman / Natasha Romanoff"}, {"title": "The Prestige", "year": 2006, "rating": 5.0, "liked": true, "poster_path": "/bdN3gXuIZYaJP7ftKK2sU0nPtEA.jpg", "character": "Olivia Wenscombe"}, {"title": "Match Point", "year": 2005, "rating": null, "liked": false, "poster_path": "/vHjEVTD8ucuwKSFOZJeyAnTZYli.jpg", "character": "Nola Rice"}, {"title": "The Island", "year": 2005, "rating": 2.5, "liked": false, "poster_path": "/9MaZYEyFmQwNeDTxZGQEN8E0e4p.jpg", "character": "Jordan Two Delta / Sarah Jordan"}, {"title": "Lost in Translation", "year": 2003, "rating": 5.0, "liked": true, "poster_path": "/3jCLmYDIIiSMPujbwygNpqdpM8N.jpg", "character": "Charlotte"}]}, {"name": "Jim Carrey", "count": 22, "liked_count": 10, "like_ratio": 45.5, "films": [{"title": "Sonic the Hedgehog 3", "year": 2024, "rating": 2.5, "liked": false, "poster_path": "/d8Ryb8AunYAuycVKDp5HpdWPKgC.jpg", "character": "Ivo Robotnik / Gerald Robotnik"}, {"title": "Sonic the Hedgehog 2", "year": 2022, "rating": 3.0, "liked": false, "poster_path": "/6DrHO1jr3qVrViUO6s6kFiAGM7.jpg", "character": "Dr. Robotnik"}, {"title": "Sonic the Hedgehog", "year": 2020, "rating": 3.5, "liked": true, "poster_path": "/aQvJ5WPzZgYVDrxLX4R6cLJCEaQ.jpg", "character": "Dr. Robotnik"}, {"title": "Jim & Andy: The Great Beyond", "year": 2017, "rating": null, "liked": true, "poster_path": "/kKzopOFXz9YfsCTqg3XpF0GoypX.jpg", "character": "Self"}, {"title": "Kick-Ass 2", "year": 2013, "rating": null, "liked": false, "poster_path": "/1go2A3gdQjaMuHWquybgoJlQRcX.jpg", "character": "Colonel Stars and Stripes"}, {"title": "Yes Man", "year": 2008, "rating": null, "liked": false, "poster_path": "/16zVbgFLTUaUTG1wQHuGjfWNuDM.jpg", "character": "Carl Allen"}, {"title": "The Number 23", "year": 2007, "rating": null, "liked": false, "poster_path": "/iPJwdvgX3I5dEw9QhDOG3hxUvMp.jpg", "character": "Walter Sparrow / Fingerling"}, {"title": "Fun with Dick and Jane", "year": 2005, "rating": null, "liked": false, "poster_path": "/xTcIPKpzCqQUQixNPS0Rb7HPEAf.jpg", "character": "Dick Harper"}, {"title": "Eternal Sunshine of the Spotless Mind", "year": 2004, "rating": null, "liked": true, "poster_path": "/5MwkWH9tYHv3mV9OdYTMR5qreIz.jpg", "character": "Joel Barish"}, {"title": "Bruce Almighty", "year": 2003, "rating": null, "liked": true, "poster_path": "/f0QqG14SZYYZcV4VWykVc5w13dz.jpg", "character": "Bruce Nolan"}, {"title": "How the Grinch Stole Christmas", "year": 2000, "rating": 4.5, "liked": true, "poster_path": "/1WZbbPApEivA421gCOluuzMMKCk.jpg", "character": "Grinch"}, {"title": "Me, Myself & Irene", "year": 2000, "rating": null, "liked": false, "poster_path": "/rvRrcbLbpn7UJGRH1JupgHOeJFq.jpg", "character": "Off. Charlie Baileygates / Hank Evans"}, {"title": "Man on the Moon", "year": 1999, "rating": null, "liked": false, "poster_path": "/d8rahmdfryjdmvLpSsDOUhGVQXl.jpg", "character": "Andy Kaufman / Tony Clifton"}, {"title": "The Truman Show", "year": 1998, "rating": null, "liked": true, "poster_path": "/vuza0WqY239yBXOadKlGwJsZJFE.jpg", "character": "Truman Burbank"}, {"title": "Liar Liar", "year": 1997, "rating": 4.0, "liked": true, "poster_path": "/p1habYSdC7oD3WygQ5lynU5G5rV.jpg", "character": "Fletcher Reede"}, {"title": "The Cable Guy", "year": 1996, "rating": null, "liked": false, "poster_path": "/YJt9l3RdrRohI95btQKPXwpdii.jpg", "character": "Cable Guy"}, {"title": "Batman Forever", "year": 1995, "rating": null, "liked": false, "poster_path": "/i0fJS8M5UKoETjjJ0zwUiKaR8tr.jpg", "character": "Edward Nygma / The Riddler"}, {"title": "Ace Ventura: When Nature Calls", "year": 1995, "rating": null, "liked": false, "poster_path": "/wcinCf1ov2D6M3P7BBZkzQFOiIb.jpg", "character": "Ace Ventura"}, {"title": "The Mask", "year": 1994, "rating": null, "liked": true, "poster_path": "/jPC2eYub74zwf2tPGVtzSlBW6Oy.jpg", "character": "Stanley Ipkiss / The Mask"}, {"title": "Dumb and Dumber", "year": 1994, "rating": null, "liked": true, "poster_path": "/4LdpBXiCyGKkR8FGHgjKlphrfUc.jpg", "character": "Lloyd Christmas"}, {"title": "Ace Ventura: Pet Detective", "year": 1994, "rating": null, "liked": true, "poster_path": "/pqiRuETmuSybfnVZ7qyeoXhQyN1.jpg", "character": "Ace Ventura"}, {"title": "Once Bitten", "year": 1985, "rating": 2.5, "liked": false, "poster_path": "/eK3dxRrMQGpZ1kLD9wdyOI8urFZ.jpg", "character": "Mark Kendall"}]}, {"name": "Keanu Reeves", "count": 21, "liked_count": 8, "like_ratio": 38.1, "films": [{"title": "Ballerina", "year": 2025, "rating": 3.5, "liked": false, "poster_path": "/2VUmvqsHb6cEtdfscEA6fqqVzLg.jpg", "character": "John Wick"}, {"title": "Sonic the Hedgehog 3", "year": 2024, "rating": 2.5, "liked": false, "poster_path": "/d8Ryb8AunYAuycVKDp5HpdWPKgC.jpg", "character": "Shadow (voice)"}, {"title": "John Wick: Chapter 4", "year": 2023, "rating": null, "liked": false, "poster_path": "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg", "character": "John Wick"}, {"title": "The Matrix Resurrections", "year": 2021, "rating": null, "liked": false, "poster_path": "/8c4a8kE7PizaGQQnditMmI1xbRp.jpg", "character": "Neo / Thomas Anderson"}, {"title": "Toy Story 4", "year": 2019, "rating": null, "liked": false, "poster_path": "/w9kR8qbmQ01HwnvK4alvnQ2ca0L.jpg", "character": "Duke Caboom (voice)"}, {"title": "John Wick: Chapter 2", "year": 2017, "rating": null, "liked": false, "poster_path": "/hXWBc0ioZP3cN4zCu6SN3YHXZVO.jpg", "character": "John Wick"}, {"title": "The Neon Demon", "year": 2016, "rating": null, "liked": false, "poster_path": "/3rBo2AfWSlvsPmYFdJsNUMfkNIo.jpg", "character": "Hank"}, {"title": "Knock Knock", "year": 2015, "rating": null, "liked": false, "poster_path": "/cUC4rUb1Cs2KMaZ6RD4uYUEEwls.jpg", "character": "Evan Webber"}, {"title": "John Wick", "year": 2014, "rating": null, "liked": false, "poster_path": "/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg", "character": "John Wick"}, {"title": "Constantine", "year": 2005, "rating": null, "liked": false, "poster_path": "/vPYgvd2MwHlxTamAOjwVQp4qs1W.jpg", "character": "John Constantine"}, {"title": "The Matrix Reloaded", "year": 2003, "rating": null, "liked": false, "poster_path": "/aA5qHS0FbSXO8PxcxUIHbDrJyuh.jpg", "character": "Neo"}, {"title": "The Matrix Revolutions", "year": 2003, "rating": null, "liked": false, "poster_path": "/bkkS61w94ZVMNVd8KEyyJl2tnY5.jpg", "character": "Neo"}, {"title": "The Animatrix", "year": 2003, "rating": 3.0, "liked": true, "poster_path": "/eDjIG2hAeMU5cxLrd6oiQqdqoZt.jpg", "character": "Neo (\"Kid's Story\") (voice)"}, {"title": "Kid's Story", "year": 2003, "rating": null, "liked": true, "poster_path": "/SteXNwc3hRV9o2BlyxV3yBXCV2.jpg", "character": "Neo (voice)"}, {"title": "The Matrix", "year": 1999, "rating": null, "liked": true, "poster_path": "/p96dm7sCMn4VYAStA6siNz30G1r.jpg", "character": "Neo"}, {"title": "The Devil's Advocate", "year": 1997, "rating": null, "liked": true, "poster_path": "/5ZzBGpxy55OQzHxKVY11IpY6a0o.jpg", "character": "Kevin Lomax"}, {"title": "Speed", "year": 1994, "rating": null, "liked": true, "poster_path": "/82PkCE4R95KhHICUDF7G4Ly2z3l.jpg", "character": "Jack Traven"}, {"title": "Bram Stoker's Dracula", "year": 1992, "rating": null, "liked": true, "poster_path": "/n39glC4GkBeCbwdenES8ZBodim8.jpg", "character": "Jonathan Harker"}, {"title": "My Own Private Idaho", "year": 1991, "rating": null, "liked": true, "poster_path": "/p9TF90Pb5yg2MNb2UztzyXktMm4.jpg", "character": "Scott Favor"}, {"title": "Point Break", "year": 1991, "rating": null, "liked": true, "poster_path": "/tlbERIghrQ4oofqlbF7H0K0EYnx.jpg", "character": "Agent Johnny Utah"}, {"title": "River's Edge", "year": 1986, "rating": 2.0, "liked": false, "poster_path": "/bT68aKa9d7zDF7Z8MaskbWBRqzb.jpg", "character": "Matt"}]}, {"name": "Laurence Fishburne", "count": 21, "liked_count": 9, "like_ratio": 42.9, "films": [{"title": "Megalopolis", "year": 2024, "rating": 2.5, "liked": false, "poster_path": "/8Sok3HNA3r1GHnK2lCytHyBz1A.jpg", "character": "Fundi Romaine"}, {"title": "Transformers One", "year": 2024, "rating": 4.5, "liked": true, "poster_path": "/iRCgqpdVE4wyLQvGYU3ZP7pAtUc.jpg", "character": "Alpha Trion (voice)"}, {"title": "John Wick: Chapter 4", "year": 2023, "rating": null, "liked": false, "poster_path": "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg", "character": "Bowery King"}, {"title": "John Wick: Chapter 2", "year": 2017, "rating": null, "liked": false, "poster_path": "/hXWBc0ioZP3cN4zCu6SN3YHXZVO.jpg", "character": "Bowery King"}, {"title": "Last Flag Flying", "year": 2017, "rating": null, "liked": false, "poster_path": "/pizynKUzJ9YucGff1O1MYisY1WM.jpg", "character": "Reverend Richard Mueller"}, {"title": "Batman v Superman: Dawn of Justice", "year": 2016, "rating": null, "liked": false, "poster_path": "/5UsK3grJvtQrtzEgqNlDljJW96w.jpg", "character": "Perry White"}, {"title": "Passengers", "year": 2016, "rating": null, "liked": true, "poster_path": "/jK9S6HANSf2no64v1x1HxfcpmcA.jpg", "character": "Gus Mancuso"}, {"title": "Man of Steel", "year": 2013, "rating": null, "liked": true, "poster_path": "/dksTL9NXc3GqPBRHYHcy1aIwjS.jpg", "character": "Perry White"}, {"title": "Contagion", "year": 2011, "rating": 3.5, "liked": true, "poster_path": "/qL0IooP0bjXy0KXl9KEyPo22ll0.jpg", "character": "Ellis Cheever"}, {"title": "Predators", "year": 2010, "rating": null, "liked": false, "poster_path": "/wdniP8NDaJIydi1hMxhpbJMUfr6.jpg", "character": "Noland"}, {"title": "Fantastic Four: Rise of the Silver Surfer", "year": 2007, "rating": null, "liked": false, "poster_path": "/1rxTraSO45jbvTrCeSvJ6RmOu1b.jpg", "character": "Norrin Radd / Silver Surfer (voice)"}, {"title": "The Matrix Reloaded", "year": 2003, "rating": null, "liked": false, "poster_path": "/aA5qHS0FbSXO8PxcxUIHbDrJyuh.jpg", "character": "Morpheus"}, {"title": "The Matrix Revolutions", "year": 2003, "rating": null, "liked": false, "poster_path": "/bkkS61w94ZVMNVd8KEyyJl2tnY5.jpg", "character": "Morpheus"}, {"title": "Mystic River", "year": 2003, "rating": null, "liked": true, "poster_path": "/hCHVDbo6XJGj3r2i4hVjKhE0GKF.jpg", "character": "Whitey Powers"}, {"title": "The Matrix", "year": 1999, "rating": null, "liked": true, "poster_path": "/p96dm7sCMn4VYAStA6siNz30G1r.jpg", "character": "Morpheus"}, {"title": "Event Horizon", "year": 1997, "rating": null, "liked": false, "poster_path": "/qfluaDXv0cIdLwgQWzNB2piHL2q.jpg", "character": "Miller"}, {"title": "Boyz n the Hood", "year": 1991, "rating": null, "liked": false, "poster_path": "/v4ox4aSCNT5vyLXl4Q71JiWwCXW.jpg", "character": "Furious Styles"}, {"title": "Hearts of Darkness: A Filmmaker's Apocalypse", "year": 1991, "rating": null, "liked": true, "poster_path": "/nVMCtL3r2nj4fySihDDvamaVkfx.jpg", "character": "Self"}, {"title": "King of New York", "year": 1990, "rating": 3.5, "liked": true, "poster_path": "/1MyH4MJAJZJbb6wDVeOc2bTECtK.jpg", "character": "Jimmy Jump"}, {"title": "A Nightmare on Elm Street 3: Dream Warriors", "year": 1987, "rating": 3.0, "liked": true, "poster_path": "/qbtZewU6EGvxi8yFVzwZ31NijLX.jpg", "character": "Max"}, {"title": "Apocalypse Now", "year": 1979, "rating": null, "liked": false, "poster_path": "/gQB8Y5RCMkv2zwzFHbUJX3kAhvA.jpg", "character": "Tyrone 'Clean' Miller"}]}, {"name": "Jake Gyllenhaal", "count": 20, "liked_count": 9, "like_ratio": 45.0, "films": [{"title": "Guy Ritchie's The Covenant", "year": 2023, "rating": 4.0, "liked": true, "poster_path": "/kVG8zFFYrpyYLoHChuEeOGAd6Ru.jpg", "character": "Master Sergeant John Kinley"}, {"title": "Spider-Man: Far From Home", "year": 2019, "rating": null, "liked": true, "poster_path": "/4q2NNj4S5dG2RLF9CpXsej7yXl.jpg", "character": "Quentin Beck / Mysterio"}, {"title": "Wildlife", "year": 2018, "rating": null, "liked": false, "poster_path": "/hQSUwjSSRtWCA5EBoY22gGzaE8Y.jpg", "character": "Jerry Brinson"}, {"title": "Life", "year": 2017, "rating": null, "liked": false, "poster_path": "/wztfli5NgYDgurVgShNflvnyA3Z.jpg", "character": "Dr. David Jordan"}, {"title": "Nocturnal Animals", "year": 2016, "rating": null, "liked": false, "poster_path": "/mdLDgQBD0va09npSQX5Zgo2evXM.jpg", "character": "Edward Sheffield / Tony Hastings"}, {"title": "Southpaw", "year": 2015, "rating": null, "liked": false, "poster_path": "/kSQ49Fi3NVTqGGXILmxV2T2pdkG.jpg", "character": "Billy 'The Great'  Hope"}, {"title": "Everest", "year": 2015, "rating": null, "liked": true, "poster_path": "/2jKOu2bjpLP6NXJcm7Ep14bDGtA.jpg", "character": "Scott Fischer"}, {"title": "Demolition", "year": 2015, "rating": null, "liked": false, "poster_path": "/4t56LZ1KbOOxgKfqMKN6truBDVc.jpg", "character": "Davis Mitchell"}, {"title": "Nightcrawler", "year": 2014, "rating": null, "liked": false, "poster_path": "/j9HrX8f7GbZQm1BrBiR40uFQZSb.jpg", "character": "Louis Bloom"}, {"title": "Prisoners", "year": 2013, "rating": null, "liked": true, "poster_path": "/jsS3a3ep2KyBVmmiwaz3LvK49b1.jpg", "character": "Detective Loki"}, {"title": "Enemy", "year": 2013, "rating": null, "liked": false, "poster_path": "/vf40tyDRKZsBmaLsYeopzfFLzLx.jpg", "character": "Adam / Anthony"}, {"title": "End of Watch", "year": 2012, "rating": null, "liked": true, "poster_path": "/pDeVKQICkcdwwjHxGj0MeS14YJ6.jpg", "character": "Brian Taylor"}, {"title": "Source Code", "year": 2011, "rating": null, "liked": false, "poster_path": "/nTr0lvAzeQmUjgSgDEHTJpnrxTz.jpg", "character": "Colter Stevens"}, {"title": "Love & Other Drugs", "year": 2010, "rating": 1.0, "liked": false, "poster_path": "/wZLM2uKJRYNchLmiCIjosX0rXy8.jpg", "character": "Jamie Randall"}, {"title": "Prince of Persia: The Sands of Time", "year": 2010, "rating": null, "liked": false, "poster_path": "/r9nw8LMdewMvRdNkEy0GH8yQ4n0.jpg", "character": "Prince Dastan"}, {"title": "Zodiac", "year": 2007, "rating": null, "liked": true, "poster_path": "/6YmeO4pB7XTh8P8F960O1uA14JO.jpg", "character": "Robert Graysmith"}, {"title": "Brokeback Mountain", "year": 2005, "rating": null, "liked": true, "poster_path": "/aByfQOQBNa4CMFwIgq3QrqY2ZHh.jpg", "character": "Jack Twist"}, {"title": "Jarhead", "year": 2005, "rating": null, "liked": false, "poster_path": "/6vdj47RAWOUZBkeQmqToeZ7eaio.jpg", "character": "Anthony Swofford"}, {"title": "The Day After Tomorrow", "year": 2004, "rating": null, "liked": true, "poster_path": "/Wr4HeYQRvwVCxzOV5TmGE7UkXq.jpg", "character": "Sam Hall"}, {"title": "Donnie Darko", "year": 2001, "rating": null, "liked": true, "poster_path": "/fhQoQfejY1hUcwyuLgpBrYs6uFt.jpg", "character": "Donnie Darko"}]}, {"name": "Bradley Cooper", "count": 20, "liked_count": 10, "like_ratio": 50.0, "films": [{"title": "Guardians of the Galaxy Vol. 3", "year": 2023, "rating": 3.5, "liked": true, "poster_path": "/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg", "character": "Rocket (voice)"}, {"title": "Maestro", "year": 2023, "rating": 3.0, "liked": false, "poster_path": "/kxj7rMco6RNYsVcNwuGAIlfWu64.jpg", "character": "Leonard Bernstein"}, {"title": "Licorice Pizza", "year": 2021, "rating": 5.0, "liked": true, "poster_path": "/ivXtvzfliGvoJ1DhSHIGyYBToWe.jpg", "character": "Jon Peters"}, {"title": "Nightmare Alley", "year": 2021, "rating": null, "liked": false, "poster_path": "/vfn1feL0V9HNSXuLLpaxAW8O6LO.jpg", "character": "Stanton Carlisle"}, {"title": "A Star Is Born", "year": 2018, "rating": null, "liked": true, "poster_path": "/wrFpXMNBRj2PBiN4Z5kix51XaIZ.jpg", "character": "Jackson Maine"}, {"title": "Guardians of the Galaxy Vol. 2", "year": 2017, "rating": null, "liked": false, "poster_path": "/y4MBh0EjBlMuOzv9axM4qJlmhzz.jpg", "character": "Rocket (voice)"}, {"title": "10 Cloverfield Lane", "year": 2016, "rating": null, "liked": true, "poster_path": "/q8A39vcBDruhvoDTJd6L8a4lnTi.jpg", "character": "Ben (voice)"}, {"title": "War Dogs", "year": 2016, "rating": null, "liked": true, "poster_path": "/mDcPRjZC1bb6LavFU3gwsWdVfCM.jpg", "character": "Henry Girard"}, {"title": "Guardians of the Galaxy", "year": 2014, "rating": null, "liked": true, "poster_path": "/r7vmZjiyZw9rpJMQJdXpjgiCOk9.jpg", "character": "Rocket (voice)"}, {"title": "American Sniper", "year": 2014, "rating": null, "liked": true, "poster_path": "/i1U46OwMc6vlm7OoSUKfqUH615e.jpg", "character": "Chris Kyle"}, {"title": "American Hustle", "year": 2013, "rating": null, "liked": false, "poster_path": "/z6O1KDhfWDTm5ZBr6Ovr0eg8LqO.jpg", "character": "Richie DiMaso"}, {"title": "The Hangover Part III", "year": 2013, "rating": null, "liked": false, "poster_path": "/vtxuPWkdllLNLVyGjKYa267ntuH.jpg", "character": "Phil Wenneck"}, {"title": "The Place Beyond the Pines", "year": 2012, "rating": null, "liked": false, "poster_path": "/vY5j2xQzMGWmxBuhQo0HfA4Lxqb.jpg", "character": "Avery Cross"}, {"title": "Silver Linings Playbook", "year": 2012, "rating": null, "liked": false, "poster_path": "/y7iOVneBvITlBdhy6tVqXVOa1Js.jpg", "character": "Pat Solatano Jr."}, {"title": "Limitless", "year": 2011, "rating": null, "liked": true, "poster_path": "/kCokPP4WCQRrrAuZ7FcpIyHr8b2.jpg", "character": "Edward Morra"}, {"title": "The Hangover Part II", "year": 2011, "rating": null, "liked": false, "poster_path": "/cKZu0Fdkj7dmwbfMpgDqVVCkLJQ.jpg", "character": "Phil Wenneck"}, {"title": "The A-Team", "year": 2010, "rating": null, "liked": true, "poster_path": "/bkAWEx5g5tvRPjtDQyvIZ7LRxQm.jpg", "character": "Face"}, {"title": "The Hangover", "year": 2009, "rating": 4.0, "liked": true, "poster_path": "/A0uS9rHR56FeBtpjVki16M5xxSW.jpg", "character": "Phil Wenneck"}, {"title": "Yes Man", "year": 2008, "rating": null, "liked": false, "poster_path": "/16zVbgFLTUaUTG1wQHuGjfWNuDM.jpg", "character": "Peter"}, {"title": "Wedding Crashers", "year": 2005, "rating": null, "liked": false, "poster_path": "/lFM3lk2zVzC1YFnKm0r6LbFPyRu.jpg", "character": "Sack Lodge"}]}, {"name": "Arnold Schwarzenegger", "count": 20, "liked_count": 11, "like_ratio": 55.0, "films": [{"title": "Sly", "year": 2023, "rating": 3.0, "liked": true, "poster_path": "/1utWajLPvv1R9ZwkD98s2ZEngS.jpg", "character": "Self"}, {"title": "Terminator Genisys", "year": 2015, "rating": null, "liked": false, "poster_path": "/oZRVDpNtmHk8M1VYy1aeOWUXgbC.jpg", "character": "Guardian / The Terminator"}, {"title": "The Expendables 2", "year": 2012, "rating": null, "liked": false, "poster_path": "/74rTIGyGoIu5KSxDVMdr8H3MtMo.jpg", "character": "Trench"}, {"title": "Terminator 3: Rise of the Machines", "year": 2003, "rating": null, "liked": false, "poster_path": "/vvevzdYIrk2636maNW4qeWmlPFG.jpg", "character": "The Terminator"}, {"title": "End of Days", "year": 1999, "rating": null, "liked": false, "poster_path": "/pY8FbKKl3VD0jRI1iDFrwN6alLa.jpg", "character": "Jericho Cane"}, {"title": "Batman & Robin", "year": 1997, "rating": null, "liked": false, "poster_path": "/i7hEUpDuMN2LOrCEifFyGSHZQSY.jpg", "character": "Dr. Victor Fries / Mr. Freeze"}, {"title": "Jingle All the Way", "year": 1996, "rating": null, "liked": true, "poster_path": "/6QLkeLXPIxiihuX5enHHNEuCCzy.jpg", "character": "Howard Langston"}, {"title": "Eraser", "year": 1996, "rating": null, "liked": true, "poster_path": "/uu2gBpFElDfxTI6BI9bT4pZ4kvw.jpg", "character": "U.S. Marshal John 'The Eraser' Kruger"}, {"title": "True Lies", "year": 1994, "rating": 5.0, "liked": true, "poster_path": "/pweFTnzzTfGK68woSVkiTgjLzWm.jpg", "character": "Harry Tasker"}, {"title": "Last Action Hero", "year": 1993, "rating": 5.0, "liked": true, "poster_path": "/vkhEaWAv5j3qgrOGp3BgMeiYPKj.jpg", "character": "Jack Slater / Self"}, {"title": "Terminator 2: Judgment Day", "year": 1991, "rating": 4.0, "liked": true, "poster_path": "/jFTVD4XoWQTcg7wdyJKa8PEds5q.jpg", "character": "The Terminator"}, {"title": "Total Recall", "year": 1990, "rating": null, "liked": true, "poster_path": "/wVbeL6fkbTKSmNfalj4VoAUUqJv.jpg", "character": "Douglas Quaid / Hauser"}, {"title": "Kindergarten Cop", "year": 1990, "rating": 4.0, "liked": true, "poster_path": "/nKnHWwkXyvhzCYWm3FyRAv3qBrl.jpg", "character": "John Kimble"}, {"title": "Twins", "year": 1988, "rating": null, "liked": true, "poster_path": "/stJx9BQZbXrZnTGf9Erc7d2UMVc.jpg", "character": "Julius Benedict"}, {"title": "Predator", "year": 1987, "rating": null, "liked": true, "poster_path": "/k3mW4qfJo6SKqe6laRyNGnbB9n5.jpg", "character": "Major Alan \"Dutch\" Schaefer"}, {"title": "The Running Man", "year": 1987, "rating": null, "liked": false, "poster_path": "/GTAUOhO4BN0peJVvxGEQydJvUO.jpg", "character": "Ben Richards"}, {"title": "Commando", "year": 1985, "rating": null, "liked": false, "poster_path": "/ollPAAAgZ7euU8VisfqU3cuXhZ6.jpg", "character": "John Matrix"}, {"title": "The Terminator", "year": 1984, "rating": 4.0, "liked": true, "poster_path": "/hzXSE66v6KthZ8nPoLZmsi2G05j.jpg", "character": "Terminator"}, {"title": "Conan the Destroyer", "year": 1984, "rating": null, "liked": false, "poster_path": "/m5i7S46DT1ESy7URkh2l92awGRr.jpg", "character": "Conan"}, {"title": "Conan the Barbarian", "year": 1982, "rating": 2.5, "liked": false, "poster_path": "/qw2A587Ee61IwcSOLNFRhuOACZZ.jpg", "character": "Conan"}]}, {"name": "Leonardo DiCaprio", "count": 19, "liked_count": 17, "like_ratio": 89.5, "films": [{"title": "One Battle After Another", "year": 2025, "rating": 4.5, "liked": true, "poster_path": "/r4uXvqCeco0KmO0CjlhXuTEFuSE.jpg", "character": "Bob"}, {"title": "Killers of the Flower Moon", "year": 2023, "rating": 4.0, "liked": true, "poster_path": "/dB6Krk806zeqd0YNp2ngQ9zXteH.jpg", "character": "Ernest Burkhart"}, {"title": "Don't Look Up", "year": 2021, "rating": null, "liked": true, "poster_path": "/th4E1yqsE8DGpAseLiUrI60Hf8V.jpg", "character": "Dr. Randall Mindy"}, {"title": "Once Upon a Time... in Hollywood", "year": 2019, "rating": null, "liked": true, "poster_path": "/8j58iEBw9pOXFD2L0nt0ZXeHviB.jpg", "character": "Rick Dalton"}, {"title": "The Revenant", "year": 2015, "rating": null, "liked": true, "poster_path": "/ji3ecJphATlVgWNY0B0RVXZizdf.jpg", "character": "Hugh Glass"}, {"title": "The Wolf of Wall Street", "year": 2013, "rating": null, "liked": true, "poster_path": "/kW9LmvYHAaS9iA0tHmZVq8hQYoq.jpg", "character": "Jordan Belfort"}, {"title": "The Great Gatsby", "year": 2013, "rating": null, "liked": false, "poster_path": "/tyxfCBQv6Ap74jcu3xd7aBiaa29.jpg", "character": "Jay Gatsby"}, {"title": "Django Unchained", "year": 2012, "rating": null, "liked": true, "poster_path": "/7oWY8VDWW7thTzWh3OKYRkWUlD5.jpg", "character": "Calvin J. Candie"}, {"title": "Shutter Island", "year": 2010, "rating": 5.0, "liked": true, "poster_path": "/nrmXQ0zcZUL8jFLrakWc90IR8z9.jpg", "character": "Teddy Daniels"}, {"title": "Inception", "year": 2010, "rating": null, "liked": true, "poster_path": "/xlaY2zyzMfkhk0HSC5VUwzoZPU1.jpg", "character": "Dom Cobb"}, {"title": "The Departed", "year": 2006, "rating": null, "liked": true, "poster_path": "/nT97ifVT2J1yMQmeq20Qblg61T.jpg", "character": "Billy"}, {"title": "Blood Diamond", "year": 2006, "rating": null, "liked": true, "poster_path": "/bqKNoySmI4eOjsSjJEnLj4j2HAp.jpg", "character": "Danny Archer"}, {"title": "The Aviator", "year": 2004, "rating": null, "liked": true, "poster_path": "/lx4kWcZc3o9PaNxlQpEJZM17XUI.jpg", "character": "Howard Hughes"}, {"title": "Catch Me If You Can", "year": 2002, "rating": null, "liked": true, "poster_path": "/sdYgEkKCDPWNU6KnoL4qd8xZ4w7.jpg", "character": "Frank Abagnale Jr."}, {"title": "Gangs of New York", "year": 2002, "rating": null, "liked": true, "poster_path": "/lemqKtcCuAano5aqrzxYiKC8kkn.jpg", "character": "Amsterdam Vallon"}, {"title": "The Beach", "year": 2000, "rating": null, "liked": true, "poster_path": "/4y7LxD8TSi6AtsM2xSYqUm1gu7u.jpg", "character": "Richard"}, {"title": "Titanic", "year": 1997, "rating": 4.0, "liked": true, "poster_path": "/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg", "character": "Jack Dawson"}, {"title": "Romeo + Juliet", "year": 1996, "rating": null, "liked": true, "poster_path": "/eLf4jclPijOqfEp6bDAmezRFxk5.jpg", "character": "Romeo"}, {"title": "The Quick and the Dead", "year": 1995, "rating": null, "liked": false, "poster_path": "/jhEmrXJpP6F3cqwyLjvgBgxxxFA.jpg", "character": "Kid"}]}, {"name": "Benedict Cumberbatch", "count": 19, "liked_count": 9, "like_ratio": 47.4, "films": [{"title": "The Phoenician Scheme", "year": 2025, "rating": 3.5, "liked": false, "poster_path": "/u2jxeYLXTYfu0bqJmnLGIgZswib.jpg", "character": "Uncle Nubar"}, {"title": "The Wonderful Story of Henry Sugar", "year": 2023, "rating": 4.5, "liked": true, "poster_path": "/fDUywEHwHh6nsLnVXAdPN9m4ZUG.jpg", "character": "Henry Sugar / Make-Up Artist"}, {"title": "Poison", "year": 2023, "rating": 3.5, "liked": false, "poster_path": "/IQG49DUJw5DsgcNbW0NfagiDOs.jpg", "character": "Harry Pope"}, {"title": "Doctor Strange in the Multiverse of Madness", "year": 2022, "rating": null, "liked": true, "poster_path": "/ddJcSKbcp4rKZTmuyWaMhuwcfMz.jpg", "character": "Doctor Stephen Strange"}, {"title": "The Mauritanian", "year": 2021, "rating": null, "liked": true, "poster_path": "/lIADEa6oH74uUapjsPbNRzxus8M.jpg", "character": "Lt. Stuart Couch"}, {"title": "Spider-Man: No Way Home", "year": 2021, "rating": null, "liked": false, "poster_path": "/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg", "character": "Doctor Strange"}, {"title": "The Power of the Dog", "year": 2021, "rating": null, "liked": true, "poster_path": "/kEy48iCzGnp0ao1cZbNeWR6yIhC.jpg", "character": "Phil Burbank"}, {"title": "Avengers: Endgame", "year": 2019, "rating": null, "liked": false, "poster_path": "/bR8ISy1O9XQxqiy0fQFw2BX72RQ.jpg", "character": "Doctor Strange"}, {"title": "1917", "year": 2019, "rating": null, "liked": false, "poster_path": "/iZf0KyrE25z1sage4SYFLCCrMi9.jpg", "character": "Colonel MacKenzie"}, {"title": "Avengers: Infinity War", "year": 2018, "rating": null, "liked": true, "poster_path": "/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg", "character": "Doctor Strange"}, {"title": "The Grinch", "year": 2018, "rating": null, "liked": false, "poster_path": "/smxA8yvZ0LzDPer9BIRd4pyOpx1.jpg", "character": "Grinch (voice)"}, {"title": "Thor: Ragnarok", "year": 2017, "rating": null, "liked": true, "poster_path": "/rzRwTcFvttcN1ZpX2xv4j3tSdJu.jpg", "character": "Doctor Strange"}, {"title": "Doctor Strange", "year": 2016, "rating": null, "liked": false, "poster_path": "/xf8PbyQcR5ucXErmZNzdKR0s8ya.jpg", "character": "Dr. Stephen Strange"}, {"title": "The Hobbit: The Battle of the Five Armies", "year": 2014, "rating": null, "liked": false, "poster_path": "/xT98tLqatZPQApyRmlPL12LtiWp.jpg", "character": "Smaug / Sauron (voice)"}, {"title": "The Imitation Game", "year": 2014, "rating": null, "liked": true, "poster_path": "/zSqJ1qFq8NXFfi7JeIYMlzyR0dx.jpg", "character": "Alan Turing"}, {"title": "12 Years a Slave", "year": 2013, "rating": null, "liked": false, "poster_path": "/xdANQijuNrJaw1HA61rDccME4Tm.jpg", "character": "William Ford"}, {"title": "Star Trek Into Darkness", "year": 2013, "rating": 4.0, "liked": true, "poster_path": "/Aim3kVNh1MPIxPEFeJrl9e9Uf1a.jpg", "character": "John Harrison / Khan"}, {"title": "The Hobbit: The Desolation of Smaug", "year": 2013, "rating": null, "liked": false, "poster_path": "/xQYiXsheRCDBA39DOrmaw1aSpbk.jpg", "character": "Smaug / Sauron"}, {"title": "Four Lions", "year": 2010, "rating": null, "liked": true, "poster_path": "/x4JzaRPXBs9wiHCe3e3ymXWuwfd.jpg", "character": "Negotiator"}]}];
+const directorsData = [{"name": "Steven Spielberg", "count": 26, "liked_count": 13, "like_ratio": 50.0, "films": [{"title": "The Fabelmans", "year": 2022, "rating": 3.0, "liked": false, "poster_path": "/h7llKkqkkJtJrTOaDLuVeUYDQ7I.jpg"}, {"title": "West Side Story", "year": 2021, "rating": null, "liked": false, "poster_path": "/yfz3IUoYYSY32tkb97HlUBGFsnh.jpg"}, {"title": "Ready Player One", "year": 2018, "rating": null, "liked": true, "poster_path": "/pU1ULUq8D3iRxl1fdX2lZIzdHuI.jpg"}, {"title": "The Post", "year": 2017, "rating": null, "liked": false, "poster_path": "/h4XG3g6uMMPIBPjAoQhC2QIMdkl.jpg"}, {"title": "Bridge of Spies", "year": 2015, "rating": null, "liked": false, "poster_path": "/fmOOjHAQzxr0c1sfcY4qkiSRBH6.jpg"}, {"title": "The Adventures of Tintin", "year": 2011, "rating": null, "liked": false, "poster_path": "/fQZ3sLR1Fi63NMsNRbjm9q5qODJ.jpg"}, {"title": "Indiana Jones and the Kingdom of the Crystal Skull", "year": 2008, "rating": null, "liked": false, "poster_path": "/56As6XEM1flWvprX4LgkPl8ii4K.jpg"}, {"title": "War of the Worlds", "year": 2005, "rating": null, "liked": false, "poster_path": "/6Biy7R9LfumYshur3YKhpj56MpB.jpg"}, {"title": "Munich", "year": 2005, "rating": null, "liked": false, "poster_path": "/iUekaw96QLInZpsNwRTlRKrZgwm.jpg"}, {"title": "The Terminal", "year": 2004, "rating": null, "liked": true, "poster_path": "/cPB3ZMM4UdsSAhNdS4c7ps5nypY.jpg"}, {"title": "Catch Me If You Can", "year": 2002, "rating": null, "liked": true, "poster_path": "/sdYgEkKCDPWNU6KnoL4qd8xZ4w7.jpg"}, {"title": "Minority Report", "year": 2002, "rating": null, "liked": true, "poster_path": "/qtgFcnwh9dAFLocsDk2ySDVS8UF.jpg"}, {"title": "A.I. Artificial Intelligence", "year": 2001, "rating": null, "liked": false, "poster_path": "/8MZSGX5JORoO72EfuAEcejH5yHn.jpg"}, {"title": "Saving Private Ryan", "year": 1998, "rating": null, "liked": true, "poster_path": "/uqx37cS8cpHg8U35f9U5IBlrCV3.jpg"}, {"title": "The Lost World: Jurassic Park", "year": 1997, "rating": null, "liked": false, "poster_path": "/6fSkhv35nPSw9hwPVCMINQFG1WD.jpg"}, {"title": "Schindler's List", "year": 1993, "rating": null, "liked": true, "poster_path": "/sF1U4EUQS8YHUYjNl3pMGNIQyr0.jpg"}, {"title": "Jurassic Park", "year": 1993, "rating": 5.0, "liked": true, "poster_path": "/bRKmwU9eXZI5dKT11Zx1KsayiLW.jpg"}, {"title": "Hook", "year": 1991, "rating": null, "liked": true, "poster_path": "/a6rB1lGXoGms7gWxRfJneQmAjNV.jpg"}, {"title": "Indiana Jones and the Last Crusade", "year": 1989, "rating": null, "liked": true, "poster_path": "/sizg1AU8f8JDZX4QIgE4pjUMBvx.jpg"}, {"title": "Empire of the Sun", "year": 1987, "rating": null, "liked": false, "poster_path": "/gEaCzjwHoPgyQFcwHql7o5YLHAU.jpg"}, {"title": "Indiana Jones and the Temple of Doom", "year": 1984, "rating": null, "liked": true, "poster_path": "/gpdVNUaa4LhRMLfJOPj1AZdhAZ3.jpg"}, {"title": "E.T. the Extra-Terrestrial", "year": 1982, "rating": null, "liked": true, "poster_path": "/an0nD6uq6byfxXCfk6lQBzdL2J1.jpg"}, {"title": "Raiders of the Lost Ark", "year": 1981, "rating": null, "liked": true, "poster_path": "/ceG9VzoRAVGwivFU403Wc3AHRys.jpg"}, {"title": "Close Encounters of the Third Kind", "year": 1977, "rating": 2.5, "liked": false, "poster_path": "/gCWPB8cF82tqzrS9tvzcO6q6nyz.jpg"}, {"title": "Jaws", "year": 1975, "rating": null, "liked": true, "poster_path": "/tjbLSFwi0I3phZwh8zoHWNfbsEp.jpg"}, {"title": "Duel", "year": 1971, "rating": null, "liked": false, "poster_path": "/trhk6fA4Ss2cyiCYvwegLW9OmEM.jpg"}]}, {"name": "Martin Scorsese", "count": 20, "liked_count": 13, "like_ratio": 65.0, "films": [{"title": "Killers of the Flower Moon", "year": 2023, "rating": 4.0, "liked": true, "poster_path": "/dB6Krk806zeqd0YNp2ngQ9zXteH.jpg"}, {"title": "The Irishman", "year": 2019, "rating": null, "liked": true, "poster_path": "/mbm8k3GFhXS0ROd9AD1gqYbIFbM.jpg"}, {"title": "Silence", "year": 2016, "rating": null, "liked": false, "poster_path": "/x5T0cQDYws0xRBVG4Q3wpcrcmax.jpg"}, {"title": "The Wolf of Wall Street", "year": 2013, "rating": null, "liked": true, "poster_path": "/kW9LmvYHAaS9iA0tHmZVq8hQYoq.jpg"}, {"title": "Hugo", "year": 2011, "rating": 3.5, "liked": false, "poster_path": "/1dxRq3o3l3bVWNRvvSb7rRf68qp.jpg"}, {"title": "Shutter Island", "year": 2010, "rating": 5.0, "liked": true, "poster_path": "/nrmXQ0zcZUL8jFLrakWc90IR8z9.jpg"}, {"title": "The Departed", "year": 2006, "rating": null, "liked": true, "poster_path": "/nT97ifVT2J1yMQmeq20Qblg61T.jpg"}, {"title": "The Aviator", "year": 2004, "rating": null, "liked": true, "poster_path": "/lx4kWcZc3o9PaNxlQpEJZM17XUI.jpg"}, {"title": "Gangs of New York", "year": 2002, "rating": null, "liked": true, "poster_path": "/lemqKtcCuAano5aqrzxYiKC8kkn.jpg"}, {"title": "Casino", "year": 1995, "rating": null, "liked": true, "poster_path": "/gziIkUSnYuj9ChCi8qOu2ZunpSC.jpg"}, {"title": "The Age of Innocence", "year": 1993, "rating": null, "liked": false, "poster_path": "/5Tuyt26v7qNR8Cl3m7ZRx36rduf.jpg"}, {"title": "Cape Fear", "year": 1991, "rating": 3.5, "liked": true, "poster_path": "/ws4mrtndzgSH5QGCamOFAgilr2R.jpg"}, {"title": "GoodFellas", "year": 1990, "rating": null, "liked": true, "poster_path": "/9OkCLM73MIU2CrKZbqiT8Ln1wY2.jpg"}, {"title": "The Last Temptation of Christ", "year": 1988, "rating": null, "liked": false, "poster_path": "/7L4qwrC1mipZXJfU5oRgQWChLv1.jpg"}, {"title": "The Color of Money", "year": 1986, "rating": null, "liked": true, "poster_path": "/dVdnHmdQu3JtLAAksjTmTEF76gD.jpg"}, {"title": "After Hours", "year": 1985, "rating": 3.0, "liked": false, "poster_path": "/eamOBurHBu0MIxohTIVcfxmZ6Z7.jpg"}, {"title": "The King of Comedy", "year": 1982, "rating": null, "liked": true, "poster_path": "/3sGuQv0UxfjDODCC9IQG5S1jXK8.jpg"}, {"title": "Raging Bull", "year": 1980, "rating": null, "liked": false, "poster_path": "/1WV7WlTS8LI1L5NkCgjWT9GSW3O.jpg"}, {"title": "Taxi Driver", "year": 1976, "rating": 4.0, "liked": true, "poster_path": "/ekstpH614fwDX8DUln1a2Opz0N8.jpg"}, {"title": "Mean Streets", "year": 1973, "rating": null, "liked": false, "poster_path": "/rzVTH9ylCw0owKkMZQVz2Eve97E.jpg"}]}, {"name": "Wes Anderson", "count": 18, "liked_count": 12, "like_ratio": 66.7, "films": [{"title": "The Phoenician Scheme", "year": 2025, "rating": 3.5, "liked": false, "poster_path": "/u2jxeYLXTYfu0bqJmnLGIgZswib.jpg"}, {"title": "Asteroid City", "year": 2023, "rating": 4.0, "liked": true, "poster_path": "/rAkz95CREc3A1qTnwlSQ0jh8Zw8.jpg"}, {"title": "The Wonderful Story of Henry Sugar", "year": 2023, "rating": 4.5, "liked": true, "poster_path": "/fDUywEHwHh6nsLnVXAdPN9m4ZUG.jpg"}, {"title": "Poison", "year": 2023, "rating": 3.5, "liked": false, "poster_path": "/IQG49DUJw5DsgcNbW0NfagiDOs.jpg"}, {"title": "The Rat Catcher", "year": 2023, "rating": 2.0, "liked": false, "poster_path": "/29WJ7dOHt48AtXK1J1rONEEvIMN.jpg"}, {"title": "The Swan", "year": 2023, "rating": 3.0, "liked": false, "poster_path": "/fRbx6DPdQBJrhZWyshjJABtAIyu.jpg"}, {"title": "The French Dispatch of the Liberty, Kansas Evening Sun", "year": 2021, "rating": null, "liked": false, "poster_path": "/6JXR3KJH5roiBCjWFt09xfgxHZc.jpg"}, {"title": "Isle of Dogs", "year": 2018, "rating": null, "liked": false, "poster_path": "/c0nUX6Q1ZB0P2t1Jo6EeFSVnOGQ.jpg"}, {"title": "The Grand Budapest Hotel", "year": 2014, "rating": null, "liked": true, "poster_path": "/eWdyYQreja6JGCzqHWXpWHDrrPo.jpg"}, {"title": "Castello Cavalcanti", "year": 2013, "rating": null, "liked": true, "poster_path": "/iGZHMSIxbsvjG1M5PfUYq1doMDK.jpg"}, {"title": "Moonrise Kingdom", "year": 2012, "rating": null, "liked": true, "poster_path": "/y4SXcbNl6CEF2t36icuzuBioj7K.jpg"}, {"title": "Fantastic Mr. Fox", "year": 2009, "rating": null, "liked": true, "poster_path": "/euZyZb6iGreujYKrGyZHRddhUYh.jpg"}, {"title": "The Darjeeling Limited", "year": 2007, "rating": null, "liked": true, "poster_path": "/oSW5OVXTulaIXcoNwJAp5YEKpbP.jpg"}, {"title": "Hotel Chevalier", "year": 2007, "rating": null, "liked": true, "poster_path": "/fiWLuGIUAcJtu2hs7KlcZ0O2Ix3.jpg"}, {"title": "The Life Aquatic with Steve Zissou", "year": 2004, "rating": null, "liked": true, "poster_path": "/qZoFLNBC78jzboWeDH6Ha0qavF2.jpg"}, {"title": "The Royal Tenenbaums", "year": 2001, "rating": null, "liked": true, "poster_path": "/nG7hZJn7wQTSDCQT39Gy3s3tbrp.jpg"}, {"title": "Rushmore", "year": 1998, "rating": null, "liked": true, "poster_path": "/hSJ6swahAuZ8wM96lHDTwQPXUvZ.jpg"}, {"title": "Bottle Rocket", "year": 1996, "rating": null, "liked": true, "poster_path": "/wOPiNYt9V3Cbr9Izeddwj7nU8RT.jpg"}]}, {"name": "Christopher Nolan", "count": 16, "liked_count": 11, "like_ratio": 68.8, "films": [{"title": "Oppenheimer", "year": 2023, "rating": 4.0, "liked": true, "poster_path": "/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg"}, {"title": "Tenet", "year": 2020, "rating": 5.0, "liked": true, "poster_path": "/aCIFMriQh8rvhxpN1IWGgvH0Tlg.jpg"}, {"title": "Dunkirk", "year": 2017, "rating": null, "liked": true, "poster_path": "/b4Oe15CGLL61Ped0RAS9JpqdmCt.jpg"}, {"title": "Quay", "year": 2015, "rating": null, "liked": false, "poster_path": "/uluMeKfYFVvfZlmHgFBXqbnHXE2.jpg"}, {"title": "Interstellar", "year": 2014, "rating": 5.0, "liked": true, "poster_path": "/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg"}, {"title": "The Dark Knight Rises", "year": 2012, "rating": null, "liked": true, "poster_path": "/hr0L2aueqlP2BYUblTTjmtn0hw4.jpg"}, {"title": "Inception", "year": 2010, "rating": null, "liked": true, "poster_path": "/xlaY2zyzMfkhk0HSC5VUwzoZPU1.jpg"}, {"title": "The Dark Knight", "year": 2008, "rating": null, "liked": true, "poster_path": "/qJ2tW6WMUDux911r6m7haRef0WH.jpg"}, {"title": "The Prestige", "year": 2006, "rating": 5.0, "liked": true, "poster_path": "/bdN3gXuIZYaJP7ftKK2sU0nPtEA.jpg"}, {"title": "Batman Begins", "year": 2005, "rating": null, "liked": true, "poster_path": "/sPX89Td70IDDjVr85jdSBb4rWGr.jpg"}, {"title": "Insomnia", "year": 2002, "rating": null, "liked": true, "poster_path": "/riVXh3EimGO0y5dgQxEWPRy5Itg.jpg"}, {"title": "Memento", "year": 2000, "rating": null, "liked": true, "poster_path": "/fKTPH2WvH8nHTXeBYBVhawtRqtR.jpg"}, {"title": "Following", "year": 1998, "rating": null, "liked": false, "poster_path": "/3bX6VVSMf0dvzk5pMT4ALG5A92d.jpg"}, {"title": "Doodlebug", "year": 1997, "rating": null, "liked": false, "poster_path": "/zomfKkYlS6oeiTUUfqHYHrnI2sk.jpg"}, {"title": "Larceny", "year": 1996, "rating": null, "liked": false, "poster_path": "/jBWtTViwpr9xN6PWuzp8WlxTSXB.jpg"}, {"title": "Tarantella", "year": 1989, "rating": null, "liked": false, "poster_path": "/eqFhruWEIRwjkvqgJN48VPuR50Q.jpg"}]}, {"name": "Ridley Scott", "count": 14, "liked_count": 6, "like_ratio": 42.9, "films": [{"title": "Gladiator II", "year": 2024, "rating": 2.0, "liked": false, "poster_path": "/2cxhvwyEwRlysAmRH4iodkvo0z5.jpg"}, {"title": "Napoleon", "year": 2023, "rating": 3.5, "liked": false, "poster_path": "/ytFOXyghxLzAM4KZyazDdEkM66q.jpg"}, {"title": "The Last Duel", "year": 2021, "rating": null, "liked": false, "poster_path": "/zjrJE0fpzPvX8saJXj8VNfcjBoU.jpg"}, {"title": "House of Gucci", "year": 2021, "rating": null, "liked": false, "poster_path": "/oJCQjD2byiVF1EG408F9dBn9ndU.jpg"}, {"title": "Alien: Covenant", "year": 2017, "rating": null, "liked": false, "poster_path": "/zecMELPbU5YMQpC81Z8ImaaXuf9.jpg"}, {"title": "The Martian", "year": 2015, "rating": 4.5, "liked": true, "poster_path": "/3ndAx3weG6KDkJIRMCi5vXX6Dyb.jpg"}, {"title": "Prometheus", "year": 2012, "rating": null, "liked": false, "poster_path": "/qsYQflQhOuhDpQ0W2aOcwqgDAeI.jpg"}, {"title": "Kingdom of Heaven", "year": 2005, "rating": null, "liked": false, "poster_path": "/rNaBe4TwbMef71sgscqabpGKsxh.jpg"}, {"title": "Hannibal", "year": 2001, "rating": null, "liked": false, "poster_path": "/v5wAZwRqpGWmyAaaJ8BBHYuNXnj.jpg"}, {"title": "Gladiator", "year": 2000, "rating": null, "liked": true, "poster_path": "/ty8TGRuvJLPUmAR1H1nRIsgwvim.jpg"}, {"title": "Thelma & Louise", "year": 1991, "rating": null, "liked": true, "poster_path": "/gQSUVGR80RVHxJywtwXm2qa1ebi.jpg"}, {"title": "Black Rain", "year": 1989, "rating": 3.5, "liked": true, "poster_path": "/funhGWt9ee3Uwb6Ar8SGCCvbJdV.jpg"}, {"title": "Blade Runner", "year": 1982, "rating": 5.0, "liked": true, "poster_path": "/63N9uy8nd9j7Eog2axPQ8lbr3Wj.jpg"}, {"title": "Alien", "year": 1979, "rating": null, "liked": true, "poster_path": "/vfrQk5IPloGg1v9Rzbh2Eg3VGyM.jpg"}]}, {"name": "Michael Mann", "count": 14, "liked_count": 11, "like_ratio": 78.6, "films": [{"title": "Ferrari", "year": 2023, "rating": 4.0, "liked": true, "poster_path": "/LyCOcGqOTyTmaXu2TK8LfGveIb.jpg"}, {"title": "Blackhat", "year": 2015, "rating": null, "liked": false, "poster_path": "/7zu6HPnKPjNA7NuR4DGRdaH0PdX.jpg"}, {"title": "Public Enemies", "year": 2009, "rating": null, "liked": false, "poster_path": "/3KgtekisQBrHRsm2cD5UOB6Ce3k.jpg"}, {"title": "Miami Vice", "year": 2006, "rating": null, "liked": true, "poster_path": "/1KGD2g0wOc7WBfHc5G19reLHQxk.jpg"}, {"title": "Collateral", "year": 2004, "rating": null, "liked": true, "poster_path": "/nV5316WUsVij8sVXLCF1g7TFitg.jpg"}, {"title": "Ali", "year": 2001, "rating": null, "liked": true, "poster_path": "/3VIZRakftZZFys2ee9S7ufNNNyR.jpg"}, {"title": "The Insider", "year": 1999, "rating": null, "liked": false, "poster_path": "/jJCyIBPfvk41uETq6K6u4upyGO8.jpg"}, {"title": "Heat", "year": 1995, "rating": 5.0, "liked": true, "poster_path": "/umSVjVdbVwtx5ryCA2QXL44Durm.jpg"}, {"title": "The Last of the Mohicans", "year": 1992, "rating": 5.0, "liked": true, "poster_path": "/qzJMPWRtZveBkxXOv3ucWhoJuyj.jpg"}, {"title": "L.A. Takedown", "year": 1989, "rating": null, "liked": true, "poster_path": "/tzPBYA8CR2m9ChptqiR1Puob04N.jpg"}, {"title": "Manhunter", "year": 1986, "rating": 5.0, "liked": true, "poster_path": "/6rb24x39vV8n5301IelC8rCPJTH.jpg"}, {"title": "The Keep", "year": 1983, "rating": null, "liked": true, "poster_path": "/yd9wU3oajNxwaFHQ02rtTBuSFJD.jpg"}, {"title": "Thief", "year": 1981, "rating": 4.5, "liked": true, "poster_path": "/bpjRGwfYJ71bU0hNhLIz7g3t6Oy.jpg"}, {"title": "The Jericho Mile", "year": 1979, "rating": null, "liked": true, "poster_path": "/cinQBqd5K5jDqEJ0ECbXA58dXt4.jpg"}]}, {"name": "Tim Burton", "count": 14, "liked_count": 9, "like_ratio": 64.3, "films": [{"title": "Beetlejuice Beetlejuice", "year": 2024, "rating": 3.0, "liked": false, "poster_path": "/kKgQzkUCnQmeTPkyIwHly2t6ZFI.jpg"}, {"title": "Miss Peregrine's Home for Peculiar Children", "year": 2016, "rating": null, "liked": false, "poster_path": "/CIlbMFOfYDj0MP23hsIYhFGrL6.jpg"}, {"title": "Sweeney Todd: The Demon Barber of Fleet Street", "year": 2007, "rating": null, "liked": true, "poster_path": "/gAW4J1bkRjZKmFsJsIiOBASeoAp.jpg"}, {"title": "Corpse Bride", "year": 2005, "rating": null, "liked": false, "poster_path": "/isb2Qow76GpqYmsSyfdMfsYAjts.jpg"}, {"title": "Charlie and the Chocolate Factory", "year": 2005, "rating": null, "liked": false, "poster_path": "/iKP6wg3c6COUe8gYutoGG7qcPnO.jpg"}, {"title": "Big Fish", "year": 2003, "rating": null, "liked": true, "poster_path": "/tjK063yCgaBAluVU72rZ6PKPH2l.jpg"}, {"title": "Planet of the Apes", "year": 2001, "rating": null, "liked": true, "poster_path": "/eEsOgbgKXMvI2FEw1WENamVXi41.jpg"}, {"title": "Sleepy Hollow", "year": 1999, "rating": null, "liked": true, "poster_path": "/1GuK965FLJxqUw9fd1pmvjbFAlv.jpg"}, {"title": "Mars Attacks!", "year": 1996, "rating": null, "liked": true, "poster_path": "/vUbGCNSEilGvxRQZi2kfTPRP0pS.jpg"}, {"title": "Ed Wood", "year": 1994, "rating": null, "liked": true, "poster_path": "/jNao464ZTwWUWr3uJJ8swVgaKd9.jpg"}, {"title": "Batman Returns", "year": 1992, "rating": 3.5, "liked": true, "poster_path": "/jKBjeXM7iBBV9UkUcOXx3m7FSHY.jpg"}, {"title": "Edward Scissorhands", "year": 1990, "rating": null, "liked": true, "poster_path": "/e0FqKFvGPdQNWG8tF9cZBtev9Em.jpg"}, {"title": "Batman", "year": 1989, "rating": null, "liked": false, "poster_path": "/oYWUsIVoMl2H6Xl3FTBi9R9Y4OS.jpg"}, {"title": "Beetlejuice", "year": 1988, "rating": 5.0, "liked": true, "poster_path": "/nnl6OWkyPpuMm595hmAxNW3rZFn.jpg"}]}, {"name": "Robert Zemeckis", "count": 13, "liked_count": 7, "like_ratio": 53.8, "films": [{"title": "Here", "year": 2024, "rating": 2.5, "liked": false, "poster_path": "/79euHUJJtfgeGU63ef38KtNjXEn.jpg"}, {"title": "Allied", "year": 2016, "rating": 3.5, "liked": false, "poster_path": "/sV4lXM32quwminL3TP36nlNPp7Q.jpg"}, {"title": "Flight", "year": 2012, "rating": null, "liked": false, "poster_path": "/tFsHDNclXoCKy2xMxskzXXMaFJS.jpg"}, {"title": "Cast Away", "year": 2000, "rating": null, "liked": true, "poster_path": "/7lLJgKnAicAcR5UEuo8xhSMj18w.jpg"}, {"title": "What Lies Beneath", "year": 2000, "rating": 3.0, "liked": false, "poster_path": "/2L3Cn0CizbSy2E9KJt1SiOSyb6p.jpg"}, {"title": "Contact", "year": 1997, "rating": 3.0, "liked": false, "poster_path": "/bCpMIywuNZeWt3i5UMLEIc0VSwM.jpg"}, {"title": "Forrest Gump", "year": 1994, "rating": null, "liked": true, "poster_path": "/saHP97rTPS5eLmrLQEcANmKrsFl.jpg"}, {"title": "Death Becomes Her", "year": 1992, "rating": null, "liked": true, "poster_path": "/kkWxyyyWFK5KNk9WVwQuGEC9H9H.jpg"}, {"title": "Back to the Future Part III", "year": 1990, "rating": 5.0, "liked": true, "poster_path": "/crzoVQnMzIrRfHtQw0tLBirNfVg.jpg"}, {"title": "Back to the Future Part II", "year": 1989, "rating": null, "liked": true, "poster_path": "/YBawEsTkUZBDajKbd5LiHkmMGf.jpg"}, {"title": "Who Framed Roger Rabbit", "year": 1988, "rating": null, "liked": true, "poster_path": "/lYfRc57Kx9VgLZ48iulu0HKnM15.jpg"}, {"title": "Back to the Future", "year": 1985, "rating": 5.0, "liked": true, "poster_path": "/vN5B5WgYscRGcQpVhHl6p9DDTP0.jpg"}, {"title": "Romancing the Stone", "year": 1984, "rating": null, "liked": false, "poster_path": "/qaCLbDs6Ace4I1lAbBNWPQAm75h.jpg"}]}, {"name": "James Mangold", "count": 13, "liked_count": 9, "like_ratio": 69.2, "films": [{"title": "A Complete Unknown", "year": 2024, "rating": 3.5, "liked": true, "poster_path": "/llWl3GtNoXosbvYboelmoT459NM.jpg"}, {"title": "Indiana Jones and the Dial of Destiny", "year": 2023, "rating": 3.0, "liked": false, "poster_path": "/Af4bXE63pVsb2FtbW8uYIyPBadD.jpg"}, {"title": "Ford v Ferrari", "year": 2019, "rating": null, "liked": true, "poster_path": "/dR1Ju50iudrOh3YgfwkAU1g2HZe.jpg"}, {"title": "Logan", "year": 2017, "rating": 5.0, "liked": true, "poster_path": "/fnbjcRDYn6YviCcePDnGdyAkYsB.jpg"}, {"title": "The Wolverine", "year": 2013, "rating": null, "liked": true, "poster_path": "/t2wVAcoRlKvEIVSbiYDb8d0QqqS.jpg"}, {"title": "Knight and Day", "year": 2010, "rating": 2.5, "liked": false, "poster_path": "/a7JmOBMNj5erYTgt4u1mQgvHItu.jpg"}, {"title": "3:10 to Yuma", "year": 2007, "rating": 4.5, "liked": true, "poster_path": "/voMB69AsLnPNmtfbrBl0lbeFKDH.jpg"}, {"title": "Walk the Line", "year": 2005, "rating": null, "liked": true, "poster_path": "/p8lPTjvjOjTfvC1E9pmMwcF9vkn.jpg"}, {"title": "Identity", "year": 2003, "rating": 4.0, "liked": true, "poster_path": "/sYgimsiBywqVwJI8H4sETke8m7v.jpg"}, {"title": "Kate & Leopold", "year": 2001, "rating": null, "liked": false, "poster_path": "/57kLEPlIXHynZXTjJF6Jyk3ZmKT.jpg"}, {"title": "Girl, Interrupted", "year": 1999, "rating": 3.5, "liked": true, "poster_path": "/dOBdatHIVppvmRFw2z7bf9VKJr9.jpg"}, {"title": "Cop Land", "year": 1997, "rating": null, "liked": true, "poster_path": "/bUXaWZPj7qzXjKc2s3Pwdkhxh2o.jpg"}, {"title": "Heavy", "year": 1995, "rating": null, "liked": false, "poster_path": "/xo2KsY7hOHDqpgYlDStL56zmgaq.jpg"}]}, {"name": "Akira Kurosawa", "count": 12, "liked_count": 6, "like_ratio": 50.0, "films": [{"title": "Ran", "year": 1985, "rating": 5.0, "liked": true, "poster_path": "/jQnUtWaHYfqnXPOIf77K7Ycqk4M.jpg"}, {"title": "Kagemusha", "year": 1980, "rating": 4.0, "liked": true, "poster_path": "/fJgqj9s8HNZz9zwX6femVJn8HEB.jpg"}, {"title": "Dersu Uzala", "year": 1975, "rating": 4.0, "liked": true, "poster_path": "/bIOrDQ3Gg68k3qJAnRU7nIZr0BW.jpg"}, {"title": "Dodes'ka-den", "year": 1970, "rating": null, "liked": false, "poster_path": "/gP9pM94ATcZGfKQ3faKy0a3dVIi.jpg"}, {"title": "High and Low", "year": 1963, "rating": 4.0, "liked": true, "poster_path": "/tgNjemQPG96uIezpiUiXFcer5ga.jpg"}, {"title": "Yojimbo", "year": 1961, "rating": 3.0, "liked": false, "poster_path": "/tN7kYPjRhDolpui9sc9Eq9n5b2O.jpg"}, {"title": "The Hidden Fortress", "year": 1958, "rating": null, "liked": false, "poster_path": "/olO4vMPKNIJQxhJh54TPQFwKpad.jpg"}, {"title": "Throne of Blood", "year": 1957, "rating": 3.0, "liked": false, "poster_path": "/zaZFMNxJST0TtPd68yF7fNt1he8.jpg"}, {"title": "Seven Samurai", "year": 1954, "rating": null, "liked": true, "poster_path": "/lOMGc8bnSwQhS4XyE1S99uH8NXf.jpg"}, {"title": "Ikiru", "year": 1952, "rating": 2.5, "liked": false, "poster_path": "/dgNTS4EQDDVfkzJI5msKuHu2Ei3.jpg"}, {"title": "Rashomon", "year": 1950, "rating": null, "liked": false, "poster_path": "/vL7Xw04nFMHwnvXRFCmYYAzMUvY.jpg"}, {"title": "Stray Dog", "year": 1949, "rating": 4.0, "liked": true, "poster_path": "/riBzUgeYawBDi2q9PjARjHrQM7Z.jpg"}]}, {"name": "Quentin Tarantino", "count": 11, "liked_count": 11, "like_ratio": 100.0, "films": [{"title": "Once Upon a Time... in Hollywood", "year": 2019, "rating": null, "liked": true, "poster_path": "/8j58iEBw9pOXFD2L0nt0ZXeHviB.jpg"}, {"title": "The Hateful Eight", "year": 2015, "rating": null, "liked": true, "poster_path": "/jIywvdPjia2t3eKYbjVTcwBQlG8.jpg"}, {"title": "Django Unchained", "year": 2012, "rating": null, "liked": true, "poster_path": "/7oWY8VDWW7thTzWh3OKYRkWUlD5.jpg"}, {"title": "Inglourious Basterds", "year": 2009, "rating": null, "liked": true, "poster_path": "/7sfbEnaARXDDhKm0CZ7D7uc2sbo.jpg"}, {"title": "Death Proof", "year": 2007, "rating": null, "liked": true, "poster_path": "/vtu6H4NWnQVqEp3aanUq3hNeeot.jpg"}, {"title": "Grindhouse", "year": 2007, "rating": null, "liked": true, "poster_path": "/tvMBwJlmQTIQf5EBjHzzyE9tjcN.jpg"}, {"title": "Kill Bill: Vol. 2", "year": 2004, "rating": null, "liked": true, "poster_path": "/vr9w5OrpAPjCdccZ6xheBqGkxwM.jpg"}, {"title": "Kill Bill: Vol. 1", "year": 2003, "rating": null, "liked": true, "poster_path": "/v7TaX8kXMXs5yFFGR41guUDNcnB.jpg"}, {"title": "Jackie Brown", "year": 1997, "rating": null, "liked": true, "poster_path": "/rOUx7qg4KmEh1juEDwqzbDSL1Nr.jpg"}, {"title": "Pulp Fiction", "year": 1994, "rating": null, "liked": true, "poster_path": "/vQWk5YBFWF4bZaofAbv0tShwBvQ.jpg"}, {"title": "Reservoir Dogs", "year": 1992, "rating": null, "liked": true, "poster_path": "/xi8Iu6qyTfyZVDVy60raIOYJJmk.jpg"}]}, {"name": "David Fincher", "count": 11, "liked_count": 8, "like_ratio": 72.7, "films": [{"title": "The Killer", "year": 2023, "rating": 2.5, "liked": false, "poster_path": "/e7Jvsry47JJQruuezjU2X1Z6J77.jpg"}, {"title": "Mank", "year": 2020, "rating": null, "liked": true, "poster_path": "/4yzTcAtvzyZLLto4z04xobUK9el.jpg"}, {"title": "Gone Girl", "year": 2014, "rating": null, "liked": false, "poster_path": "/ts996lKsxvjkO2yiYG0ht4qAicO.jpg"}, {"title": "The Girl with the Dragon Tattoo", "year": 2011, "rating": null, "liked": true, "poster_path": "/8bokS83zGdhaXgN9tjidUKmAftW.jpg"}, {"title": "The Social Network", "year": 2010, "rating": null, "liked": true, "poster_path": "/n0ybibhJtQ5icDqTp8eRytcIHJx.jpg"}, {"title": "Zodiac", "year": 2007, "rating": null, "liked": true, "poster_path": "/6YmeO4pB7XTh8P8F960O1uA14JO.jpg"}, {"title": "Panic Room", "year": 2002, "rating": null, "liked": true, "poster_path": "/hANYbvfwxmkC9E4yY6YyJxYxlSJ.jpg"}, {"title": "Fight Club", "year": 1999, "rating": null, "liked": true, "poster_path": "/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg"}, {"title": "The Game", "year": 1997, "rating": 3.5, "liked": false, "poster_path": "/4UOa079915QjiTA2u5hT2yKVgUu.jpg"}, {"title": "Se7en", "year": 1995, "rating": null, "liked": true, "poster_path": "/191nKfP0ehp3uIvWqgPbFmI4lv9.jpg"}, {"title": "Alien\u00b3", "year": 1992, "rating": null, "liked": true, "poster_path": "/xh5wI0UoW7DfS1IyLy3d2CgrCEP.jpg"}]}, {"name": "Billy Wilder", "count": 11, "liked_count": 8, "like_ratio": 72.7, "films": [{"title": "The Apartment", "year": 1960, "rating": 5.0, "liked": true, "poster_path": "/hhSRt1KKfRT0yEhEtRW3qp31JFU.jpg"}, {"title": "Some Like It Hot", "year": 1959, "rating": null, "liked": true, "poster_path": "/hVIKyTK13AvOGv7ICmJjK44DTzp.jpg"}, {"title": "Witness for the Prosecution", "year": 1957, "rating": 4.5, "liked": true, "poster_path": "/bCj4EfuehAlgBwVd3diyWyhuuau.jpg"}, {"title": "The Seven Year Itch", "year": 1955, "rating": null, "liked": false, "poster_path": "/4oLqx0QbjWFzWtkxRmDLGH47CUJ.jpg"}, {"title": "Sabrina", "year": 1954, "rating": 4.5, "liked": true, "poster_path": "/e1Po9NDrH7IJZhv89467gJH5FS0.jpg"}, {"title": "Stalag 17", "year": 1953, "rating": null, "liked": false, "poster_path": "/lfve9FDKjT7JPbWI9NCs5340F79.jpg"}, {"title": "Ace in the Hole", "year": 1951, "rating": 4.0, "liked": true, "poster_path": "/gPVPzHEsJBX02HtBtIQgYnfeqNQ.jpg"}, {"title": "Sunset Boulevard", "year": 1950, "rating": null, "liked": true, "poster_path": "/zt8aQ6ksqK6p1AopC5zVTDS9pKT.jpg"}, {"title": "The Lost Weekend", "year": 1945, "rating": 4.5, "liked": true, "poster_path": "/8ggIOoCzt8xT2ePl8DdlRtXgcOh.jpg"}, {"title": "Double Indemnity", "year": 1944, "rating": 5.0, "liked": true, "poster_path": "/rVNYZZgfhwqVMMWlBmxOfWqnwCj.jpg"}, {"title": "Bad Seed", "year": 1934, "rating": null, "liked": false, "poster_path": "/7BLrXi3vB9sE0ZbShcVsjUMd7X.jpg"}]}, {"name": "Paul Thomas Anderson", "count": 11, "liked_count": 8, "like_ratio": 72.7, "films": [{"title": "One Battle After Another", "year": 2025, "rating": 4.5, "liked": true, "poster_path": "/r4uXvqCeco0KmO0CjlhXuTEFuSE.jpg"}, {"title": "Licorice Pizza", "year": 2021, "rating": 5.0, "liked": true, "poster_path": "/ivXtvzfliGvoJ1DhSHIGyYBToWe.jpg"}, {"title": "Anima", "year": 2019, "rating": 4.0, "liked": true, "poster_path": "/xCBOjFAzsz8d2kABIPfwIAOeJ5t.jpg"}, {"title": "Phantom Thread", "year": 2017, "rating": null, "liked": true, "poster_path": "/hgoWjp9Sh0MI97eAMZCnIoVfgvq.jpg"}, {"title": "Inherent Vice", "year": 2014, "rating": null, "liked": false, "poster_path": "/pfVua7TzzttOh3RTOuBqT7xN0oY.jpg"}, {"title": "The Master", "year": 2012, "rating": null, "liked": false, "poster_path": "/rUSjbyvYWN9H4az8xt0tDtU7I6v.jpg"}, {"title": "There Will Be Blood", "year": 2007, "rating": null, "liked": true, "poster_path": "/fa0RDkAlCec0STeMNAhPaF89q6U.jpg"}, {"title": "Punch-Drunk Love", "year": 2002, "rating": null, "liked": true, "poster_path": "/htYp4yqFu4rzBEIa6j9jP8miDm3.jpg"}, {"title": "Magnolia", "year": 1999, "rating": null, "liked": true, "poster_path": "/tpfC325Jk6S38VTe5dDWjWtoyxr.jpg"}, {"title": "Boogie Nights", "year": 1997, "rating": 4.0, "liked": false, "poster_path": "/wnE24UPCPQsQnbBOu4zVE2qaDNm.jpg"}, {"title": "Hard Eight", "year": 1996, "rating": null, "liked": true, "poster_path": "/1l5UaoP25Ak8PWCKIULQz70yF03.jpg"}]}, {"name": "Quentin Dupieux", "count": 11, "liked_count": 7, "like_ratio": 63.6, "films": [{"title": "The Piano Accident", "year": 2025, "rating": 3.0, "liked": false, "poster_path": "/euF099slkcbX6CoYvUvfIp0uHdP.jpg"}, {"title": "The Second Act", "year": 2024, "rating": 4.0, "liked": true, "poster_path": "/lc5ZJA4C55n6nzNtkNnDwOvpEtD.jpg"}, {"title": "Yannick", "year": 2023, "rating": 4.5, "liked": true, "poster_path": "/vZtteptwaNpZmdB1YwlyXOmUVw9.jpg"}, {"title": "Daaaaaal\u00ed!", "year": 2023, "rating": 3.5, "liked": true, "poster_path": "/cKMiUOT5rSWt7AJOhStuBpVeIUQ.jpg"}, {"title": "Incredible But True", "year": 2022, "rating": null, "liked": false, "poster_path": "/yBLlwTXweDzBKgEbYz5ZVTRQaZX.jpg"}, {"title": "Smoking Causes Coughing", "year": 2022, "rating": 4.5, "liked": true, "poster_path": "/7aYwL5VEzGkBvww9YFYKBPGBbRt.jpg"}, {"title": "Mandibles", "year": 2020, "rating": null, "liked": true, "poster_path": "/pdizbiLiOiV8ysYknz79VMitsfU.jpg"}, {"title": "Deerskin", "year": 2019, "rating": null, "liked": false, "poster_path": "/r5O84lMJRMQStl8GGJzAgkkdqP0.jpg"}, {"title": "Keep an Eye Out", "year": 2018, "rating": null, "liked": true, "poster_path": "/zfq8FfMbaYL3fHVgrIsFBaDhRPC.jpg"}, {"title": "Rubber", "year": 2010, "rating": null, "liked": false, "poster_path": "/mWgCORI5IC5vOvB2cDVQe0YNtXZ.jpg"}, {"title": "Steak", "year": 2007, "rating": null, "liked": true, "poster_path": "/IugtyTSEBusqT9F8nIcc3tD6hN.jpg"}]}];
+const POSTER_BASE = "https://image.tmdb.org/t/p/w185";
+const POSTER_PLACEHOLDER = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='185' height='278' viewBox='0 0 185 278'%3E%3Crect fill='%231a1a2e' width='185' height='278'/%3E%3Ctext fill='%234a4a5a' font-family='sans-serif' font-size='14' x='50%25' y='50%25' text-anchor='middle'%3ENo Poster%3C/text%3E%3C/svg%3E";
 
-        // Genres Chart
-        new Chart(document.getElementById('genresChart'), {"type": "doughnut", "data": {"labels": ["Drama", "Comedy", "Action", "Thriller", "Adventure", "Science Fiction", "Crime", "Horror", "Fantasy", "Romance"], "datasets": [{"data": [923, 618, 552, 516, 423, 368, 361, 272, 257, 215], "backgroundColor": ["rgba(0, 212, 255, 0.8)", "rgba(124, 58, 237, 0.8)", "rgba(244, 114, 182, 0.8)", "rgba(251, 191, 36, 0.8)", "rgba(52, 211, 153, 0.8)", "rgba(251, 146, 60, 0.8)", "rgba(167, 139, 250, 0.8)", "rgba(248, 113, 113, 0.8)", "rgba(96, 165, 250, 0.8)", "rgba(74, 222, 128, 0.8)"], "borderWidth": 0}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"position": "right", "labels": {"padding": 15, "usePointStyle": true}}}}});
+// Tab navigation
+document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Update buttons
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
 
-        // Yearly Chart
-        new Chart(document.getElementById('yearlyChart'), {"type": "bar", "data": {"labels": ["2019", "2021", "2022", "2023", "2024", "2025", "2026"], "datasets": [{"label": "Films Watched", "data": [4, 3, 28, 220, 159, 180, 5], "backgroundColor": "rgba(0, 212, 255, 0.8)", "borderRadius": 6}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"y": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "x": {"grid": {"display": false}}}}});
+        // Update content
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+        document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+});
 
-        // Actors Chart
-        new Chart(document.getElementById('actorsChart'), {"type": "bar", "data": {"labels": ["Brad Pitt", "Robert De Niro", "Tom Hanks", "Willem Dafoe", "Ralph Fiennes", "Christian Bale", "Samuel L. Jackson", "Bruce Willis", "Josh Brolin", "Woody Harrelson", "Tom Cruise", "Scarlett Johansson", "Jim Carrey", "Keanu Reeves", "Laurence Fishburne"], "datasets": [{"label": "Films", "data": [30, 28, 27, 25, 24, 23, 23, 23, 23, 23, 23, 22, 22, 21, 21], "backgroundColor": "rgba(124, 58, 237, 0.8)", "borderRadius": 6}]}, "options": {"indexAxis": "y", "responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"x": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "y": {"grid": {"display": false}}}}});
+// Person card clicks (open modal)
+document.querySelectorAll('.person-card').forEach(card => {
+    card.addEventListener('click', () => {
+        const type = card.dataset.personType;
+        const index = parseInt(card.dataset.personIndex);
+        const data = type === 'actor' ? actorsData[index] : directorsData[index];
+        openModal(data, type);
+    });
+});
 
-        // Directors Chart
-        new Chart(document.getElementById('directorsChart'), {"type": "bar", "data": {"labels": ["Steven Spielberg", "Martin Scorsese", "Wes Anderson", "Christopher Nolan", "Ridley Scott", "Michael Mann", "Tim Burton", "Robert Zemeckis", "James Mangold", "Akira Kurosawa", "Quentin Tarantino", "David Fincher", "Billy Wilder", "Paul Thomas Anderson", "Quentin Dupieux"], "datasets": [{"label": "Films", "data": [26, 20, 18, 16, 14, 14, 14, 13, 13, 12, 11, 11, 11, 11, 11], "backgroundColor": "rgba(251, 146, 60, 0.8)", "borderRadius": 6}]}, "options": {"indexAxis": "y", "responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"x": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "y": {"grid": {"display": false}}}}});
+function openModal(person, type) {
+    document.getElementById('modalTitle').textContent = person.name;
+    document.getElementById('modalMeta').textContent = `${person.count} films watched | ${person.liked_count || 0} liked`;
 
-        // Runtime Chart
-        new Chart(document.getElementById('runtimeChart'), {"type": "bar", "data": {"labels": ["<90", "90-120", "120-150", "150-180", "180+"], "datasets": [{"label": "Films", "data": [268, 1061, 571, 114, 30], "backgroundColor": "rgba(52, 211, 153, 0.8)", "borderRadius": 6}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"y": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "x": {"grid": {"display": false}, "title": {"display": true, "text": "Runtime (minutes)"}}}}});
+    const grid = document.getElementById('modalFilmsGrid');
+    grid.innerHTML = '';
 
-        // Monthly Chart
-        new Chart(document.getElementById('monthlyChart'), {"type": "line", "data": {"labels": ["2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01"], "datasets": [{"label": "Films", "data": [12, 16, 10, 11, 8, 7, 15, 9, 18, 20, 11, 10, 15, 10, 6, 15, 12, 16, 5, 13, 25, 25, 28, 5], "borderColor": "rgba(244, 114, 182, 0.8)", "backgroundColor": "rgba(244, 114, 182, 0.1)", "fill": true, "tension": 0.4}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"y": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "x": {"grid": {"display": false}}}}});
-    </script>
+    (person.films || []).forEach(film => {
+        const posterUrl = film.poster_path ? POSTER_BASE + film.poster_path : POSTER_PLACEHOLDER;
+        const ratingStars = film.rating ? '★'.repeat(Math.floor(film.rating)) + (film.rating % 1 ? '½' : '') : '';
+
+        const filmEl = document.createElement('div');
+        filmEl.className = 'modal-film';
+        filmEl.innerHTML = `
+            <img src="${posterUrl}" alt="${film.title}" loading="lazy">
+            <div class="film-title">${film.title}</div>
+            <div class="film-year">${film.year}</div>
+            ${ratingStars ? `<div class="film-rating">${ratingStars}</div>` : ''}
+        `;
+        grid.appendChild(filmEl);
+    });
+
+    document.getElementById('filmModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    document.getElementById('filmModal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Close modal on overlay click
+document.getElementById('filmModal').addEventListener('click', (e) => {
+    if (e.target.classList.contains('modal-overlay')) closeModal();
+});
+
+// Close modal on escape
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+});
+
+// Chart.js configuration
+Chart.defaults.color = '#a1a1aa';
+Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.08)';
+Chart.defaults.font.family = "'Inter', sans-serif";
+
+// Initialize charts
+const charts = {
+    genresWatchedLikedChart: {"type": "bar", "data": {"labels": ["Drama", "Comedy", "Action", "Thriller", "Adventure", "Science Fiction", "Crime", "Horror"], "datasets": [{"label": "Watched", "data": [923, 618, 552, 516, 423, 368, 361, 272], "backgroundColor": "rgba(0, 212, 255, 0.85)", "borderRadius": 4}, {"label": "Liked", "data": [532, 345, 262, 250, 209, 173, 201, 119], "backgroundColor": "rgba(239, 68, 68, 0.85)", "borderRadius": 4}]}, "options": {"indexAxis": "y", "responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": true, "position": "top", "labels": {"padding": 15, "usePointStyle": true}}}, "scales": {"x": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "y": {"grid": {"display": false}}}}},
+    actorsWatchedLikedChart: {"type": "bar", "data": {"labels": ["Brad Pitt", "Robert De Niro", "Tom Hanks", "Willem Dafoe", "Ralph Fiennes", "Christian Bale", "Samuel L. Jackson", "Bruce Willis", "Josh Brolin", "Woody Harrelson"], "datasets": [{"label": "Watched", "data": [30, 28, 27, 25, 24, 23, 23, 23, 23, 23], "backgroundColor": "rgba(124, 58, 237, 0.85)", "borderRadius": 4}, {"label": "Liked", "data": [19, 17, 14, 9, 9, 10, 15, 16, 13, 7], "backgroundColor": "rgba(239, 68, 68, 0.85)", "borderRadius": 4}]}, "options": {"indexAxis": "y", "responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": true, "position": "top", "labels": {"padding": 15, "usePointStyle": true}}}, "scales": {"x": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "y": {"grid": {"display": false}}}}},
+    directorsWatchedLikedChart: {"type": "bar", "data": {"labels": ["Steven Spielberg", "Martin Scorsese", "Wes Anderson", "Christopher Nolan", "Ridley Scott", "Michael Mann", "Tim Burton", "Robert Zemeckis", "James Mangold", "Akira Kurosawa"], "datasets": [{"label": "Watched", "data": [26, 20, 18, 16, 14, 14, 14, 13, 13, 12], "backgroundColor": "rgba(251, 146, 60, 0.85)", "borderRadius": 4}, {"label": "Liked", "data": [13, 13, 12, 11, 6, 11, 9, 7, 9, 6], "backgroundColor": "rgba(239, 68, 68, 0.85)", "borderRadius": 4}]}, "options": {"indexAxis": "y", "responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": true, "position": "top", "labels": {"padding": 15, "usePointStyle": true}}}, "scales": {"x": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "y": {"grid": {"display": false}}}}},
+    yearlyChart: {"type": "bar", "data": {"labels": ["2019", "2021", "2022", "2023", "2024", "2025", "2026"], "datasets": [{"label": "Films Watched", "data": [4, 3, 28, 220, 159, 180, 5], "backgroundColor": "rgba(0, 212, 255, 0.8)", "borderRadius": 6}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"y": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "x": {"grid": {"display": false}}}}},
+    monthlyChart: {"type": "line", "data": {"labels": ["2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01"], "datasets": [{"label": "Films", "data": [12, 16, 10, 11, 8, 7, 15, 9, 18, 20, 11, 10, 15, 10, 6, 15, 12, 16, 5, 13, 25, 25, 28, 5], "borderColor": "rgba(244, 114, 182, 0.8)", "backgroundColor": "rgba(244, 114, 182, 0.1)", "fill": true, "tension": 0.4}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"y": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "x": {"grid": {"display": false}}}}},
+    runtimeChart: {"type": "bar", "data": {"labels": ["<90", "90-120", "120-150", "150-180", "180+"], "datasets": [{"label": "Films", "data": [268, 1061, 571, 114, 30], "backgroundColor": "rgba(52, 211, 153, 0.8)", "borderRadius": 6}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"y": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "x": {"grid": {"display": false}, "title": {"display": true, "text": "Runtime (minutes)"}}}}},
+    genresChart: {"type": "doughnut", "data": {"labels": ["Drama", "Comedy", "Action", "Thriller", "Adventure", "Science Fiction", "Crime", "Horror", "Fantasy", "Romance"], "datasets": [{"data": [923, 618, 552, 516, 423, 368, 361, 272, 257, 215], "backgroundColor": ["rgba(0, 212, 255, 0.8)", "rgba(124, 58, 237, 0.8)", "rgba(244, 114, 182, 0.8)", "rgba(251, 191, 36, 0.8)", "rgba(52, 211, 153, 0.8)", "rgba(251, 146, 60, 0.8)", "rgba(167, 139, 250, 0.8)", "rgba(248, 113, 113, 0.8)", "rgba(96, 165, 250, 0.8)", "rgba(74, 222, 128, 0.8)"], "borderWidth": 0}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"position": "right", "labels": {"padding": 15, "usePointStyle": true}}}}},
+    countriesChart: {"type": "bar", "data": {"labels": ["United States of America", "United Kingdom", "France", "Germany", "Japan", "Canada", "Italy", "Belgium", "Australia", "Spain"], "datasets": [{"label": "Films", "data": [1607, 340, 251, 117, 106, 85, 54, 43, 31, 29], "backgroundColor": "rgba(167, 139, 250, 0.8)", "borderRadius": 6}]}, "options": {"indexAxis": "y", "responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"x": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "y": {"grid": {"display": false}}}}},
+    ratingEvolutionChart: {"type": "line", "data": {"labels": ["2019", "2021", "2022", "2023", "2024", "2025", "2026"], "datasets": [{"label": "Average Rating", "data": [3.88, 3.0, 3.46, 3.66, 3.55, 3.44, 3.83], "borderColor": "rgba(251, 191, 36, 0.8)", "backgroundColor": "rgba(251, 191, 36, 0.1)", "fill": true, "tension": 0.3}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"y": {"min": 0, "max": 5, "grid": {"color": "rgba(255,255,255,0.05)"}}, "x": {"grid": {"display": false}}}}}
+};
+
+// Create charts when tab becomes visible
+function initCharts() {
+    Object.entries(charts).forEach(([id, config]) => {
+        const canvas = document.getElementById(id);
+        if (canvas && !canvas.chart) {
+            canvas.chart = new Chart(canvas, config);
+        }
+    });
+}
+
+// Initialize visible charts
+initCharts();
+
+// Reinitialize when tab changes (for proper sizing)
+document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        setTimeout(initCharts, 100);
+    });
+});
+</script>
 </body>
 </html>

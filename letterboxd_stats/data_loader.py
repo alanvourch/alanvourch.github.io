@@ -32,9 +32,9 @@ class LetterboxdDataLoader:
         # Preprocess data
         self._preprocess_data()
 
-        print(f"✓ Loaded {len(self.data['watched'])} watched films")
-        print(f"✓ Loaded {len(self.data['diary'])} diary entries")
-        print(f"✓ Loaded {len(self.data['ratings'])} ratings")
+        print(f"[OK] Loaded {len(self.data['watched'])} watched films")
+        print(f"[OK] Loaded {len(self.data['diary'])} diary entries")
+        print(f"[OK] Loaded {len(self.data['ratings'])} ratings")
 
         return self.data
 
@@ -91,7 +91,7 @@ class LetterboxdDataLoader:
             # Remove films with no year
             unique = unique[unique['Year'] > 0]
             self.data['unique_films'] = unique.reset_index(drop=True)
-            print(f"✓ Found {len(unique)} unique films to enrich")
+            print(f"[OK] Found {len(unique)} unique films to enrich")
         else:
             self.data['unique_films'] = pd.DataFrame(columns=['Name', 'Year'])
 

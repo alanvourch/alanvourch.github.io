@@ -1,12 +1,17 @@
 """
-Generate HTML dashboard with enhanced visualizations
+Generate HTML dashboard with modern tabbed layout, modals, and movie posters
+Dashboard v3.0 - Complete redesign
 """
 from typing import Dict
 import json
+from . import config
 
 
 class HTMLGenerator:
-    """Generate interactive HTML dashboard"""
+    """Generate interactive HTML dashboard with tabs, modals, and posters"""
+
+    POSTER_BASE_URL = f"{config.TMDB_IMAGE_BASE_URL}/{config.POSTER_SIZE}"
+    POSTER_PLACEHOLDER = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='185' height='278' viewBox='0 0 185 278'%3E%3Crect fill='%231a1a2e' width='185' height='278'/%3E%3Ctext fill='%234a4a5a' font-family='sans-serif' font-size='14' x='50%25' y='50%25' text-anchor='middle'%3ENo Poster%3C/text%3E%3C/svg%3E"
 
     def __init__(self, stats: Dict, charts: Dict):
         self.stats = stats
@@ -19,335 +24,1144 @@ class HTMLGenerator:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Letterboxd Stats - Enhanced Dashboard</title>
+    <title>Letterboxd Stats Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     {self._generate_styles()}
 </head>
 <body>
-    <div class="container">
+    <div class="app">
         {self._generate_header()}
-        {self._generate_stats_grid()}
-        {self._generate_charts_section()}
-        {self._generate_lists_section()}
+        {self._generate_nav()}
+        <main class="main-content">
+            {self._generate_overview_tab()}
+            {self._generate_year_tab('last_full_year')}
+            {self._generate_year_tab('current_year')}
+            {self._generate_people_tab()}
+            {self._generate_discovery_tab()}
+        </main>
         {self._generate_footer()}
     </div>
+    {self._generate_modal()}
     {self._generate_scripts()}
 </body>
 </html>'''
 
     def _generate_styles(self) -> str:
-        """Generate CSS styles"""
+        """Generate modern CSS styles"""
         return '''<style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+:root {
+    --bg-primary: #0d0d14;
+    --bg-secondary: #14141f;
+    --bg-card: rgba(255, 255, 255, 0.03);
+    --bg-card-hover: rgba(255, 255, 255, 0.06);
+    --border-color: rgba(255, 255, 255, 0.08);
+    --text-primary: #f4f4f5;
+    --text-secondary: #a1a1aa;
+    --text-muted: #71717a;
+    --accent-cyan: #00d4ff;
+    --accent-purple: #7c3aed;
+    --accent-pink: #f472b6;
+    --accent-yellow: #fbbf24;
+    --accent-green: #34d399;
+    --accent-orange: #fb923c;
+    --accent-red: #ef4444;
+    --liked-color: #ef4444;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+}
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            min-height: 100vh;
-            color: #e4e4e7;
-            padding: 2rem;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    line-height: 1.5;
+}
 
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+.app {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
 
-        h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #00d4ff, #7c3aed, #f472b6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-        }
+/* Header */
+.header {
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-bottom: 1rem;
+}
 
-        .subtitle {
-            color: #a1a1aa;
-            font-size: 1.1rem;
-        }
+.header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
+.header .subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
 
-        .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 1.5rem;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s;
-        }
+/* Navigation */
+.nav {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
 
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
+.nav-btn {
+    flex: 1;
+    min-width: fit-content;
+    padding: 0.75rem 1.25rem;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
 
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
+.nav-btn:hover {
+    background: var(--bg-card-hover);
+    color: var(--text-primary);
+}
 
-        .stat-card:nth-child(1) .stat-number { color: #00d4ff; }
-        .stat-card:nth-child(2) .stat-number { color: #f472b6; }
-        .stat-card:nth-child(3) .stat-number { color: #fbbf24; }
-        .stat-card:nth-child(4) .stat-number { color: #34d399; }
-        .stat-card:nth-child(5) .stat-number { color: #a78bfa; }
-        .stat-card:nth-child(6) .stat-number { color: #fb923c; }
+.nav-btn.active {
+    background: var(--accent-purple);
+    color: white;
+}
 
-        .stat-label {
-            color: #a1a1aa;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+.nav-btn .year-badge {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    background: rgba(255,255,255,0.15);
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
+}
 
-        .charts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
+/* Tab content */
+.tab-content {
+    display: none;
+}
 
-        .chart-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
 
-        .chart-card h2 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            color: #fff;
-        }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-        .chart-container {
-            position: relative;
-            height: 300px;
-        }
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
 
-        .lists-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
+.stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    text-align: center;
+    transition: all 0.2s;
+}
 
-        .list-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+.stat-card:hover {
+    background: var(--bg-card-hover);
+    transform: translateY(-2px);
+}
 
-        .list-card h2 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            color: #fff;
-        }
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
 
-        .movie-list {
-            list-style: none;
-        }
+.stat-label {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
 
-        .movie-list li {
-            padding: 0.75rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            justify-content: space-between;
-        }
+.stat-card.cyan .stat-number { color: var(--accent-cyan); }
+.stat-card.purple .stat-number { color: var(--accent-purple); }
+.stat-card.pink .stat-number { color: var(--accent-pink); }
+.stat-card.yellow .stat-number { color: var(--accent-yellow); }
+.stat-card.green .stat-number { color: var(--accent-green); }
+.stat-card.orange .stat-number { color: var(--accent-orange); }
+.stat-card.red .stat-number { color: var(--liked-color); }
 
-        .movie-name {
-            font-weight: 500;
-        }
+/* Section */
+.section {
+    margin-bottom: 2.5rem;
+}
 
-        .movie-count {
-            color: #a1a1aa;
-        }
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
 
-        footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding: 2rem;
-            color: #71717a;
-        }
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
 
-        footer a {
-            color: #00d4ff;
-            text-decoration: none;
-        }
-    </style>'''
+.section-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+/* Charts Grid */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 500px) {
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.chart-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+}
+
+.chart-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.chart-container {
+    position: relative;
+    height: 280px;
+}
+
+/* People Grid (Actors/Directors) */
+.people-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.person-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.person-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--accent-purple);
+    transform: translateY(-2px);
+}
+
+.person-card .name {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.person-card .meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.person-card .meta .watched {
+    color: var(--accent-cyan);
+}
+
+.person-card .meta .liked {
+    color: var(--liked-color);
+}
+
+.person-card .like-ratio {
+    margin-top: 0.5rem;
+    height: 4px;
+    background: var(--bg-secondary);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.person-card .like-ratio-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--liked-color));
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+/* Film Posters Grid */
+.posters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.poster-card {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    aspect-ratio: 2/3;
+    background: var(--bg-secondary);
+    transition: transform 0.2s;
+}
+
+.poster-card:hover {
+    transform: scale(1.05);
+}
+
+.poster-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.poster-card .overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.75rem 0.5rem 0.5rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+}
+
+.poster-card .title {
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.poster-card .year {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+}
+
+.poster-card .rating {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: rgba(0,0,0,0.7);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.poster-card .rating.high { color: var(--accent-green); }
+.poster-card .rating.mid { color: var(--accent-yellow); }
+.poster-card .rating.low { color: var(--liked-color); }
+
+.poster-card .liked-badge {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    color: var(--liked-color);
+    font-size: 0.9rem;
+}
+
+/* Year Wrap Section */
+.year-wrap {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(244, 114, 182, 0.1));
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.year-wrap .year-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.year-wrap .year-number {
+    font-size: 4rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.year-wrap .year-label {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+.year-highlight {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.highlight-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    text-align: center;
+}
+
+.highlight-card .icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.highlight-card .value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--accent-cyan);
+}
+
+.highlight-card .label {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.top-person-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.top-person-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+}
+
+.top-person-card h4 {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.75rem;
+}
+
+.top-person-card .person-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.top-person-card .person-count {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.top-person-card .mini-posters {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+}
+
+.top-person-card .mini-poster {
+    width: 60px;
+    height: 90px;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* Modal */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-xl);
+    max-width: 900px;
+    max-height: 85vh;
+    width: 100%;
+    overflow: hidden;
+    animation: modalIn 0.3s ease;
+}
+
+@keyframes modalIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.modal-header .meta {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.modal-close {
+    background: var(--bg-card);
+    border: none;
+    color: var(--text-primary);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.25rem;
+    transition: background 0.2s;
+}
+
+.modal-close:hover {
+    background: var(--bg-card-hover);
+}
+
+.modal-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+    max-height: calc(85vh - 100px);
+}
+
+.modal-films-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+}
+
+.modal-film {
+    text-align: center;
+}
+
+.modal-film img {
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.5rem;
+}
+
+.modal-film .film-title {
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.modal-film .film-year {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+}
+
+.modal-film .film-rating {
+    font-size: 0.7rem;
+    color: var(--accent-yellow);
+    margin-top: 0.25rem;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.footer a {
+    color: var(--accent-cyan);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* Utility classes */
+.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .two-col {
+        grid-template-columns: 1fr;
+    }
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-secondary);
+}
+</style>'''
 
     def _generate_header(self) -> str:
         """Generate header"""
-        return '''
-        <header>
-            <h1>Letterboxd Stats</h1>
-            <p class="subtitle">Enhanced Dashboard with TMDB Data</p>
-        </header>'''
+        basic = self.stats.get('basic', {})
+        return f'''
+<header class="header">
+    <h1>Letterboxd Stats</h1>
+    <p class="subtitle">{basic.get('total_watched', 0)} films watched</p>
+</header>'''
 
-    def _generate_stats_grid(self) -> str:
-        """Generate statistics grid"""
+    def _generate_nav(self) -> str:
+        """Generate navigation tabs"""
+        yearly = self.stats.get('yearly_breakdown', {})
+        last_year = yearly.get('last_full_year_value', 2025)
+        current_year = yearly.get('current_year_value', 2026)
+
+        return f'''
+<nav class="nav">
+    <button class="nav-btn active" data-tab="overview">Overview</button>
+    <button class="nav-btn" data-tab="year-last">{last_year}<span class="year-badge">Wrap</span></button>
+    <button class="nav-btn" data-tab="year-current">{current_year}<span class="year-badge">Live</span></button>
+    <button class="nav-btn" data-tab="people">People</button>
+    <button class="nav-btn" data-tab="discovery">Discovery</button>
+</nav>'''
+
+    def _generate_overview_tab(self) -> str:
+        """Generate overview tab content"""
         basic = self.stats.get('basic', {})
 
-        return f'''
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number">{basic.get('total_watched', 0)}</div>
-                <div class="stat-label">Films Watched</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">{basic.get('total_rated', 0)}</div>
-                <div class="stat-label">Films Rated</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">{basic.get('avg_rating', 0)}</div>
-                <div class="stat-label">Average Rating</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">{basic.get('total_liked', 0)}</div>
-                <div class="stat-label">Films Liked</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">{basic.get('rewatches', 0)}</div>
-                <div class="stat-label">Rewatches</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">{basic.get('total_watchlist', 0)}</div>
-                <div class="stat-label">In Watchlist</div>
-            </div>
-        </div>'''
+        # Calculate like ratio
+        watched = basic.get('total_watched', 0)
+        liked = basic.get('total_liked', 0)
+        like_ratio = round(liked / watched * 100, 1) if watched > 0 else 0
 
-    def _generate_charts_section(self) -> str:
-        """Generate charts section"""
         return f'''
+<div id="overview" class="tab-content active">
+    <div class="stats-grid">
+        <div class="stat-card cyan">
+            <div class="stat-number">{basic.get('total_watched', 0)}</div>
+            <div class="stat-label">Films Watched</div>
+        </div>
+        <div class="stat-card red">
+            <div class="stat-number">{basic.get('total_liked', 0)}</div>
+            <div class="stat-label">Films Liked</div>
+        </div>
+        <div class="stat-card pink">
+            <div class="stat-number">{like_ratio}%</div>
+            <div class="stat-label">Like Ratio</div>
+        </div>
+        <div class="stat-card yellow">
+            <div class="stat-number">{basic.get('avg_rating', 0)}</div>
+            <div class="stat-label">Avg Rating</div>
+        </div>
+        <div class="stat-card green">
+            <div class="stat-number">{basic.get('total_rated', 0)}</div>
+            <div class="stat-label">Rated</div>
+        </div>
+        <div class="stat-card orange">
+            <div class="stat-number">{basic.get('total_watchlist', 0)}</div>
+            <div class="stat-label">Watchlist</div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Watched vs Liked</h2>
+            <span class="section-subtitle">How much do you really love what you watch?</span>
+        </div>
         <div class="charts-grid">
             <div class="chart-card">
-                <h2>Top Genres</h2>
+                <h3>Genres: Watched vs Liked</h3>
                 <div class="chart-container">
-                    <canvas id="genresChart"></canvas>
+                    <canvas id="genresWatchedLikedChart"></canvas>
                 </div>
             </div>
             <div class="chart-card">
-                <h2>Films Watched Per Year</h2>
+                <h3>Actors: Watched vs Liked</h3>
+                <div class="chart-container">
+                    <canvas id="actorsWatchedLikedChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Activity</h2>
+        </div>
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3>Films Per Year</h3>
                 <div class="chart-container">
                     <canvas id="yearlyChart"></canvas>
                 </div>
             </div>
             <div class="chart-card">
-                <h2>Top Actors</h2>
-                <div class="chart-container">
-                    <canvas id="actorsChart"></canvas>
-                </div>
-            </div>
-            <div class="chart-card">
-                <h2>Top Directors</h2>
-                <div class="chart-container">
-                    <canvas id="directorsChart"></canvas>
-                </div>
-            </div>
-            <div class="chart-card">
-                <h2>Runtime Distribution</h2>
-                <div class="chart-container">
-                    <canvas id="runtimeChart"></canvas>
-                </div>
-            </div>
-            <div class="chart-card">
-                <h2>Monthly Activity</h2>
+                <h3>Monthly Activity (Last 24 Months)</h3>
                 <div class="chart-container">
                     <canvas id="monthlyChart"></canvas>
                 </div>
             </div>
-        </div>'''
+        </div>
+    </section>
 
-    def _generate_lists_section(self) -> str:
-        """Generate lists section"""
-        actors = self.stats.get('actors', {}).get('top_by_count', [])[:10]
-        directors = self.stats.get('directors', {}).get('top_by_count', [])[:10]
-        genres = self.stats.get('genres', {}).get('distribution', [])[:10]
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Directors: Watched vs Liked</h2>
+        </div>
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3>Top Directors Comparison</h3>
+                <div class="chart-container">
+                    <canvas id="directorsWatchedLikedChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>Runtime Distribution</h3>
+                <div class="chart-container">
+                    <canvas id="runtimeChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>'''
 
-        actors_html = ''.join([
-            f'<li><span class="movie-name">{a["name"]}</span><span class="movie-count">{a["count"]} films</span></li>'
-            for a in actors
-        ])
+    def _generate_year_tab(self, year_key: str) -> str:
+        """Generate year wrap-up or current year tab"""
+        yearly = self.stats.get('yearly_breakdown', {})
+        year_stats = yearly.get(year_key, {})
+        year_value = yearly.get(f'{year_key}_value', 0)
 
-        directors_html = ''.join([
-            f'<li><span class="movie-name">{d["name"]}</span><span class="movie-count">{d["count"]} films</span></li>'
-            for d in directors
-        ])
+        is_wrap = year_key == 'last_full_year'
+        tab_id = 'year-last' if is_wrap else 'year-current'
+        label = 'Year in Review' if is_wrap else 'Year in Progress'
 
-        genres_html = ''.join([
-            f'<li><span class="movie-name">{g["genre"]}</span><span class="movie-count">{g["count"]} films</span></li>'
-            for g in genres
-        ])
+        if not year_stats or year_stats.get('total_films', 0) == 0:
+            return f'''
+<div id="{tab_id}" class="tab-content">
+    <div class="year-wrap">
+        <div class="year-header">
+            <div class="year-number">{year_value}</div>
+            <div class="year-label">{label}</div>
+        </div>
+        <div class="empty-state">
+            <p>No films logged for {year_value} yet.</p>
+        </div>
+    </div>
+</div>'''
+
+        # Month name mapping
+        month_names = ['', 'January', 'February', 'March', 'April', 'May', 'June',
+                      'July', 'August', 'September', 'October', 'November', 'December']
+        most_active_month = month_names[year_stats.get('most_active_month', 0)] if year_stats.get('most_active_month', 0) else 'N/A'
+
+        # Generate top rated posters
+        top_rated_html = self._generate_poster_grid(year_stats.get('top_5_rated', []), 'Highest Rated')
+        bottom_rated_html = self._generate_poster_grid(year_stats.get('bottom_5_rated', []), 'Lowest Rated')
+
+        # Top actor section
+        top_actor = year_stats.get('top_actor')
+        top_actor_html = ''
+        if top_actor:
+            actor_posters = ''.join([
+                f'<img class="mini-poster" src="{self._poster_url(f.get("poster_path"))}" alt="{f.get("title")}" loading="lazy">'
+                for f in top_actor.get('films', [])[:5]
+            ])
+            top_actor_html = f'''
+<div class="top-person-card">
+    <h4>Most Watched Actor</h4>
+    <div class="person-name">{top_actor.get('name', 'N/A')}</div>
+    <div class="person-count">{top_actor.get('count', 0)} films this year</div>
+    <div class="mini-posters">{actor_posters}</div>
+</div>'''
+
+        # Top director section
+        top_director = year_stats.get('top_director')
+        top_director_html = ''
+        if top_director:
+            director_posters = ''.join([
+                f'<img class="mini-poster" src="{self._poster_url(f.get("poster_path"))}" alt="{f.get("title")}" loading="lazy">'
+                for f in top_director.get('films', [])[:5]
+            ])
+            top_director_html = f'''
+<div class="top-person-card">
+    <h4>Most Watched Director</h4>
+    <div class="person-name">{top_director.get('name', 'N/A')}</div>
+    <div class="person-count">{top_director.get('count', 0)} films this year</div>
+    <div class="mini-posters">{director_posters}</div>
+</div>'''
 
         return f'''
-        <div class="lists-grid">
-            <div class="list-card">
-                <h2>Top Actors</h2>
-                <ul class="movie-list">{actors_html}</ul>
+<div id="{tab_id}" class="tab-content">
+    <div class="year-wrap">
+        <div class="year-header">
+            <div class="year-number">{year_value}</div>
+            <div class="year-label">{label}</div>
+        </div>
+
+        <div class="year-highlight">
+            <div class="highlight-card">
+                <div class="icon">🎬</div>
+                <div class="value">{year_stats.get('total_films', 0)}</div>
+                <div class="label">Films Logged</div>
             </div>
-            <div class="list-card">
-                <h2>Top Directors</h2>
-                <ul class="movie-list">{directors_html}</ul>
+            <div class="highlight-card">
+                <div class="icon">❤️</div>
+                <div class="value">{year_stats.get('total_liked', 0)}</div>
+                <div class="label">Films Liked</div>
             </div>
-            <div class="list-card">
-                <h2>Favorite Genres</h2>
-                <ul class="movie-list">{genres_html}</ul>
+            <div class="highlight-card">
+                <div class="icon">⭐</div>
+                <div class="value">{year_stats.get('avg_rating', 0)}</div>
+                <div class="label">Avg Rating</div>
             </div>
-        </div>'''
+            <div class="highlight-card">
+                <div class="icon">📅</div>
+                <div class="value">{most_active_month}</div>
+                <div class="label">Most Active Month</div>
+            </div>
+        </div>
+
+        <div class="top-person-section">
+            {top_actor_html}
+            {top_director_html}
+        </div>
+
+        <div class="two-col">
+            {top_rated_html}
+            {bottom_rated_html}
+        </div>
+    </div>
+</div>'''
+
+    def _generate_poster_grid(self, films: list, title: str) -> str:
+        """Generate a grid of movie posters"""
+        if not films:
+            return f'<div class="section"><h3 class="section-title">{title}</h3><p class="empty-state">No films</p></div>'
+
+        posters_html = ''
+        for film in films:
+            rating = film.get('rating', 0)
+            rating_class = 'high' if rating >= 4 else 'mid' if rating >= 3 else 'low'
+            liked_badge = '<span class="liked-badge">❤️</span>' if film.get('liked') else ''
+
+            posters_html += f'''
+<div class="poster-card">
+    <img src="{self._poster_url(film.get('poster_path'))}" alt="{film.get('title')}" loading="lazy">
+    {liked_badge}
+    <span class="rating {rating_class}">{'★' * int(rating) if rating else ''}{('½' if rating and rating % 1 else '')}</span>
+    <div class="overlay">
+        <div class="title">{film.get('title', 'Unknown')}</div>
+        <div class="year">{film.get('year', '')}</div>
+    </div>
+</div>'''
+
+        return f'''
+<div class="section">
+    <h3 class="section-title">{title}</h3>
+    <div class="posters-grid">{posters_html}</div>
+</div>'''
+
+    def _generate_people_tab(self) -> str:
+        """Generate people (actors/directors) tab"""
+        actors = self.stats.get('actors', {}).get('top_by_count', [])[:15]
+        directors = self.stats.get('directors', {}).get('top_by_count', [])[:15]
+
+        actors_html = ''
+        for i, actor in enumerate(actors):
+            like_ratio = actor.get('like_ratio', 0)
+            actors_html += f'''
+<div class="person-card" data-person-type="actor" data-person-index="{i}">
+    <div class="name">{actor.get('name', 'Unknown')}</div>
+    <div class="meta">
+        <span class="watched">{actor.get('count', 0)} watched</span>
+        <span class="liked">❤️ {actor.get('liked_count', 0)} liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: {like_ratio}%"></div>
+    </div>
+</div>'''
+
+        directors_html = ''
+        for i, director in enumerate(directors):
+            like_ratio = director.get('like_ratio', 0)
+            directors_html += f'''
+<div class="person-card" data-person-type="director" data-person-index="{i}">
+    <div class="name">{director.get('name', 'Unknown')}</div>
+    <div class="meta">
+        <span class="watched">{director.get('count', 0)} watched</span>
+        <span class="liked">❤️ {director.get('liked_count', 0)} liked</span>
+    </div>
+    <div class="like-ratio">
+        <div class="like-ratio-fill" style="width: {like_ratio}%"></div>
+    </div>
+</div>'''
+
+        return f'''
+<div id="people" class="tab-content">
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Top Actors</h2>
+            <span class="section-subtitle">Click to see films</span>
+        </div>
+        <div class="people-grid">{actors_html}</div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Top Directors</h2>
+            <span class="section-subtitle">Click to see films</span>
+        </div>
+        <div class="people-grid">{directors_html}</div>
+    </section>
+</div>'''
+
+    def _generate_discovery_tab(self) -> str:
+        """Generate discovery tab with genres, countries, etc."""
+        return f'''
+<div id="discovery" class="tab-content">
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Genre Distribution</h2>
+        </div>
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3>Top Genres</h3>
+                <div class="chart-container">
+                    <canvas id="genresChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>Top Countries</h3>
+                <div class="chart-container">
+                    <canvas id="countriesChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Rating Trends</h2>
+        </div>
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3>Rating Evolution Over Time</h3>
+                <div class="chart-container">
+                    <canvas id="ratingEvolutionChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>'''
+
+    def _generate_modal(self) -> str:
+        """Generate modal structure for film lists"""
+        return '''
+<div class="modal-overlay" id="filmModal">
+    <div class="modal">
+        <div class="modal-header">
+            <div>
+                <h2 id="modalTitle">Person Name</h2>
+                <span class="meta" id="modalMeta">X films</span>
+            </div>
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-films-grid" id="modalFilmsGrid"></div>
+        </div>
+    </div>
+</div>'''
 
     def _generate_footer(self) -> str:
         """Generate footer"""
         return '''
-        <footer>
-            <p>Enhanced with data from <a href="https://www.themoviedb.org" target="_blank">The Movie Database (TMDB)</a></p>
-            <p>Built with Letterboxd Stats v2.0</p>
-        </footer>'''
+<footer class="footer">
+    <p>Data from <a href="https://letterboxd.com" target="_blank">Letterboxd</a> |
+       Enhanced with <a href="https://www.themoviedb.org" target="_blank">TMDB</a></p>
+    <p>Letterboxd Stats v3.0</p>
+</footer>'''
 
     def _generate_scripts(self) -> str:
-        """Generate JavaScript for charts"""
+        """Generate JavaScript for interactivity and charts"""
+        # Prepare data for JavaScript
+        actors_data = json.dumps(self.stats.get('actors', {}).get('top_by_count', []))
+        directors_data = json.dumps(self.stats.get('directors', {}).get('top_by_count', []))
+
         return f'''
-    <script>
-        Chart.defaults.color = '#a1a1aa';
-        Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+<script>
+// Data for modals
+const actorsData = {actors_data};
+const directorsData = {directors_data};
+const POSTER_BASE = "{self.POSTER_BASE_URL}";
+const POSTER_PLACEHOLDER = "{self.POSTER_PLACEHOLDER}";
 
-        // Genres Chart
-        new Chart(document.getElementById('genresChart'), {self.charts.get('genres', '{}')});
+// Tab navigation
+document.querySelectorAll('.nav-btn').forEach(btn => {{
+    btn.addEventListener('click', () => {{
+        // Update buttons
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
 
-        // Yearly Chart
-        new Chart(document.getElementById('yearlyChart'), {self.charts.get('yearly', '{}')});
+        // Update content
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+        document.getElementById(btn.dataset.tab).classList.add('active');
+    }});
+}});
 
-        // Actors Chart
-        new Chart(document.getElementById('actorsChart'), {self.charts.get('top_actors', '{}')});
+// Person card clicks (open modal)
+document.querySelectorAll('.person-card').forEach(card => {{
+    card.addEventListener('click', () => {{
+        const type = card.dataset.personType;
+        const index = parseInt(card.dataset.personIndex);
+        const data = type === 'actor' ? actorsData[index] : directorsData[index];
+        openModal(data, type);
+    }});
+}});
 
-        // Directors Chart
-        new Chart(document.getElementById('directorsChart'), {self.charts.get('top_directors', '{}')});
+function openModal(person, type) {{
+    document.getElementById('modalTitle').textContent = person.name;
+    document.getElementById('modalMeta').textContent = `${{person.count}} films watched | ${{person.liked_count || 0}} liked`;
 
-        // Runtime Chart
-        new Chart(document.getElementById('runtimeChart'), {self.charts.get('runtime', '{}')});
+    const grid = document.getElementById('modalFilmsGrid');
+    grid.innerHTML = '';
 
-        // Monthly Chart
-        new Chart(document.getElementById('monthlyChart'), {self.charts.get('monthly', '{}')});
-    </script>'''
+    (person.films || []).forEach(film => {{
+        const posterUrl = film.poster_path ? POSTER_BASE + film.poster_path : POSTER_PLACEHOLDER;
+        const ratingStars = film.rating ? '★'.repeat(Math.floor(film.rating)) + (film.rating % 1 ? '½' : '') : '';
+
+        const filmEl = document.createElement('div');
+        filmEl.className = 'modal-film';
+        filmEl.innerHTML = `
+            <img src="${{posterUrl}}" alt="${{film.title}}" loading="lazy">
+            <div class="film-title">${{film.title}}</div>
+            <div class="film-year">${{film.year}}</div>
+            ${{ratingStars ? `<div class="film-rating">${{ratingStars}}</div>` : ''}}
+        `;
+        grid.appendChild(filmEl);
+    }});
+
+    document.getElementById('filmModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}}
+
+function closeModal() {{
+    document.getElementById('filmModal').classList.remove('active');
+    document.body.style.overflow = '';
+}}
+
+// Close modal on overlay click
+document.getElementById('filmModal').addEventListener('click', (e) => {{
+    if (e.target.classList.contains('modal-overlay')) closeModal();
+}});
+
+// Close modal on escape
+document.addEventListener('keydown', (e) => {{
+    if (e.key === 'Escape') closeModal();
+}});
+
+// Chart.js configuration
+Chart.defaults.color = '#a1a1aa';
+Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.08)';
+Chart.defaults.font.family = "'Inter', sans-serif";
+
+// Initialize charts
+const charts = {{
+    genresWatchedLikedChart: {self.charts.get('genres_watched_vs_liked', '{}')},
+    actorsWatchedLikedChart: {self.charts.get('actors_watched_vs_liked', '{}')},
+    directorsWatchedLikedChart: {self.charts.get('directors_watched_vs_liked', '{}')},
+    yearlyChart: {self.charts.get('yearly', '{}')},
+    monthlyChart: {self.charts.get('monthly', '{}')},
+    runtimeChart: {self.charts.get('runtime', '{}')},
+    genresChart: {self.charts.get('genres', '{}')},
+    countriesChart: {self.charts.get('countries', '{}')},
+    ratingEvolutionChart: {self.charts.get('rating_evolution', '{}')}
+}};
+
+// Create charts when tab becomes visible
+function initCharts() {{
+    Object.entries(charts).forEach(([id, config]) => {{
+        const canvas = document.getElementById(id);
+        if (canvas && !canvas.chart) {{
+            canvas.chart = new Chart(canvas, config);
+        }}
+    }});
+}}
+
+// Initialize visible charts
+initCharts();
+
+// Reinitialize when tab changes (for proper sizing)
+document.querySelectorAll('.nav-btn').forEach(btn => {{
+    btn.addEventListener('click', () => {{
+        setTimeout(initCharts, 100);
+    }});
+}});
+</script>'''
+
+    def _poster_url(self, poster_path: str) -> str:
+        """Get full poster URL or placeholder"""
+        if poster_path:
+            return f"{self.POSTER_BASE_URL}{poster_path}"
+        return self.POSTER_PLACEHOLDER

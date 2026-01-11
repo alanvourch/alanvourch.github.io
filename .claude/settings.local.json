@@ -3,7 +3,9 @@
     "allow": [
       "Bash(python letterboxd_stats.py:*)",
       "Bash(start \"\" \"C:\\\\Users\\\\snip1\\\\Documents\\\\GitHub\\\\Claude CODE\\\\letterboxd_stats.html\")",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "Bash(python run.py:*)",
+      "Bash(set PYTHONIOENCODING=utf-8:*)"
     ]
   }
 }

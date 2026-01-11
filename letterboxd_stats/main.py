@@ -14,7 +14,7 @@ from .html_generator import HTMLGenerator
 def main():
     """Main execution function"""
     print("="*60)
-    print("LETTERBOXD STATS - Enhanced Dashboard Generator")
+    print("LETTERBOXD STATS v3.0 - Dashboard Generator")
     print("="*60)
     print()
 
@@ -49,7 +49,7 @@ def main():
         print("-"*60)
         chart_gen = ChartGenerator(stats)
         charts = chart_gen.generate_all_charts()
-        print("✓ Chart configurations generated")
+        print("[OK] Chart configurations generated")
         print()
 
         # Step 5: Generate HTML
@@ -61,14 +61,14 @@ def main():
         # Write HTML file
         with open(config.OUTPUT_HTML, 'w', encoding='utf-8') as f:
             f.write(html)
-        print(f"✓ HTML dashboard saved to: {config.OUTPUT_HTML}")
+        print(f"[OK] HTML dashboard saved to: {config.OUTPUT_HTML}")
 
         # Step 6: Export JSON data (for web app use)
         print("STEP 6: Exporting JSON Data")
         print("-"*60)
         with open(config.OUTPUT_JSON, 'w', encoding='utf-8') as f:
             json.dump(stats, f, indent=2, ensure_ascii=False)
-        print(f"✓ JSON data saved to: {config.OUTPUT_JSON}")
+        print(f"[OK] JSON data saved to: {config.OUTPUT_JSON}")
         print()
 
         # Summary
@@ -80,19 +80,19 @@ def main():
         return 0
 
     except ValueError as e:
-        print(f"\n❌ Configuration Error:")
+        print(f"\n[ERROR] Configuration Error:")
         print(str(e))
         print()
         return 1
 
     except FileNotFoundError as e:
-        print(f"\n❌ File Not Found:")
+        print(f"\n[ERROR] File Not Found:")
         print(str(e))
         print()
         return 1
 
     except Exception as e:
-        print(f"\n❌ Unexpected Error:")
+        print(f"\n[ERROR] Unexpected Error:")
         print(str(e))
         import traceback
         traceback.print_exc()

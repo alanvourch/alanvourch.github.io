@@ -9,6 +9,23 @@ from . import config
 class ChartGenerator:
     """Generate Chart.js configurations for various chart types"""
 
+    # Modern color palette
+    COLORS = {
+        'cyan': 'rgba(0, 212, 255, 0.85)',
+        'purple': 'rgba(124, 58, 237, 0.85)',
+        'pink': 'rgba(244, 114, 182, 0.85)',
+        'yellow': 'rgba(251, 191, 36, 0.85)',
+        'green': 'rgba(52, 211, 153, 0.85)',
+        'orange': 'rgba(251, 146, 60, 0.85)',
+        'violet': 'rgba(167, 139, 250, 0.85)',
+        'red': 'rgba(248, 113, 113, 0.85)',
+        'blue': 'rgba(96, 165, 250, 0.85)',
+        'emerald': 'rgba(74, 222, 128, 0.85)',
+        # Liked-specific (heart red)
+        'liked': 'rgba(239, 68, 68, 0.85)',
+        'liked_light': 'rgba(239, 68, 68, 0.4)',
+    }
+
     def __init__(self, stats: Dict):
         self.stats = stats
         self.colors = config.CHART_COLORS
@@ -30,6 +47,11 @@ class ChartGenerator:
         charts['runtime'] = self._runtime_distribution_chart()
         charts['countries'] = self._countries_chart()
         charts['rating_evolution'] = self._rating_evolution_chart()
+
+        # NEW: Watched vs Liked comparison charts
+        charts['genres_watched_vs_liked'] = self._genres_watched_vs_liked_chart()
+        charts['actors_watched_vs_liked'] = self._actors_watched_vs_liked_chart()
+        charts['directors_watched_vs_liked'] = self._directors_watched_vs_liked_chart()
 
         return charts
 
@@ -299,6 +321,147 @@ class ChartGenerator:
                 'scales': {
                     'y': {'min': 0, 'max': 5, 'grid': {'color': 'rgba(255,255,255,0.05)'}},
                     'x': {'grid': {'display': False}}
+                }
+            }
+        })
+
+    def _genres_watched_vs_liked_chart(self) -> str:
+        """Genres comparison: watched vs liked - horizontal grouped bar chart"""
+        # Get watched genres
+        watched_genres = self.stats.get('genres', {}).get('distribution', [])[:8]
+        # Get liked genres
+        liked_genres = self.stats.get('liked', {}).get('top_genres', [])
+
+        # Create lookup for liked counts
+        liked_lookup = {g['genre']: g['count'] for g in liked_genres}
+
+        labels = [g['genre'] for g in watched_genres]
+        watched_data = [g['count'] for g in watched_genres]
+        liked_data = [liked_lookup.get(genre, 0) for genre in labels]
+
+        return json.dumps({
+            'type': 'bar',
+            'data': {
+                'labels': labels,
+                'datasets': [
+                    {
+                        'label': 'Watched',
+                        'data': watched_data,
+                        'backgroundColor': self.COLORS['cyan'],
+                        'borderRadius': 4
+                    },
+                    {
+                        'label': 'Liked',
+                        'data': liked_data,
+                        'backgroundColor': self.COLORS['liked'],
+                        'borderRadius': 4
+                    }
+                ]
+            },
+            'options': {
+                'indexAxis': 'y',
+                'responsive': True,
+                'maintainAspectRatio': False,
+                'plugins': {
+                    'legend': {
+                        'display': True,
+                        'position': 'top',
+                        'labels': {'padding': 15, 'usePointStyle': True}
+                    }
+                },
+                'scales': {
+                    'x': {'beginAtZero': True, 'grid': {'color': 'rgba(255,255,255,0.05)'}},
+                    'y': {'grid': {'display': False}}
+                }
+            }
+        })
+
+    def _actors_watched_vs_liked_chart(self) -> str:
+        """Top actors: watched count vs liked count"""
+        actors = self.stats.get('actors', {}).get('top_by_count', [])[:10]
+
+        labels = [a['name'] for a in actors]
+        watched_data = [a['count'] for a in actors]
+        liked_data = [a.get('liked_count', 0) for a in actors]
+
+        return json.dumps({
+            'type': 'bar',
+            'data': {
+                'labels': labels,
+                'datasets': [
+                    {
+                        'label': 'Watched',
+                        'data': watched_data,
+                        'backgroundColor': self.COLORS['purple'],
+                        'borderRadius': 4
+                    },
+                    {
+                        'label': 'Liked',
+                        'data': liked_data,
+                        'backgroundColor': self.COLORS['liked'],
+                        'borderRadius': 4
+                    }
+                ]
+            },
+            'options': {
+                'indexAxis': 'y',
+                'responsive': True,
+                'maintainAspectRatio': False,
+                'plugins': {
+                    'legend': {
+                        'display': True,
+                        'position': 'top',
+                        'labels': {'padding': 15, 'usePointStyle': True}
+                    }
+                },
+                'scales': {
+                    'x': {'beginAtZero': True, 'grid': {'color': 'rgba(255,255,255,0.05)'}},
+                    'y': {'grid': {'display': False}}
+                }
+            }
+        })
+
+    def _directors_watched_vs_liked_chart(self) -> str:
+        """Top directors: watched count vs liked count"""
+        directors = self.stats.get('directors', {}).get('top_by_count', [])[:10]
+
+        labels = [d['name'] for d in directors]
+        watched_data = [d['count'] for d in directors]
+        liked_data = [d.get('liked_count', 0) for d in directors]
+
+        return json.dumps({
+            'type': 'bar',
+            'data': {
+                'labels': labels,
+                'datasets': [
+                    {
+                        'label': 'Watched',
+                        'data': watched_data,
+                        'backgroundColor': self.COLORS['orange'],
+                        'borderRadius': 4
+                    },
+                    {
+                        'label': 'Liked',
+                        'data': liked_data,
+                        'backgroundColor': self.COLORS['liked'],
+                        'borderRadius': 4
+                    }
+                ]
+            },
+            'options': {
+                'indexAxis': 'y',
+                'responsive': True,
+                'maintainAspectRatio': False,
+                'plugins': {
+                    'legend': {
+                        'display': True,
+                        'position': 'top',
+                        'labels': {'padding': 15, 'usePointStyle': True}
+                    }
+                },
+                'scales': {
+                    'x': {'beginAtZero': True, 'grid': {'color': 'rgba(255,255,255,0.05)'}},
+                    'y': {'grid': {'display': False}}
                 }
             }
         })

@@ -10,8 +10,14 @@ load_dotenv()
 # TMDB API Configuration
 TMDB_API_KEY = os.getenv('TMDB_API_KEY', '')
 TMDB_BASE_URL = 'https://api.themoviedb.org/3'
+TMDB_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p'
 TMDB_RATE_LIMIT = 40  # requests per 10 seconds
 TMDB_RATE_WINDOW = 10  # seconds
+
+# Poster Configuration
+# Available sizes: w92, w154, w185, w342, w500, w780, original
+# w185 is a good balance between quality and size (~10-15KB per image)
+POSTER_SIZE = os.getenv('POSTER_SIZE', 'w185')
 
 # Data Paths
 DATA_DIR = os.getenv('DATA_DIR', 'letterboxd-nashkel-2026-01-08-19-29-utc')

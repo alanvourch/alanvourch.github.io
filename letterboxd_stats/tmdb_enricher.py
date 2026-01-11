@@ -39,7 +39,7 @@ class TMDBEnricher:
             try:
                 with open(self.cache_file, 'r', encoding='utf-8') as f:
                     self.cache = json.load(f)
-                print(f"✓ Loaded {len(self.cache)} cached films")
+                print(f"[OK] Loaded {len(self.cache)} cached films")
             except Exception as e:
                 print(f"Warning: Could not load cache: {e}")
                 self.cache = {}
@@ -281,6 +281,6 @@ class TMDBEnricher:
                 f.write("="*60 + "\n\n")
                 for film in self.stats['unmatched_films']:
                     f.write(f"{film['title']} ({film['year']})\n")
-            print(f"✓ Unmatched films logged to {config.UNMATCHED_LOG_FILE}")
+            print(f"[OK] Unmatched films logged to {config.UNMATCHED_LOG_FILE}")
         except Exception as e:
             print(f"Warning: Could not write unmatched films log: {e}")
