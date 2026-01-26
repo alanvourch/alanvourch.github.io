@@ -300,31 +300,32 @@ body {
     transition: width 0.3s ease;
 }
 
-/* Film Posters Grid - Adaptive layout for year wrap */
+/* Film Posters Grid - Fixed 4 per row layout for year wrap */
 .posters-grid-adaptive {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
 }
 
 .posters-grid-adaptive .poster-card {
-    min-height: 200px;
+    min-height: 150px;
 }
 
 .posters-grid-adaptive .poster-card img {
-    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
 }
 
-@media (min-width: 1100px) {
+@media (max-width: 768px) {
     .posters-grid-adaptive {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
     .posters-grid-adaptive {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-        gap: 0.75rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
     }
 }
 
@@ -925,24 +926,20 @@ body {
 
     <section class="section">
         <div class="section-header">
-            <h2 class="section-title">🎬 Directors: Watched vs Liked</h2>
+            <h2 class="section-title">🎬 Directors & Runtime</h2>
         </div>
-        <div class="chart-card" style="max-width: 700px;">
-            <h3>Top Directors Comparison</h3>
-            <div class="chart-container">
-                <canvas id="directorsWatchedLikedChart"></canvas>
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3>Directors: Watched vs Liked</h3>
+                <div class="chart-container">
+                    <canvas id="directorsWatchedLikedChart"></canvas>
+                </div>
             </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="section-header">
-            <h2 class="section-title">⏱️ Runtime Distribution</h2>
-        </div>
-        <div class="chart-card" style="max-width: 700px;">
-            <h3>Film Lengths</h3>
-            <div class="chart-container">
-                <canvas id="runtimeChart"></canvas>
+            <div class="chart-card">
+                <h3>Runtime Distribution</h3>
+                <div class="chart-container">
+                    <canvas id="runtimeChart"></canvas>
+                </div>
             </div>
         </div>
     </section>
@@ -1081,6 +1078,33 @@ body {
         <div class="title">Interstellar</div>
         <div class="year">2014</div>
     </div>
+</div>
+<div class="poster-card">
+    <img src="https://image.tmdb.org/t/p/w185/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg" alt="La La Land" loading="lazy">
+    <span class="liked-badge">❤️</span>
+    <span class="rating high">★★★★★</span>
+    <div class="overlay">
+        <div class="title">La La Land</div>
+        <div class="year">2016</div>
+    </div>
+</div>
+<div class="poster-card">
+    <img src="https://image.tmdb.org/t/p/w185/2uSWRTtCG336nuBiG8jOTEUKSy8.jpg" alt="Alien: Romulus" loading="lazy">
+    <span class="liked-badge">❤️</span>
+    <span class="rating high">★★★★★</span>
+    <div class="overlay">
+        <div class="title">Alien: Romulus</div>
+        <div class="year">2024</div>
+    </div>
+</div>
+<div class="poster-card">
+    <img src="https://image.tmdb.org/t/p/w185/hNEokmUke0dazoBhttFN0o3L7Xv.jpg" alt="X-Men: First Class" loading="lazy">
+    <span class="liked-badge">❤️</span>
+    <span class="rating high">★★★★★</span>
+    <div class="overlay">
+        <div class="title">X-Men: First Class</div>
+        <div class="year">2011</div>
+    </div>
 </div></div>
 </div>
             
@@ -1130,6 +1154,33 @@ body {
     <div class="overlay">
         <div class="title">Gladiator II</div>
         <div class="year">2024</div>
+    </div>
+</div>
+<div class="poster-card">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='185' height='278' viewBox='0 0 185 278'%3E%3Crect fill='%231a1a2e' width='185' height='278'/%3E%3Ctext fill='%234a4a5a' font-family='sans-serif' font-size='14' x='50%25' y='50%25' text-anchor='middle'%3ENo Poster%3C/text%3E%3C/svg%3E" alt="The Beast" loading="lazy">
+    
+    <span class="rating low">★★</span>
+    <div class="overlay">
+        <div class="title">The Beast</div>
+        <div class="year">2023</div>
+    </div>
+</div>
+<div class="poster-card">
+    <img src="https://image.tmdb.org/t/p/w185/dVsgV7ak6vR5xyXFggooJQinXBg.jpg" alt="Hallow Road" loading="lazy">
+    
+    <span class="rating low">★★</span>
+    <div class="overlay">
+        <div class="title">Hallow Road</div>
+        <div class="year">2025</div>
+    </div>
+</div>
+<div class="poster-card">
+    <img src="https://image.tmdb.org/t/p/w185/bT68aKa9d7zDF7Z8MaskbWBRqzb.jpg" alt="River's Edge" loading="lazy">
+    
+    <span class="rating low">★★</span>
+    <div class="overlay">
+        <div class="title">River's Edge</div>
+        <div class="year">1986</div>
     </div>
 </div></div>
 </div>
@@ -1598,12 +1649,20 @@ body {
 
     <section class="section">
         <div class="section-header">
-            <h2 class="section-title">📈 Rating Trends</h2>
+            <h2 class="section-title">📈 Rating Analysis</h2>
         </div>
-        <div class="chart-card" style="max-width: 800px;">
-            <h3>Your Ratings Over Time</h3>
-            <div class="chart-container">
-                <canvas id="ratingEvolutionChart"></canvas>
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3>Your Ratings Over Time</h3>
+                <div class="chart-container">
+                    <canvas id="ratingEvolutionChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>Rating Distribution</h3>
+                <div class="chart-container">
+                    <canvas id="ratingDistributionChart"></canvas>
+                </div>
             </div>
         </div>
     </section>
@@ -1613,7 +1672,7 @@ body {
 <footer class="footer">
     <p>Data from <a href="https://letterboxd.com" target="_blank">Letterboxd</a> |
        Enhanced with <a href="https://www.themoviedb.org" target="_blank">TMDB</a></p>
-    <p>Letterboxd Stats v4.1</p>
+    <p>Letterboxd Stats v4.2</p>
 </footer>
     </div>
     
@@ -1722,7 +1781,8 @@ const charts = {
     runtimeChart: {"type": "bar", "data": {"labels": ["<90", "90-120", "120-150", "150-180", "180+"], "datasets": [{"label": "Films", "data": [247, 1006, 545, 109, 28], "backgroundColor": "rgba(52, 211, 153, 0.8)", "borderRadius": 6}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"y": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "x": {"grid": {"display": false}, "title": {"display": true, "text": "Runtime (minutes)"}}}}},
     genresChart: {"type": "doughnut", "data": {"labels": ["Drama", "Comedy", "Action", "Thriller", "Adventure", "Science Fiction", "Crime", "Horror", "Fantasy", "Romance"], "datasets": [{"data": [851, 594, 539, 496, 410, 363, 345, 263, 248, 192], "backgroundColor": ["rgba(0, 212, 255, 0.8)", "rgba(124, 58, 237, 0.8)", "rgba(244, 114, 182, 0.8)", "rgba(251, 191, 36, 0.8)", "rgba(52, 211, 153, 0.8)", "rgba(251, 146, 60, 0.8)", "rgba(167, 139, 250, 0.8)", "rgba(248, 113, 113, 0.8)", "rgba(96, 165, 250, 0.8)", "rgba(74, 222, 128, 0.8)"], "borderWidth": 0, "hoverOffset": 8}]}, "options": {"responsive": true, "maintainAspectRatio": false, "cutout": "55%", "plugins": {"legend": {"position": "right", "labels": {"padding": 12, "usePointStyle": true, "pointStyle": "circle", "font": {"size": 11}}, "maxWidth": 150}}, "layout": {"padding": {"right": 10}}}},
     countriesChart: {"type": "bar", "data": {"labels": ["United States of America", "United Kingdom", "France", "Germany", "Japan", "Canada", "Italy", "Belgium", "Australia", "Spain"], "datasets": [{"label": "Films", "data": [1542, 323, 234, 105, 96, 83, 47, 41, 31, 26], "backgroundColor": "rgba(167, 139, 250, 0.8)", "borderRadius": 6}]}, "options": {"indexAxis": "y", "responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"x": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "y": {"grid": {"display": false}}}}},
-    ratingEvolutionChart: {"type": "line", "data": {"labels": ["2019", "2021", "2022", "2023", "2024", "2025", "2026"], "datasets": [{"label": "Average Rating", "data": [3.88, 3.0, 3.46, 3.66, 3.55, 3.44, 3.83], "borderColor": "rgba(251, 191, 36, 0.8)", "backgroundColor": "rgba(251, 191, 36, 0.1)", "fill": true, "tension": 0.3}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"y": {"min": 0, "max": 5, "grid": {"color": "rgba(255,255,255,0.05)"}}, "x": {"grid": {"display": false}}}}}
+    ratingEvolutionChart: {"type": "line", "data": {"labels": ["2019", "2021", "2022", "2023", "2024", "2025", "2026"], "datasets": [{"label": "Average Rating", "data": [3.88, 3.0, 3.46, 3.66, 3.55, 3.44, 3.83], "borderColor": "rgba(251, 191, 36, 0.8)", "backgroundColor": "rgba(251, 191, 36, 0.1)", "fill": true, "tension": 0.3}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"y": {"min": 0, "max": 5, "grid": {"color": "rgba(255,255,255,0.05)"}}, "x": {"grid": {"display": false}}}}},
+    ratingDistributionChart: {"type": "bar", "data": {"labels": ["\u00bd", "\u2605", "\u2605\u00bd", "\u2605\u2605", "\u2605\u2605\u00bd", "\u2605\u2605\u2605", "\u2605\u2605\u2605\u00bd", "\u2605\u2605\u2605\u2605", "\u2605\u2605\u2605\u2605\u00bd", "\u2605\u2605\u2605\u2605\u2605"], "datasets": [{"label": "Films", "data": [2, 5, 4, 28, 49, 120, 143, 121, 62, 56], "backgroundColor": "rgba(251, 191, 36, 0.85)", "borderRadius": 6}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"y": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "x": {"grid": {"display": false}, "title": {"display": true, "text": "Your Rating"}}}}}
 };
 
 // Create charts when tab becomes visible

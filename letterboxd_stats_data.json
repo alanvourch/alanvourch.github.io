@@ -6219,7 +6219,7 @@
       "total_liked": 88,
       "total_rated": 169,
       "avg_rating": 3.44,
-      "top_5_rated": [
+      "top_rated": [
         {
           "title": "Wind River",
           "year": 2017,
@@ -6254,9 +6254,30 @@
           "rating": 5.0,
           "poster_path": "/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
           "liked": true
+        },
+        {
+          "title": "La La Land",
+          "year": 2016,
+          "rating": 5.0,
+          "poster_path": "/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg",
+          "liked": true
+        },
+        {
+          "title": "Alien: Romulus",
+          "year": 2024,
+          "rating": 5.0,
+          "poster_path": "/2uSWRTtCG336nuBiG8jOTEUKSy8.jpg",
+          "liked": true
+        },
+        {
+          "title": "X-Men: First Class",
+          "year": 2011,
+          "rating": 5.0,
+          "poster_path": "/hNEokmUke0dazoBhttFN0o3L7Xv.jpg",
+          "liked": true
         }
       ],
-      "bottom_5_rated": [
+      "bottom_rated": [
         {
           "title": "Wake Up Dead Man",
           "year": 2025,
@@ -6290,6 +6311,27 @@
           "year": 2024,
           "rating": 2.0,
           "poster_path": "/2cxhvwyEwRlysAmRH4iodkvo0z5.jpg",
+          "liked": false
+        },
+        {
+          "title": "The Beast",
+          "year": 2023,
+          "rating": 2.0,
+          "poster_path": null,
+          "liked": false
+        },
+        {
+          "title": "Hallow Road",
+          "year": 2025,
+          "rating": 2.0,
+          "poster_path": "/dVsgV7ak6vR5xyXFggooJQinXBg.jpg",
+          "liked": false
+        },
+        {
+          "title": "River's Edge",
+          "year": 1986,
+          "rating": 2.0,
+          "poster_path": "/bT68aKa9d7zDF7Z8MaskbWBRqzb.jpg",
           "liked": false
         }
       ],
@@ -6477,7 +6519,7 @@
       "total_liked": 3,
       "total_rated": 3,
       "avg_rating": 3.83,
-      "top_5_rated": [
+      "top_rated": [
         {
           "title": "Singin' in the Rain",
           "year": 1952,
@@ -6500,7 +6542,7 @@
           "liked": false
         }
       ],
-      "bottom_5_rated": [],
+      "bottom_rated": [],
       "top_actor": {
         "name": "Patton Oswalt",
         "count": 1,
@@ -8961,5 +9003,47 @@
       }
     ],
     "total": 1122
-  }
+  },
+  "rating_distribution": [
+    {
+      "rating": 0.5,
+      "count": 2
+    },
+    {
+      "rating": 1.0,
+      "count": 5
+    },
+    {
+      "rating": 1.5,
+      "count": 4
+    },
+    {
+      "rating": 2.0,
+      "count": 28
+    },
+    {
+      "rating": 2.5,
+      "count": 49
+    },
+    {
+      "rating": 3.0,
+      "count": 120
+    },
+    {
+      "rating": 3.5,
+      "count": 143
+    },
+    {
+      "rating": 4.0,
+      "count": 121
+    },
+    {
+      "rating": 4.5,
+      "count": 62
+    },
+    {
+      "rating": 5.0,
+      "count": 56
+    }
+  ]
 }

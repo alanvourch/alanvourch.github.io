@@ -71,6 +71,9 @@ class StatsCalculator:
         # NEW: Liked-specific stats
         self._calculate_liked_stats()
 
+        # NEW: Rating distribution for charts
+        self._calculate_rating_distribution()
+
         print("[OK] Statistics calculated")
         return self.stats
 
@@ -534,10 +537,10 @@ class StatsCalculator:
         # Get films with ratings
         year_diary_rated = year_diary[year_diary['Rating'].notna()].copy()
 
-        # Top 5 highest rated
+        # Top 8 highest rated (2 rows of 4)
         top_rated = []
         if not year_diary_rated.empty:
-            top_sorted = year_diary_rated.nlargest(5, 'Rating')
+            top_sorted = year_diary_rated.nlargest(8, 'Rating')
             for _, row in top_sorted.iterrows():
                 title, yr = row['Name'], int(row['Year']) if pd.notna(row['Year']) else 0
                 metadata = self.tmdb_data.get((title, yr), {})
@@ -549,10 +552,10 @@ class StatsCalculator:
                     'liked': self.is_film_liked(title, yr)
                 })
 
-        # Bottom 5 lowest rated (minimum 5 entries)
+        # Bottom 8 lowest rated (minimum 8 entries for full display)
         bottom_rated = []
-        if len(year_diary_rated) >= 5:
-            bottom_sorted = year_diary_rated.nsmallest(5, 'Rating')
+        if len(year_diary_rated) >= 8:
+            bottom_sorted = year_diary_rated.nsmallest(8, 'Rating')
             for _, row in bottom_sorted.iterrows():
                 title, yr = row['Name'], int(row['Year']) if pd.notna(row['Year']) else 0
                 metadata = self.tmdb_data.get((title, yr), {})
@@ -647,8 +650,8 @@ class StatsCalculator:
             'total_liked': liked_count,
             'total_rated': len(year_diary_rated),
             'avg_rating': avg_rating,
-            'top_5_rated': top_rated,
-            'bottom_5_rated': bottom_rated,
+            'top_rated': top_rated,
+            'bottom_rated': bottom_rated,
             'top_actor': top_actor,
             'top_director': top_director,
             'genre_distribution': genre_distribution,
@@ -664,8 +667,8 @@ class StatsCalculator:
             'total_liked': 0,
             'total_rated': 0,
             'avg_rating': 0,
-            'top_5_rated': [],
-            'bottom_5_rated': [],
+            'top_rated': [],
+            'bottom_rated': [],
             'top_actor': None,
             'top_director': None,
             'genre_distribution': [],
@@ -763,3 +766,21 @@ class StatsCalculator:
             'top_genres': top_liked_genres,
             'total': len(liked_films)
         }
+
+    def _calculate_rating_distribution(self):
+        """Calculate distribution of ratings (how many films at each star level)"""
+        ratings = self.lb_data.get('ratings', pd.DataFrame())
+
+        if ratings.empty:
+            self.stats['rating_distribution'] = []
+            return
+
+        # Count ratings by star level (0.5 to 5.0)
+        rating_counts = {}
+        for rating in [0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0]:
+            count = len(ratings[ratings['Rating'] == rating])
+            rating_counts[rating] = count
+
+        self.stats['rating_distribution'] = [
+            {'rating': r, 'count': c} for r, c in rating_counts.items()
+        ]

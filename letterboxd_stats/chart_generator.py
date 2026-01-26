@@ -56,17 +56,30 @@ class ChartGenerator:
         return charts
 
     def _rating_distribution_chart(self) -> str:
-        """Rating distribution bar chart"""
-        # This would use the ratings data from basic stats
-        # For now, returning a placeholder structure
+        """Rating distribution bar chart - shows how many films at each star level"""
+        rating_data = self.stats.get('rating_distribution', [])
+
+        # Format labels as stars (e.g., "★½", "★★", etc.)
+        labels = []
+        data = []
+        for item in rating_data:
+            rating = item['rating']
+            full_stars = int(rating)
+            half_star = rating % 1 >= 0.5
+            star_label = '★' * full_stars + ('½' if half_star else '')
+            if not star_label:
+                star_label = '½'
+            labels.append(star_label)
+            data.append(item['count'])
+
         return json.dumps({
             'type': 'bar',
             'data': {
-                'labels': [],
+                'labels': labels,
                 'datasets': [{
                     'label': 'Films',
-                    'data': [],
-                    'backgroundColor': self.colors[3],
+                    'data': data,
+                    'backgroundColor': self.COLORS['yellow'],
                     'borderRadius': 6
                 }]
             },
@@ -76,7 +89,7 @@ class ChartGenerator:
                 'plugins': {'legend': {'display': False}},
                 'scales': {
                     'y': {'beginAtZero': True, 'grid': {'color': 'rgba(255,255,255,0.05)'}},
-                    'x': {'grid': {'display': False}}
+                    'x': {'grid': {'display': False}, 'title': {'display': True, 'text': 'Your Rating'}}
                 }
             }
         })

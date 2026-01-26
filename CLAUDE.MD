@@ -1,4 +1,4 @@
-# Letterboxd Stats Visualizer v4.1
+# Letterboxd Stats Visualizer v4.2
 
 A Python-based tool that generates beautiful, interactive HTML visualizations of your Letterboxd movie watching data, enhanced with metadata from The Movie Database (TMDB).
 
@@ -29,13 +29,13 @@ requirements.txt          # Python dependencies
 
 ## Features
 
-### Dashboard Navigation (v4.1)
+### Dashboard Navigation (v4.2)
 The dashboard uses a tabbed interface with 5 main sections:
-1. **Overview** - Key stats, watched vs liked comparisons, activity charts, and runtime distribution
-2. **[Year] Wrap** - Previous year wrap-up (Spotify Wrapped style) with adaptive poster grids
+1. **Overview** - Key stats, watched vs liked comparisons, activity charts, directors comparison, and runtime distribution
+2. **[Year] Wrap** - Previous year wrap-up (Spotify Wrapped style) with 8 movies in rated sections (2 rows of 4)
 3. **[Year] Live** - Current year stats, updated on each run
 4. **People** - Interactive actor/director cards with click-to-expand film lists
-5. **Insights** - Viewing time stats, genre distribution, countries, and rating trends
+5. **Insights** - Viewing time stats, genre distribution, countries, rating trends, and rating distribution
 
 ### Basic Statistics
 - Total films watched
@@ -331,6 +331,13 @@ This project uses data from TMDB. Make sure to comply with TMDB's terms of servi
 - Built with Python, pandas, and Chart.js
 
 ## Changelog
+
+### v4.2 (2026-01)
+- Directors and Runtime charts now displayed in aligned 2-column grid (matching Activity section)
+- Year wrap sections now show 8 movies (2 rows of 4) instead of 5 for highest/lowest rated
+- Added Rating Distribution chart to Insights tab showing films per star level
+- Rating Analysis section with side-by-side Rating Trends and Rating Distribution charts
+- Fixed poster grid layout for year wrap sections
 
 ### v4.1 (2026-01)
 - Enhanced year wrap sections with better visual design

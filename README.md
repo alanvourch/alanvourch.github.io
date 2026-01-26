@@ -1,19 +1,17 @@
-# Letterboxd Stats Visualizer v4.1
+# Letterboxd Stats Visualizer v4.2
 
 Transform your Letterboxd data into a beautiful, interactive dashboard with insights about your favorite actors, directors, genres, and viewing habits.
 
-![Version](https://img.shields.io/badge/version-4.1-blue)
+![Version](https://img.shields.io/badge/version-4.2-blue)
 ![Python](https://img.shields.io/badge/python-3.8+-green)
 ![License](https://img.shields.io/badge/license-MIT-orange)
 
-## What's New in v4.1
+## What's New in v4.2
 
-- **Enhanced Year Wrap** - Bigger posters, red heart emojis, full month names
-- **Adaptive Poster Grids** - Posters intelligently fill available space
-- **Improved Visuals** - Better shadows, hover effects, gradient accents
-- **Cleaner Layout** - Less empty space, single-column pie chart legend
-- **Section Emojis** - Visual icons for each dashboard section
-- **Polished UI** - Gradient effects on year numbers and top person names
+- **Aligned Chart Layouts** - Directors and Runtime charts now in 2-column grid matching Activity section
+- **More Movies in Year Wrap** - 8 movies (2 rows of 4) for highest/lowest rated instead of 5
+- **Rating Distribution Chart** - New chart showing how many films you rated at each star level
+- **Better Insights Tab** - Rating trends and distribution side-by-side in consistent layout
 
 ## Features
 
@@ -112,6 +110,12 @@ See [CLAUDE.md](CLAUDE.md) for detailed documentation including:
 - **HTML/CSS**: Modern, responsive dark-themed UI
 
 ## Changelog
+
+### v4.2
+- Directors and Runtime charts now in aligned 2-column grid
+- Year wrap sections show 8 movies (2 rows of 4) instead of 5
+- Added Rating Distribution chart to Insights tab
+- Rating Analysis section with side-by-side charts
 
 ### v4.1
 - Enhanced year wrap sections with larger posters (90x135px)

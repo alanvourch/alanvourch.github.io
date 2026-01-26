@@ -1,6 +1,6 @@
 """
 Generate HTML dashboard with modern tabbed layout, modals, and movie posters
-Dashboard v4.1 - Enhanced visuals, adaptive poster grids, improved year wrap sections
+Dashboard v4.2 - Aligned chart layouts, 8 movies per rated section, rating distribution chart
 """
 from typing import Dict
 import json
@@ -343,31 +343,32 @@ body {
     transition: width 0.3s ease;
 }
 
-/* Film Posters Grid - Adaptive layout for year wrap */
+/* Film Posters Grid - Fixed 4 per row layout for year wrap */
 .posters-grid-adaptive {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
 }
 
 .posters-grid-adaptive .poster-card {
-    min-height: 200px;
+    min-height: 150px;
 }
 
 .posters-grid-adaptive .poster-card img {
-    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
 }
 
-@media (min-width: 1100px) {
+@media (max-width: 768px) {
     .posters-grid-adaptive {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
     .posters-grid-adaptive {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-        gap: 0.75rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
     }
 }
 
@@ -985,24 +986,20 @@ body {
 
     <section class="section">
         <div class="section-header">
-            <h2 class="section-title">🎬 Directors: Watched vs Liked</h2>
+            <h2 class="section-title">🎬 Directors & Runtime</h2>
         </div>
-        <div class="chart-card" style="max-width: 700px;">
-            <h3>Top Directors Comparison</h3>
-            <div class="chart-container">
-                <canvas id="directorsWatchedLikedChart"></canvas>
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3>Directors: Watched vs Liked</h3>
+                <div class="chart-container">
+                    <canvas id="directorsWatchedLikedChart"></canvas>
+                </div>
             </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="section-header">
-            <h2 class="section-title">⏱️ Runtime Distribution</h2>
-        </div>
-        <div class="chart-card" style="max-width: 700px;">
-            <h3>Film Lengths</h3>
-            <div class="chart-container">
-                <canvas id="runtimeChart"></canvas>
+            <div class="chart-card">
+                <h3>Runtime Distribution</h3>
+                <div class="chart-container">
+                    <canvas id="runtimeChart"></canvas>
+                </div>
             </div>
         </div>
     </section>
@@ -1039,9 +1036,9 @@ body {
         most_active_month_name = month_names[most_active_month] if most_active_month else 'N/A'
         most_active_month_count = year_stats.get('most_active_month_count', 0)
 
-        # Generate top rated posters (5 per row)
-        top_rated_html = self._generate_rated_poster_grid(year_stats.get('top_5_rated', []), 'Highest Rated', 'trophy')
-        bottom_rated_html = self._generate_rated_poster_grid(year_stats.get('bottom_5_rated', []), 'Lowest Rated', 'thumbs-down')
+        # Generate top rated posters (4 per row, 2 rows = 8 movies)
+        top_rated_html = self._generate_rated_poster_grid(year_stats.get('top_rated', []), 'Highest Rated', 'trophy')
+        bottom_rated_html = self._generate_rated_poster_grid(year_stats.get('bottom_rated', []), 'Lowest Rated', 'thumbs-down')
 
         # Top actor section - show ALL films
         top_actor = year_stats.get('top_actor')
@@ -1288,12 +1285,20 @@ body {
 
     <section class="section">
         <div class="section-header">
-            <h2 class="section-title">📈 Rating Trends</h2>
+            <h2 class="section-title">📈 Rating Analysis</h2>
         </div>
-        <div class="chart-card" style="max-width: 800px;">
-            <h3>Your Ratings Over Time</h3>
-            <div class="chart-container">
-                <canvas id="ratingEvolutionChart"></canvas>
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3>Your Ratings Over Time</h3>
+                <div class="chart-container">
+                    <canvas id="ratingEvolutionChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>Rating Distribution</h3>
+                <div class="chart-container">
+                    <canvas id="ratingDistributionChart"></canvas>
+                </div>
             </div>
         </div>
     </section>
@@ -1323,7 +1328,7 @@ body {
 <footer class="footer">
     <p>Data from <a href="https://letterboxd.com" target="_blank">Letterboxd</a> |
        Enhanced with <a href="https://www.themoviedb.org" target="_blank">TMDB</a></p>
-    <p>Letterboxd Stats v4.1</p>
+    <p>Letterboxd Stats v4.2</p>
 </footer>'''
 
     def _generate_scripts(self) -> str:
@@ -1423,7 +1428,8 @@ const charts = {{
     runtimeChart: {self.charts.get('runtime', '{}')},
     genresChart: {self.charts.get('genres', '{}')},
     countriesChart: {self.charts.get('countries', '{}')},
-    ratingEvolutionChart: {self.charts.get('rating_evolution', '{}')}
+    ratingEvolutionChart: {self.charts.get('rating_evolution', '{}')},
+    ratingDistributionChart: {self.charts.get('ratings', '{}')}
 }};
 
 // Create charts when tab becomes visible
