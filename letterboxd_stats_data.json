@@ -12,43 +12,43 @@
     "distribution": [
       {
         "genre": "Drama",
-        "count": 923
+        "count": 851
       },
       {
         "genre": "Comedy",
-        "count": 618
+        "count": 594
       },
       {
         "genre": "Action",
-        "count": 552
+        "count": 539
       },
       {
         "genre": "Thriller",
-        "count": 516
+        "count": 496
       },
       {
         "genre": "Adventure",
-        "count": 423
+        "count": 410
       },
       {
         "genre": "Science Fiction",
-        "count": 368
-      },
-      {
-        "genre": "Crime",
         "count": 361
       },
       {
+        "genre": "Crime",
+        "count": 345
+      },
+      {
         "genre": "Horror",
-        "count": 272
+        "count": 262
       },
       {
         "genre": "Fantasy",
-        "count": 257
+        "count": 248
       },
       {
         "genre": "Romance",
-        "count": 215
+        "count": 192
       }
     ],
     "favorites": [
@@ -109,9 +109,9 @@
     "top_by_count": [
       {
         "name": "Brad Pitt",
-        "count": 30,
+        "count": 29,
         "liked_count": 19,
-        "like_ratio": 63.3,
+        "like_ratio": 65.5,
         "films": [
           {
             "title": "F1",
@@ -250,14 +250,6 @@
             "character": "Rusty Ryan"
           },
           {
-            "title": "The Assassination of Jesse James by the Coward Robert Ford",
-            "year": 2007,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/xMKn6EQS7eR5ubhPJbw5pQSBZMw.jpg",
-            "character": "Jesse James"
-          },
-          {
             "title": "Mr. & Mrs. Smith",
             "year": 2005,
             "rating": 3.5,
@@ -357,9 +349,9 @@
       },
       {
         "name": "Robert De Niro",
-        "count": 28,
+        "count": 25,
         "liked_count": 17,
-        "like_ratio": 60.7,
+        "like_ratio": 68.0,
         "films": [
           {
             "title": "Killers of the Flower Moon",
@@ -400,14 +392,6 @@
             "liked": true,
             "poster_path": "/kCokPP4WCQRrrAuZ7FcpIyHr8b2.jpg",
             "character": "Carl Van Loon"
-          },
-          {
-            "title": "Stardust",
-            "year": 2007,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/7zbFmxy3DqKYL2M8Hop6uylp2Uy.jpg",
-            "character": "Captain Shakespeare"
           },
           {
             "title": "Shark Tale",
@@ -498,28 +482,12 @@
             "character": "Leonard Lowe"
           },
           {
-            "title": "Midnight Run",
-            "year": 1988,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/yx0touyDQ9enWDsFgS4MbBwCSNd.jpg",
-            "character": "John Wesley “Jack” Walsh"
-          },
-          {
             "title": "The Untouchables",
             "year": 1987,
             "rating": null,
             "liked": true,
             "poster_path": "/8BquGK22zCcsmBWiaIakaaPpSZb.jpg",
             "character": "Al Capone"
-          },
-          {
-            "title": "Angel Heart",
-            "year": 1987,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/h5v3wjJQNB7q2RntEnKDLhKtTFE.jpg",
-            "character": "Louis Cyphre"
           },
           {
             "title": "Brazil",
@@ -589,9 +557,9 @@
       },
       {
         "name": "Tom Hanks",
-        "count": 27,
+        "count": 25,
         "liked_count": 14,
-        "like_ratio": 51.9,
+        "like_ratio": 56.0,
         "films": [
           {
             "title": "The Phoenician Scheme",
@@ -784,22 +752,6 @@
             "liked": true,
             "poster_path": "/tFe5Yoo5zT495okA49bq1vPPkiV.jpg",
             "character": "Andrew Beckett"
-          },
-          {
-            "title": "Sleepless in Seattle",
-            "year": 1993,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/jAXfku1u1uaLGh4cUmK0ESf1pPu.jpg",
-            "character": "Sam Baldwin"
-          },
-          {
-            "title": "A League of Their Own",
-            "year": 1992,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/7xpFXAOjgzFPE3vyVerFGfrXhFK.jpg",
-            "character": "Jimmy Dugan"
           },
           {
             "title": "Big",
@@ -1021,9 +973,9 @@
       },
       {
         "name": "Ralph Fiennes",
-        "count": 24,
+        "count": 23,
         "liked_count": 9,
-        "like_ratio": 37.5,
+        "like_ratio": 39.1,
         "films": [
           {
             "title": "Conclave",
@@ -1194,14 +1146,6 @@
             "character": "Francis Dolarhyde"
           },
           {
-            "title": "The Prince of Egypt",
-            "year": 1998,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/2xUjYwL6Ol7TLJPPKs7sYW5PWLX.jpg",
-            "character": "Rameses (voice)"
-          },
-          {
             "title": "Strange Days",
             "year": 1995,
             "rating": 3.5,
@@ -1216,198 +1160,6 @@
             "liked": true,
             "poster_path": "/sF1U4EUQS8YHUYjNl3pMGNIQyr0.jpg",
             "character": "Amon Goeth"
-          }
-        ]
-      },
-      {
-        "name": "Christian Bale",
-        "count": 23,
-        "liked_count": 10,
-        "like_ratio": 43.5,
-        "films": [
-          {
-            "title": "Thor: Love and Thunder",
-            "year": 2022,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg",
-            "character": "Gorr"
-          },
-          {
-            "title": "Amsterdam",
-            "year": 2022,
-            "rating": 1.0,
-            "liked": false,
-            "poster_path": "/6sJcVzGCwrDCBMV0DU6eRzA2UxM.jpg",
-            "character": "Burt Berendsen"
-          },
-          {
-            "title": "The Pale Blue Eye",
-            "year": 2022,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/9xkGlFRqrN8btTLU0KQvOfn2PHr.jpg",
-            "character": "Augustus Landor"
-          },
-          {
-            "title": "Ford v Ferrari",
-            "year": 2019,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/dR1Ju50iudrOh3YgfwkAU1g2HZe.jpg",
-            "character": "Ken Miles"
-          },
-          {
-            "title": "Vice",
-            "year": 2018,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/1gCab6rNv1r6V64cwsU4oEr649Y.jpg",
-            "character": "Dick Cheney"
-          },
-          {
-            "title": "Hostiles",
-            "year": 2017,
-            "rating": 3.0,
-            "liked": false,
-            "poster_path": "/rqoezyB51GfhiloOB5ZErg5HXas.jpg",
-            "character": "Captain Joseph J. Blocker"
-          },
-          {
-            "title": "Knight of Cups",
-            "year": 2015,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/xejFBC19Nc7Xi1MiIvcf84ZCy2g.jpg",
-            "character": "Rick"
-          },
-          {
-            "title": "The Big Short",
-            "year": 2015,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/scVEaJEwP8zUix8vgmMoJJ9Nq0w.jpg",
-            "character": "Michael Burry"
-          },
-          {
-            "title": "American Hustle",
-            "year": 2013,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/z6O1KDhfWDTm5ZBr6Ovr0eg8LqO.jpg",
-            "character": "Irving Rosenfeld"
-          },
-          {
-            "title": "Out of the Furnace",
-            "year": 2013,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/cOuQQ4eRpSBxb0G9OXzWE1pHPeq.jpg",
-            "character": "Russell Baze"
-          },
-          {
-            "title": "The Dark Knight Rises",
-            "year": 2012,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/hr0L2aueqlP2BYUblTTjmtn0hw4.jpg",
-            "character": "Bruce Wayne"
-          },
-          {
-            "title": "The Fighter",
-            "year": 2010,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/xfsFerGhO1h6rLk8vwLgMyQ8WVJ.jpg",
-            "character": "Dicky Eklund"
-          },
-          {
-            "title": "Public Enemies",
-            "year": 2009,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/3KgtekisQBrHRsm2cD5UOB6Ce3k.jpg",
-            "character": "Melvin Purvis"
-          },
-          {
-            "title": "Terminator Salvation",
-            "year": 2009,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/gw6JhlekZgtKUFlDTezq3j5JEPK.jpg",
-            "character": "John Connor"
-          },
-          {
-            "title": "The Dark Knight",
-            "year": 2008,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
-            "character": "Bruce Wayne"
-          },
-          {
-            "title": "3:10 to Yuma",
-            "year": 2007,
-            "rating": 4.5,
-            "liked": true,
-            "poster_path": "/voMB69AsLnPNmtfbrBl0lbeFKDH.jpg",
-            "character": "Dan Evans"
-          },
-          {
-            "title": "The Prestige",
-            "year": 2006,
-            "rating": 5.0,
-            "liked": true,
-            "poster_path": "/bdN3gXuIZYaJP7ftKK2sU0nPtEA.jpg",
-            "character": "Alfred Borden"
-          },
-          {
-            "title": "Rescue Dawn",
-            "year": 2006,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/ymPlV2ymUBSctfRzpehFOxFmJiS.jpg",
-            "character": "Dieter Dengler"
-          },
-          {
-            "title": "Batman Begins",
-            "year": 2005,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/sPX89Td70IDDjVr85jdSBb4rWGr.jpg",
-            "character": "Bruce Wayne / Batman"
-          },
-          {
-            "title": "The Machinist",
-            "year": 2004,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/diAYqR4xdF9Hnj7qun6DEQhRrT2.jpg",
-            "character": "Trevor Reznik"
-          },
-          {
-            "title": "American Psycho",
-            "year": 2000,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/9uGHEgsiUXjCNq8wdq4r49YL8A1.jpg",
-            "character": "Patrick Bateman"
-          },
-          {
-            "title": "Pocahontas",
-            "year": 1995,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/kZ1ft0QZ4e3zDUPMBftEkwI9ftd.jpg",
-            "character": "Thomas (voice)"
-          },
-          {
-            "title": "Empire of the Sun",
-            "year": 1987,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/gEaCzjwHoPgyQFcwHql7o5YLHAU.jpg",
-            "character": "Jim"
           }
         ]
       },
@@ -2372,6 +2124,190 @@
         ]
       },
       {
+        "name": "Christian Bale",
+        "count": 22,
+        "liked_count": 10,
+        "like_ratio": 45.5,
+        "films": [
+          {
+            "title": "Thor: Love and Thunder",
+            "year": 2022,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg",
+            "character": "Gorr"
+          },
+          {
+            "title": "Amsterdam",
+            "year": 2022,
+            "rating": 1.0,
+            "liked": false,
+            "poster_path": "/6sJcVzGCwrDCBMV0DU6eRzA2UxM.jpg",
+            "character": "Burt Berendsen"
+          },
+          {
+            "title": "Ford v Ferrari",
+            "year": 2019,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/dR1Ju50iudrOh3YgfwkAU1g2HZe.jpg",
+            "character": "Ken Miles"
+          },
+          {
+            "title": "Vice",
+            "year": 2018,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/1gCab6rNv1r6V64cwsU4oEr649Y.jpg",
+            "character": "Dick Cheney"
+          },
+          {
+            "title": "Hostiles",
+            "year": 2017,
+            "rating": 3.0,
+            "liked": false,
+            "poster_path": "/rqoezyB51GfhiloOB5ZErg5HXas.jpg",
+            "character": "Captain Joseph J. Blocker"
+          },
+          {
+            "title": "Knight of Cups",
+            "year": 2015,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/xejFBC19Nc7Xi1MiIvcf84ZCy2g.jpg",
+            "character": "Rick"
+          },
+          {
+            "title": "The Big Short",
+            "year": 2015,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/scVEaJEwP8zUix8vgmMoJJ9Nq0w.jpg",
+            "character": "Michael Burry"
+          },
+          {
+            "title": "American Hustle",
+            "year": 2013,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/z6O1KDhfWDTm5ZBr6Ovr0eg8LqO.jpg",
+            "character": "Irving Rosenfeld"
+          },
+          {
+            "title": "Out of the Furnace",
+            "year": 2013,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/cOuQQ4eRpSBxb0G9OXzWE1pHPeq.jpg",
+            "character": "Russell Baze"
+          },
+          {
+            "title": "The Dark Knight Rises",
+            "year": 2012,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/hr0L2aueqlP2BYUblTTjmtn0hw4.jpg",
+            "character": "Bruce Wayne"
+          },
+          {
+            "title": "The Fighter",
+            "year": 2010,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/xfsFerGhO1h6rLk8vwLgMyQ8WVJ.jpg",
+            "character": "Dicky Eklund"
+          },
+          {
+            "title": "Public Enemies",
+            "year": 2009,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/3KgtekisQBrHRsm2cD5UOB6Ce3k.jpg",
+            "character": "Melvin Purvis"
+          },
+          {
+            "title": "Terminator Salvation",
+            "year": 2009,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/gw6JhlekZgtKUFlDTezq3j5JEPK.jpg",
+            "character": "John Connor"
+          },
+          {
+            "title": "The Dark Knight",
+            "year": 2008,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+            "character": "Bruce Wayne"
+          },
+          {
+            "title": "3:10 to Yuma",
+            "year": 2007,
+            "rating": 4.5,
+            "liked": true,
+            "poster_path": "/voMB69AsLnPNmtfbrBl0lbeFKDH.jpg",
+            "character": "Dan Evans"
+          },
+          {
+            "title": "The Prestige",
+            "year": 2006,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/bdN3gXuIZYaJP7ftKK2sU0nPtEA.jpg",
+            "character": "Alfred Borden"
+          },
+          {
+            "title": "Rescue Dawn",
+            "year": 2006,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/ymPlV2ymUBSctfRzpehFOxFmJiS.jpg",
+            "character": "Dieter Dengler"
+          },
+          {
+            "title": "Batman Begins",
+            "year": 2005,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/sPX89Td70IDDjVr85jdSBb4rWGr.jpg",
+            "character": "Bruce Wayne / Batman"
+          },
+          {
+            "title": "The Machinist",
+            "year": 2004,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/diAYqR4xdF9Hnj7qun6DEQhRrT2.jpg",
+            "character": "Trevor Reznik"
+          },
+          {
+            "title": "American Psycho",
+            "year": 2000,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/9uGHEgsiUXjCNq8wdq4r49YL8A1.jpg",
+            "character": "Patrick Bateman"
+          },
+          {
+            "title": "Pocahontas",
+            "year": 1995,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/kZ1ft0QZ4e3zDUPMBftEkwI9ftd.jpg",
+            "character": "Thomas (voice)"
+          },
+          {
+            "title": "Empire of the Sun",
+            "year": 1987,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/gEaCzjwHoPgyQFcwHql7o5YLHAU.jpg",
+            "character": "Jim"
+          }
+        ]
+      },
+      {
         "name": "Scarlett Johansson",
         "count": 22,
         "liked_count": 11,
@@ -3092,174 +3028,6 @@
         ]
       },
       {
-        "name": "Jake Gyllenhaal",
-        "count": 20,
-        "liked_count": 9,
-        "like_ratio": 45.0,
-        "films": [
-          {
-            "title": "Guy Ritchie's The Covenant",
-            "year": 2023,
-            "rating": 4.0,
-            "liked": true,
-            "poster_path": "/kVG8zFFYrpyYLoHChuEeOGAd6Ru.jpg",
-            "character": "Master Sergeant John Kinley"
-          },
-          {
-            "title": "Spider-Man: Far From Home",
-            "year": 2019,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/4q2NNj4S5dG2RLF9CpXsej7yXl.jpg",
-            "character": "Quentin Beck / Mysterio"
-          },
-          {
-            "title": "Wildlife",
-            "year": 2018,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/hQSUwjSSRtWCA5EBoY22gGzaE8Y.jpg",
-            "character": "Jerry Brinson"
-          },
-          {
-            "title": "Life",
-            "year": 2017,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/wztfli5NgYDgurVgShNflvnyA3Z.jpg",
-            "character": "Dr. David Jordan"
-          },
-          {
-            "title": "Nocturnal Animals",
-            "year": 2016,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/mdLDgQBD0va09npSQX5Zgo2evXM.jpg",
-            "character": "Edward Sheffield / Tony Hastings"
-          },
-          {
-            "title": "Southpaw",
-            "year": 2015,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/kSQ49Fi3NVTqGGXILmxV2T2pdkG.jpg",
-            "character": "Billy 'The Great'  Hope"
-          },
-          {
-            "title": "Everest",
-            "year": 2015,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/2jKOu2bjpLP6NXJcm7Ep14bDGtA.jpg",
-            "character": "Scott Fischer"
-          },
-          {
-            "title": "Demolition",
-            "year": 2015,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/4t56LZ1KbOOxgKfqMKN6truBDVc.jpg",
-            "character": "Davis Mitchell"
-          },
-          {
-            "title": "Nightcrawler",
-            "year": 2014,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/j9HrX8f7GbZQm1BrBiR40uFQZSb.jpg",
-            "character": "Louis Bloom"
-          },
-          {
-            "title": "Prisoners",
-            "year": 2013,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/jsS3a3ep2KyBVmmiwaz3LvK49b1.jpg",
-            "character": "Detective Loki"
-          },
-          {
-            "title": "Enemy",
-            "year": 2013,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/vf40tyDRKZsBmaLsYeopzfFLzLx.jpg",
-            "character": "Adam / Anthony"
-          },
-          {
-            "title": "End of Watch",
-            "year": 2012,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/pDeVKQICkcdwwjHxGj0MeS14YJ6.jpg",
-            "character": "Brian Taylor"
-          },
-          {
-            "title": "Source Code",
-            "year": 2011,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/nTr0lvAzeQmUjgSgDEHTJpnrxTz.jpg",
-            "character": "Colter Stevens"
-          },
-          {
-            "title": "Love & Other Drugs",
-            "year": 2010,
-            "rating": 1.0,
-            "liked": false,
-            "poster_path": "/wZLM2uKJRYNchLmiCIjosX0rXy8.jpg",
-            "character": "Jamie Randall"
-          },
-          {
-            "title": "Prince of Persia: The Sands of Time",
-            "year": 2010,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/r9nw8LMdewMvRdNkEy0GH8yQ4n0.jpg",
-            "character": "Prince Dastan"
-          },
-          {
-            "title": "Zodiac",
-            "year": 2007,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/6YmeO4pB7XTh8P8F960O1uA14JO.jpg",
-            "character": "Robert Graysmith"
-          },
-          {
-            "title": "Brokeback Mountain",
-            "year": 2005,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/aByfQOQBNa4CMFwIgq3QrqY2ZHh.jpg",
-            "character": "Jack Twist"
-          },
-          {
-            "title": "Jarhead",
-            "year": 2005,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/6vdj47RAWOUZBkeQmqToeZ7eaio.jpg",
-            "character": "Anthony Swofford"
-          },
-          {
-            "title": "The Day After Tomorrow",
-            "year": 2004,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/Wr4HeYQRvwVCxzOV5TmGE7UkXq.jpg",
-            "character": "Sam Hall"
-          },
-          {
-            "title": "Donnie Darko",
-            "year": 2001,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/fhQoQfejY1hUcwyuLgpBrYs6uFt.jpg",
-            "character": "Donnie Darko"
-          }
-        ]
-      },
-      {
         "name": "Bradley Cooper",
         "count": 20,
         "liked_count": 10,
@@ -3428,174 +3196,6 @@
         ]
       },
       {
-        "name": "Arnold Schwarzenegger",
-        "count": 20,
-        "liked_count": 11,
-        "like_ratio": 55.0,
-        "films": [
-          {
-            "title": "Sly",
-            "year": 2023,
-            "rating": 3.0,
-            "liked": true,
-            "poster_path": "/1utWajLPvv1R9ZwkD98s2ZEngS.jpg",
-            "character": "Self"
-          },
-          {
-            "title": "Terminator Genisys",
-            "year": 2015,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/oZRVDpNtmHk8M1VYy1aeOWUXgbC.jpg",
-            "character": "Guardian / The Terminator"
-          },
-          {
-            "title": "The Expendables 2",
-            "year": 2012,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/74rTIGyGoIu5KSxDVMdr8H3MtMo.jpg",
-            "character": "Trench"
-          },
-          {
-            "title": "Terminator 3: Rise of the Machines",
-            "year": 2003,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/vvevzdYIrk2636maNW4qeWmlPFG.jpg",
-            "character": "The Terminator"
-          },
-          {
-            "title": "End of Days",
-            "year": 1999,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/pY8FbKKl3VD0jRI1iDFrwN6alLa.jpg",
-            "character": "Jericho Cane"
-          },
-          {
-            "title": "Batman & Robin",
-            "year": 1997,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/i7hEUpDuMN2LOrCEifFyGSHZQSY.jpg",
-            "character": "Dr. Victor Fries / Mr. Freeze"
-          },
-          {
-            "title": "Jingle All the Way",
-            "year": 1996,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/6QLkeLXPIxiihuX5enHHNEuCCzy.jpg",
-            "character": "Howard Langston"
-          },
-          {
-            "title": "Eraser",
-            "year": 1996,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/uu2gBpFElDfxTI6BI9bT4pZ4kvw.jpg",
-            "character": "U.S. Marshal John 'The Eraser' Kruger"
-          },
-          {
-            "title": "True Lies",
-            "year": 1994,
-            "rating": 5.0,
-            "liked": true,
-            "poster_path": "/pweFTnzzTfGK68woSVkiTgjLzWm.jpg",
-            "character": "Harry Tasker"
-          },
-          {
-            "title": "Last Action Hero",
-            "year": 1993,
-            "rating": 5.0,
-            "liked": true,
-            "poster_path": "/vkhEaWAv5j3qgrOGp3BgMeiYPKj.jpg",
-            "character": "Jack Slater / Self"
-          },
-          {
-            "title": "Terminator 2: Judgment Day",
-            "year": 1991,
-            "rating": 4.0,
-            "liked": true,
-            "poster_path": "/jFTVD4XoWQTcg7wdyJKa8PEds5q.jpg",
-            "character": "The Terminator"
-          },
-          {
-            "title": "Total Recall",
-            "year": 1990,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/wVbeL6fkbTKSmNfalj4VoAUUqJv.jpg",
-            "character": "Douglas Quaid / Hauser"
-          },
-          {
-            "title": "Kindergarten Cop",
-            "year": 1990,
-            "rating": 4.0,
-            "liked": true,
-            "poster_path": "/nKnHWwkXyvhzCYWm3FyRAv3qBrl.jpg",
-            "character": "John Kimble"
-          },
-          {
-            "title": "Twins",
-            "year": 1988,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/stJx9BQZbXrZnTGf9Erc7d2UMVc.jpg",
-            "character": "Julius Benedict"
-          },
-          {
-            "title": "Predator",
-            "year": 1987,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/k3mW4qfJo6SKqe6laRyNGnbB9n5.jpg",
-            "character": "Major Alan \"Dutch\" Schaefer"
-          },
-          {
-            "title": "The Running Man",
-            "year": 1987,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/GTAUOhO4BN0peJVvxGEQydJvUO.jpg",
-            "character": "Ben Richards"
-          },
-          {
-            "title": "Commando",
-            "year": 1985,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/ollPAAAgZ7euU8VisfqU3cuXhZ6.jpg",
-            "character": "John Matrix"
-          },
-          {
-            "title": "The Terminator",
-            "year": 1984,
-            "rating": 4.0,
-            "liked": true,
-            "poster_path": "/hzXSE66v6KthZ8nPoLZmsi2G05j.jpg",
-            "character": "Terminator"
-          },
-          {
-            "title": "Conan the Destroyer",
-            "year": 1984,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/m5i7S46DT1ESy7URkh2l92awGRr.jpg",
-            "character": "Conan"
-          },
-          {
-            "title": "Conan the Barbarian",
-            "year": 1982,
-            "rating": 2.5,
-            "liked": false,
-            "poster_path": "/qw2A587Ee61IwcSOLNFRhuOACZZ.jpg",
-            "character": "Conan"
-          }
-        ]
-      },
-      {
         "name": "Leonardo DiCaprio",
         "count": 19,
         "liked_count": 17,
@@ -3752,6 +3352,166 @@
             "liked": false,
             "poster_path": "/jhEmrXJpP6F3cqwyLjvgBgxxxFA.jpg",
             "character": "Kid"
+          }
+        ]
+      },
+      {
+        "name": "Jake Gyllenhaal",
+        "count": 19,
+        "liked_count": 9,
+        "like_ratio": 47.4,
+        "films": [
+          {
+            "title": "Guy Ritchie's The Covenant",
+            "year": 2023,
+            "rating": 4.0,
+            "liked": true,
+            "poster_path": "/kVG8zFFYrpyYLoHChuEeOGAd6Ru.jpg",
+            "character": "Master Sergeant John Kinley"
+          },
+          {
+            "title": "Spider-Man: Far From Home",
+            "year": 2019,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/4q2NNj4S5dG2RLF9CpXsej7yXl.jpg",
+            "character": "Quentin Beck / Mysterio"
+          },
+          {
+            "title": "Life",
+            "year": 2017,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/wztfli5NgYDgurVgShNflvnyA3Z.jpg",
+            "character": "Dr. David Jordan"
+          },
+          {
+            "title": "Nocturnal Animals",
+            "year": 2016,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/mdLDgQBD0va09npSQX5Zgo2evXM.jpg",
+            "character": "Edward Sheffield / Tony Hastings"
+          },
+          {
+            "title": "Southpaw",
+            "year": 2015,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/kSQ49Fi3NVTqGGXILmxV2T2pdkG.jpg",
+            "character": "Billy 'The Great'  Hope"
+          },
+          {
+            "title": "Everest",
+            "year": 2015,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/2jKOu2bjpLP6NXJcm7Ep14bDGtA.jpg",
+            "character": "Scott Fischer"
+          },
+          {
+            "title": "Demolition",
+            "year": 2015,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/4t56LZ1KbOOxgKfqMKN6truBDVc.jpg",
+            "character": "Davis Mitchell"
+          },
+          {
+            "title": "Nightcrawler",
+            "year": 2014,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/j9HrX8f7GbZQm1BrBiR40uFQZSb.jpg",
+            "character": "Louis Bloom"
+          },
+          {
+            "title": "Prisoners",
+            "year": 2013,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/jsS3a3ep2KyBVmmiwaz3LvK49b1.jpg",
+            "character": "Detective Loki"
+          },
+          {
+            "title": "Enemy",
+            "year": 2013,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/vf40tyDRKZsBmaLsYeopzfFLzLx.jpg",
+            "character": "Adam / Anthony"
+          },
+          {
+            "title": "End of Watch",
+            "year": 2012,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/pDeVKQICkcdwwjHxGj0MeS14YJ6.jpg",
+            "character": "Brian Taylor"
+          },
+          {
+            "title": "Source Code",
+            "year": 2011,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/nTr0lvAzeQmUjgSgDEHTJpnrxTz.jpg",
+            "character": "Colter Stevens"
+          },
+          {
+            "title": "Love & Other Drugs",
+            "year": 2010,
+            "rating": 1.0,
+            "liked": false,
+            "poster_path": "/wZLM2uKJRYNchLmiCIjosX0rXy8.jpg",
+            "character": "Jamie Randall"
+          },
+          {
+            "title": "Prince of Persia: The Sands of Time",
+            "year": 2010,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/r9nw8LMdewMvRdNkEy0GH8yQ4n0.jpg",
+            "character": "Prince Dastan"
+          },
+          {
+            "title": "Zodiac",
+            "year": 2007,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/6YmeO4pB7XTh8P8F960O1uA14JO.jpg",
+            "character": "Robert Graysmith"
+          },
+          {
+            "title": "Brokeback Mountain",
+            "year": 2005,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/aByfQOQBNa4CMFwIgq3QrqY2ZHh.jpg",
+            "character": "Jack Twist"
+          },
+          {
+            "title": "Jarhead",
+            "year": 2005,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/6vdj47RAWOUZBkeQmqToeZ7eaio.jpg",
+            "character": "Anthony Swofford"
+          },
+          {
+            "title": "The Day After Tomorrow",
+            "year": 2004,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/Wr4HeYQRvwVCxzOV5TmGE7UkXq.jpg",
+            "character": "Sam Hall"
+          },
+          {
+            "title": "Donnie Darko",
+            "year": 2001,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/fhQoQfejY1hUcwyuLgpBrYs6uFt.jpg",
+            "character": "Donnie Darko"
           }
         ]
       },
@@ -3914,6 +3674,166 @@
             "character": "Negotiator"
           }
         ]
+      },
+      {
+        "name": "Bill Murray",
+        "count": 19,
+        "liked_count": 16,
+        "like_ratio": 84.2,
+        "films": [
+          {
+            "title": "Ghostbusters: Afterlife",
+            "year": 2021,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/sg4xJaufDiQl7caFEskBtQXfD4x.jpg",
+            "character": "Peter Venkman"
+          },
+          {
+            "title": "On the Rocks",
+            "year": 2020,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/fcijRCmB7yTtloh4Pumy9b1rkwU.jpg",
+            "character": "Felix"
+          },
+          {
+            "title": "Isle of Dogs",
+            "year": 2018,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/c0nUX6Q1ZB0P2t1Jo6EeFSVnOGQ.jpg",
+            "character": "Boss (voice)"
+          },
+          {
+            "title": "The Grand Budapest Hotel",
+            "year": 2014,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/eWdyYQreja6JGCzqHWXpWHDrrPo.jpg",
+            "character": "M. Ivan"
+          },
+          {
+            "title": "Moonrise Kingdom",
+            "year": 2012,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/y4SXcbNl6CEF2t36icuzuBioj7K.jpg",
+            "character": "Mr. Bishop"
+          },
+          {
+            "title": "Fantastic Mr. Fox",
+            "year": 2009,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/euZyZb6iGreujYKrGyZHRddhUYh.jpg",
+            "character": "Clive Badger (voice)"
+          },
+          {
+            "title": "Zombieland",
+            "year": 2009,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/dUkAmAyPVqubSBNRjRqCgHggZcK.jpg",
+            "character": "Bill Murray"
+          },
+          {
+            "title": "The Darjeeling Limited",
+            "year": 2007,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/oSW5OVXTulaIXcoNwJAp5YEKpbP.jpg",
+            "character": "The Businessman"
+          },
+          {
+            "title": "The Life Aquatic with Steve Zissou",
+            "year": 2004,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/qZoFLNBC78jzboWeDH6Ha0qavF2.jpg",
+            "character": "Steve Zissou"
+          },
+          {
+            "title": "Lost in Translation",
+            "year": 2003,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/3jCLmYDIIiSMPujbwygNpqdpM8N.jpg",
+            "character": "Bob Harris"
+          },
+          {
+            "title": "The Royal Tenenbaums",
+            "year": 2001,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/nG7hZJn7wQTSDCQT39Gy3s3tbrp.jpg",
+            "character": "Raleigh St. Clair"
+          },
+          {
+            "title": "Charlie's Angels",
+            "year": 2000,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/iHTmZs0BmkwMCYi8rhvMWC5G4EM.jpg",
+            "character": "John Bosley"
+          },
+          {
+            "title": "Rushmore",
+            "year": 1998,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/hSJ6swahAuZ8wM96lHDTwQPXUvZ.jpg",
+            "character": "Herman Blume"
+          },
+          {
+            "title": "Space Jam",
+            "year": 1996,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/4RN5El3Pj2W4gpwgiAGLVfSJv2g.jpg",
+            "character": "Bill Murray"
+          },
+          {
+            "title": "Ed Wood",
+            "year": 1994,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/jNao464ZTwWUWr3uJJ8swVgaKd9.jpg",
+            "character": "Bunny Breckinridge"
+          },
+          {
+            "title": "Groundhog Day",
+            "year": 1993,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/gCgt1WARPZaXnq523ySQEUKinCs.jpg",
+            "character": "Phil Connors"
+          },
+          {
+            "title": "Ghostbusters II",
+            "year": 1989,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/yObYPMA58DnTMvJooFW7GG6jWAt.jpg",
+            "character": "Peter Venkman"
+          },
+          {
+            "title": "Scrooged",
+            "year": 1988,
+            "rating": 3.0,
+            "liked": false,
+            "poster_path": "/uO0znfB2ZzTXA1IS7jkrjNbpkYK.jpg",
+            "character": "Francis Cross"
+          },
+          {
+            "title": "Ghostbusters",
+            "year": 1984,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/7E8nLijS9AwwUEPu2oFYOVKhdFA.jpg",
+            "character": "Peter Venkman"
+          }
+        ]
       }
     ],
     "favorites": [
@@ -3993,7 +3913,7 @@
         "count": 3
       }
     ],
-    "total_unique": 11270
+    "total_unique": 10623
   },
   "directors": {
     "top_by_count": [
@@ -4189,9 +4109,9 @@
       },
       {
         "name": "Martin Scorsese",
-        "count": 20,
+        "count": 18,
         "liked_count": 13,
-        "like_ratio": 65.0,
+        "like_ratio": 72.2,
         "films": [
           {
             "title": "Killers of the Flower Moon",
@@ -4206,13 +4126,6 @@
             "rating": null,
             "liked": true,
             "poster_path": "/mbm8k3GFhXS0ROd9AD1gqYbIFbM.jpg"
-          },
-          {
-            "title": "Silence",
-            "year": 2016,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/x5T0cQDYws0xRBVG4Q3wpcrcmax.jpg"
           },
           {
             "title": "The Wolf of Wall Street",
@@ -4262,13 +4175,6 @@
             "rating": null,
             "liked": true,
             "poster_path": "/gziIkUSnYuj9ChCi8qOu2ZunpSC.jpg"
-          },
-          {
-            "title": "The Age of Innocence",
-            "year": 1993,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/5Tuyt26v7qNR8Cl3m7ZRx36rduf.jpg"
           },
           {
             "title": "Cape Fear",
@@ -5007,197 +4913,6 @@
         ]
       },
       {
-        "name": "James Mangold",
-        "count": 13,
-        "liked_count": 9,
-        "like_ratio": 69.2,
-        "films": [
-          {
-            "title": "A Complete Unknown",
-            "year": 2024,
-            "rating": 3.5,
-            "liked": true,
-            "poster_path": "/llWl3GtNoXosbvYboelmoT459NM.jpg"
-          },
-          {
-            "title": "Indiana Jones and the Dial of Destiny",
-            "year": 2023,
-            "rating": 3.0,
-            "liked": false,
-            "poster_path": "/Af4bXE63pVsb2FtbW8uYIyPBadD.jpg"
-          },
-          {
-            "title": "Ford v Ferrari",
-            "year": 2019,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/dR1Ju50iudrOh3YgfwkAU1g2HZe.jpg"
-          },
-          {
-            "title": "Logan",
-            "year": 2017,
-            "rating": 5.0,
-            "liked": true,
-            "poster_path": "/fnbjcRDYn6YviCcePDnGdyAkYsB.jpg"
-          },
-          {
-            "title": "The Wolverine",
-            "year": 2013,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/t2wVAcoRlKvEIVSbiYDb8d0QqqS.jpg"
-          },
-          {
-            "title": "Knight and Day",
-            "year": 2010,
-            "rating": 2.5,
-            "liked": false,
-            "poster_path": "/a7JmOBMNj5erYTgt4u1mQgvHItu.jpg"
-          },
-          {
-            "title": "3:10 to Yuma",
-            "year": 2007,
-            "rating": 4.5,
-            "liked": true,
-            "poster_path": "/voMB69AsLnPNmtfbrBl0lbeFKDH.jpg"
-          },
-          {
-            "title": "Walk the Line",
-            "year": 2005,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/p8lPTjvjOjTfvC1E9pmMwcF9vkn.jpg"
-          },
-          {
-            "title": "Identity",
-            "year": 2003,
-            "rating": 4.0,
-            "liked": true,
-            "poster_path": "/sYgimsiBywqVwJI8H4sETke8m7v.jpg"
-          },
-          {
-            "title": "Kate & Leopold",
-            "year": 2001,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/57kLEPlIXHynZXTjJF6Jyk3ZmKT.jpg"
-          },
-          {
-            "title": "Girl, Interrupted",
-            "year": 1999,
-            "rating": 3.5,
-            "liked": true,
-            "poster_path": "/dOBdatHIVppvmRFw2z7bf9VKJr9.jpg"
-          },
-          {
-            "title": "Cop Land",
-            "year": 1997,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/bUXaWZPj7qzXjKc2s3Pwdkhxh2o.jpg"
-          },
-          {
-            "title": "Heavy",
-            "year": 1995,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/xo2KsY7hOHDqpgYlDStL56zmgaq.jpg"
-          }
-        ]
-      },
-      {
-        "name": "Akira Kurosawa",
-        "count": 12,
-        "liked_count": 6,
-        "like_ratio": 50.0,
-        "films": [
-          {
-            "title": "Ran",
-            "year": 1985,
-            "rating": 5.0,
-            "liked": true,
-            "poster_path": "/jQnUtWaHYfqnXPOIf77K7Ycqk4M.jpg"
-          },
-          {
-            "title": "Kagemusha",
-            "year": 1980,
-            "rating": 4.0,
-            "liked": true,
-            "poster_path": "/fJgqj9s8HNZz9zwX6femVJn8HEB.jpg"
-          },
-          {
-            "title": "Dersu Uzala",
-            "year": 1975,
-            "rating": 4.0,
-            "liked": true,
-            "poster_path": "/bIOrDQ3Gg68k3qJAnRU7nIZr0BW.jpg"
-          },
-          {
-            "title": "Dodes'ka-den",
-            "year": 1970,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/gP9pM94ATcZGfKQ3faKy0a3dVIi.jpg"
-          },
-          {
-            "title": "High and Low",
-            "year": 1963,
-            "rating": 4.0,
-            "liked": true,
-            "poster_path": "/tgNjemQPG96uIezpiUiXFcer5ga.jpg"
-          },
-          {
-            "title": "Yojimbo",
-            "year": 1961,
-            "rating": 3.0,
-            "liked": false,
-            "poster_path": "/tN7kYPjRhDolpui9sc9Eq9n5b2O.jpg"
-          },
-          {
-            "title": "The Hidden Fortress",
-            "year": 1958,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/olO4vMPKNIJQxhJh54TPQFwKpad.jpg"
-          },
-          {
-            "title": "Throne of Blood",
-            "year": 1957,
-            "rating": 3.0,
-            "liked": false,
-            "poster_path": "/zaZFMNxJST0TtPd68yF7fNt1he8.jpg"
-          },
-          {
-            "title": "Seven Samurai",
-            "year": 1954,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/lOMGc8bnSwQhS4XyE1S99uH8NXf.jpg"
-          },
-          {
-            "title": "Ikiru",
-            "year": 1952,
-            "rating": 2.5,
-            "liked": false,
-            "poster_path": "/dgNTS4EQDDVfkzJI5msKuHu2Ei3.jpg"
-          },
-          {
-            "title": "Rashomon",
-            "year": 1950,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/vL7Xw04nFMHwnvXRFCmYYAzMUvY.jpg"
-          },
-          {
-            "title": "Stray Dog",
-            "year": 1949,
-            "rating": 4.0,
-            "liked": true,
-            "poster_path": "/riBzUgeYawBDi2q9PjARjHrQM7Z.jpg"
-          }
-        ]
-      },
-      {
         "name": "Quentin Tarantino",
         "count": 11,
         "liked_count": 11,
@@ -5368,91 +5083,6 @@
         ]
       },
       {
-        "name": "Billy Wilder",
-        "count": 11,
-        "liked_count": 8,
-        "like_ratio": 72.7,
-        "films": [
-          {
-            "title": "The Apartment",
-            "year": 1960,
-            "rating": 5.0,
-            "liked": true,
-            "poster_path": "/hhSRt1KKfRT0yEhEtRW3qp31JFU.jpg"
-          },
-          {
-            "title": "Some Like It Hot",
-            "year": 1959,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/hVIKyTK13AvOGv7ICmJjK44DTzp.jpg"
-          },
-          {
-            "title": "Witness for the Prosecution",
-            "year": 1957,
-            "rating": 4.5,
-            "liked": true,
-            "poster_path": "/bCj4EfuehAlgBwVd3diyWyhuuau.jpg"
-          },
-          {
-            "title": "The Seven Year Itch",
-            "year": 1955,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/4oLqx0QbjWFzWtkxRmDLGH47CUJ.jpg"
-          },
-          {
-            "title": "Sabrina",
-            "year": 1954,
-            "rating": 4.5,
-            "liked": true,
-            "poster_path": "/e1Po9NDrH7IJZhv89467gJH5FS0.jpg"
-          },
-          {
-            "title": "Stalag 17",
-            "year": 1953,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/lfve9FDKjT7JPbWI9NCs5340F79.jpg"
-          },
-          {
-            "title": "Ace in the Hole",
-            "year": 1951,
-            "rating": 4.0,
-            "liked": true,
-            "poster_path": "/gPVPzHEsJBX02HtBtIQgYnfeqNQ.jpg"
-          },
-          {
-            "title": "Sunset Boulevard",
-            "year": 1950,
-            "rating": null,
-            "liked": true,
-            "poster_path": "/zt8aQ6ksqK6p1AopC5zVTDS9pKT.jpg"
-          },
-          {
-            "title": "The Lost Weekend",
-            "year": 1945,
-            "rating": 4.5,
-            "liked": true,
-            "poster_path": "/8ggIOoCzt8xT2ePl8DdlRtXgcOh.jpg"
-          },
-          {
-            "title": "Double Indemnity",
-            "year": 1944,
-            "rating": 5.0,
-            "liked": true,
-            "poster_path": "/rVNYZZgfhwqVMMWlBmxOfWqnwCj.jpg"
-          },
-          {
-            "title": "Bad Seed",
-            "year": 1934,
-            "rating": null,
-            "liked": false,
-            "poster_path": "/7BLrXi3vB9sE0ZbShcVsjUMd7X.jpg"
-          }
-        ]
-      },
-      {
         "name": "Paul Thomas Anderson",
         "count": 11,
         "liked_count": 8,
@@ -5534,6 +5164,91 @@
             "rating": null,
             "liked": true,
             "poster_path": "/1l5UaoP25Ak8PWCKIULQz70yF03.jpg"
+          }
+        ]
+      },
+      {
+        "name": "James Mangold",
+        "count": 11,
+        "liked_count": 9,
+        "like_ratio": 81.8,
+        "films": [
+          {
+            "title": "A Complete Unknown",
+            "year": 2024,
+            "rating": 3.5,
+            "liked": true,
+            "poster_path": "/llWl3GtNoXosbvYboelmoT459NM.jpg"
+          },
+          {
+            "title": "Indiana Jones and the Dial of Destiny",
+            "year": 2023,
+            "rating": 3.0,
+            "liked": false,
+            "poster_path": "/Af4bXE63pVsb2FtbW8uYIyPBadD.jpg"
+          },
+          {
+            "title": "Ford v Ferrari",
+            "year": 2019,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/dR1Ju50iudrOh3YgfwkAU1g2HZe.jpg"
+          },
+          {
+            "title": "Logan",
+            "year": 2017,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/fnbjcRDYn6YviCcePDnGdyAkYsB.jpg"
+          },
+          {
+            "title": "The Wolverine",
+            "year": 2013,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/t2wVAcoRlKvEIVSbiYDb8d0QqqS.jpg"
+          },
+          {
+            "title": "Knight and Day",
+            "year": 2010,
+            "rating": 2.5,
+            "liked": false,
+            "poster_path": "/a7JmOBMNj5erYTgt4u1mQgvHItu.jpg"
+          },
+          {
+            "title": "3:10 to Yuma",
+            "year": 2007,
+            "rating": 4.5,
+            "liked": true,
+            "poster_path": "/voMB69AsLnPNmtfbrBl0lbeFKDH.jpg"
+          },
+          {
+            "title": "Walk the Line",
+            "year": 2005,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/p8lPTjvjOjTfvC1E9pmMwcF9vkn.jpg"
+          },
+          {
+            "title": "Identity",
+            "year": 2003,
+            "rating": 4.0,
+            "liked": true,
+            "poster_path": "/sYgimsiBywqVwJI8H4sETke8m7v.jpg"
+          },
+          {
+            "title": "Girl, Interrupted",
+            "year": 1999,
+            "rating": 3.5,
+            "liked": true,
+            "poster_path": "/dOBdatHIVppvmRFw2z7bf9VKJr9.jpg"
+          },
+          {
+            "title": "Cop Land",
+            "year": 1997,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/bUXaWZPj7qzXjKc2s3Pwdkhxh2o.jpg"
           }
         ]
       },
@@ -5621,6 +5336,162 @@
             "poster_path": "/IugtyTSEBusqT9F8nIcc3tD6hN.jpg"
           }
         ]
+      },
+      {
+        "name": "Akira Kurosawa",
+        "count": 10,
+        "liked_count": 6,
+        "like_ratio": 60.0,
+        "films": [
+          {
+            "title": "Ran",
+            "year": 1985,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/jQnUtWaHYfqnXPOIf77K7Ycqk4M.jpg"
+          },
+          {
+            "title": "Kagemusha",
+            "year": 1980,
+            "rating": 4.0,
+            "liked": true,
+            "poster_path": "/fJgqj9s8HNZz9zwX6femVJn8HEB.jpg"
+          },
+          {
+            "title": "Dersu Uzala",
+            "year": 1975,
+            "rating": 4.0,
+            "liked": true,
+            "poster_path": "/bIOrDQ3Gg68k3qJAnRU7nIZr0BW.jpg"
+          },
+          {
+            "title": "High and Low",
+            "year": 1963,
+            "rating": 4.0,
+            "liked": true,
+            "poster_path": "/tgNjemQPG96uIezpiUiXFcer5ga.jpg"
+          },
+          {
+            "title": "Yojimbo",
+            "year": 1961,
+            "rating": 3.0,
+            "liked": false,
+            "poster_path": "/tN7kYPjRhDolpui9sc9Eq9n5b2O.jpg"
+          },
+          {
+            "title": "Throne of Blood",
+            "year": 1957,
+            "rating": 3.0,
+            "liked": false,
+            "poster_path": "/zaZFMNxJST0TtPd68yF7fNt1he8.jpg"
+          },
+          {
+            "title": "Seven Samurai",
+            "year": 1954,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/lOMGc8bnSwQhS4XyE1S99uH8NXf.jpg"
+          },
+          {
+            "title": "Ikiru",
+            "year": 1952,
+            "rating": 2.5,
+            "liked": false,
+            "poster_path": "/dgNTS4EQDDVfkzJI5msKuHu2Ei3.jpg"
+          },
+          {
+            "title": "Rashomon",
+            "year": 1950,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/vL7Xw04nFMHwnvXRFCmYYAzMUvY.jpg"
+          },
+          {
+            "title": "Stray Dog",
+            "year": 1949,
+            "rating": 4.0,
+            "liked": true,
+            "poster_path": "/riBzUgeYawBDi2q9PjARjHrQM7Z.jpg"
+          }
+        ]
+      },
+      {
+        "name": "Hayao Miyazaki",
+        "count": 10,
+        "liked_count": 3,
+        "like_ratio": 30.0,
+        "films": [
+          {
+            "title": "The Boy and the Heron",
+            "year": 2023,
+            "rating": 2.0,
+            "liked": false,
+            "poster_path": "/f4oZTcfGrVTXKTWg157AwikXqmP.jpg"
+          },
+          {
+            "title": "Ponyo",
+            "year": 2008,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/yp8vEZflGynlEylxEesbYasc06i.jpg"
+          },
+          {
+            "title": "Howl's Moving Castle",
+            "year": 2004,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/13kOl2v0nD2OLbVSHnHk8GUFEhO.jpg"
+          },
+          {
+            "title": "Spirited Away",
+            "year": 2001,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/39wmItIWsg5sZMyRUHLkWBcuVCM.jpg"
+          },
+          {
+            "title": "Princess Mononoke",
+            "year": 1997,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/cMYCDADoLKLbB83g4WnJegaZimC.jpg"
+          },
+          {
+            "title": "Porco Rosso",
+            "year": 1992,
+            "rating": null,
+            "liked": true,
+            "poster_path": "/8mIvSvnVBApfORL9N6S38Q7wD6A.jpg"
+          },
+          {
+            "title": "Kiki's Delivery Service",
+            "year": 1989,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/Aufa4YdZIv4AXpR9rznwVA5SEfd.jpg"
+          },
+          {
+            "title": "My Neighbor Totoro",
+            "year": 1988,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/rtGDOeG9LzoerkDGZF9dnVeLppL.jpg"
+          },
+          {
+            "title": "Castle in the Sky",
+            "year": 1986,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/41XxSsJc5OrulP0m7TrrUeO2hoz.jpg"
+          },
+          {
+            "title": "Nausicaä of the Valley of the Wind",
+            "year": 1984,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/tcrkfB8SRPQCgwI88hQScua6nxh.jpg"
+          }
+        ]
       }
     ],
     "favorites": [
@@ -5675,53 +5546,65 @@
         "count": 3
       }
     ],
-    "total_unique": 1061
+    "total_unique": 1006
   },
   "runtime": {
-    "avg_runtime": 111.4,
+    "average": 111.5,
+    "total_hours": 3596,
+    "total_minutes": 215789,
+    "shortest": {
+      "title": "There's a Monster in My Kitchen",
+      "year": 2020,
+      "runtime": 2
+    },
+    "longest": {
+      "title": "Once Upon a Time in America",
+      "year": 1984,
+      "runtime": 229
+    },
     "min_runtime": 2,
-    "max_runtime": 276,
+    "max_runtime": 229,
     "distribution": {
-      "<90": 268,
-      "90-120": 1061,
-      "120-150": 571,
-      "150-180": 114,
-      "180+": 30
+      "<90": 247,
+      "90-120": 1006,
+      "120-150": 545,
+      "150-180": 109,
+      "180+": 28
     }
   },
   "geography": {
     "top_countries": [
       {
         "country": "United States of America",
-        "count": 1607
+        "count": 1542
       },
       {
         "country": "United Kingdom",
-        "count": 340
+        "count": 323
       },
       {
         "country": "France",
-        "count": 251
+        "count": 234
       },
       {
         "country": "Germany",
-        "count": 117
+        "count": 105
       },
       {
         "country": "Japan",
-        "count": 106
+        "count": 94
       },
       {
         "country": "Canada",
-        "count": 85
+        "count": 83
       },
       {
         "country": "Italy",
-        "count": 54
+        "count": 47
       },
       {
         "country": "Belgium",
-        "count": 43
+        "count": 41
       },
       {
         "country": "Australia",
@@ -5729,29 +5612,29 @@
       },
       {
         "country": "Spain",
-        "count": 29
+        "count": 26
       }
     ],
     "top_languages": [
       {
         "language": "en",
-        "count": 1709
+        "count": 1637
       },
       {
         "language": "fr",
-        "count": 143
+        "count": 138
       },
       {
         "language": "ja",
-        "count": 73
+        "count": 61
       },
       {
         "language": "it",
-        "count": 22
+        "count": 19
       },
       {
         "language": "es",
-        "count": 17
+        "count": 15
       },
       {
         "language": "de",
@@ -5759,23 +5642,23 @@
       },
       {
         "language": "ko",
-        "count": 14
+        "count": 12
       },
       {
         "language": "cn",
-        "count": 11
-      },
-      {
-        "language": "ru",
-        "count": 8
+        "count": 10
       },
       {
         "language": "da",
         "count": 7
+      },
+      {
+        "language": "sv",
+        "count": 5
       }
     ],
-    "total_countries": 58,
-    "total_languages": 21
+    "total_countries": 56,
+    "total_languages": 17
   },
   "rating_trends": {
     "monthly": [

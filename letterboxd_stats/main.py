@@ -14,7 +14,7 @@ from .html_generator import HTMLGenerator
 def main():
     """Main execution function"""
     print("="*60)
-    print("LETTERBOXD STATS v3.0 - Dashboard Generator")
+    print("LETTERBOXD STATS v4.0 - Dashboard Generator")
     print("="*60)
     print()
 

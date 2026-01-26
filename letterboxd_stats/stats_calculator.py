@@ -15,8 +15,9 @@ class StatsCalculator:
         self.lb_data = letterboxd_data
         self.tmdb_data = tmdb_data
         self.stats = {}
-        # Build liked films lookup set for fast checking
+        # Build lookup sets for fast checking
         self._build_liked_lookup()
+        self._build_watched_lookup()
 
     def _build_liked_lookup(self):
         """Build a set of liked films for fast lookup"""
@@ -25,6 +26,18 @@ class StatsCalculator:
         if not liked.empty:
             for _, row in liked.iterrows():
                 self.liked_set.add((row['Name'], int(row['Year']) if pd.notna(row['Year']) else 0))
+
+    def _build_watched_lookup(self):
+        """Build a set of watched films for fast lookup (excludes watchlist)"""
+        watched = self.lb_data.get('watched', pd.DataFrame())
+        self.watched_set = set()
+        if not watched.empty:
+            for _, row in watched.iterrows():
+                self.watched_set.add((row['Name'], int(row['Year']) if pd.notna(row['Year']) else 0))
+
+    def is_film_watched(self, title: str, year: int) -> bool:
+        """Check if a film is in the watched list (not just watchlist)"""
+        return (title, year) in self.watched_set
 
     def is_film_liked(self, title: str, year: int) -> bool:
         """Check if a film is liked"""
@@ -80,11 +93,15 @@ class StatsCalculator:
         }
 
     def _calculate_genre_stats(self):
-        """Calculate genre-related statistics"""
+        """Calculate genre-related statistics (only for watched films)"""
         genre_counts = Counter()
         genre_ratings = {}
 
         for (title, year), metadata in self.tmdb_data.items():
+            # Skip films not in watched list
+            if not self.is_film_watched(title, year):
+                continue
+
             genres = metadata.get('genres', [])
 
             # Get user rating for this film
@@ -121,13 +138,17 @@ class StatsCalculator:
         }
 
     def _calculate_actor_stats(self):
-        """Calculate actor-related statistics with film lists"""
+        """Calculate actor-related statistics with film lists (only for watched films)"""
         actor_counts = Counter()
         actor_ratings = {}
-        actor_films = defaultdict(list)  # NEW: Track films per actor
-        actor_liked_counts = Counter()  # NEW: Track liked films per actor
+        actor_films = defaultdict(list)  # Track films per actor
+        actor_liked_counts = Counter()  # Track liked films per actor
 
         for (title, year), metadata in self.tmdb_data.items():
+            # Skip films not in watched list
+            if not self.is_film_watched(title, year):
+                continue
+
             actors = metadata.get('actors', [])
             rating = self._get_film_rating(title, year)
             is_liked = self.is_film_liked(title, year)
@@ -190,13 +211,17 @@ class StatsCalculator:
         }
 
     def _calculate_director_stats(self):
-        """Calculate director-related statistics with film lists"""
+        """Calculate director-related statistics with film lists (only for watched films)"""
         director_counts = Counter()
         director_ratings = {}
-        director_films = defaultdict(list)  # NEW: Track films per director
-        director_liked_counts = Counter()  # NEW: Track liked films per director
+        director_films = defaultdict(list)  # Track films per director
+        director_liked_counts = Counter()  # Track liked films per director
 
         for (title, year), metadata in self.tmdb_data.items():
+            # Skip films not in watched list
+            if not self.is_film_watched(title, year):
+                continue
+
             directors = metadata.get('directors', [])
             rating = self._get_film_rating(title, year)
             is_liked = self.is_film_liked(title, year)
@@ -257,14 +282,26 @@ class StatsCalculator:
         }
 
     def _calculate_runtime_stats(self):
-        """Calculate runtime-related statistics"""
+        """Calculate runtime-related statistics (only for watched films)"""
         runtimes = []
         runtime_distribution = {'<90': 0, '90-120': 0, '120-150': 0, '150-180': 0, '180+': 0}
+        shortest_film = {'title': 'N/A', 'runtime': 999999}
+        longest_film = {'title': 'N/A', 'runtime': 0}
 
         for (title, year), metadata in self.tmdb_data.items():
+            # Skip films not in watched list
+            if not self.is_film_watched(title, year):
+                continue
+
             runtime = metadata.get('runtime')
             if runtime and runtime > 0:
                 runtimes.append(runtime)
+
+                # Track shortest and longest
+                if runtime < shortest_film['runtime']:
+                    shortest_film = {'title': title, 'year': year, 'runtime': runtime}
+                if runtime > longest_film['runtime']:
+                    longest_film = {'title': title, 'year': year, 'runtime': runtime}
 
                 # Categorize
                 if runtime < 90:
@@ -278,19 +315,30 @@ class StatsCalculator:
                 else:
                     runtime_distribution['180+'] += 1
 
+        total_minutes = sum(runtimes) if runtimes else 0
+        total_hours = round(total_minutes / 60)
+
         self.stats['runtime'] = {
-            'avg_runtime': round(sum(runtimes) / len(runtimes), 1) if runtimes else 0,
+            'average': round(sum(runtimes) / len(runtimes), 1) if runtimes else 0,
+            'total_hours': total_hours,
+            'total_minutes': total_minutes,
+            'shortest': shortest_film if shortest_film['runtime'] != 999999 else {'title': 'N/A', 'runtime': 0},
+            'longest': longest_film,
             'min_runtime': min(runtimes) if runtimes else 0,
             'max_runtime': max(runtimes) if runtimes else 0,
             'distribution': runtime_distribution
         }
 
     def _calculate_country_language_stats(self):
-        """Calculate country and language statistics"""
+        """Calculate country and language statistics (only for watched films)"""
         country_counts = Counter()
         language_counts = Counter()
 
         for (title, year), metadata in self.tmdb_data.items():
+            # Skip films not in watched list
+            if not self.is_film_watched(title, year):
+                continue
+
             countries = metadata.get('production_countries', [])
             for country in countries:
                 country_counts[country] += 1
