@@ -1,17 +1,20 @@
-# Letterboxd Stats Visualizer v4.2
+# Letterboxd Stats Visualizer v5.0
 
 Transform your Letterboxd data into a beautiful, interactive dashboard with insights about your favorite actors, directors, genres, and viewing habits.
 
-![Version](https://img.shields.io/badge/version-4.2-blue)
+![Version](https://img.shields.io/badge/version-5.0-blue)
 ![Python](https://img.shields.io/badge/python-3.8+-green)
 ![License](https://img.shields.io/badge/license-MIT-orange)
 
-## What's New in v4.2
+## What's New in v5.0
 
-- **Aligned Chart Layouts** - Directors and Runtime charts now in 2-column grid matching Activity section
-- **More Movies in Year Wrap** - 8 movies (2 rows of 4) for highest/lowest rated instead of 5
-- **Rating Distribution Chart** - New chart showing how many films you rated at each star level
-- **Better Insights Tab** - Rating trends and distribution side-by-side in consistent layout
+- **🎯 Journey Tab** - See your first film, milestones (100th, 500th, 1000th film), personal records, and streaks
+- **📅 Decades Tab** - Explore your films by decade with top-rated films from each era
+- **⭐ 5-Star Wall** - Beautiful poster grid of all your perfect-rated films
+- **🔄 Rewatches** - Track which films you keep coming back to
+- **✨ Fun Facts** - Personalized insights like time spent with your favorite actor
+- **🏆 Milestones** - Visual cards celebrating your film journey landmarks
+- **📊 Personal Records** - Most films in a day, longest streak, busiest month
 
 ## Features
 
@@ -110,6 +113,16 @@ See [CLAUDE.md](CLAUDE.md) for detailed documentation including:
 - **HTML/CSS**: Modern, responsive dark-themed UI
 
 ## Changelog
+
+### v5.0
+- NEW: Journey tab with first film, milestones, and personal records
+- NEW: Decades tab with era analysis and top films per decade
+- NEW: 5-star poster wall showcasing all perfect-rated films
+- NEW: Rewatch tracking with most rewatched films grid
+- NEW: Fun facts with personalized insights (time with favorite actor, etc.)
+- NEW: Milestone cards celebrating 100th, 250th, 500th, 1000th films
+- NEW: Personal records (most films in a day, longest streak, busiest month)
+- Improved visual design with new card styles and animations
 
 ### v4.2
 - Directors and Runtime charts now in aligned 2-column grid

@@ -53,6 +53,9 @@ class ChartGenerator:
         charts['actors_watched_vs_liked'] = self._actors_watched_vs_liked_chart()
         charts['directors_watched_vs_liked'] = self._directors_watched_vs_liked_chart()
 
+        # V5.0: New charts
+        charts['decades_distribution'] = self._decades_distribution_chart()
+
         return charts
 
     def _rating_distribution_chart(self) -> str:
@@ -135,8 +138,53 @@ class ChartGenerator:
         })
 
     def _decades_chart(self) -> str:
-        """Decades distribution chart"""
-        return "{}"  # Placeholder
+        """Decades distribution chart - placeholder for backwards compatibility"""
+        return self._decades_distribution_chart()
+
+    def _decades_distribution_chart(self) -> str:
+        """Decades distribution bar chart showing films per decade"""
+        decade_data = self.stats.get('decades', {}).get('distribution', [])
+
+        labels = [item['decade'] for item in decade_data]
+        data = [item['count'] for item in decade_data]
+
+        # Create gradient colors from oldest to newest
+        colors = [
+            'rgba(139, 92, 246, 0.85)',   # Purple for older
+            'rgba(168, 85, 247, 0.85)',
+            'rgba(192, 132, 252, 0.85)',
+            'rgba(196, 181, 253, 0.85)',
+            'rgba(124, 58, 237, 0.85)',
+            'rgba(99, 102, 241, 0.85)',
+            'rgba(79, 70, 229, 0.85)',
+            'rgba(67, 56, 202, 0.85)',
+            'rgba(55, 48, 163, 0.85)',
+            'rgba(49, 46, 129, 0.85)',
+            'rgba(0, 212, 255, 0.85)',    # Cyan for newer
+            'rgba(34, 211, 238, 0.85)',
+        ]
+
+        return json.dumps({
+            'type': 'bar',
+            'data': {
+                'labels': labels,
+                'datasets': [{
+                    'label': 'Films',
+                    'data': data,
+                    'backgroundColor': colors[:len(labels)],
+                    'borderRadius': 6
+                }]
+            },
+            'options': {
+                'responsive': True,
+                'maintainAspectRatio': False,
+                'plugins': {'legend': {'display': False}},
+                'scales': {
+                    'y': {'beginAtZero': True, 'grid': {'color': 'rgba(255,255,255,0.05)'}},
+                    'x': {'grid': {'display': False}}
+                }
+            }
+        })
 
     def _yearly_watch_chart(self) -> str:
         """Yearly watch activity chart"""

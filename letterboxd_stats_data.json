@@ -9045,5 +9045,985 @@
       "rating": 5.0,
       "count": 56
     }
+  ],
+  "decades": {
+    "distribution": [
+      {
+        "decade": "1900s",
+        "count": 1,
+        "decade_num": 1900
+      },
+      {
+        "decade": "1920s",
+        "count": 3,
+        "decade_num": 1920
+      },
+      {
+        "decade": "1930s",
+        "count": 7,
+        "decade_num": 1930
+      },
+      {
+        "decade": "1940s",
+        "count": 15,
+        "decade_num": 1940
+      },
+      {
+        "decade": "1950s",
+        "count": 26,
+        "decade_num": 1950
+      },
+      {
+        "decade": "1960s",
+        "count": 33,
+        "decade_num": 1960
+      },
+      {
+        "decade": "1970s",
+        "count": 54,
+        "decade_num": 1970
+      },
+      {
+        "decade": "1980s",
+        "count": 147,
+        "decade_num": 1980
+      },
+      {
+        "decade": "1990s",
+        "count": 282,
+        "decade_num": 1990
+      },
+      {
+        "decade": "2000s",
+        "count": 402,
+        "decade_num": 2000
+      },
+      {
+        "decade": "2010s",
+        "count": 621,
+        "decade_num": 2010
+      },
+      {
+        "decade": "2020s",
+        "count": 403,
+        "decade_num": 2020
+      }
+    ],
+    "top_per_decade": {
+      "1970s": {
+        "films": [
+          {
+            "title": "Network",
+            "year": 1976,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/qZomlHsaALUtkFeMDwdYmwS2Pbo.jpg"
+          },
+          {
+            "title": "French Fried Vacation 2",
+            "year": 1979,
+            "rating": 4.5,
+            "liked": true,
+            "poster_path": "/uTN0bp8yMUKesNTLXR1GnL2kLFs.jpg"
+          },
+          {
+            "title": "Serpico",
+            "year": 1973,
+            "rating": 4.5,
+            "liked": true,
+            "poster_path": "/pRagfd10PPWryFRSzLPIivfAXHJ.jpg"
+          },
+          {
+            "title": "Taxi Driver",
+            "year": 1976,
+            "rating": 4.0,
+            "liked": true,
+            "poster_path": "/ekstpH614fwDX8DUln1a2Opz0N8.jpg"
+          },
+          {
+            "title": "Phantom of the Paradise",
+            "year": 1974,
+            "rating": 4.0,
+            "liked": true,
+            "poster_path": "/qDOtGWeSQNwB3dG7Amt1K0JW0az.jpg"
+          }
+        ],
+        "total": 54,
+        "avg_rating": 3.74
+      },
+      "1950s": {
+        "films": [
+          {
+            "title": "Singin' in the Rain",
+            "year": 1952,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/w03EiJVHP8Un77boQeE7hg9DVdU.jpg"
+          },
+          {
+            "title": "Sabrina",
+            "year": 1954,
+            "rating": 4.5,
+            "liked": true,
+            "poster_path": "/e1Po9NDrH7IJZhv89467gJH5FS0.jpg"
+          },
+          {
+            "title": "Witness for the Prosecution",
+            "year": 1957,
+            "rating": 4.5,
+            "liked": true,
+            "poster_path": "/bCj4EfuehAlgBwVd3diyWyhuuau.jpg"
+          },
+          {
+            "title": "A Streetcar Named Desire",
+            "year": 1951,
+            "rating": 4.0,
+            "liked": true,
+            "poster_path": "/aicdlO5vt7z2ARm279eGzJeYCLQ.jpg"
+          },
+          {
+            "title": "North by Northwest",
+            "year": 1959,
+            "rating": 4.0,
+            "liked": true,
+            "poster_path": "/kNOFPQrel9YFCVzI0DF8FnCEpCw.jpg"
+          }
+        ],
+        "total": 26,
+        "avg_rating": 3.65
+      },
+      "2010s": {
+        "films": [
+          {
+            "title": "Whiplash",
+            "year": 2014,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/7fn624j5lj3xTme2SgiLCeuedmO.jpg"
+          },
+          {
+            "title": "Shutter Island",
+            "year": 2010,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/nrmXQ0zcZUL8jFLrakWc90IR8z9.jpg"
+          },
+          {
+            "title": "Drive",
+            "year": 2011,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/602vevIURmpDfzbnv5Ubi6wIkQm.jpg"
+          },
+          {
+            "title": "Interstellar",
+            "year": 2014,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg"
+          },
+          {
+            "title": "Mad Max: Fury Road",
+            "year": 2015,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/hA2ple9q4qnwxp3hKVNhroipsir.jpg"
+          }
+        ],
+        "total": 621,
+        "avg_rating": 3.57
+      },
+      "2000s": {
+        "films": [
+          {
+            "title": "The Lord of the Rings: The Fellowship of the Ring",
+            "year": 2001,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg"
+          },
+          {
+            "title": "Lost in Translation",
+            "year": 2003,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/3jCLmYDIIiSMPujbwygNpqdpM8N.jpg"
+          },
+          {
+            "title": "Ocean's Eleven",
+            "year": 2001,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/hQQCdZrsHtZyR6NbKH2YyCqd2fR.jpg"
+          },
+          {
+            "title": "The Prestige",
+            "year": 2006,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/bdN3gXuIZYaJP7ftKK2sU0nPtEA.jpg"
+          },
+          {
+            "title": "The Lord of the Rings: The Return of the King",
+            "year": 2003,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg"
+          }
+        ],
+        "total": 402,
+        "avg_rating": 3.77
+      },
+      "1980s": {
+        "films": [
+          {
+            "title": "The Empire Strikes Back",
+            "year": 1980,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/nNAeTmF4CtdSgMDplXTDPOpYzsX.jpg"
+          },
+          {
+            "title": "Back to the Future",
+            "year": 1985,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/vN5B5WgYscRGcQpVhHl6p9DDTP0.jpg"
+          },
+          {
+            "title": "Die Hard",
+            "year": 1988,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/7Bjd8kfmDSOzpmhySpEhkUyK2oH.jpg"
+          },
+          {
+            "title": "Blade Runner",
+            "year": 1982,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/63N9uy8nd9j7Eog2axPQ8lbr3Wj.jpg"
+          },
+          {
+            "title": "Manhunter",
+            "year": 1986,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/6rb24x39vV8n5301IelC8rCPJTH.jpg"
+          }
+        ],
+        "total": 147,
+        "avg_rating": 3.7
+      },
+      "1990s": {
+        "films": [
+          {
+            "title": "The Shawshank Redemption",
+            "year": 1994,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg"
+          },
+          {
+            "title": "Jurassic Park",
+            "year": 1993,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/bRKmwU9eXZI5dKT11Zx1KsayiLW.jpg"
+          },
+          {
+            "title": "Heat",
+            "year": 1995,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/umSVjVdbVwtx5ryCA2QXL44Durm.jpg"
+          },
+          {
+            "title": "Last Action Hero",
+            "year": 1993,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/vkhEaWAv5j3qgrOGp3BgMeiYPKj.jpg"
+          },
+          {
+            "title": "Home Alone 2: Lost in New York",
+            "year": 1992,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/9CAkQ9nfrDaIAyncWndwg0tfC8g.jpg"
+          }
+        ],
+        "total": 282,
+        "avg_rating": 3.72
+      },
+      "1960s": {
+        "films": [
+          {
+            "title": "The Apartment",
+            "year": 1960,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/hhSRt1KKfRT0yEhEtRW3qp31JFU.jpg"
+          },
+          {
+            "title": "Psycho",
+            "year": 1960,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/yz4QVqPx3h1hD1DfqqQkCq3rmxW.jpg"
+          },
+          {
+            "title": "Breakfast at Tiffany's",
+            "year": 1961,
+            "rating": 4.5,
+            "liked": true,
+            "poster_path": "/79xm4gXw4l7A5D0XukUOJRocFYQ.jpg"
+          },
+          {
+            "title": "Butch Cassidy and the Sundance Kid",
+            "year": 1969,
+            "rating": 4.5,
+            "liked": true,
+            "poster_path": "/gFmmykF1Ym3OGzENo50nZQaD1dx.jpg"
+          },
+          {
+            "title": "Harakiri",
+            "year": 1962,
+            "rating": 4.5,
+            "liked": true,
+            "poster_path": "/3nPwMd3KviJWaHzG9fZCqlwWMas.jpg"
+          }
+        ],
+        "total": 33,
+        "avg_rating": 4.04
+      },
+      "1940s": {
+        "films": [
+          {
+            "title": "Double Indemnity",
+            "year": 1944,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/rVNYZZgfhwqVMMWlBmxOfWqnwCj.jpg"
+          },
+          {
+            "title": "The Red Shoes",
+            "year": 1948,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/w6qzOivBPyX8ph6UvZaYMPgLiyx.jpg"
+          },
+          {
+            "title": "The Lost Weekend",
+            "year": 1945,
+            "rating": 4.5,
+            "liked": true,
+            "poster_path": "/8ggIOoCzt8xT2ePl8DdlRtXgcOh.jpg"
+          },
+          {
+            "title": "Rope",
+            "year": 1948,
+            "rating": 4.0,
+            "liked": true,
+            "poster_path": "/9ar6rxLDB8kagAnXZKn6h9smscr.jpg"
+          },
+          {
+            "title": "Stray Dog",
+            "year": 1949,
+            "rating": 4.0,
+            "liked": true,
+            "poster_path": "/riBzUgeYawBDi2q9PjARjHrQM7Z.jpg"
+          }
+        ],
+        "total": 15,
+        "avg_rating": 4.14
+      },
+      "1920s": {
+        "films": [
+          {
+            "title": "The Gold Rush",
+            "year": 1925,
+            "rating": 3.0,
+            "liked": false,
+            "poster_path": "/eQRFo1qwRREYwj47Yoe1PisgOle.jpg"
+          }
+        ],
+        "total": 3,
+        "avg_rating": 3.0
+      },
+      "1930s": {
+        "films": [
+          {
+            "title": "Bride of Frankenstein",
+            "year": 1935,
+            "rating": 3.0,
+            "liked": true,
+            "poster_path": "/5241zUwe7rC17MNc2QpCBKKdp1N.jpg"
+          },
+          {
+            "title": "M",
+            "year": 1931,
+            "rating": 2.5,
+            "liked": false,
+            "poster_path": "/9sNarT9Ob7p1zhKM0NDkEaI31HG.jpg"
+          }
+        ],
+        "total": 7,
+        "avg_rating": 2.75
+      },
+      "2020s": {
+        "films": [
+          {
+            "title": "Tenet",
+            "year": 2020,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/aCIFMriQh8rvhxpN1IWGgvH0Tlg.jpg"
+          },
+          {
+            "title": "Licorice Pizza",
+            "year": 2021,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/ivXtvzfliGvoJ1DhSHIGyYBToWe.jpg"
+          },
+          {
+            "title": "Final Cut",
+            "year": 2022,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/hBUdnylt2a84PwGIPQcZDkCVB5M.jpg"
+          },
+          {
+            "title": "Jackass 4.5",
+            "year": 2022,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/bl686OSeMQOvs90IQAgt8QipCsB.jpg"
+          },
+          {
+            "title": "Top Gun: Maverick",
+            "year": 2022,
+            "rating": 5.0,
+            "liked": true,
+            "poster_path": "/62HCnUTziyWcpDaBO2i1DX17ljH.jpg"
+          }
+        ],
+        "total": 403,
+        "avg_rating": 3.36
+      },
+      "1900s": {
+        "films": [],
+        "total": 1,
+        "avg_rating": 0
+      }
+    },
+    "favorite_decade": "1960s",
+    "favorite_decade_avg": 4.04
+  },
+  "rewatches": {
+    "total": 83,
+    "unique_films": 78,
+    "most_rewatched": [
+      {
+        "title": "Klaus",
+        "year": 2019,
+        "rewatch_count": 3,
+        "rating": 5.0,
+        "liked": true,
+        "poster_path": "/q125RHUDgR4gjwh1QkfYuJLYkL.jpg"
+      },
+      {
+        "title": "Last Action Hero",
+        "year": 1993,
+        "rewatch_count": 3,
+        "rating": 5.0,
+        "liked": true,
+        "poster_path": "/vkhEaWAv5j3qgrOGp3BgMeiYPKj.jpg"
+      },
+      {
+        "title": "Home Alone 2: Lost in New York",
+        "year": 1992,
+        "rewatch_count": 3,
+        "rating": 5.0,
+        "liked": true,
+        "poster_path": "/9CAkQ9nfrDaIAyncWndwg0tfC8g.jpg"
+      },
+      {
+        "title": "Batman: Mask of the Phantasm",
+        "year": 1993,
+        "rewatch_count": 3,
+        "rating": 4.0,
+        "liked": true,
+        "poster_path": "/hT4ehUteagUrhUOHAtmYiY7mp5l.jpg"
+      },
+      {
+        "title": "Armageddon",
+        "year": 1998,
+        "rewatch_count": 3,
+        "rating": 5.0,
+        "liked": true,
+        "poster_path": "/eTM3qtGhDU8cvjpoa6KEt5E2auU.jpg"
+      },
+      {
+        "title": "Mission: Impossible II",
+        "year": 2000,
+        "rewatch_count": 2,
+        "rating": 3.5,
+        "liked": true,
+        "poster_path": "/hfnrual76gPeNFduhD4xzHWpfTw.jpg"
+      },
+      {
+        "title": "L.A. Confidential",
+        "year": 1997,
+        "rewatch_count": 2,
+        "rating": null,
+        "liked": true,
+        "poster_path": "/lWCgf5sD5FpMljjpkRhcC8pXcch.jpg"
+      },
+      {
+        "title": "Thief",
+        "year": 1981,
+        "rewatch_count": 2,
+        "rating": 4.5,
+        "liked": true,
+        "poster_path": "/bpjRGwfYJ71bU0hNhLIz7g3t6Oy.jpg"
+      },
+      {
+        "title": "Another Round",
+        "year": 2020,
+        "rewatch_count": 2,
+        "rating": 4.0,
+        "liked": true,
+        "poster_path": "/aDcIt4NHURLKnAEu7gow51Yd00Q.jpg"
+      },
+      {
+        "title": "Three Billboards Outside Ebbing, Missouri",
+        "year": 2017,
+        "rewatch_count": 2,
+        "rating": 5.0,
+        "liked": true,
+        "poster_path": "/bRYLt8fV82tdVoDppSFTZIcJiLN.jpg"
+      }
+    ]
+  },
+  "journey": {
+    "first_film": {
+      "title": "Climax",
+      "year": 2018,
+      "date": "October 06, 2019",
+      "poster_path": "/47IXH2iEWwX0F7vIyGXaKQ0psBG.jpg"
+    },
+    "recent_film": {
+      "title": "Avatar: Fire and Ash",
+      "year": 2025,
+      "date": "January 08, 2026",
+      "poster_path": "/cf7hE1ifY4UNbS25tGnaTyyDrI2.jpg"
+    },
+    "milestones": [
+      {
+        "number": 100,
+        "title": "To Catch a Killer",
+        "year": 2023,
+        "date": "May 18, 2023",
+        "poster_path": "/mFp3l4lZg1NSEsyxKrdi0rNK8r1.jpg"
+      },
+      {
+        "number": 250,
+        "title": "Lost in Translation",
+        "year": 2003,
+        "date": "December 19, 2023",
+        "poster_path": "/3jCLmYDIIiSMPujbwygNpqdpM8N.jpg"
+      },
+      {
+        "number": 500,
+        "title": "Tenet",
+        "year": 2020,
+        "date": "August 07, 2025",
+        "poster_path": "/aCIFMriQh8rvhxpN1IWGgvH0Tlg.jpg"
+      }
+    ],
+    "total_diary_entries": 599,
+    "max_day": "2019-10-06",
+    "max_day_count": 3,
+    "max_month": "2023-11",
+    "max_month_count": 42,
+    "longest_streak": 9,
+    "days_since_first": 2304
+  },
+  "five_star_films": [
+    {
+      "title": "Furiosa: A Mad Max Saga",
+      "year": 2024,
+      "poster_path": "/iADOJ8Zymht2JPMoy3R7xceZprc.jpg",
+      "liked": true
+    },
+    {
+      "title": "Alien: Romulus",
+      "year": 2024,
+      "poster_path": "/2uSWRTtCG336nuBiG8jOTEUKSy8.jpg",
+      "liked": true
+    },
+    {
+      "title": "The Brutalist",
+      "year": 2024,
+      "poster_path": "/vP7Yd6couiAaw9jgMd5cjMRj3hQ.jpg",
+      "liked": true
+    },
+    {
+      "title": "The Book of Solutions",
+      "year": 2023,
+      "poster_path": "/te2DSyhBfr61XUnp5fE0A2qbgzK.jpg",
+      "liked": true
+    },
+    {
+      "title": "Jackass 4.5",
+      "year": 2022,
+      "poster_path": "/bl686OSeMQOvs90IQAgt8QipCsB.jpg",
+      "liked": true
+    },
+    {
+      "title": "Final Cut",
+      "year": 2022,
+      "poster_path": "/hBUdnylt2a84PwGIPQcZDkCVB5M.jpg",
+      "liked": true
+    },
+    {
+      "title": "Top Gun: Maverick",
+      "year": 2022,
+      "poster_path": "/62HCnUTziyWcpDaBO2i1DX17ljH.jpg",
+      "liked": true
+    },
+    {
+      "title": "Licorice Pizza",
+      "year": 2021,
+      "poster_path": "/ivXtvzfliGvoJ1DhSHIGyYBToWe.jpg",
+      "liked": true
+    },
+    {
+      "title": "Tenet",
+      "year": 2020,
+      "poster_path": "/aCIFMriQh8rvhxpN1IWGgvH0Tlg.jpg",
+      "liked": true
+    },
+    {
+      "title": "Klaus",
+      "year": 2019,
+      "poster_path": "/q125RHUDgR4gjwh1QkfYuJLYkL.jpg",
+      "liked": true
+    },
+    {
+      "title": "Three Billboards Outside Ebbing, Missouri",
+      "year": 2017,
+      "poster_path": "/bRYLt8fV82tdVoDppSFTZIcJiLN.jpg",
+      "liked": true
+    },
+    {
+      "title": "Logan",
+      "year": 2017,
+      "poster_path": "/fnbjcRDYn6YviCcePDnGdyAkYsB.jpg",
+      "liked": true
+    },
+    {
+      "title": "Wind River",
+      "year": 2017,
+      "poster_path": "/pySivdR845Hom4u4T2WNkJxe6Ad.jpg",
+      "liked": true
+    },
+    {
+      "title": "Planet Earth II",
+      "year": 2016,
+      "poster_path": "/qV9T4ORVpwgF5e2BPy5Ev7v8UWj.jpg",
+      "liked": true
+    },
+    {
+      "title": "La La Land",
+      "year": 2016,
+      "poster_path": "/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg",
+      "liked": true
+    },
+    {
+      "title": "Mad Max: Fury Road",
+      "year": 2015,
+      "poster_path": "/hA2ple9q4qnwxp3hKVNhroipsir.jpg",
+      "liked": true
+    },
+    {
+      "title": "Whiplash",
+      "year": 2014,
+      "poster_path": "/7fn624j5lj3xTme2SgiLCeuedmO.jpg",
+      "liked": true
+    },
+    {
+      "title": "Interstellar",
+      "year": 2014,
+      "poster_path": "/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
+      "liked": true
+    },
+    {
+      "title": "Drive",
+      "year": 2011,
+      "poster_path": "/602vevIURmpDfzbnv5Ubi6wIkQm.jpg",
+      "liked": true
+    },
+    {
+      "title": "X-Men: First Class",
+      "year": 2011,
+      "poster_path": "/hNEokmUke0dazoBhttFN0o3L7Xv.jpg",
+      "liked": true
+    },
+    {
+      "title": "How to Train Your Dragon",
+      "year": 2010,
+      "poster_path": "/ygGmAO60t8GyqUo9xYeYxSZAR3b.jpg",
+      "liked": true
+    },
+    {
+      "title": "Shutter Island",
+      "year": 2010,
+      "poster_path": "/nrmXQ0zcZUL8jFLrakWc90IR8z9.jpg",
+      "liked": true
+    },
+    {
+      "title": "The Prestige",
+      "year": 2006,
+      "poster_path": "/bdN3gXuIZYaJP7ftKK2sU0nPtEA.jpg",
+      "liked": true
+    },
+    {
+      "title": "Planet Earth",
+      "year": 2006,
+      "poster_path": "/dW8lvvTmxZ5CTZKRwtqTrO1K1sA.jpg",
+      "liked": true
+    },
+    {
+      "title": "300",
+      "year": 2006,
+      "poster_path": "/h7Lcio0c9ohxPhSZg42eTlKIVVY.jpg",
+      "liked": true
+    },
+    {
+      "title": "The Lord of the Rings: The Return of the King",
+      "year": 2003,
+      "poster_path": "/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg",
+      "liked": true
+    },
+    {
+      "title": "Lost in Translation",
+      "year": 2003,
+      "poster_path": "/3jCLmYDIIiSMPujbwygNpqdpM8N.jpg",
+      "liked": true
+    },
+    {
+      "title": "Oldboy",
+      "year": 2003,
+      "poster_path": "/pWDtjs568ZfOTMbURQBYuT4Qxka.jpg",
+      "liked": true
+    },
+    {
+      "title": "Ocean's Eleven",
+      "year": 2001,
+      "poster_path": "/hQQCdZrsHtZyR6NbKH2YyCqd2fR.jpg",
+      "liked": true
+    },
+    {
+      "title": "The Lord of the Rings: The Fellowship of the Ring",
+      "year": 2001,
+      "poster_path": "/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg",
+      "liked": true
+    },
+    {
+      "title": "Pearl Harbor",
+      "year": 2001,
+      "poster_path": "/y8A0Cvp8WQmZ3bjbnsL53lY0dsC.jpg",
+      "liked": true
+    },
+    {
+      "title": "The Mummy",
+      "year": 1999,
+      "poster_path": "/yhIsVvcUm7QxzLfT6HW2wLf5ajY.jpg",
+      "liked": true
+    },
+    {
+      "title": "Armageddon",
+      "year": 1998,
+      "poster_path": "/eTM3qtGhDU8cvjpoa6KEt5E2auU.jpg",
+      "liked": true
+    },
+    {
+      "title": "Heat",
+      "year": 1995,
+      "poster_path": "/umSVjVdbVwtx5ryCA2QXL44Durm.jpg",
+      "liked": true
+    },
+    {
+      "title": "The Shawshank Redemption",
+      "year": 1994,
+      "poster_path": "/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg",
+      "liked": true
+    },
+    {
+      "title": "True Lies",
+      "year": 1994,
+      "poster_path": "/pweFTnzzTfGK68woSVkiTgjLzWm.jpg",
+      "liked": true
+    },
+    {
+      "title": "Jurassic Park",
+      "year": 1993,
+      "poster_path": "/bRKmwU9eXZI5dKT11Zx1KsayiLW.jpg",
+      "liked": true
+    },
+    {
+      "title": "Last Action Hero",
+      "year": 1993,
+      "poster_path": "/vkhEaWAv5j3qgrOGp3BgMeiYPKj.jpg",
+      "liked": true
+    },
+    {
+      "title": "Home Alone 2: Lost in New York",
+      "year": 1992,
+      "poster_path": "/9CAkQ9nfrDaIAyncWndwg0tfC8g.jpg",
+      "liked": true
+    },
+    {
+      "title": "The Last of the Mohicans",
+      "year": 1992,
+      "poster_path": "/qzJMPWRtZveBkxXOv3ucWhoJuyj.jpg",
+      "liked": true
+    },
+    {
+      "title": "Back to the Future Part III",
+      "year": 1990,
+      "poster_path": "/crzoVQnMzIrRfHtQw0tLBirNfVg.jpg",
+      "liked": true
+    },
+    {
+      "title": "Beetlejuice",
+      "year": 1988,
+      "poster_path": "/nnl6OWkyPpuMm595hmAxNW3rZFn.jpg",
+      "liked": true
+    },
+    {
+      "title": "As Tears Go By",
+      "year": 1988,
+      "poster_path": "/2ePFbsguw4d9UZ3hA61vCUQOBhh.jpg",
+      "liked": true
+    },
+    {
+      "title": "Die Hard",
+      "year": 1988,
+      "poster_path": "/7Bjd8kfmDSOzpmhySpEhkUyK2oH.jpg",
+      "liked": true
+    },
+    {
+      "title": "Aliens",
+      "year": 1986,
+      "poster_path": "/r1x5JGpyqZU8PYhbs4UcrO1Xb6x.jpg",
+      "liked": true
+    },
+    {
+      "title": "Manhunter",
+      "year": 1986,
+      "poster_path": "/6rb24x39vV8n5301IelC8rCPJTH.jpg",
+      "liked": true
+    },
+    {
+      "title": "Ran",
+      "year": 1985,
+      "poster_path": "/jQnUtWaHYfqnXPOIf77K7Ycqk4M.jpg",
+      "liked": true
+    },
+    {
+      "title": "Back to the Future",
+      "year": 1985,
+      "poster_path": "/vN5B5WgYscRGcQpVhHl6p9DDTP0.jpg",
+      "liked": true
+    },
+    {
+      "title": "Blade Runner",
+      "year": 1982,
+      "poster_path": "/63N9uy8nd9j7Eog2axPQ8lbr3Wj.jpg",
+      "liked": true
+    },
+    {
+      "title": "The Empire Strikes Back",
+      "year": 1980,
+      "poster_path": "/nNAeTmF4CtdSgMDplXTDPOpYzsX.jpg",
+      "liked": true
+    },
+    {
+      "title": "Network",
+      "year": 1976,
+      "poster_path": "/qZomlHsaALUtkFeMDwdYmwS2Pbo.jpg",
+      "liked": true
+    },
+    {
+      "title": "Psycho",
+      "year": 1960,
+      "poster_path": "/yz4QVqPx3h1hD1DfqqQkCq3rmxW.jpg",
+      "liked": true
+    },
+    {
+      "title": "The Apartment",
+      "year": 1960,
+      "poster_path": "/hhSRt1KKfRT0yEhEtRW3qp31JFU.jpg",
+      "liked": true
+    },
+    {
+      "title": "Singin' in the Rain",
+      "year": 1952,
+      "poster_path": "/w03EiJVHP8Un77boQeE7hg9DVdU.jpg",
+      "liked": true
+    },
+    {
+      "title": "The Red Shoes",
+      "year": 1948,
+      "poster_path": "/w6qzOivBPyX8ph6UvZaYMPgLiyx.jpg",
+      "liked": true
+    },
+    {
+      "title": "Double Indemnity",
+      "year": 1944,
+      "poster_path": "/rVNYZZgfhwqVMMWlBmxOfWqnwCj.jpg",
+      "liked": true
+    }
+  ],
+  "fun_facts": [
+    {
+      "icon": "⏰",
+      "text": "You've spent 3,596 hours watching films",
+      "subtext": "That's 149.8 days or 21.4 weeks of your life!"
+    },
+    {
+      "icon": "🎭",
+      "text": "You've watched 62.4 hours of Brad Pitt",
+      "subtext": "Across 29 films"
+    },
+    {
+      "icon": "🎬",
+      "text": "Your most watched director is Steven Spielberg",
+      "subtext": "26 films, 13 liked"
+    },
+    {
+      "icon": "📅",
+      "text": "You rate 1960s films highest",
+      "subtext": "Average rating: 4.04★"
+    },
+    {
+      "icon": "📽️",
+      "text": "Your films span 123 years of cinema",
+      "subtext": "From 1902 to 2025"
+    },
+    {
+      "icon": "🎞️",
+      "text": "Average age of films you watch: 20.3 years",
+      "subtext": "A mix of classics and contemporary!"
+    },
+    {
+      "icon": "📊",
+      "text": "You average 85.6 films per year",
+      "subtext": "Across 7 years of logging"
+    }
   ]
 }

@@ -1,4 +1,4 @@
-# Letterboxd Stats Visualizer v4.2
+# Letterboxd Stats Visualizer v5.0
 
 A Python-based tool that generates beautiful, interactive HTML visualizations of your Letterboxd movie watching data, enhanced with metadata from The Movie Database (TMDB).
 
@@ -29,13 +29,15 @@ requirements.txt          # Python dependencies
 
 ## Features
 
-### Dashboard Navigation (v4.2)
-The dashboard uses a tabbed interface with 5 main sections:
+### Dashboard Navigation (v5.0)
+The dashboard uses a tabbed interface with 7 main sections:
 1. **Overview** - Key stats, watched vs liked comparisons, activity charts, directors comparison, and runtime distribution
-2. **[Year] Wrap** - Previous year wrap-up (Spotify Wrapped style) with 8 movies in rated sections (2 rows of 4)
-3. **[Year] Live** - Current year stats, updated on each run
-4. **People** - Interactive actor/director cards with click-to-expand film lists
-5. **Insights** - Viewing time stats, genre distribution, countries, rating trends, and rating distribution
+2. **Journey** - Film milestones, personal records, fun facts, rewatches, and 5-star wall
+3. **[Year] Wrap** - Previous year wrap-up (Spotify Wrapped style) with 8 movies in rated sections
+4. **[Year] Live** - Current year stats, updated on each run
+5. **Decades** - Era analysis with films by decade and top-rated films from each decade
+6. **People** - Interactive actor/director cards with click-to-expand film lists
+7. **Insights** - Viewing time stats, genre distribution, countries, rating trends, and rating distribution
 
 ### Basic Statistics
 - Total films watched
@@ -331,6 +333,19 @@ This project uses data from TMDB. Make sure to comply with TMDB's terms of servi
 - Built with Python, pandas, and Chart.js
 
 ## Changelog
+
+### v5.0 (2026-01)
+- NEW: Journey tab with film milestones (100th, 250th, 500th, 1000th films)
+- NEW: First film and most recent film cards with posters and dates
+- NEW: Personal records (most films in a day, longest streak, busiest month)
+- NEW: Fun facts with personalized insights (time with favorite actor, decade preferences, etc.)
+- NEW: Decades tab with era analysis and top-rated films per decade
+- NEW: Decades distribution chart showing films watched by decade
+- NEW: 5-star poster wall showcasing all perfect-rated films
+- NEW: Rewatch tracking with most rewatched films grid
+- Improved visual design with new milestone cards, journey hero section, and decade cards
+- Enhanced CSS with gradient effects, hover animations, and better card layouts
+- Dashboard now has 7 tabs: Overview, Journey, [Year] Wrap, [Year] Live, Decades, People, Insights
 
 ### v4.2 (2026-01)
 - Directors and Runtime charts now displayed in aligned 2-column grid (matching Activity section)

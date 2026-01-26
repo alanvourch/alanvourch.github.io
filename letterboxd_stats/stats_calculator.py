@@ -74,6 +74,13 @@ class StatsCalculator:
         # NEW: Rating distribution for charts
         self._calculate_rating_distribution()
 
+        # V5.0: New statistics
+        self._calculate_decade_stats()
+        self._calculate_rewatch_stats()
+        self._calculate_journey_stats()
+        self._calculate_five_star_films()
+        self._calculate_fun_facts()
+
         print("[OK] Statistics calculated")
         return self.stats
 
@@ -784,3 +791,332 @@ class StatsCalculator:
         self.stats['rating_distribution'] = [
             {'rating': r, 'count': c} for r, c in rating_counts.items()
         ]
+
+    def _calculate_decade_stats(self):
+        """Calculate decade-based statistics for films watched"""
+        watched = self.lb_data.get('watched', pd.DataFrame())
+
+        if watched.empty:
+            self.stats['decades'] = {'distribution': [], 'top_per_decade': {}}
+            return
+
+        decade_counts = Counter()
+        decade_films = defaultdict(list)
+        decade_ratings = defaultdict(list)
+
+        for _, row in watched.iterrows():
+            title = row['Name']
+            year = int(row['Year']) if pd.notna(row['Year']) else 0
+            if year > 0:
+                decade = (year // 10) * 10
+                decade_counts[decade] += 1
+
+                # Get rating and metadata
+                rating = self._get_film_rating(title, year)
+                metadata = self.tmdb_data.get((title, year), {})
+                is_liked = self.is_film_liked(title, year)
+
+                decade_films[decade].append({
+                    'title': title,
+                    'year': year,
+                    'rating': rating if rating else None,
+                    'liked': is_liked,
+                    'poster_path': metadata.get('poster_path')
+                })
+
+                if rating and rating > 0:
+                    decade_ratings[decade].append(rating)
+
+        # Sort decades and create distribution
+        decade_distribution = [
+            {'decade': f"{d}s", 'count': c, 'decade_num': d}
+            for d, c in sorted(decade_counts.items())
+        ]
+
+        # Get top 5 films per decade (by rating)
+        top_per_decade = {}
+        for decade, films in decade_films.items():
+            rated_films = [f for f in films if f['rating']]
+            sorted_films = sorted(rated_films, key=lambda x: (x['rating'], x['liked']), reverse=True)[:5]
+            avg_rating = round(sum(decade_ratings[decade]) / len(decade_ratings[decade]), 2) if decade_ratings[decade] else 0
+            top_per_decade[f"{decade}s"] = {
+                'films': sorted_films,
+                'total': decade_counts[decade],
+                'avg_rating': avg_rating
+            }
+
+        # Find favorite decade (by average rating, min 10 films)
+        favorite_decade = None
+        best_avg = 0
+        for decade, ratings_list in decade_ratings.items():
+            if len(ratings_list) >= 10:
+                avg = sum(ratings_list) / len(ratings_list)
+                if avg > best_avg:
+                    best_avg = avg
+                    favorite_decade = f"{decade}s"
+
+        self.stats['decades'] = {
+            'distribution': decade_distribution,
+            'top_per_decade': top_per_decade,
+            'favorite_decade': favorite_decade,
+            'favorite_decade_avg': round(best_avg, 2)
+        }
+
+    def _calculate_rewatch_stats(self):
+        """Calculate rewatch statistics"""
+        diary = self.lb_data.get('diary', pd.DataFrame())
+
+        if diary.empty or 'Rewatch' not in diary.columns:
+            self.stats['rewatches'] = {'total': 0, 'films': [], 'most_rewatched': []}
+            return
+
+        # Find rewatched entries
+        rewatches = diary[diary['Rewatch'] == 'Yes'].copy() if 'Rewatch' in diary.columns else pd.DataFrame()
+
+        if rewatches.empty:
+            self.stats['rewatches'] = {'total': 0, 'films': [], 'most_rewatched': []}
+            return
+
+        # Count rewatches per film
+        rewatch_counts = Counter()
+        for _, row in rewatches.iterrows():
+            key = (row['Name'], int(row['Year']) if pd.notna(row['Year']) else 0)
+            rewatch_counts[key] += 1
+
+        # Get most rewatched films
+        most_rewatched = []
+        for (title, year), count in rewatch_counts.most_common(10):
+            metadata = self.tmdb_data.get((title, year), {})
+            rating = self._get_film_rating(title, year)
+            most_rewatched.append({
+                'title': title,
+                'year': year,
+                'rewatch_count': count + 1,  # +1 for original watch
+                'rating': rating if rating else None,
+                'liked': self.is_film_liked(title, year),
+                'poster_path': metadata.get('poster_path')
+            })
+
+        self.stats['rewatches'] = {
+            'total': len(rewatches),
+            'unique_films': len(rewatch_counts),
+            'most_rewatched': most_rewatched
+        }
+
+    def _calculate_journey_stats(self):
+        """Calculate film journey milestones and streaks"""
+        diary = self.lb_data.get('diary', pd.DataFrame())
+
+        if diary.empty:
+            self.stats['journey'] = {}
+            return
+
+        # Sort by watch date
+        diary_sorted = diary.sort_values('Watched Date').reset_index(drop=True)
+
+        # First film ever
+        first_entry = diary_sorted.iloc[0]
+        first_film = {
+            'title': first_entry['Name'],
+            'year': int(first_entry['Year']) if pd.notna(first_entry['Year']) else 0,
+            'date': first_entry['Watched Date'].strftime('%B %d, %Y'),
+            'poster_path': self.tmdb_data.get(
+                (first_entry['Name'], int(first_entry['Year']) if pd.notna(first_entry['Year']) else 0), {}
+            ).get('poster_path')
+        }
+
+        # Most recent film
+        recent_entry = diary_sorted.iloc[-1]
+        recent_film = {
+            'title': recent_entry['Name'],
+            'year': int(recent_entry['Year']) if pd.notna(recent_entry['Year']) else 0,
+            'date': recent_entry['Watched Date'].strftime('%B %d, %Y'),
+            'poster_path': self.tmdb_data.get(
+                (recent_entry['Name'], int(recent_entry['Year']) if pd.notna(recent_entry['Year']) else 0), {}
+            ).get('poster_path')
+        }
+
+        # Milestones (100th, 250th, 500th, 1000th, etc.)
+        milestones = []
+        milestone_numbers = [100, 250, 500, 750, 1000, 1500, 2000]
+        for num in milestone_numbers:
+            if len(diary_sorted) >= num:
+                entry = diary_sorted.iloc[num - 1]
+                milestones.append({
+                    'number': num,
+                    'title': entry['Name'],
+                    'year': int(entry['Year']) if pd.notna(entry['Year']) else 0,
+                    'date': entry['Watched Date'].strftime('%B %d, %Y'),
+                    'poster_path': self.tmdb_data.get(
+                        (entry['Name'], int(entry['Year']) if pd.notna(entry['Year']) else 0), {}
+                    ).get('poster_path')
+                })
+
+        # Calculate streaks and records
+        diary_sorted['date_only'] = diary_sorted['Watched Date'].dt.date
+        daily_counts = diary_sorted.groupby('date_only').size()
+
+        # Most films in a single day
+        max_day = daily_counts.idxmax() if not daily_counts.empty else None
+        max_day_count = int(daily_counts.max()) if not daily_counts.empty else 0
+
+        # Most active month ever
+        diary_sorted['month'] = diary_sorted['Watched Date'].dt.to_period('M')
+        monthly_counts = diary_sorted.groupby('month').size()
+        max_month = str(monthly_counts.idxmax()) if not monthly_counts.empty else None
+        max_month_count = int(monthly_counts.max()) if not monthly_counts.empty else 0
+
+        # Calculate longest streak (consecutive days watching)
+        dates = sorted(set(diary_sorted['date_only']))
+        longest_streak = 1
+        current_streak = 1
+        for i in range(1, len(dates)):
+            if (dates[i] - dates[i-1]).days == 1:
+                current_streak += 1
+                longest_streak = max(longest_streak, current_streak)
+            else:
+                current_streak = 1
+
+        self.stats['journey'] = {
+            'first_film': first_film,
+            'recent_film': recent_film,
+            'milestones': milestones,
+            'total_diary_entries': len(diary_sorted),
+            'max_day': str(max_day) if max_day else None,
+            'max_day_count': max_day_count,
+            'max_month': max_month,
+            'max_month_count': max_month_count,
+            'longest_streak': longest_streak,
+            'days_since_first': (datetime.now().date() - dates[0]).days if dates else 0
+        }
+
+    def _calculate_five_star_films(self):
+        """Get all 5-star rated films for the poster wall"""
+        ratings = self.lb_data.get('ratings', pd.DataFrame())
+
+        if ratings.empty:
+            self.stats['five_star_films'] = []
+            return
+
+        five_stars = ratings[ratings['Rating'] == 5.0].copy()
+
+        films = []
+        for _, row in five_stars.iterrows():
+            title = row['Name']
+            year = int(row['Year']) if pd.notna(row['Year']) else 0
+            metadata = self.tmdb_data.get((title, year), {})
+            films.append({
+                'title': title,
+                'year': year,
+                'poster_path': metadata.get('poster_path'),
+                'liked': self.is_film_liked(title, year)
+            })
+
+        # Sort by year descending
+        films.sort(key=lambda x: x['year'], reverse=True)
+
+        self.stats['five_star_films'] = films
+
+    def _calculate_fun_facts(self):
+        """Calculate personalized fun facts and insights"""
+        watched = self.lb_data.get('watched', pd.DataFrame())
+        diary = self.lb_data.get('diary', pd.DataFrame())
+        runtime = self.stats.get('runtime', {})
+        actors = self.stats.get('actors', {}).get('top_by_count', [])
+        directors = self.stats.get('directors', {}).get('top_by_count', [])
+        decades = self.stats.get('decades', {})
+
+        fun_facts = []
+
+        # Total watch time in different units
+        total_hours = runtime.get('total_hours', 0)
+        if total_hours > 0:
+            days = round(total_hours / 24, 1)
+            weeks = round(total_hours / 168, 1)
+            fun_facts.append({
+                'icon': '⏰',
+                'text': f"You've spent {total_hours:,} hours watching films",
+                'subtext': f"That's {days} days or {weeks} weeks of your life!"
+            })
+
+        # Time spent with favorite actor
+        if actors:
+            top_actor = actors[0]
+            actor_films = top_actor.get('films', [])
+            actor_runtime = 0
+            for film in actor_films:
+                title, year = film['title'], film['year']
+                metadata = self.tmdb_data.get((title, year), {})
+                actor_runtime += metadata.get('runtime', 0)
+            if actor_runtime > 0:
+                fun_facts.append({
+                    'icon': '🎭',
+                    'text': f"You've watched {round(actor_runtime / 60, 1)} hours of {top_actor['name']}",
+                    'subtext': f"Across {top_actor['count']} films"
+                })
+
+        # Director dedication
+        if directors:
+            top_director = directors[0]
+            fun_facts.append({
+                'icon': '🎬',
+                'text': f"Your most watched director is {top_director['name']}",
+                'subtext': f"{top_director['count']} films, {top_director.get('liked_count', 0)} liked"
+            })
+
+        # Decade preference
+        favorite_decade = decades.get('favorite_decade')
+        if favorite_decade:
+            fun_facts.append({
+                'icon': '📅',
+                'text': f"You rate {favorite_decade} films highest",
+                'subtext': f"Average rating: {decades.get('favorite_decade_avg', 0)}★"
+            })
+
+        # Oldest and newest film watched
+        oldest_film = None
+        newest_film = None
+        for _, row in watched.iterrows():
+            year = int(row['Year']) if pd.notna(row['Year']) else 0
+            if year > 1800:  # Valid year
+                if oldest_film is None or year < oldest_film['year']:
+                    oldest_film = {'title': row['Name'], 'year': year}
+                if newest_film is None or year > newest_film['year']:
+                    newest_film = {'title': row['Name'], 'year': year}
+
+        if oldest_film and newest_film:
+            span = newest_film['year'] - oldest_film['year']
+            fun_facts.append({
+                'icon': '📽️',
+                'text': f"Your films span {span} years of cinema",
+                'subtext': f"From {oldest_film['year']} to {newest_film['year']}"
+            })
+
+        # Average film age
+        current_year = datetime.now().year
+        ages = []
+        for _, row in watched.iterrows():
+            year = int(row['Year']) if pd.notna(row['Year']) else 0
+            if year > 1800:
+                ages.append(current_year - year)
+
+        if ages:
+            avg_age = round(sum(ages) / len(ages), 1)
+            fun_facts.append({
+                'icon': '🎞️',
+                'text': f"Average age of films you watch: {avg_age} years",
+                'subtext': "A mix of classics and contemporary!"
+            })
+
+        # Films per year average
+        if not diary.empty:
+            years_active = diary['Watched Date'].dt.year.nunique()
+            if years_active > 0:
+                avg_per_year = round(len(diary) / years_active, 1)
+                fun_facts.append({
+                    'icon': '📊',
+                    'text': f"You average {avg_per_year} films per year",
+                    'subtext': f"Across {years_active} years of logging"
+                })
+
+        self.stats['fun_facts'] = fun_facts

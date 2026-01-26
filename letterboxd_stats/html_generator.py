@@ -1,6 +1,6 @@
 """
 Generate HTML dashboard with modern tabbed layout, modals, and movie posters
-Dashboard v4.2 - Aligned chart layouts, 8 movies per rated section, rating distribution chart
+Dashboard v5.0 - Decades analysis, journey milestones, 5-star wall, fun facts, enhanced visuals
 """
 from typing import Dict
 import json
@@ -35,8 +35,10 @@ class HTMLGenerator:
         {self._generate_nav()}
         <main class="main-content">
             {self._generate_overview_tab()}
+            {self._generate_journey_tab()}
             {self._generate_year_tab('last_full_year')}
             {self._generate_year_tab('current_year')}
+            {self._generate_decades_tab()}
             {self._generate_people_tab()}
             {self._generate_insights_tab()}
         </main>
@@ -879,6 +881,328 @@ body {
 .rated-section h3 .icon {
     font-size: 1.25rem;
 }
+
+/* V5.0: Journey Section */
+.journey-hero {
+    background: linear-gradient(145deg, rgba(124, 58, 237, 0.15), rgba(0, 212, 255, 0.1));
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.journey-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink));
+}
+
+.milestone-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.milestone-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.milestone-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-purple);
+    box-shadow: 0 8px 24px rgba(124, 58, 237, 0.2);
+}
+
+.milestone-card .milestone-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.milestone-card .milestone-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.75rem;
+}
+
+.milestone-card .film-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
+.milestone-card .film-date {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.milestone-card .milestone-poster {
+    width: 80px;
+    height: 120px;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+    margin: 0.75rem auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+/* Fun Facts */
+.fun-facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.fun-fact-card {
+    background: linear-gradient(145deg, var(--bg-card), rgba(124, 58, 237, 0.05));
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    transition: all 0.2s;
+}
+
+.fun-fact-card:hover {
+    border-color: var(--accent-purple);
+    transform: translateY(-2px);
+}
+
+.fun-fact-card .fact-icon {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.fun-fact-card .fact-text {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+}
+
+.fun-fact-card .fact-subtext {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+/* 5-Star Poster Wall */
+.poster-wall {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 0.5rem;
+}
+
+.poster-wall .wall-poster {
+    aspect-ratio: 2/3;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.poster-wall .wall-poster:hover {
+    transform: scale(1.1);
+    z-index: 10;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+/* Record Stats */
+.record-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.record-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    text-align: center;
+}
+
+.record-card .record-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent-cyan);
+}
+
+.record-card .record-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+}
+
+.record-card .record-detail {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+
+/* V5.0: Decades Section */
+.decade-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.decade-card .decade-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.decade-card .decade-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.decade-card .decade-stats {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.decade-card .decade-films {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+}
+
+.decade-card .decade-poster {
+    width: 70px;
+    height: 105px;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+}
+
+.decade-card .decade-poster:hover {
+    transform: scale(1.08);
+}
+
+/* Rewatch Section */
+.rewatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+}
+
+.rewatch-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 0.75rem;
+    text-align: center;
+    position: relative;
+}
+
+.rewatch-card .rewatch-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--accent-purple);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+}
+
+.rewatch-card img {
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.5rem;
+}
+
+.rewatch-card .rewatch-title {
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+/* Animated Stats */
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+@keyframes countUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-in {
+    animation: countUp 0.5s ease-out forwards;
+}
+
+/* First/Last Film Cards */
+.journey-film-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.journey-film-card img {
+    width: 100px;
+    height: 150px;
+    border-radius: var(--radius-md);
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.journey-film-card .film-info h4 {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+.journey-film-card .film-info .title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.journey-film-card .film-info .date {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
 </style>'''
 
     def _generate_header(self) -> str:
@@ -899,8 +1223,10 @@ body {
         return f'''
 <nav class="nav">
     <button class="nav-btn active" data-tab="overview">Overview</button>
+    <button class="nav-btn" data-tab="journey">🎯 Journey</button>
     <button class="nav-btn" data-tab="year-last">{last_year}<span class="year-badge">Wrap</span></button>
     <button class="nav-btn" data-tab="year-current">{current_year}<span class="year-badge">Live</span></button>
+    <button class="nav-btn" data-tab="decades">📅 Decades</button>
     <button class="nav-btn" data-tab="people">People</button>
     <button class="nav-btn" data-tab="insights">Insights</button>
 </nav>'''
@@ -1304,6 +1630,226 @@ body {
     </section>
 </div>'''
 
+    def _generate_journey_tab(self) -> str:
+        """Generate journey tab with milestones, records, and fun facts"""
+        journey = self.stats.get('journey', {})
+        fun_facts = self.stats.get('fun_facts', [])
+        rewatches = self.stats.get('rewatches', {})
+        five_stars = self.stats.get('five_star_films', [])
+
+        # First and recent film cards
+        first_film = journey.get('first_film', {})
+        recent_film = journey.get('recent_film', {})
+
+        first_film_html = f'''
+<div class="journey-film-card">
+    <img src="{self._poster_url(first_film.get('poster_path'))}" alt="{first_film.get('title')}" loading="lazy">
+    <div class="film-info">
+        <h4>🎬 Your First Film</h4>
+        <div class="title">{first_film.get('title', 'Unknown')}</div>
+        <div class="date">{first_film.get('date', '')}</div>
+    </div>
+</div>''' if first_film else ''
+
+        recent_film_html = f'''
+<div class="journey-film-card">
+    <img src="{self._poster_url(recent_film.get('poster_path'))}" alt="{recent_film.get('title')}" loading="lazy">
+    <div class="film-info">
+        <h4>🆕 Most Recent Film</h4>
+        <div class="title">{recent_film.get('title', 'Unknown')}</div>
+        <div class="date">{recent_film.get('date', '')}</div>
+    </div>
+</div>''' if recent_film else ''
+
+        # Milestones
+        milestones = journey.get('milestones', [])
+        milestones_html = ''
+        for m in milestones:
+            milestones_html += f'''
+<div class="milestone-card">
+    <div class="milestone-label">Film #{m['number']}</div>
+    <img class="milestone-poster" src="{self._poster_url(m.get('poster_path'))}" alt="{m.get('title')}" loading="lazy">
+    <div class="film-title">{m.get('title', 'Unknown')}</div>
+    <div class="film-date">{m.get('date', '')}</div>
+</div>'''
+
+        # Records
+        max_day_count = journey.get('max_day_count', 0)
+        max_month = journey.get('max_month', '')
+        max_month_count = journey.get('max_month_count', 0)
+        longest_streak = journey.get('longest_streak', 0)
+        days_active = journey.get('days_since_first', 0)
+
+        # Fun facts HTML
+        fun_facts_html = ''
+        for fact in fun_facts[:6]:  # Limit to 6 facts
+            fun_facts_html += f'''
+<div class="fun-fact-card">
+    <div class="fact-icon">{fact.get('icon', '📊')}</div>
+    <div>
+        <div class="fact-text">{fact.get('text', '')}</div>
+        <div class="fact-subtext">{fact.get('subtext', '')}</div>
+    </div>
+</div>'''
+
+        # Most rewatched films
+        most_rewatched = rewatches.get('most_rewatched', [])[:8]
+        rewatches_html = ''
+        for film in most_rewatched:
+            rewatches_html += f'''
+<div class="rewatch-card">
+    <span class="rewatch-badge">×{film.get('rewatch_count', 1)}</span>
+    <img src="{self._poster_url(film.get('poster_path'))}" alt="{film.get('title')}" loading="lazy">
+    <div class="rewatch-title">{film.get('title', 'Unknown')}</div>
+</div>'''
+
+        # 5-star poster wall (first 30)
+        wall_html = ''
+        for film in five_stars[:30]:
+            wall_html += f'<img class="wall-poster" src="{self._poster_url(film.get("poster_path"))}" alt="{film.get("title")}" title="{film.get("title")} ({film.get("year")})" loading="lazy">'
+
+        return f'''
+<div id="journey" class="tab-content">
+    <div class="journey-hero">
+        <div class="section-header">
+            <h2 class="section-title">🎯 Your Film Journey</h2>
+            <span class="section-subtitle">{journey.get('total_diary_entries', 0):,} diary entries over {days_active:,} days</span>
+        </div>
+
+        <div class="two-col" style="margin-top: 1.5rem;">
+            {first_film_html}
+            {recent_film_html}
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">🏆 Milestones</h2>
+            <span class="section-subtitle">Films that marked your journey</span>
+        </div>
+        <div class="milestone-grid">
+            {milestones_html if milestones_html else '<p class="empty-state">Keep watching to reach milestones!</p>'}
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">📊 Personal Records</h2>
+        </div>
+        <div class="record-grid">
+            <div class="record-card">
+                <div class="record-value">{max_day_count}</div>
+                <div class="record-label">Films in One Day</div>
+                <div class="record-detail">Your movie marathon record</div>
+            </div>
+            <div class="record-card">
+                <div class="record-value">{max_month_count}</div>
+                <div class="record-label">Films in One Month</div>
+                <div class="record-detail">{max_month if max_month else 'N/A'}</div>
+            </div>
+            <div class="record-card">
+                <div class="record-value">{longest_streak}</div>
+                <div class="record-label">Day Streak</div>
+                <div class="record-detail">Consecutive days watching</div>
+            </div>
+            <div class="record-card">
+                <div class="record-value">{rewatches.get('total', 0)}</div>
+                <div class="record-label">Total Rewatches</div>
+                <div class="record-detail">{rewatches.get('unique_films', 0)} unique films</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">✨ Fun Facts</h2>
+            <span class="section-subtitle">Personalized insights about your viewing habits</span>
+        </div>
+        <div class="fun-facts-grid">
+            {fun_facts_html if fun_facts_html else '<p class="empty-state">Not enough data for fun facts yet!</p>'}
+        </div>
+    </section>
+
+    {f'''<section class="section">
+        <div class="section-header">
+            <h2 class="section-title">🔄 Most Rewatched</h2>
+            <span class="section-subtitle">Films you keep coming back to</span>
+        </div>
+        <div class="rewatch-grid">
+            {rewatches_html}
+        </div>
+    </section>''' if rewatches_html else ''}
+
+    {f'''<section class="section">
+        <div class="section-header">
+            <h2 class="section-title">⭐ 5-Star Wall</h2>
+            <span class="section-subtitle">{len(five_stars)} perfect films</span>
+        </div>
+        <div class="poster-wall">
+            {wall_html}
+        </div>
+    </section>''' if wall_html else ''}
+</div>'''
+
+    def _generate_decades_tab(self) -> str:
+        """Generate decades analysis tab"""
+        decades = self.stats.get('decades', {})
+        distribution = decades.get('distribution', [])
+        top_per_decade = decades.get('top_per_decade', {})
+        favorite_decade = decades.get('favorite_decade', 'N/A')
+        favorite_avg = decades.get('favorite_decade_avg', 0)
+
+        # Decades cards with top films
+        decades_html = ''
+        for decade_info in sorted(distribution, key=lambda x: x['decade_num'], reverse=True):
+            decade = decade_info['decade']
+            count = decade_info['count']
+            decade_data = top_per_decade.get(decade, {})
+            films = decade_data.get('films', [])
+            avg_rating = decade_data.get('avg_rating', 0)
+
+            films_html = ''
+            for film in films[:6]:
+                films_html += f'<img class="decade-poster" src="{self._poster_url(film.get("poster_path"))}" alt="{film.get("title")}" title="{film.get("title")} ({film.get("year")}) - {film.get("rating")}★" loading="lazy">'
+
+            decades_html += f'''
+<div class="decade-card">
+    <div class="decade-header">
+        <span class="decade-name">{decade}</span>
+        <div class="decade-stats">
+            <span>{count} films</span>
+            <span>★ {avg_rating}</span>
+        </div>
+    </div>
+    <div class="decade-films">
+        {films_html if films_html else '<span class="empty-state">No rated films</span>'}
+    </div>
+</div>'''
+
+        return f'''
+<div id="decades" class="tab-content">
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">📅 Decades Distribution</h2>
+            <span class="section-subtitle">Your favorite decade: {favorite_decade} (★ {favorite_avg} avg)</span>
+        </div>
+        <div class="chart-card" style="margin-bottom: 2rem;">
+            <h3>Films by Decade</h3>
+            <div class="chart-container">
+                <canvas id="decadesChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">🎬 Top Films by Decade</h2>
+            <span class="section-subtitle">Your highest rated films from each era</span>
+        </div>
+        {decades_html}
+    </section>
+</div>'''
+
     def _generate_modal(self) -> str:
         """Generate modal structure for film lists"""
         return '''
@@ -1328,7 +1874,7 @@ body {
 <footer class="footer">
     <p>Data from <a href="https://letterboxd.com" target="_blank">Letterboxd</a> |
        Enhanced with <a href="https://www.themoviedb.org" target="_blank">TMDB</a></p>
-    <p>Letterboxd Stats v4.2</p>
+    <p>Letterboxd Stats v5.0</p>
 </footer>'''
 
     def _generate_scripts(self) -> str:
@@ -1429,7 +1975,8 @@ const charts = {{
     genresChart: {self.charts.get('genres', '{}')},
     countriesChart: {self.charts.get('countries', '{}')},
     ratingEvolutionChart: {self.charts.get('rating_evolution', '{}')},
-    ratingDistributionChart: {self.charts.get('ratings', '{}')}
+    ratingDistributionChart: {self.charts.get('ratings', '{}')},
+    decadesChart: {self.charts.get('decades_distribution', '{}')}
 }};
 
 // Create charts when tab becomes visible
