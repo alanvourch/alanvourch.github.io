@@ -1,6 +1,6 @@
 """
 Generate HTML dashboard with modern tabbed layout, modals, and movie posters
-Dashboard v4.0 - UI improvements and polish
+Dashboard v4.1 - Enhanced visuals, adaptive poster grids, improved year wrap sections
 """
 from typing import Dict
 import json
@@ -278,6 +278,13 @@ body {
     height: 280px;
 }
 
+.chart-container-pie {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* People Grid (Actors/Directors) */
 .people-grid {
     display: grid;
@@ -336,22 +343,31 @@ body {
     transition: width 0.3s ease;
 }
 
-/* Film Posters Grid - Fixed 5 columns for year wrap */
-.posters-grid-5 {
+/* Film Posters Grid - Adaptive layout for year wrap */
+.posters-grid-adaptive {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     gap: 1rem;
 }
 
-@media (max-width: 900px) {
-    .posters-grid-5 {
-        grid-template-columns: repeat(3, 1fr);
+.posters-grid-adaptive .poster-card {
+    min-height: 200px;
+}
+
+.posters-grid-adaptive .poster-card img {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}
+
+@media (min-width: 1100px) {
+    .posters-grid-adaptive {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     }
 }
 
-@media (max-width: 500px) {
-    .posters-grid-5 {
-        grid-template-columns: repeat(2, 1fr);
+@media (max-width: 600px) {
+    .posters-grid-adaptive {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 0.75rem;
     }
 }
 
@@ -368,12 +384,14 @@ body {
     overflow: hidden;
     aspect-ratio: 2/3;
     background: var(--bg-secondary);
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 .poster-card:hover {
     transform: scale(1.05);
     z-index: 1;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
 }
 
 .poster-card img {
@@ -387,34 +405,37 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 0.75rem 0.5rem 0.5rem;
-    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    padding: 2.5rem 0.5rem 0.5rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.95));
 }
 
 .poster-card .title {
-    font-size: 0.75rem;
-    font-weight: 500;
-    line-height: 1.2;
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1.25;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
 .poster-card .year {
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     color: var(--text-secondary);
+    margin-top: 0.15rem;
 }
 
 .poster-card .rating {
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    background: rgba(0,0,0,0.7);
-    padding: 0.2rem 0.4rem;
-    border-radius: 4px;
-    font-size: 0.7rem;
+    background: rgba(0,0,0,0.8);
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
     font-weight: 600;
+    backdrop-filter: blur(4px);
 }
 
 .poster-card .rating.high { color: var(--accent-green); }
@@ -426,17 +447,30 @@ body {
     top: 0.5rem;
     left: 0.5rem;
     color: var(--liked-color);
-    font-size: 0.9rem;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    font-size: 1rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+    filter: drop-shadow(0 0 3px rgba(239, 68, 68, 0.5));
 }
 
 /* Year Wrap Section */
 .year-wrap {
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(244, 114, 182, 0.1));
+    background: linear-gradient(145deg, rgba(124, 58, 237, 0.08), rgba(244, 114, 182, 0.08), rgba(0, 212, 255, 0.05));
     border: 1px solid var(--border-color);
     border-radius: var(--radius-xl);
-    padding: 2rem;
+    padding: 2.5rem 2rem;
     margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.year-wrap::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink), var(--accent-cyan));
 }
 
 .year-wrap .year-header {
@@ -445,17 +479,21 @@ body {
 }
 
 .year-wrap .year-number {
-    font-size: 4rem;
+    font-size: 5rem;
     font-weight: 800;
-    background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+    background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink), var(--accent-cyan));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    line-height: 1;
+    margin-bottom: 0.25rem;
 }
 
 .year-wrap .year-label {
     color: var(--text-secondary);
-    font-size: 1.1rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .year-highlight {
@@ -479,32 +517,47 @@ body {
 
 .highlight-card {
     background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
-    padding: 1.5rem;
+    padding: 1rem 1.25rem;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100px;
 }
 
 .highlight-card .icon {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+    line-height: 1;
+}
+
+.highlight-card .icon.heart-icon {
+    color: var(--liked-color);
 }
 
 .highlight-card .value {
     font-size: 1.75rem;
     font-weight: 700;
     color: var(--accent-cyan);
-    margin-bottom: 0.25rem;
+    line-height: 1.1;
+}
+
+.highlight-card .value.liked-value {
+    color: var(--liked-color);
 }
 
 .highlight-card .label {
     color: var(--text-secondary);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    margin-top: 0.15rem;
 }
 
 .highlight-card .sub-value {
     color: var(--text-muted);
-    font-size: 0.8rem;
-    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    margin-top: 0.1rem;
 }
 
 .top-person-section {
@@ -516,35 +569,57 @@ body {
 
 .top-person-card {
     background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
-    padding: 1.25rem;
+    padding: 1.5rem;
+    transition: all 0.2s;
+}
+
+.top-person-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-color-light);
 }
 
 .top-person-card h4 {
     color: var(--text-secondary);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
 }
 
 .top-person-card .person-name {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 700;
     margin-bottom: 0.25rem;
+    background: linear-gradient(135deg, var(--text-primary), var(--accent-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .top-person-card .person-count {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
     margin-bottom: 1rem;
 }
 
 .top-person-card .mini-posters {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.75rem;
     overflow-x: auto;
     padding-bottom: 0.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--bg-tertiary) transparent;
+}
+
+.top-person-card .mini-posters::-webkit-scrollbar {
+    height: 4px;
+}
+
+.top-person-card .mini-posters::-webkit-scrollbar-thumb {
+    background: var(--bg-tertiary);
+    border-radius: 2px;
 }
 
 .top-person-card .mini-poster-wrapper {
@@ -553,19 +628,26 @@ body {
 }
 
 .top-person-card .mini-poster {
-    width: 70px;
-    height: 105px;
+    width: 90px;
+    height: 135px;
     border-radius: var(--radius-sm);
     object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    transition: transform 0.2s;
+}
+
+.top-person-card .mini-poster:hover {
+    transform: scale(1.05);
 }
 
 .top-person-card .mini-poster-wrapper .mini-liked {
     position: absolute;
-    top: 4px;
-    left: 4px;
-    font-size: 0.75rem;
-    color: #ff3b5c;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+    top: 6px;
+    left: 6px;
+    font-size: 0.85rem;
+    color: var(--liked-color);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+    filter: drop-shadow(0 0 2px rgba(239, 68, 68, 0.5));
 }
 
 /* Insights Section Cards */
@@ -709,11 +791,12 @@ body {
 
 .modal-film .film-liked {
     position: absolute;
-    top: 4px;
-    left: 4px;
-    color: #ff3b5c;
+    top: 6px;
+    left: 6px;
+    color: var(--liked-color);
     font-size: 1rem;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+    filter: drop-shadow(0 0 3px rgba(239, 68, 68, 0.5));
 }
 
 .modal-film .film-title {
@@ -775,7 +858,11 @@ body {
 
 /* Top rated section in year wrap */
 .rated-section {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    border: 1px solid var(--border-color);
 }
 
 .rated-section h3 {
@@ -789,7 +876,7 @@ body {
 }
 
 .rated-section h3 .icon {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
 }
 </style>'''
 
@@ -857,7 +944,7 @@ body {
 
     <section class="section">
         <div class="section-header">
-            <h2 class="section-title">Watched vs Liked</h2>
+            <h2 class="section-title">❤️ Watched vs Liked</h2>
             <span class="section-subtitle">How much do you really love what you watch?</span>
         </div>
         <div class="charts-grid">
@@ -878,7 +965,7 @@ body {
 
     <section class="section">
         <div class="section-header">
-            <h2 class="section-title">Activity</h2>
+            <h2 class="section-title">📊 Activity</h2>
         </div>
         <div class="charts-grid">
             <div class="chart-card">
@@ -898,20 +985,24 @@ body {
 
     <section class="section">
         <div class="section-header">
-            <h2 class="section-title">Directors: Watched vs Liked</h2>
+            <h2 class="section-title">🎬 Directors: Watched vs Liked</h2>
         </div>
-        <div class="charts-grid">
-            <div class="chart-card">
-                <h3>Top Directors Comparison</h3>
-                <div class="chart-container">
-                    <canvas id="directorsWatchedLikedChart"></canvas>
-                </div>
+        <div class="chart-card" style="max-width: 700px;">
+            <h3>Top Directors Comparison</h3>
+            <div class="chart-container">
+                <canvas id="directorsWatchedLikedChart"></canvas>
             </div>
-            <div class="chart-card">
-                <h3>Runtime Distribution</h3>
-                <div class="chart-container">
-                    <canvas id="runtimeChart"></canvas>
-                </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">⏱️ Runtime Distribution</h2>
+        </div>
+        <div class="chart-card" style="max-width: 700px;">
+            <h3>Film Lengths</h3>
+            <div class="chart-container">
+                <canvas id="runtimeChart"></canvas>
             </div>
         </div>
     </section>
@@ -941,9 +1032,9 @@ body {
     </div>
 </div>'''
 
-        # Month name mapping
-        month_names = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        # Month name mapping - full names for better readability
+        month_names = ['', 'January', 'February', 'March', 'April', 'May', 'June',
+                      'July', 'August', 'September', 'October', 'November', 'December']
         most_active_month = year_stats.get('most_active_month', 0)
         most_active_month_name = month_names[most_active_month] if most_active_month else 'N/A'
         most_active_month_count = year_stats.get('most_active_month_count', 0)
@@ -960,13 +1051,13 @@ body {
             actor_posters = ''.join([
                 f'''<div class="mini-poster-wrapper">
                     <img class="mini-poster" src="{self._poster_url(f.get("poster_path"))}" alt="{f.get("title")}" loading="lazy">
-                    {('<span class="mini-liked">&#10084;</span>' if self._is_film_liked_by_key(f.get("title"), f.get("year")) else '')}
+                    {('<span class="mini-liked">❤️</span>' if f.get("liked") else '')}
                 </div>'''
                 for f in actor_films
             ])
             top_actor_html = f'''
 <div class="top-person-card">
-    <h4>Most Watched Actor</h4>
+    <h4>🎭 Most Watched Actor</h4>
     <div class="person-name">{top_actor.get('name', 'N/A')}</div>
     <div class="person-count">{top_actor.get('count', 0)} films this year</div>
     <div class="mini-posters">{actor_posters}</div>
@@ -980,13 +1071,13 @@ body {
             director_posters = ''.join([
                 f'''<div class="mini-poster-wrapper">
                     <img class="mini-poster" src="{self._poster_url(f.get("poster_path"))}" alt="{f.get("title")}" loading="lazy">
-                    {('<span class="mini-liked">&#10084;</span>' if self._is_film_liked_by_key(f.get("title"), f.get("year")) else '')}
+                    {('<span class="mini-liked">❤️</span>' if f.get("liked") else '')}
                 </div>'''
                 for f in director_films
             ])
             top_director_html = f'''
 <div class="top-person-card">
-    <h4>Most Watched Director</h4>
+    <h4>🎬 Most Watched Director</h4>
     <div class="person-name">{top_director.get('name', 'N/A')}</div>
     <div class="person-count">{top_director.get('count', 0)} films this year</div>
     <div class="mini-posters">{director_posters}</div>
@@ -1002,22 +1093,22 @@ body {
 
         <div class="year-highlight">
             <div class="highlight-card">
-                <div class="icon">&#127916;</div>
+                <div class="icon">🎬</div>
                 <div class="value">{year_stats.get('total_films', 0)}</div>
                 <div class="label">Films Logged</div>
             </div>
             <div class="highlight-card">
-                <div class="icon">&#10084;</div>
-                <div class="value">{year_stats.get('total_liked', 0)}</div>
+                <div class="icon heart-icon">❤️</div>
+                <div class="value liked-value">{year_stats.get('total_liked', 0)}</div>
                 <div class="label">Films Liked</div>
             </div>
             <div class="highlight-card">
-                <div class="icon">&#11088;</div>
+                <div class="icon">⭐</div>
                 <div class="value">{year_stats.get('avg_rating', 0)}</div>
                 <div class="label">Avg Rating</div>
             </div>
             <div class="highlight-card">
-                <div class="icon">&#128197;</div>
+                <div class="icon">📅</div>
                 <div class="value">{most_active_month_name}</div>
                 <div class="label">Most Active</div>
                 <div class="sub-value">{most_active_month_count} films</div>
@@ -1037,22 +1128,22 @@ body {
 </div>'''
 
     def _generate_rated_poster_grid(self, films: list, title: str, icon: str) -> str:
-        """Generate a grid of movie posters for top/bottom rated - exactly 5 columns"""
+        """Generate a grid of movie posters for top/bottom rated - adaptive layout"""
         if not films:
             return f'<div class="rated-section"><h3>{title}</h3><p class="empty-state">No films</p></div>'
 
-        icon_html = '&#127942;' if icon == 'trophy' else '&#128078;'
+        icon_html = '🏆' if icon == 'trophy' else '👎'
 
         posters_html = ''
         for film in films:
             rating = film.get('rating', 0)
             rating_class = 'high' if rating >= 4 else 'mid' if rating >= 3 else 'low'
-            liked_badge = '<span class="liked-badge">&#10084;</span>' if film.get('liked') else ''
+            liked_badge = '<span class="liked-badge">❤️</span>' if film.get('liked') else ''
             rating_stars = ''
             if rating:
                 full_stars = int(rating)
                 half_star = rating % 1 >= 0.5
-                rating_stars = '&#9733;' * full_stars + ('&#189;' if half_star else '')
+                rating_stars = '★' * full_stars + ('½' if half_star else '')
 
             posters_html += f'''
 <div class="poster-card">
@@ -1068,7 +1159,7 @@ body {
         return f'''
 <div class="rated-section">
     <h3><span class="icon">{icon_html}</span> {title}</h3>
-    <div class="posters-grid-5">{posters_html}</div>
+    <div class="posters-grid-adaptive">{posters_html}</div>
 </div>'''
 
     def _generate_people_tab(self) -> str:
@@ -1084,7 +1175,7 @@ body {
     <div class="name">{actor.get('name', 'Unknown')}</div>
     <div class="meta">
         <span class="watched">{actor.get('count', 0)} watched</span>
-        <span class="liked">&#10084; {actor.get('liked_count', 0)} liked</span>
+        <span class="liked">❤️ {actor.get('liked_count', 0)} liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: {like_ratio}%"></div>
@@ -1099,7 +1190,7 @@ body {
     <div class="name">{director.get('name', 'Unknown')}</div>
     <div class="meta">
         <span class="watched">{director.get('count', 0)} watched</span>
-        <span class="liked">&#10084; {director.get('liked_count', 0)} liked</span>
+        <span class="liked">❤️ {director.get('liked_count', 0)} liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: {like_ratio}%"></div>
@@ -1110,7 +1201,7 @@ body {
 <div id="people" class="tab-content">
     <section class="section">
         <div class="section-header">
-            <h2 class="section-title">Top Actors</h2>
+            <h2 class="section-title">🎭 Top Actors</h2>
             <span class="section-subtitle">Click to see films</span>
         </div>
         <div class="people-grid">{actors_html}</div>
@@ -1118,7 +1209,7 @@ body {
 
     <section class="section">
         <div class="section-header">
-            <h2 class="section-title">Top Directors</h2>
+            <h2 class="section-title">🎬 Top Directors</h2>
             <span class="section-subtitle">Click to see films</span>
         </div>
         <div class="people-grid">{directors_html}</div>
@@ -1129,6 +1220,7 @@ body {
         """Generate insights tab with runtime, genres, countries, rating trends"""
         runtime = self.stats.get('runtime', {})
         basic = self.stats.get('basic', {})
+        geography = self.stats.get('geography', {})
 
         # Runtime stats
         avg_runtime = runtime.get('average', 0)
@@ -1139,13 +1231,16 @@ body {
         # Calculate additional fun stats
         total_watched = basic.get('total_watched', 0)
         total_liked = basic.get('total_liked', 0)
-        avg_rating = basic.get('avg_rating', 0)
+
+        # Get top language
+        top_languages = geography.get('top_languages', [])
+        top_language = top_languages[0] if top_languages else {'language': 'N/A', 'count': 0}
 
         return f'''
 <div id="insights" class="tab-content">
     <section class="section">
         <div class="section-header">
-            <h2 class="section-title">Viewing Time</h2>
+            <h2 class="section-title">⏱️ Viewing Time</h2>
         </div>
         <div class="insights-grid">
             <div class="insight-card accent-cyan">
@@ -1173,12 +1268,12 @@ body {
 
     <section class="section">
         <div class="section-header">
-            <h2 class="section-title">Distribution</h2>
+            <h2 class="section-title">🌍 Geography & Genres</h2>
         </div>
         <div class="charts-grid">
             <div class="chart-card">
                 <h3>Top Genres</h3>
-                <div class="chart-container">
+                <div class="chart-container chart-container-pie">
                     <canvas id="genresChart"></canvas>
                 </div>
             </div>
@@ -1193,20 +1288,12 @@ body {
 
     <section class="section">
         <div class="section-header">
-            <h2 class="section-title">Rating Trends</h2>
+            <h2 class="section-title">📈 Rating Trends</h2>
         </div>
-        <div class="charts-grid">
-            <div class="chart-card">
-                <h3>Your Ratings Over Time</h3>
-                <div class="chart-container">
-                    <canvas id="ratingEvolutionChart"></canvas>
-                </div>
-            </div>
-            <div class="chart-card">
-                <h3>Runtime Distribution</h3>
-                <div class="chart-container">
-                    <canvas id="runtimeChart"></canvas>
-                </div>
+        <div class="chart-card" style="max-width: 800px;">
+            <h3>Your Ratings Over Time</h3>
+            <div class="chart-container">
+                <canvas id="ratingEvolutionChart"></canvas>
             </div>
         </div>
     </section>
@@ -1236,7 +1323,7 @@ body {
 <footer class="footer">
     <p>Data from <a href="https://letterboxd.com" target="_blank">Letterboxd</a> |
        Enhanced with <a href="https://www.themoviedb.org" target="_blank">TMDB</a></p>
-    <p>Letterboxd Stats v4.0</p>
+    <p>Letterboxd Stats v4.1</p>
 </footer>'''
 
     def _generate_scripts(self) -> str:
@@ -1285,8 +1372,8 @@ function openModal(person, type) {{
 
     (person.films || []).forEach(film => {{
         const posterUrl = film.poster_path ? POSTER_BASE + film.poster_path : POSTER_PLACEHOLDER;
-        const ratingStars = film.rating ? '&#9733;'.repeat(Math.floor(film.rating)) + (film.rating % 1 >= 0.5 ? '&#189;' : '') : '';
-        const likedBadge = film.liked ? '<span class="film-liked">&#10084;</span>' : '';
+        const ratingStars = film.rating ? '★'.repeat(Math.floor(film.rating)) + (film.rating % 1 >= 0.5 ? '½' : '') : '';
+        const likedBadge = film.liked ? '<span class="film-liked">❤️</span>' : '';
 
         const filmEl = document.createElement('div');
         filmEl.className = 'modal-film';

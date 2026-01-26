@@ -82,7 +82,7 @@ class ChartGenerator:
         })
 
     def _genres_chart(self) -> str:
-        """Genre distribution chart"""
+        """Genre distribution chart - doughnut with single column legend"""
         genre_data = self.stats.get('genres', {}).get('distribution', [])
 
         labels = [item['genre'] for item in genre_data]
@@ -95,14 +95,28 @@ class ChartGenerator:
                 'datasets': [{
                     'data': data,
                     'backgroundColor': self.colors[:len(labels)],
-                    'borderWidth': 0
+                    'borderWidth': 0,
+                    'hoverOffset': 8
                 }]
             },
             'options': {
                 'responsive': True,
                 'maintainAspectRatio': False,
+                'cutout': '55%',
                 'plugins': {
-                    'legend': {'position': 'right', 'labels': {'padding': 15, 'usePointStyle': True}}
+                    'legend': {
+                        'position': 'right',
+                        'labels': {
+                            'padding': 12,
+                            'usePointStyle': True,
+                            'pointStyle': 'circle',
+                            'font': {'size': 11}
+                        },
+                        'maxWidth': 150
+                    }
+                },
+                'layout': {
+                    'padding': {'right': 10}
                 }
             }
         })

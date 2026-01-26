@@ -235,6 +235,13 @@ body {
     height: 280px;
 }
 
+.chart-container-pie {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* People Grid (Actors/Directors) */
 .people-grid {
     display: grid;
@@ -293,22 +300,31 @@ body {
     transition: width 0.3s ease;
 }
 
-/* Film Posters Grid - Fixed 5 columns for year wrap */
-.posters-grid-5 {
+/* Film Posters Grid - Adaptive layout for year wrap */
+.posters-grid-adaptive {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     gap: 1rem;
 }
 
-@media (max-width: 900px) {
-    .posters-grid-5 {
-        grid-template-columns: repeat(3, 1fr);
+.posters-grid-adaptive .poster-card {
+    min-height: 200px;
+}
+
+.posters-grid-adaptive .poster-card img {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}
+
+@media (min-width: 1100px) {
+    .posters-grid-adaptive {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     }
 }
 
-@media (max-width: 500px) {
-    .posters-grid-5 {
-        grid-template-columns: repeat(2, 1fr);
+@media (max-width: 600px) {
+    .posters-grid-adaptive {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 0.75rem;
     }
 }
 
@@ -325,12 +341,14 @@ body {
     overflow: hidden;
     aspect-ratio: 2/3;
     background: var(--bg-secondary);
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 .poster-card:hover {
     transform: scale(1.05);
     z-index: 1;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
 }
 
 .poster-card img {
@@ -344,34 +362,37 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 0.75rem 0.5rem 0.5rem;
-    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    padding: 2.5rem 0.5rem 0.5rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.95));
 }
 
 .poster-card .title {
-    font-size: 0.75rem;
-    font-weight: 500;
-    line-height: 1.2;
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1.25;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
 .poster-card .year {
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     color: var(--text-secondary);
+    margin-top: 0.15rem;
 }
 
 .poster-card .rating {
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    background: rgba(0,0,0,0.7);
-    padding: 0.2rem 0.4rem;
-    border-radius: 4px;
-    font-size: 0.7rem;
+    background: rgba(0,0,0,0.8);
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
     font-weight: 600;
+    backdrop-filter: blur(4px);
 }
 
 .poster-card .rating.high { color: var(--accent-green); }
@@ -383,17 +404,30 @@ body {
     top: 0.5rem;
     left: 0.5rem;
     color: var(--liked-color);
-    font-size: 0.9rem;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    font-size: 1rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+    filter: drop-shadow(0 0 3px rgba(239, 68, 68, 0.5));
 }
 
 /* Year Wrap Section */
 .year-wrap {
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(244, 114, 182, 0.1));
+    background: linear-gradient(145deg, rgba(124, 58, 237, 0.08), rgba(244, 114, 182, 0.08), rgba(0, 212, 255, 0.05));
     border: 1px solid var(--border-color);
     border-radius: var(--radius-xl);
-    padding: 2rem;
+    padding: 2.5rem 2rem;
     margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.year-wrap::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink), var(--accent-cyan));
 }
 
 .year-wrap .year-header {
@@ -402,17 +436,21 @@ body {
 }
 
 .year-wrap .year-number {
-    font-size: 4rem;
+    font-size: 5rem;
     font-weight: 800;
-    background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+    background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink), var(--accent-cyan));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    line-height: 1;
+    margin-bottom: 0.25rem;
 }
 
 .year-wrap .year-label {
     color: var(--text-secondary);
-    font-size: 1.1rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .year-highlight {
@@ -436,32 +474,47 @@ body {
 
 .highlight-card {
     background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
-    padding: 1.5rem;
+    padding: 1rem 1.25rem;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100px;
 }
 
 .highlight-card .icon {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+    line-height: 1;
+}
+
+.highlight-card .icon.heart-icon {
+    color: var(--liked-color);
 }
 
 .highlight-card .value {
     font-size: 1.75rem;
     font-weight: 700;
     color: var(--accent-cyan);
-    margin-bottom: 0.25rem;
+    line-height: 1.1;
+}
+
+.highlight-card .value.liked-value {
+    color: var(--liked-color);
 }
 
 .highlight-card .label {
     color: var(--text-secondary);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    margin-top: 0.15rem;
 }
 
 .highlight-card .sub-value {
     color: var(--text-muted);
-    font-size: 0.8rem;
-    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    margin-top: 0.1rem;
 }
 
 .top-person-section {
@@ -473,35 +526,57 @@ body {
 
 .top-person-card {
     background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
-    padding: 1.25rem;
+    padding: 1.5rem;
+    transition: all 0.2s;
+}
+
+.top-person-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-color-light);
 }
 
 .top-person-card h4 {
     color: var(--text-secondary);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
 }
 
 .top-person-card .person-name {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 700;
     margin-bottom: 0.25rem;
+    background: linear-gradient(135deg, var(--text-primary), var(--accent-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .top-person-card .person-count {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
     margin-bottom: 1rem;
 }
 
 .top-person-card .mini-posters {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.75rem;
     overflow-x: auto;
     padding-bottom: 0.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--bg-tertiary) transparent;
+}
+
+.top-person-card .mini-posters::-webkit-scrollbar {
+    height: 4px;
+}
+
+.top-person-card .mini-posters::-webkit-scrollbar-thumb {
+    background: var(--bg-tertiary);
+    border-radius: 2px;
 }
 
 .top-person-card .mini-poster-wrapper {
@@ -510,19 +585,26 @@ body {
 }
 
 .top-person-card .mini-poster {
-    width: 70px;
-    height: 105px;
+    width: 90px;
+    height: 135px;
     border-radius: var(--radius-sm);
     object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    transition: transform 0.2s;
+}
+
+.top-person-card .mini-poster:hover {
+    transform: scale(1.05);
 }
 
 .top-person-card .mini-poster-wrapper .mini-liked {
     position: absolute;
-    top: 4px;
-    left: 4px;
-    font-size: 0.75rem;
-    color: #ff3b5c;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+    top: 6px;
+    left: 6px;
+    font-size: 0.85rem;
+    color: var(--liked-color);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+    filter: drop-shadow(0 0 2px rgba(239, 68, 68, 0.5));
 }
 
 /* Insights Section Cards */
@@ -666,11 +748,12 @@ body {
 
 .modal-film .film-liked {
     position: absolute;
-    top: 4px;
-    left: 4px;
-    color: #ff3b5c;
+    top: 6px;
+    left: 6px;
+    color: var(--liked-color);
     font-size: 1rem;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+    filter: drop-shadow(0 0 3px rgba(239, 68, 68, 0.5));
 }
 
 .modal-film .film-title {
@@ -732,7 +815,11 @@ body {
 
 /* Top rated section in year wrap */
 .rated-section {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    border: 1px solid var(--border-color);
 }
 
 .rated-section h3 {
@@ -746,7 +833,7 @@ body {
 }
 
 .rated-section h3 .icon {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
 }
 </style>
 </head>
@@ -797,7 +884,7 @@ body {
 
     <section class="section">
         <div class="section-header">
-            <h2 class="section-title">Watched vs Liked</h2>
+            <h2 class="section-title">❤️ Watched vs Liked</h2>
             <span class="section-subtitle">How much do you really love what you watch?</span>
         </div>
         <div class="charts-grid">
@@ -818,7 +905,7 @@ body {
 
     <section class="section">
         <div class="section-header">
-            <h2 class="section-title">Activity</h2>
+            <h2 class="section-title">📊 Activity</h2>
         </div>
         <div class="charts-grid">
             <div class="chart-card">
@@ -838,20 +925,24 @@ body {
 
     <section class="section">
         <div class="section-header">
-            <h2 class="section-title">Directors: Watched vs Liked</h2>
+            <h2 class="section-title">🎬 Directors: Watched vs Liked</h2>
         </div>
-        <div class="charts-grid">
-            <div class="chart-card">
-                <h3>Top Directors Comparison</h3>
-                <div class="chart-container">
-                    <canvas id="directorsWatchedLikedChart"></canvas>
-                </div>
+        <div class="chart-card" style="max-width: 700px;">
+            <h3>Top Directors Comparison</h3>
+            <div class="chart-container">
+                <canvas id="directorsWatchedLikedChart"></canvas>
             </div>
-            <div class="chart-card">
-                <h3>Runtime Distribution</h3>
-                <div class="chart-container">
-                    <canvas id="runtimeChart"></canvas>
-                </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">⏱️ Runtime Distribution</h2>
+        </div>
+        <div class="chart-card" style="max-width: 700px;">
+            <h3>Film Lengths</h3>
+            <div class="chart-container">
+                <canvas id="runtimeChart"></canvas>
             </div>
         </div>
     </section>
@@ -866,23 +957,23 @@ body {
 
         <div class="year-highlight">
             <div class="highlight-card">
-                <div class="icon">&#127916;</div>
+                <div class="icon">🎬</div>
                 <div class="value">180</div>
                 <div class="label">Films Logged</div>
             </div>
             <div class="highlight-card">
-                <div class="icon">&#10084;</div>
-                <div class="value">88</div>
+                <div class="icon heart-icon">❤️</div>
+                <div class="value liked-value">88</div>
                 <div class="label">Films Liked</div>
             </div>
             <div class="highlight-card">
-                <div class="icon">&#11088;</div>
+                <div class="icon">⭐</div>
                 <div class="value">3.44</div>
                 <div class="label">Avg Rating</div>
             </div>
             <div class="highlight-card">
-                <div class="icon">&#128197;</div>
-                <div class="value">Dec</div>
+                <div class="icon">📅</div>
+                <div class="value">December</div>
                 <div class="label">Most Active</div>
                 <div class="sub-value">28 films</div>
             </div>
@@ -891,7 +982,7 @@ body {
         <div class="top-person-section">
             
 <div class="top-person-card">
-    <h4>Most Watched Actor</h4>
+    <h4>🎭 Most Watched Actor</h4>
     <div class="person-name">Mark Hamill</div>
     <div class="person-count">9 films this year</div>
     <div class="mini-posters"><div class="mini-poster-wrapper">
@@ -925,7 +1016,7 @@ body {
 </div>
             
 <div class="top-person-card">
-    <h4>Most Watched Director</h4>
+    <h4>🎬 Most Watched Director</h4>
     <div class="person-name">Ridley Scott</div>
     <div class="person-count">3 films this year</div>
     <div class="mini-posters"><div class="mini-poster-wrapper">
@@ -944,12 +1035,12 @@ body {
         <div class="two-col">
             
 <div class="rated-section">
-    <h3><span class="icon">&#127942;</span> Highest Rated</h3>
-    <div class="posters-grid-5">
+    <h3><span class="icon">🏆</span> Highest Rated</h3>
+    <div class="posters-grid-adaptive">
 <div class="poster-card">
     <img src="https://image.tmdb.org/t/p/w185/pySivdR845Hom4u4T2WNkJxe6Ad.jpg" alt="Wind River" loading="lazy">
-    <span class="liked-badge">&#10084;</span>
-    <span class="rating high">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+    <span class="liked-badge">❤️</span>
+    <span class="rating high">★★★★★</span>
     <div class="overlay">
         <div class="title">Wind River</div>
         <div class="year">2017</div>
@@ -957,8 +1048,8 @@ body {
 </div>
 <div class="poster-card">
     <img src="https://image.tmdb.org/t/p/w185/3ndAx3weG6KDkJIRMCi5vXX6Dyb.jpg" alt="The Martian" loading="lazy">
-    <span class="liked-badge">&#10084;</span>
-    <span class="rating high">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+    <span class="liked-badge">❤️</span>
+    <span class="rating high">★★★★★</span>
     <div class="overlay">
         <div class="title">The Martian</div>
         <div class="year">2015</div>
@@ -966,8 +1057,8 @@ body {
 </div>
 <div class="poster-card">
     <img src="https://image.tmdb.org/t/p/w185/eTM3qtGhDU8cvjpoa6KEt5E2auU.jpg" alt="Armageddon" loading="lazy">
-    <span class="liked-badge">&#10084;</span>
-    <span class="rating high">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+    <span class="liked-badge">❤️</span>
+    <span class="rating high">★★★★★</span>
     <div class="overlay">
         <div class="title">Armageddon</div>
         <div class="year">1998</div>
@@ -975,8 +1066,8 @@ body {
 </div>
 <div class="poster-card">
     <img src="https://image.tmdb.org/t/p/w185/umSVjVdbVwtx5ryCA2QXL44Durm.jpg" alt="Heat" loading="lazy">
-    <span class="liked-badge">&#10084;</span>
-    <span class="rating high">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+    <span class="liked-badge">❤️</span>
+    <span class="rating high">★★★★★</span>
     <div class="overlay">
         <div class="title">Heat</div>
         <div class="year">1995</div>
@@ -984,8 +1075,8 @@ body {
 </div>
 <div class="poster-card">
     <img src="https://image.tmdb.org/t/p/w185/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg" alt="Interstellar" loading="lazy">
-    <span class="liked-badge">&#10084;</span>
-    <span class="rating high">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+    <span class="liked-badge">❤️</span>
+    <span class="rating high">★★★★★</span>
     <div class="overlay">
         <div class="title">Interstellar</div>
         <div class="year">2014</div>
@@ -994,12 +1085,12 @@ body {
 </div>
             
 <div class="rated-section">
-    <h3><span class="icon">&#128078;</span> Lowest Rated</h3>
-    <div class="posters-grid-5">
+    <h3><span class="icon">👎</span> Lowest Rated</h3>
+    <div class="posters-grid-adaptive">
 <div class="poster-card">
     <img src="https://image.tmdb.org/t/p/w185/qCOGGi8JBVEZMc3DVby8rUivyXz.jpg" alt="Wake Up Dead Man" loading="lazy">
     
-    <span class="rating low">&#9733;&#189;</span>
+    <span class="rating low">★½</span>
     <div class="overlay">
         <div class="title">Wake Up Dead Man</div>
         <div class="year">2025</div>
@@ -1008,7 +1099,7 @@ body {
 <div class="poster-card">
     <img src="https://image.tmdb.org/t/p/w185/jjcAOhtGuX4p8XvlVn1WXUT1jWi.jpg" alt="Prince of Darkness" loading="lazy">
     
-    <span class="rating low">&#9733;&#9733;</span>
+    <span class="rating low">★★</span>
     <div class="overlay">
         <div class="title">Prince of Darkness</div>
         <div class="year">1987</div>
@@ -1017,7 +1108,7 @@ body {
 <div class="poster-card">
     <img src="https://image.tmdb.org/t/p/w185/sI2NiMU8o65hmIMY0JI9CjJ0p7f.jpg" alt="The Electric State" loading="lazy">
     
-    <span class="rating low">&#9733;&#9733;</span>
+    <span class="rating low">★★</span>
     <div class="overlay">
         <div class="title">The Electric State</div>
         <div class="year">2025</div>
@@ -1026,7 +1117,7 @@ body {
 <div class="poster-card">
     <img src="https://image.tmdb.org/t/p/w185/wpSDzTBfF0Eeo5lzu2w9FTujGqd.jpg" alt="Wolf Man" loading="lazy">
     
-    <span class="rating low">&#9733;&#9733;</span>
+    <span class="rating low">★★</span>
     <div class="overlay">
         <div class="title">Wolf Man</div>
         <div class="year">2025</div>
@@ -1035,7 +1126,7 @@ body {
 <div class="poster-card">
     <img src="https://image.tmdb.org/t/p/w185/2cxhvwyEwRlysAmRH4iodkvo0z5.jpg" alt="Gladiator II" loading="lazy">
     
-    <span class="rating low">&#9733;&#9733;</span>
+    <span class="rating low">★★</span>
     <div class="overlay">
         <div class="title">Gladiator II</div>
         <div class="year">2024</div>
@@ -1055,23 +1146,23 @@ body {
 
         <div class="year-highlight">
             <div class="highlight-card">
-                <div class="icon">&#127916;</div>
+                <div class="icon">🎬</div>
                 <div class="value">5</div>
                 <div class="label">Films Logged</div>
             </div>
             <div class="highlight-card">
-                <div class="icon">&#10084;</div>
-                <div class="value">3</div>
+                <div class="icon heart-icon">❤️</div>
+                <div class="value liked-value">3</div>
                 <div class="label">Films Liked</div>
             </div>
             <div class="highlight-card">
-                <div class="icon">&#11088;</div>
+                <div class="icon">⭐</div>
                 <div class="value">3.83</div>
                 <div class="label">Avg Rating</div>
             </div>
             <div class="highlight-card">
-                <div class="icon">&#128197;</div>
-                <div class="value">Jan</div>
+                <div class="icon">📅</div>
+                <div class="value">January</div>
                 <div class="label">Most Active</div>
                 <div class="sub-value">5 films</div>
             </div>
@@ -1080,7 +1171,7 @@ body {
         <div class="top-person-section">
             
 <div class="top-person-card">
-    <h4>Most Watched Actor</h4>
+    <h4>🎭 Most Watched Actor</h4>
     <div class="person-name">Patton Oswalt</div>
     <div class="person-count">1 films this year</div>
     <div class="mini-posters"><div class="mini-poster-wrapper">
@@ -1090,7 +1181,7 @@ body {
 </div>
             
 <div class="top-person-card">
-    <h4>Most Watched Director</h4>
+    <h4>🎬 Most Watched Director</h4>
     <div class="person-name">Brad Bird</div>
     <div class="person-count">1 films this year</div>
     <div class="mini-posters"><div class="mini-poster-wrapper">
@@ -1103,12 +1194,12 @@ body {
         <div class="two-col">
             
 <div class="rated-section">
-    <h3><span class="icon">&#127942;</span> Highest Rated</h3>
-    <div class="posters-grid-5">
+    <h3><span class="icon">🏆</span> Highest Rated</h3>
+    <div class="posters-grid-adaptive">
 <div class="poster-card">
     <img src="https://image.tmdb.org/t/p/w185/w03EiJVHP8Un77boQeE7hg9DVdU.jpg" alt="Singin' in the Rain" loading="lazy">
-    <span class="liked-badge">&#10084;</span>
-    <span class="rating high">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+    <span class="liked-badge">❤️</span>
+    <span class="rating high">★★★★★</span>
     <div class="overlay">
         <div class="title">Singin' in the Rain</div>
         <div class="year">1952</div>
@@ -1117,7 +1208,7 @@ body {
 <div class="poster-card">
     <img src="https://image.tmdb.org/t/p/w185/cf7hE1ifY4UNbS25tGnaTyyDrI2.jpg" alt="Avatar: Fire and Ash" loading="lazy">
     
-    <span class="rating mid">&#9733;&#9733;&#9733;&#189;</span>
+    <span class="rating mid">★★★½</span>
     <div class="overlay">
         <div class="title">Avatar: Fire and Ash</div>
         <div class="year">2025</div>
@@ -1126,7 +1217,7 @@ body {
 <div class="poster-card">
     <img src="https://image.tmdb.org/t/p/w185/zaZFMNxJST0TtPd68yF7fNt1he8.jpg" alt="Throne of Blood" loading="lazy">
     
-    <span class="rating mid">&#9733;&#9733;&#9733;</span>
+    <span class="rating mid">★★★</span>
     <div class="overlay">
         <div class="title">Throne of Blood</div>
         <div class="year">1957</div>
@@ -1141,7 +1232,7 @@ body {
 <div id="people" class="tab-content">
     <section class="section">
         <div class="section-header">
-            <h2 class="section-title">Top Actors</h2>
+            <h2 class="section-title">🎭 Top Actors</h2>
             <span class="section-subtitle">Click to see films</span>
         </div>
         <div class="people-grid">
@@ -1149,7 +1240,7 @@ body {
     <div class="name">Brad Pitt</div>
     <div class="meta">
         <span class="watched">29 watched</span>
-        <span class="liked">&#10084; 19 liked</span>
+        <span class="liked">❤️ 19 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 65.5%"></div>
@@ -1159,7 +1250,7 @@ body {
     <div class="name">Robert De Niro</div>
     <div class="meta">
         <span class="watched">25 watched</span>
-        <span class="liked">&#10084; 17 liked</span>
+        <span class="liked">❤️ 17 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 68.0%"></div>
@@ -1169,7 +1260,7 @@ body {
     <div class="name">Tom Hanks</div>
     <div class="meta">
         <span class="watched">25 watched</span>
-        <span class="liked">&#10084; 14 liked</span>
+        <span class="liked">❤️ 14 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 56.0%"></div>
@@ -1179,7 +1270,7 @@ body {
     <div class="name">Willem Dafoe</div>
     <div class="meta">
         <span class="watched">25 watched</span>
-        <span class="liked">&#10084; 9 liked</span>
+        <span class="liked">❤️ 9 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 36.0%"></div>
@@ -1189,7 +1280,7 @@ body {
     <div class="name">Ralph Fiennes</div>
     <div class="meta">
         <span class="watched">23 watched</span>
-        <span class="liked">&#10084; 9 liked</span>
+        <span class="liked">❤️ 9 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 39.1%"></div>
@@ -1199,7 +1290,7 @@ body {
     <div class="name">Samuel L. Jackson</div>
     <div class="meta">
         <span class="watched">23 watched</span>
-        <span class="liked">&#10084; 15 liked</span>
+        <span class="liked">❤️ 15 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 65.2%"></div>
@@ -1209,7 +1300,7 @@ body {
     <div class="name">Bruce Willis</div>
     <div class="meta">
         <span class="watched">23 watched</span>
-        <span class="liked">&#10084; 16 liked</span>
+        <span class="liked">❤️ 16 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 69.6%"></div>
@@ -1219,7 +1310,7 @@ body {
     <div class="name">Josh Brolin</div>
     <div class="meta">
         <span class="watched">23 watched</span>
-        <span class="liked">&#10084; 13 liked</span>
+        <span class="liked">❤️ 13 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 56.5%"></div>
@@ -1229,7 +1320,7 @@ body {
     <div class="name">Woody Harrelson</div>
     <div class="meta">
         <span class="watched">23 watched</span>
-        <span class="liked">&#10084; 7 liked</span>
+        <span class="liked">❤️ 7 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 30.4%"></div>
@@ -1239,7 +1330,7 @@ body {
     <div class="name">Tom Cruise</div>
     <div class="meta">
         <span class="watched">23 watched</span>
-        <span class="liked">&#10084; 17 liked</span>
+        <span class="liked">❤️ 17 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 73.9%"></div>
@@ -1249,7 +1340,7 @@ body {
     <div class="name">Christian Bale</div>
     <div class="meta">
         <span class="watched">22 watched</span>
-        <span class="liked">&#10084; 10 liked</span>
+        <span class="liked">❤️ 10 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 45.5%"></div>
@@ -1259,7 +1350,7 @@ body {
     <div class="name">Scarlett Johansson</div>
     <div class="meta">
         <span class="watched">22 watched</span>
-        <span class="liked">&#10084; 11 liked</span>
+        <span class="liked">❤️ 11 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 50.0%"></div>
@@ -1269,7 +1360,7 @@ body {
     <div class="name">Jim Carrey</div>
     <div class="meta">
         <span class="watched">22 watched</span>
-        <span class="liked">&#10084; 10 liked</span>
+        <span class="liked">❤️ 10 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 45.5%"></div>
@@ -1279,7 +1370,7 @@ body {
     <div class="name">Keanu Reeves</div>
     <div class="meta">
         <span class="watched">21 watched</span>
-        <span class="liked">&#10084; 8 liked</span>
+        <span class="liked">❤️ 8 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 38.1%"></div>
@@ -1289,7 +1380,7 @@ body {
     <div class="name">Laurence Fishburne</div>
     <div class="meta">
         <span class="watched">21 watched</span>
-        <span class="liked">&#10084; 9 liked</span>
+        <span class="liked">❤️ 9 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 42.9%"></div>
@@ -1299,7 +1390,7 @@ body {
 
     <section class="section">
         <div class="section-header">
-            <h2 class="section-title">Top Directors</h2>
+            <h2 class="section-title">🎬 Top Directors</h2>
             <span class="section-subtitle">Click to see films</span>
         </div>
         <div class="people-grid">
@@ -1307,7 +1398,7 @@ body {
     <div class="name">Steven Spielberg</div>
     <div class="meta">
         <span class="watched">26 watched</span>
-        <span class="liked">&#10084; 13 liked</span>
+        <span class="liked">❤️ 13 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 50.0%"></div>
@@ -1317,7 +1408,7 @@ body {
     <div class="name">Martin Scorsese</div>
     <div class="meta">
         <span class="watched">18 watched</span>
-        <span class="liked">&#10084; 13 liked</span>
+        <span class="liked">❤️ 13 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 72.2%"></div>
@@ -1327,7 +1418,7 @@ body {
     <div class="name">Wes Anderson</div>
     <div class="meta">
         <span class="watched">18 watched</span>
-        <span class="liked">&#10084; 12 liked</span>
+        <span class="liked">❤️ 12 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 66.7%"></div>
@@ -1337,7 +1428,7 @@ body {
     <div class="name">Christopher Nolan</div>
     <div class="meta">
         <span class="watched">16 watched</span>
-        <span class="liked">&#10084; 11 liked</span>
+        <span class="liked">❤️ 11 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 68.8%"></div>
@@ -1347,7 +1438,7 @@ body {
     <div class="name">Ridley Scott</div>
     <div class="meta">
         <span class="watched">14 watched</span>
-        <span class="liked">&#10084; 6 liked</span>
+        <span class="liked">❤️ 6 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 42.9%"></div>
@@ -1357,7 +1448,7 @@ body {
     <div class="name">Michael Mann</div>
     <div class="meta">
         <span class="watched">14 watched</span>
-        <span class="liked">&#10084; 11 liked</span>
+        <span class="liked">❤️ 11 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 78.6%"></div>
@@ -1367,7 +1458,7 @@ body {
     <div class="name">Tim Burton</div>
     <div class="meta">
         <span class="watched">14 watched</span>
-        <span class="liked">&#10084; 9 liked</span>
+        <span class="liked">❤️ 9 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 64.3%"></div>
@@ -1377,7 +1468,7 @@ body {
     <div class="name">Robert Zemeckis</div>
     <div class="meta">
         <span class="watched">13 watched</span>
-        <span class="liked">&#10084; 7 liked</span>
+        <span class="liked">❤️ 7 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 53.8%"></div>
@@ -1387,7 +1478,7 @@ body {
     <div class="name">Quentin Tarantino</div>
     <div class="meta">
         <span class="watched">11 watched</span>
-        <span class="liked">&#10084; 11 liked</span>
+        <span class="liked">❤️ 11 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 100.0%"></div>
@@ -1397,7 +1488,7 @@ body {
     <div class="name">David Fincher</div>
     <div class="meta">
         <span class="watched">11 watched</span>
-        <span class="liked">&#10084; 8 liked</span>
+        <span class="liked">❤️ 8 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 72.7%"></div>
@@ -1407,7 +1498,7 @@ body {
     <div class="name">Paul Thomas Anderson</div>
     <div class="meta">
         <span class="watched">11 watched</span>
-        <span class="liked">&#10084; 8 liked</span>
+        <span class="liked">❤️ 8 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 72.7%"></div>
@@ -1417,7 +1508,7 @@ body {
     <div class="name">James Mangold</div>
     <div class="meta">
         <span class="watched">11 watched</span>
-        <span class="liked">&#10084; 9 liked</span>
+        <span class="liked">❤️ 9 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 81.8%"></div>
@@ -1427,7 +1518,7 @@ body {
     <div class="name">Quentin Dupieux</div>
     <div class="meta">
         <span class="watched">11 watched</span>
-        <span class="liked">&#10084; 7 liked</span>
+        <span class="liked">❤️ 7 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 63.6%"></div>
@@ -1437,7 +1528,7 @@ body {
     <div class="name">Akira Kurosawa</div>
     <div class="meta">
         <span class="watched">10 watched</span>
-        <span class="liked">&#10084; 6 liked</span>
+        <span class="liked">❤️ 6 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 60.0%"></div>
@@ -1447,7 +1538,7 @@ body {
     <div class="name">Hayao Miyazaki</div>
     <div class="meta">
         <span class="watched">10 watched</span>
-        <span class="liked">&#10084; 3 liked</span>
+        <span class="liked">❤️ 3 liked</span>
     </div>
     <div class="like-ratio">
         <div class="like-ratio-fill" style="width: 30.0%"></div>
@@ -1459,7 +1550,7 @@ body {
 <div id="insights" class="tab-content">
     <section class="section">
         <div class="section-header">
-            <h2 class="section-title">Viewing Time</h2>
+            <h2 class="section-title">⏱️ Viewing Time</h2>
         </div>
         <div class="insights-grid">
             <div class="insight-card accent-cyan">
@@ -1487,12 +1578,12 @@ body {
 
     <section class="section">
         <div class="section-header">
-            <h2 class="section-title">Distribution</h2>
+            <h2 class="section-title">🌍 Geography & Genres</h2>
         </div>
         <div class="charts-grid">
             <div class="chart-card">
                 <h3>Top Genres</h3>
-                <div class="chart-container">
+                <div class="chart-container chart-container-pie">
                     <canvas id="genresChart"></canvas>
                 </div>
             </div>
@@ -1507,20 +1598,12 @@ body {
 
     <section class="section">
         <div class="section-header">
-            <h2 class="section-title">Rating Trends</h2>
+            <h2 class="section-title">📈 Rating Trends</h2>
         </div>
-        <div class="charts-grid">
-            <div class="chart-card">
-                <h3>Your Ratings Over Time</h3>
-                <div class="chart-container">
-                    <canvas id="ratingEvolutionChart"></canvas>
-                </div>
-            </div>
-            <div class="chart-card">
-                <h3>Runtime Distribution</h3>
-                <div class="chart-container">
-                    <canvas id="runtimeChart"></canvas>
-                </div>
+        <div class="chart-card" style="max-width: 800px;">
+            <h3>Your Ratings Over Time</h3>
+            <div class="chart-container">
+                <canvas id="ratingEvolutionChart"></canvas>
             </div>
         </div>
     </section>
@@ -1530,7 +1613,7 @@ body {
 <footer class="footer">
     <p>Data from <a href="https://letterboxd.com" target="_blank">Letterboxd</a> |
        Enhanced with <a href="https://www.themoviedb.org" target="_blank">TMDB</a></p>
-    <p>Letterboxd Stats v4.0</p>
+    <p>Letterboxd Stats v4.1</p>
 </footer>
     </div>
     
@@ -1588,8 +1671,8 @@ function openModal(person, type) {
 
     (person.films || []).forEach(film => {
         const posterUrl = film.poster_path ? POSTER_BASE + film.poster_path : POSTER_PLACEHOLDER;
-        const ratingStars = film.rating ? '&#9733;'.repeat(Math.floor(film.rating)) + (film.rating % 1 >= 0.5 ? '&#189;' : '') : '';
-        const likedBadge = film.liked ? '<span class="film-liked">&#10084;</span>' : '';
+        const ratingStars = film.rating ? '★'.repeat(Math.floor(film.rating)) + (film.rating % 1 >= 0.5 ? '½' : '') : '';
+        const likedBadge = film.liked ? '<span class="film-liked">❤️</span>' : '';
 
         const filmEl = document.createElement('div');
         filmEl.className = 'modal-film';
@@ -1631,14 +1714,14 @@ Chart.defaults.font.family = "'Inter', sans-serif";
 
 // Initialize charts
 const charts = {
-    genresWatchedLikedChart: {"type": "bar", "data": {"labels": ["Drama", "Comedy", "Action", "Thriller", "Adventure", "Science Fiction", "Crime", "Horror"], "datasets": [{"label": "Watched", "data": [851, 594, 539, 496, 410, 361, 345, 262], "backgroundColor": "rgba(0, 212, 255, 0.85)", "borderRadius": 4}, {"label": "Liked", "data": [532, 345, 262, 250, 209, 173, 201, 119], "backgroundColor": "rgba(239, 68, 68, 0.85)", "borderRadius": 4}]}, "options": {"indexAxis": "y", "responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": true, "position": "top", "labels": {"padding": 15, "usePointStyle": true}}}, "scales": {"x": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "y": {"grid": {"display": false}}}}},
+    genresWatchedLikedChart: {"type": "bar", "data": {"labels": ["Drama", "Comedy", "Action", "Thriller", "Adventure", "Science Fiction", "Crime", "Horror"], "datasets": [{"label": "Watched", "data": [851, 594, 539, 496, 410, 363, 345, 263], "backgroundColor": "rgba(0, 212, 255, 0.85)", "borderRadius": 4}, {"label": "Liked", "data": [532, 345, 262, 250, 209, 174, 201, 120], "backgroundColor": "rgba(239, 68, 68, 0.85)", "borderRadius": 4}]}, "options": {"indexAxis": "y", "responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": true, "position": "top", "labels": {"padding": 15, "usePointStyle": true}}}, "scales": {"x": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "y": {"grid": {"display": false}}}}},
     actorsWatchedLikedChart: {"type": "bar", "data": {"labels": ["Brad Pitt", "Robert De Niro", "Tom Hanks", "Willem Dafoe", "Ralph Fiennes", "Samuel L. Jackson", "Bruce Willis", "Josh Brolin", "Woody Harrelson", "Tom Cruise"], "datasets": [{"label": "Watched", "data": [29, 25, 25, 25, 23, 23, 23, 23, 23, 23], "backgroundColor": "rgba(124, 58, 237, 0.85)", "borderRadius": 4}, {"label": "Liked", "data": [19, 17, 14, 9, 9, 15, 16, 13, 7, 17], "backgroundColor": "rgba(239, 68, 68, 0.85)", "borderRadius": 4}]}, "options": {"indexAxis": "y", "responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": true, "position": "top", "labels": {"padding": 15, "usePointStyle": true}}}, "scales": {"x": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "y": {"grid": {"display": false}}}}},
     directorsWatchedLikedChart: {"type": "bar", "data": {"labels": ["Steven Spielberg", "Martin Scorsese", "Wes Anderson", "Christopher Nolan", "Ridley Scott", "Michael Mann", "Tim Burton", "Robert Zemeckis", "Quentin Tarantino", "David Fincher"], "datasets": [{"label": "Watched", "data": [26, 18, 18, 16, 14, 14, 14, 13, 11, 11], "backgroundColor": "rgba(251, 146, 60, 0.85)", "borderRadius": 4}, {"label": "Liked", "data": [13, 13, 12, 11, 6, 11, 9, 7, 11, 8], "backgroundColor": "rgba(239, 68, 68, 0.85)", "borderRadius": 4}]}, "options": {"indexAxis": "y", "responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": true, "position": "top", "labels": {"padding": 15, "usePointStyle": true}}}, "scales": {"x": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "y": {"grid": {"display": false}}}}},
     yearlyChart: {"type": "bar", "data": {"labels": ["2019", "2021", "2022", "2023", "2024", "2025", "2026"], "datasets": [{"label": "Films Watched", "data": [4, 3, 28, 220, 159, 180, 5], "backgroundColor": "rgba(0, 212, 255, 0.8)", "borderRadius": 6}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"y": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "x": {"grid": {"display": false}}}}},
     monthlyChart: {"type": "line", "data": {"labels": ["2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01"], "datasets": [{"label": "Films", "data": [12, 16, 10, 11, 8, 7, 15, 9, 18, 20, 11, 10, 15, 10, 6, 15, 12, 16, 5, 13, 25, 25, 28, 5], "borderColor": "rgba(244, 114, 182, 0.8)", "backgroundColor": "rgba(244, 114, 182, 0.1)", "fill": true, "tension": 0.4}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"y": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "x": {"grid": {"display": false}}}}},
     runtimeChart: {"type": "bar", "data": {"labels": ["<90", "90-120", "120-150", "150-180", "180+"], "datasets": [{"label": "Films", "data": [247, 1006, 545, 109, 28], "backgroundColor": "rgba(52, 211, 153, 0.8)", "borderRadius": 6}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"y": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "x": {"grid": {"display": false}, "title": {"display": true, "text": "Runtime (minutes)"}}}}},
-    genresChart: {"type": "doughnut", "data": {"labels": ["Drama", "Comedy", "Action", "Thriller", "Adventure", "Science Fiction", "Crime", "Horror", "Fantasy", "Romance"], "datasets": [{"data": [851, 594, 539, 496, 410, 361, 345, 262, 248, 192], "backgroundColor": ["rgba(0, 212, 255, 0.8)", "rgba(124, 58, 237, 0.8)", "rgba(244, 114, 182, 0.8)", "rgba(251, 191, 36, 0.8)", "rgba(52, 211, 153, 0.8)", "rgba(251, 146, 60, 0.8)", "rgba(167, 139, 250, 0.8)", "rgba(248, 113, 113, 0.8)", "rgba(96, 165, 250, 0.8)", "rgba(74, 222, 128, 0.8)"], "borderWidth": 0}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"position": "right", "labels": {"padding": 15, "usePointStyle": true}}}}},
-    countriesChart: {"type": "bar", "data": {"labels": ["United States of America", "United Kingdom", "France", "Germany", "Japan", "Canada", "Italy", "Belgium", "Australia", "Spain"], "datasets": [{"label": "Films", "data": [1542, 323, 234, 105, 94, 83, 47, 41, 31, 26], "backgroundColor": "rgba(167, 139, 250, 0.8)", "borderRadius": 6}]}, "options": {"indexAxis": "y", "responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"x": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "y": {"grid": {"display": false}}}}},
+    genresChart: {"type": "doughnut", "data": {"labels": ["Drama", "Comedy", "Action", "Thriller", "Adventure", "Science Fiction", "Crime", "Horror", "Fantasy", "Romance"], "datasets": [{"data": [851, 594, 539, 496, 410, 363, 345, 263, 248, 192], "backgroundColor": ["rgba(0, 212, 255, 0.8)", "rgba(124, 58, 237, 0.8)", "rgba(244, 114, 182, 0.8)", "rgba(251, 191, 36, 0.8)", "rgba(52, 211, 153, 0.8)", "rgba(251, 146, 60, 0.8)", "rgba(167, 139, 250, 0.8)", "rgba(248, 113, 113, 0.8)", "rgba(96, 165, 250, 0.8)", "rgba(74, 222, 128, 0.8)"], "borderWidth": 0, "hoverOffset": 8}]}, "options": {"responsive": true, "maintainAspectRatio": false, "cutout": "55%", "plugins": {"legend": {"position": "right", "labels": {"padding": 12, "usePointStyle": true, "pointStyle": "circle", "font": {"size": 11}}, "maxWidth": 150}}, "layout": {"padding": {"right": 10}}}},
+    countriesChart: {"type": "bar", "data": {"labels": ["United States of America", "United Kingdom", "France", "Germany", "Japan", "Canada", "Italy", "Belgium", "Australia", "Spain"], "datasets": [{"label": "Films", "data": [1542, 323, 234, 105, 96, 83, 47, 41, 31, 26], "backgroundColor": "rgba(167, 139, 250, 0.8)", "borderRadius": 6}]}, "options": {"indexAxis": "y", "responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"x": {"beginAtZero": true, "grid": {"color": "rgba(255,255,255,0.05)"}}, "y": {"grid": {"display": false}}}}},
     ratingEvolutionChart: {"type": "line", "data": {"labels": ["2019", "2021", "2022", "2023", "2024", "2025", "2026"], "datasets": [{"label": "Average Rating", "data": [3.88, 3.0, 3.46, 3.66, 3.55, 3.44, 3.83], "borderColor": "rgba(251, 191, 36, 0.8)", "backgroundColor": "rgba(251, 191, 36, 0.1)", "fill": true, "tension": 0.3}]}, "options": {"responsive": true, "maintainAspectRatio": false, "plugins": {"legend": {"display": false}}, "scales": {"y": {"min": 0, "max": 5, "grid": {"color": "rgba(255,255,255,0.05)"}}, "x": {"grid": {"display": false}}}}}
 };
 

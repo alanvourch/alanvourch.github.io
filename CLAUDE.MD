@@ -1,4 +1,4 @@
-# Letterboxd Stats Visualizer v3.0
+# Letterboxd Stats Visualizer v4.1
 
 A Python-based tool that generates beautiful, interactive HTML visualizations of your Letterboxd movie watching data, enhanced with metadata from The Movie Database (TMDB).
 
@@ -29,13 +29,13 @@ requirements.txt          # Python dependencies
 
 ## Features
 
-### Dashboard Navigation (v3.0)
+### Dashboard Navigation (v4.1)
 The dashboard uses a tabbed interface with 5 main sections:
-1. **Overview** - Key stats and watched vs liked comparisons
-2. **[Year] Wrap** - Previous year wrap-up (Spotify Wrapped style)
+1. **Overview** - Key stats, watched vs liked comparisons, activity charts, and runtime distribution
+2. **[Year] Wrap** - Previous year wrap-up (Spotify Wrapped style) with adaptive poster grids
 3. **[Year] Live** - Current year stats, updated on each run
 4. **People** - Interactive actor/director cards with click-to-expand film lists
-5. **Discovery** - Genre distribution, countries, rating trends
+5. **Insights** - Viewing time stats, genre distribution, countries, and rating trends
 
 ### Basic Statistics
 - Total films watched
@@ -53,16 +53,15 @@ The dashboard uses a tabbed interface with 5 main sections:
 - **Geography**: Top production countries, original language distribution
 - **Temporal Patterns**: Viewing activity by year, month, and weekday
 
-### Year Wrap-up Features (NEW in v3.0)
+### Year Wrap-up Features (Enhanced in v4.1)
 Each year section includes:
 - Total films logged that year
-- Total films liked that year
+- Total films liked that year (with red heart icon)
 - Average rating for the year
-- Most active month
-- Top actor of the year (with poster filmstrip)
-- Top director of the year (with poster filmstrip)
-- Top 5 highest rated films (with posters)
-- Top 5 lowest rated films (with posters)
+- Most active month (full month names like "January")
+- Top actor of the year (with larger poster filmstrip, 90x135px)
+- Top director of the year (with larger poster filmstrip)
+- Adaptive poster grid for highest/lowest rated films (fills available space)
 
 ### Watched vs Liked Analysis (NEW in v3.0)
 - Dual-bar charts comparing watched count vs liked count
@@ -81,18 +80,22 @@ Each year section includes:
 8. **Top Countries** - Horizontal bar chart
 9. **Rating Evolution** - Line chart over time
 
-### Interactive Features (NEW in v3.0)
+### Interactive Features
 - **Click on Actor/Director cards** - Opens modal with all their films
-- **Film modals show**: Poster, title, year, your rating
+- **Film modals show**: Poster with red heart for liked films, title, year, star rating
 - **Poster images** - Loaded from TMDB (w185 size for performance)
-- **Tab navigation** - Switch between dashboard sections
+- **Tab navigation** - Switch between dashboard sections with smooth animations
 - **Keyboard support** - ESC to close modals
+- **Hover effects** - Poster scale, shadows, and card highlighting
 
 ### Movie Posters
 - Poster size: `w185` (185px wide, ~10-15KB each)
+- Mini posters in filmstrips: 90x135px with shadow effects
+- Adaptive grid posters: 130-140px minimum width
 - Lazy loading for performance
 - SVG placeholder for missing posters
 - Used in: Year wrap-ups, film modals, top/bottom rated sections
+- Hover effects with scale transform and enhanced shadows
 
 ## Setup
 
@@ -329,7 +332,21 @@ This project uses data from TMDB. Make sure to comply with TMDB's terms of servi
 
 ## Changelog
 
-### v3.0 (2026-01)
+### v4.1 (2026-01)
+- Enhanced year wrap sections with better visual design
+- Red heart emojis for liked films throughout the dashboard
+- Full month names instead of abbreviations (e.g., "January" not "Jan")
+- Adaptive poster grids that fill available space responsively
+- Larger, more visually appealing posters (90x135px in filmstrips)
+- Improved highlight cards with less empty space
+- Removed duplicate runtime distribution from Insights tab
+- Fixed genres pie chart legend to single column
+- Added emoji icons to section headers
+- Improved top person cards with gradient text effect
+- Better poster shadows and hover effects
+- Year wrap sections now have gradient top border accent
+
+### v4.0 (2026-01)
 - Complete dashboard redesign with tabbed navigation
 - Added year wrap-up sections (previous year + current year)
 - Added watched vs liked comparison charts
@@ -339,6 +356,9 @@ This project uses data from TMDB. Make sure to comply with TMDB's terms of servi
 - Removed redundant duplicate lists
 - Improved mobile responsiveness
 - Fixed Windows console encoding issues
+
+### v3.0
+- Initial tabbed dashboard design
 
 ### v2.0
 - Initial TMDB integration

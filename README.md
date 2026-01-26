@@ -1,18 +1,19 @@
-# Letterboxd Stats Visualizer v3.0
+# Letterboxd Stats Visualizer v4.1
 
 Transform your Letterboxd data into a beautiful, interactive dashboard with insights about your favorite actors, directors, genres, and viewing habits.
 
-![Version](https://img.shields.io/badge/version-3.0-blue)
+![Version](https://img.shields.io/badge/version-4.1-blue)
 ![Python](https://img.shields.io/badge/python-3.8+-green)
 ![License](https://img.shields.io/badge/license-MIT-orange)
 
-## What's New in v3.0
+## What's New in v4.1
 
-- **Tabbed Dashboard** - Navigate between Overview, Year Wrap-ups, People, and Discovery
-- **Year Wrap-ups** - Spotify Wrapped-style summaries for last year and current year
-- **Watched vs Liked** - See which actors/directors you truly love, not just watch often
-- **Movie Posters** - Visual filmographies with TMDB poster images
-- **Click-to-Explore** - Click any actor or director to see all their films you've watched
+- **Enhanced Year Wrap** - Bigger posters, red heart emojis, full month names
+- **Adaptive Poster Grids** - Posters intelligently fill available space
+- **Improved Visuals** - Better shadows, hover effects, gradient accents
+- **Cleaner Layout** - Less empty space, single-column pie chart legend
+- **Section Emojis** - Visual icons for each dashboard section
+- **Polished UI** - Gradient effects on year numbers and top person names
 
 ## Features
 
@@ -69,13 +70,14 @@ Open `letterboxd_stats.html` in your browser to see your dashboard!
 - Key stats at a glance (watched, liked, like ratio, avg rating)
 - Watched vs Liked comparison charts for genres, actors, directors
 - Activity trends (yearly, monthly)
+- Runtime distribution chart
 
 ### Year Wrap-up (e.g., 2025)
-- Total films logged and liked that year
+- Total films logged and liked that year (with ❤️ icons)
 - Average rating for the year
-- Most active month
-- Top actor and director of the year (with poster filmstrip)
-- Top 5 highest and lowest rated films (with posters)
+- Most active month (full name like "January")
+- Top actor and director of the year (with larger poster filmstrip)
+- Adaptive grid of highest and lowest rated films (with posters)
 
 ### Current Year (e.g., 2026)
 - Same as wrap-up, but updates each time you run
@@ -84,10 +86,11 @@ Open `letterboxd_stats.html` in your browser to see your dashboard!
 ### People
 - Top actors and directors with watch/like counts
 - Like ratio bar showing how much you love vs just watch
-- Click any card to see all their films with posters
+- Click any card to see all their films with posters and ❤️ badges
 
-### Discovery
-- Genre distribution (doughnut chart)
+### Insights
+- Viewing time statistics (average runtime, total hours, shortest/longest)
+- Genre distribution (doughnut chart with single-column legend)
 - Top production countries
 - Rating evolution over time
 
@@ -110,7 +113,17 @@ See [CLAUDE.md](CLAUDE.md) for detailed documentation including:
 
 ## Changelog
 
-### v3.0
+### v4.1
+- Enhanced year wrap sections with larger posters (90x135px)
+- Red heart emojis for liked films throughout
+- Full month names (e.g., "January" not "Jan")
+- Adaptive poster grids that fill available space
+- Improved highlight cards with less empty space
+- Fixed genres pie chart legend to single column
+- Emoji icons added to section headers
+- Better visual design with gradients and shadows
+
+### v4.0
 - Complete dashboard redesign with tabbed navigation
 - Year wrap-up sections with movie posters
 - Watched vs liked comparison analysis
