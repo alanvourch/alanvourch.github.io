@@ -287,22 +287,65 @@ body {
     justify-content: center;
 }
 
+/* People Sub-Tab Navigation */
+.people-subtabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+}
+
+.people-subtab {
+    padding: 0.5rem 1.25rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    font-family: inherit;
+}
+
+.people-subtab:hover {
+    border-color: var(--accent-purple);
+    color: var(--text-primary);
+}
+
+.people-subtab.active {
+    background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+    border-color: transparent;
+    color: white;
+    font-weight: 600;
+}
+
+.people-subcontent {
+    display: none;
+}
+
+.people-subcontent.active {
+    display: block;
+}
+
 /* People Grid (Actors/Directors) - Enhanced v5.0 */
 .people-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 1.25rem;
 }
 
 .person-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
-    padding: 1.25rem;
+    padding: 1.5rem;
     cursor: pointer;
     transition: all 0.25s ease;
     display: flex;
-    gap: 1rem;
+    gap: 1.25rem;
     align-items: flex-start;
     position: relative;
     overflow: hidden;
@@ -332,25 +375,25 @@ body {
 }
 
 .person-card .person-photo {
-    width: 60px;
-    height: 60px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     object-fit: cover;
     flex-shrink: 0;
-    border: 2px solid var(--border-color);
+    border: 3px solid var(--border-color);
     background: var(--bg-secondary);
 }
 
 .person-card .person-photo-placeholder {
-    width: 60px;
-    height: 60px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     flex-shrink: 0;
     background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 2.2rem;
     font-weight: 700;
     color: white;
 }
@@ -361,17 +404,17 @@ body {
 }
 
 .person-card .person-rank {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 0.15rem;
+    margin-bottom: 0.2rem;
 }
 
 .person-card .name {
     font-weight: 600;
-    font-size: 1.05rem;
-    margin-bottom: 0.35rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -379,9 +422,9 @@ body {
 
 .person-card .person-stats {
     display: flex;
-    gap: 0.75rem;
-    font-size: 0.8rem;
-    margin-bottom: 0.5rem;
+    gap: 1rem;
+    font-size: 0.85rem;
+    margin-bottom: 0.6rem;
 }
 
 .person-card .person-stat {
@@ -414,62 +457,65 @@ body {
 
 .person-card .person-posters {
     display: flex;
-    gap: 0.25rem;
-    margin-top: 0.5rem;
+    gap: 0.4rem;
+    margin-top: 0.6rem;
     overflow: hidden;
 }
 
 .person-card .person-mini-poster {
-    width: 32px;
-    height: 48px;
-    border-radius: 3px;
+    width: 55px;
+    height: 82px;
+    border-radius: 4px;
     object-fit: cover;
-    opacity: 0.8;
+    opacity: 0.85;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
-/* Crew mini grid (composers, cinematographers, writers) */
+/* Crew grid (composers, cinematographers, writers) */
 .crew-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1rem;
 }
 
 .crew-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    padding: 1rem;
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
     display: flex;
-    gap: 0.75rem;
-    align-items: center;
+    gap: 1rem;
+    align-items: flex-start;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.25s;
 }
 
 .crew-card:hover {
     border-color: var(--accent-purple);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(124, 58, 237, 0.15);
 }
 
 .crew-card .crew-photo {
-    width: 44px;
-    height: 44px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     object-fit: cover;
     flex-shrink: 0;
+    border: 2px solid var(--border-color);
     background: var(--bg-secondary);
 }
 
 .crew-card .crew-photo-placeholder {
-    width: 44px;
-    height: 44px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     flex-shrink: 0;
     background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: white;
 }
@@ -481,52 +527,70 @@ body {
 
 .crew-card .crew-name {
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .crew-card .crew-meta {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.crew-card .crew-posters {
+    display: flex;
+    gap: 0.35rem;
+    overflow: hidden;
+}
+
+.crew-card .crew-mini-poster {
+    width: 42px;
+    height: 63px;
+    border-radius: 3px;
+    object-fit: cover;
+    opacity: 0.85;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 /* Studios section */
 .studio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
 }
 
 .studio-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    padding: 1rem;
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.25s;
 }
 
 .studio-card:hover {
     border-color: var(--accent-cyan);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 188, 212, 0.15);
 }
 
 .studio-card .studio-name {
     font-weight: 600;
-    font-size: 0.9rem;
-    margin-bottom: 0.35rem;
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .studio-card .studio-meta {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: var(--text-secondary);
     display: flex;
-    gap: 0.75rem;
+    gap: 1rem;
 }
 
 .studio-card .studio-meta .stat-value {
@@ -1688,8 +1752,8 @@ body {
         else:
             photo_html = f'<div class="person-photo-placeholder">{initial}</div>'
 
-        # Mini poster strip (first 4 films)
-        films = person.get('films', [])[:4]
+        # Mini poster strip (first 5 films)
+        films = person.get('films', [])[:5]
         posters_html = ''
         for f in films:
             posters_html += f'<img class="person-mini-poster" src="{self._poster_url(f.get("poster_path"))}" alt="{f.get("title")}" loading="lazy">'
@@ -1713,7 +1777,7 @@ body {
 </div>'''
 
     def _generate_crew_card(self, person: dict, person_type: str, index: int) -> str:
-        """Generate a compact crew card for composers, cinematographers, writers"""
+        """Generate a crew card with photo and poster strip"""
         name = person.get('name', 'Unknown')
         profile_path = person.get('profile_path')
         initial = name[0] if name else '?'
@@ -1723,17 +1787,24 @@ body {
         else:
             photo_html = f'<div class="crew-photo-placeholder">{initial}</div>'
 
+        # Mini poster strip (first 3 films)
+        films = person.get('films', [])[:3]
+        posters_html = ''
+        for f in films:
+            posters_html += f'<img class="crew-mini-poster" src="{self._poster_url(f.get("poster_path"))}" alt="{f.get("title")}" loading="lazy">'
+
         return f'''
 <div class="crew-card" data-person-type="{person_type}" data-person-index="{index}">
     {photo_html}
     <div class="crew-info">
         <div class="crew-name">{name}</div>
         <div class="crew-meta">{person.get('count', 0)} films · ★ {person.get('avg_rating', 0)} · ❤️ {person.get('liked_count', 0)}</div>
+        <div class="crew-posters">{posters_html}</div>
     </div>
 </div>'''
 
     def _generate_people_tab(self) -> str:
-        """Generate enhanced people tab with photos, crew, and studios"""
+        """Generate enhanced people tab with sub-tabs, photos, crew, and studios"""
         actors = self.stats.get('actors', {}).get('top_by_count', [])[:15]
         directors = self.stats.get('directors', {}).get('top_by_count', [])[:15]
         composers = self.stats.get('composers', {}).get('top_by_count', [])[:6]
@@ -1777,58 +1848,75 @@ body {
     </div>
 </div>'''
 
-        # Build crew section (only if data available)
-        crew_section = ''
-        if composers or cinematographers or writers:
-            crew_section = f'''
-    <section class="section">
-        <div class="section-header">
-            <h2 class="section-title">🎼 Behind the Camera</h2>
-            <span class="section-subtitle">Composers, cinematographers & writers — click to see films</span>
-        </div>
+        # Build sub-tab buttons (only show tabs that have data)
+        subtabs = []
+        subtabs.append(('actors', '🎭 Actors', True))
+        subtabs.append(('directors', '🎬 Directors', True))
+        if composers:
+            subtabs.append(('composers', '🎵 Composers', False))
+        if cinematographers:
+            subtabs.append(('cinematographers', '📸 Cinematographers', False))
+        if writers:
+            subtabs.append(('writers', '✍️ Writers', False))
+        if studios:
+            subtabs.append(('studios', '🏢 Studios', False))
 
-        {f"""<h3 style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--text-secondary);">🎵 Top Composers</h3>
-        <div class="crew-grid" style="margin-bottom: 1.5rem;">{composers_html}</div>""" if composers_html else ""}
-
-        {f"""<h3 style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--text-secondary);">📸 Top Cinematographers</h3>
-        <div class="crew-grid" style="margin-bottom: 1.5rem;">{cinematographers_html}</div>""" if cinematographers_html else ""}
-
-        {f"""<h3 style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--text-secondary);">✍️ Top Writers</h3>
-        <div class="crew-grid">{writers_html}</div>""" if writers_html else ""}
-    </section>'''
-
-        # Studios section
-        studios_section = ''
-        if studios_html:
-            studios_section = f'''
-    <section class="section">
-        <div class="section-header">
-            <h2 class="section-title">🏢 Top Studios</h2>
-            <span class="section-subtitle">Production companies behind your films — click to see their catalog</span>
-        </div>
-        <div class="studio-grid">{studios_html}</div>
-    </section>'''
+        subtab_buttons = ''
+        for key, label, is_first in subtabs:
+            active = ' active' if key == 'actors' else ''
+            subtab_buttons += f'<button class="people-subtab{active}" data-people-tab="{key}">{label}</button>'
 
         return f'''
 <div id="people" class="tab-content">
-    <section class="section">
+    <div class="people-subtabs">{subtab_buttons}</div>
+
+    <div class="people-subcontent active" data-people-content="actors">
         <div class="section-header">
             <h2 class="section-title">🎭 Top Actors</h2>
             <span class="section-subtitle">{self.stats.get('actors', {}).get('total_unique', 0):,} unique actors — click to see films</span>
         </div>
         <div class="people-grid">{actors_html}</div>
-    </section>
+    </div>
 
-    <section class="section">
+    <div class="people-subcontent" data-people-content="directors">
         <div class="section-header">
             <h2 class="section-title">🎬 Top Directors</h2>
             <span class="section-subtitle">{self.stats.get('directors', {}).get('total_unique', 0):,} unique directors — click to see films</span>
         </div>
         <div class="people-grid">{directors_html}</div>
-    </section>
+    </div>
 
-    {crew_section}
-    {studios_section}
+    {f"""<div class="people-subcontent" data-people-content="composers">
+        <div class="section-header">
+            <h2 class="section-title">🎵 Top Composers</h2>
+            <span class="section-subtitle">Click to see their filmography</span>
+        </div>
+        <div class="crew-grid">{composers_html}</div>
+    </div>""" if composers else ""}
+
+    {f"""<div class="people-subcontent" data-people-content="cinematographers">
+        <div class="section-header">
+            <h2 class="section-title">📸 Top Cinematographers</h2>
+            <span class="section-subtitle">Click to see their filmography</span>
+        </div>
+        <div class="crew-grid">{cinematographers_html}</div>
+    </div>""" if cinematographers else ""}
+
+    {f"""<div class="people-subcontent" data-people-content="writers">
+        <div class="section-header">
+            <h2 class="section-title">✍️ Top Writers</h2>
+            <span class="section-subtitle">Click to see their filmography</span>
+        </div>
+        <div class="crew-grid">{writers_html}</div>
+    </div>""" if writers else ""}
+
+    {f"""<div class="people-subcontent" data-people-content="studios">
+        <div class="section-header">
+            <h2 class="section-title">🏢 Top Studios</h2>
+            <span class="section-subtitle">Production companies behind your films — click to see their catalog</span>
+        </div>
+        <div class="studio-grid">{studios_html}</div>
+    </div>""" if studios else ""}
 </div>'''
 
     def _generate_insights_tab(self) -> str:
@@ -2201,6 +2289,17 @@ document.querySelectorAll('.nav-btn').forEach(btn => {{
         // Update content
         document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
         document.getElementById(btn.dataset.tab).classList.add('active');
+    }});
+}});
+
+// People sub-tab navigation
+document.querySelectorAll('.people-subtab').forEach(btn => {{
+    btn.addEventListener('click', () => {{
+        document.querySelectorAll('.people-subtab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.people-subcontent').forEach(c => c.classList.remove('active'));
+        const target = document.querySelector(`.people-subcontent[data-people-content="${{btn.dataset.peopleTab}}"]`);
+        if (target) target.classList.add('active');
     }});
 }});
 

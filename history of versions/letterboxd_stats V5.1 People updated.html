@@ -242,65 +242,22 @@ body {
     justify-content: center;
 }
 
-/* People Sub-Tab Navigation */
-.people-subtabs {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-    overflow-x: auto;
-    padding-bottom: 0.25rem;
-}
-
-.people-subtab {
-    padding: 0.5rem 1.25rem;
-    border-radius: 999px;
-    border: 1px solid var(--border-color);
-    background: var(--bg-card);
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s;
-    white-space: nowrap;
-    font-family: inherit;
-}
-
-.people-subtab:hover {
-    border-color: var(--accent-purple);
-    color: var(--text-primary);
-}
-
-.people-subtab.active {
-    background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
-    border-color: transparent;
-    color: white;
-    font-weight: 600;
-}
-
-.people-subcontent {
-    display: none;
-}
-
-.people-subcontent.active {
-    display: block;
-}
-
 /* People Grid (Actors/Directors) - Enhanced v5.0 */
 .people-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
 }
 
 .person-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
-    padding: 1.5rem;
+    padding: 1.25rem;
     cursor: pointer;
     transition: all 0.25s ease;
     display: flex;
-    gap: 1.25rem;
+    gap: 1rem;
     align-items: flex-start;
     position: relative;
     overflow: hidden;
@@ -330,25 +287,25 @@ body {
 }
 
 .person-card .person-photo {
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     object-fit: cover;
     flex-shrink: 0;
-    border: 3px solid var(--border-color);
+    border: 2px solid var(--border-color);
     background: var(--bg-secondary);
 }
 
 .person-card .person-photo-placeholder {
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     flex-shrink: 0;
     background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.2rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: white;
 }
@@ -359,17 +316,17 @@ body {
 }
 
 .person-card .person-rank {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.15rem;
 }
 
 .person-card .name {
     font-weight: 600;
-    font-size: 1.2rem;
-    margin-bottom: 0.4rem;
+    font-size: 1.05rem;
+    margin-bottom: 0.35rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -377,9 +334,9 @@ body {
 
 .person-card .person-stats {
     display: flex;
-    gap: 1rem;
-    font-size: 0.85rem;
-    margin-bottom: 0.6rem;
+    gap: 0.75rem;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
 }
 
 .person-card .person-stat {
@@ -412,65 +369,62 @@ body {
 
 .person-card .person-posters {
     display: flex;
-    gap: 0.4rem;
-    margin-top: 0.6rem;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
     overflow: hidden;
 }
 
 .person-card .person-mini-poster {
-    width: 55px;
-    height: 82px;
-    border-radius: 4px;
+    width: 32px;
+    height: 48px;
+    border-radius: 3px;
     object-fit: cover;
-    opacity: 0.85;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    opacity: 0.8;
 }
 
-/* Crew grid (composers, cinematographers, writers) */
+/* Crew mini grid (composers, cinematographers, writers) */
 .crew-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 0.75rem;
 }
 
 .crew-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    padding: 1rem;
     display: flex;
-    gap: 1rem;
-    align-items: flex-start;
+    gap: 0.75rem;
+    align-items: center;
     cursor: pointer;
-    transition: all 0.25s;
+    transition: all 0.2s;
 }
 
 .crew-card:hover {
     border-color: var(--accent-purple);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(124, 58, 237, 0.15);
+    transform: translateY(-2px);
 }
 
 .crew-card .crew-photo {
-    width: 70px;
-    height: 70px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     object-fit: cover;
     flex-shrink: 0;
-    border: 2px solid var(--border-color);
     background: var(--bg-secondary);
 }
 
 .crew-card .crew-photo-placeholder {
-    width: 70px;
-    height: 70px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     flex-shrink: 0;
     background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 700;
     color: white;
 }
@@ -482,70 +436,52 @@ body {
 
 .crew-card .crew-name {
     font-weight: 600;
-    font-size: 1rem;
-    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .crew-card .crew-meta {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--text-secondary);
-    margin-bottom: 0.5rem;
-}
-
-.crew-card .crew-posters {
-    display: flex;
-    gap: 0.35rem;
-    overflow: hidden;
-}
-
-.crew-card .crew-mini-poster {
-    width: 42px;
-    height: 63px;
-    border-radius: 3px;
-    object-fit: cover;
-    opacity: 0.85;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 /* Studios section */
 .studio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.75rem;
 }
 
 .studio-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    padding: 1rem;
     cursor: pointer;
-    transition: all 0.25s;
+    transition: all 0.2s;
 }
 
 .studio-card:hover {
     border-color: var(--accent-cyan);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(0, 188, 212, 0.15);
+    transform: translateY(-2px);
 }
 
 .studio-card .studio-name {
     font-weight: 600;
-    font-size: 1rem;
-    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.35rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .studio-card .studio-meta {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--text-secondary);
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
 }
 
 .studio-card .studio-meta .stat-value {
@@ -2223,9 +2159,7 @@ body {
 </div>
             
 <div id="people" class="tab-content">
-    <div class="people-subtabs"><button class="people-subtab active" data-people-tab="actors">🎭 Actors</button><button class="people-subtab" data-people-tab="directors">🎬 Directors</button><button class="people-subtab" data-people-tab="composers">🎵 Composers</button><button class="people-subtab" data-people-tab="cinematographers">📸 Cinematographers</button><button class="people-subtab" data-people-tab="writers">✍️ Writers</button><button class="people-subtab" data-people-tab="studios">🏢 Studios</button></div>
-
-    <div class="people-subcontent active" data-people-content="actors">
+    <section class="section">
         <div class="section-header">
             <h2 class="section-title">🎭 Top Actors</h2>
             <span class="section-subtitle">10,615 unique actors — click to see films</span>
@@ -2244,7 +2178,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 65.5%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/vqBmyAj0Xm9LnS1xe1MSlMAJyHq.jpg" alt="F1" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/vOX1Zng472PC2KnS0B9nRfM8aaZ.jpg" alt="Wolfs" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/j8szC8OgrejDQjjMKSVXyaAjw3V.jpg" alt="Bullet Train" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/wjOHjWCUE0YzDiEzKv8AfqHj3ir.jpg" alt="Babylon" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/8j58iEBw9pOXFD2L0nt0ZXeHviB.jpg" alt="Once Upon a Time... in Hollywood" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/vqBmyAj0Xm9LnS1xe1MSlMAJyHq.jpg" alt="F1" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/vOX1Zng472PC2KnS0B9nRfM8aaZ.jpg" alt="Wolfs" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/j8szC8OgrejDQjjMKSVXyaAjw3V.jpg" alt="Bullet Train" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/wjOHjWCUE0YzDiEzKv8AfqHj3ir.jpg" alt="Babylon" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="actor" data-person-index="1">
@@ -2260,7 +2194,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 68.0%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/dB6Krk806zeqd0YNp2ngQ9zXteH.jpg" alt="Killers of the Flower Moon" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg" alt="Joker" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/mbm8k3GFhXS0ROd9AD1gqYbIFbM.jpg" alt="The Irishman" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/wfgRhxfkA5rNPLMVhOCGJHREHJb.jpg" alt="Silver Linings Playbook" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/kCokPP4WCQRrrAuZ7FcpIyHr8b2.jpg" alt="Limitless" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/dB6Krk806zeqd0YNp2ngQ9zXteH.jpg" alt="Killers of the Flower Moon" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg" alt="Joker" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/mbm8k3GFhXS0ROd9AD1gqYbIFbM.jpg" alt="The Irishman" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/wfgRhxfkA5rNPLMVhOCGJHREHJb.jpg" alt="Silver Linings Playbook" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="actor" data-person-index="2">
@@ -2276,7 +2210,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 56.0%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/u2jxeYLXTYfu0bqJmnLGIgZswib.jpg" alt="The Phoenician Scheme" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/79euHUJJtfgeGU63ef38KtNjXEn.jpg" alt="Here" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/rAkz95CREc3A1qTnwlSQ0jh8Zw8.jpg" alt="Asteroid City" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/rva3UhKaMeiB0Vej5A2pm1leX7K.jpg" alt="Elvis" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/3L1Ml5RWjFVfVq3rQENvgFymT0U.jpg" alt="Borat Subsequent Moviefilm" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/u2jxeYLXTYfu0bqJmnLGIgZswib.jpg" alt="The Phoenician Scheme" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/79euHUJJtfgeGU63ef38KtNjXEn.jpg" alt="Here" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/rAkz95CREc3A1qTnwlSQ0jh8Zw8.jpg" alt="Asteroid City" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/rva3UhKaMeiB0Vej5A2pm1leX7K.jpg" alt="Elvis" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="actor" data-person-index="3">
@@ -2292,7 +2226,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 36.0%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/qYyEelO4JfOwE0Ui5KsrCE0O8UA.jpg" alt="The Legend of Ochi" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/kKgQzkUCnQmeTPkyIwHly2t6ZFI.jpg" alt="Beetlejuice Beetlejuice" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/5qGIxdEO841C0tdY8vOdLoRVrr0.jpg" alt="Nosferatu" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/kCGlIMHnOm8JPXq3rXM6c5wMxcT.jpg" alt="Poor Things" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/aSSJMnHknzKjlZ6zybwD7eyJ4Po.jpg" alt="The Northman" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/qYyEelO4JfOwE0Ui5KsrCE0O8UA.jpg" alt="The Legend of Ochi" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/kKgQzkUCnQmeTPkyIwHly2t6ZFI.jpg" alt="Beetlejuice Beetlejuice" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/5qGIxdEO841C0tdY8vOdLoRVrr0.jpg" alt="Nosferatu" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/kCGlIMHnOm8JPXq3rXM6c5wMxcT.jpg" alt="Poor Things" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="actor" data-person-index="4">
@@ -2308,7 +2242,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 39.1%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/vYEyxF1UT779RiEalpMjUT6kfdf.jpg" alt="Conclave" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/fDUywEHwHh6nsLnVXAdPN9m4ZUG.jpg" alt="The Wonderful Story of Henry Sugar" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/IQG49DUJw5DsgcNbW0NfagiDOs.jpg" alt="Poison" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/29WJ7dOHt48AtXK1J1rONEEvIMN.jpg" alt="The Rat Catcher" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/fRbx6DPdQBJrhZWyshjJABtAIyu.jpg" alt="The Swan" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/vYEyxF1UT779RiEalpMjUT6kfdf.jpg" alt="Conclave" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/fDUywEHwHh6nsLnVXAdPN9m4ZUG.jpg" alt="The Wonderful Story of Henry Sugar" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/IQG49DUJw5DsgcNbW0NfagiDOs.jpg" alt="Poison" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/29WJ7dOHt48AtXK1J1rONEEvIMN.jpg" alt="The Rat Catcher" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="actor" data-person-index="5">
@@ -2324,7 +2258,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 65.2%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/4q2NNj4S5dG2RLF9CpXsej7yXl.jpg" alt="Spider-Man: Far From Home" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/9lFKBtaVIhP7E2Pk0IY1CwTKTMZ.jpg" alt="Incredibles 2" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/r2517Vz9EhDhj88qwbDVj8DCRZN.jpg" alt="Kong: Skull Island" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/5CGjlz2vyBhW5xHW4eNOZIdgzYq.jpg" alt="The Hitman's Bodyguard" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/CIlbMFOfYDj0MP23hsIYhFGrL6.jpg" alt="Miss Peregrine's Home for Peculiar Children" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/4q2NNj4S5dG2RLF9CpXsej7yXl.jpg" alt="Spider-Man: Far From Home" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/9lFKBtaVIhP7E2Pk0IY1CwTKTMZ.jpg" alt="Incredibles 2" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/r2517Vz9EhDhj88qwbDVj8DCRZN.jpg" alt="Kong: Skull Island" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/5CGjlz2vyBhW5xHW4eNOZIdgzYq.jpg" alt="The Hitman's Bodyguard" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="actor" data-person-index="6">
@@ -2340,7 +2274,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 69.6%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/50kALxDX4mmzIRljbNbPY0u4cie.jpg" alt="Sin City: A Dame to Kill For" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/qJ0csDXAVFMsNn0cRcjy6W6PxAK.jpg" alt="A Good Day to Die Hard" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/y4SXcbNl6CEF2t36icuzuBioj7K.jpg" alt="Moonrise Kingdom" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/sNjL6SqErDBE8OUZlrDLkexfsCj.jpg" alt="Looper" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/74rTIGyGoIu5KSxDVMdr8H3MtMo.jpg" alt="The Expendables 2" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/50kALxDX4mmzIRljbNbPY0u4cie.jpg" alt="Sin City: A Dame to Kill For" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/qJ0csDXAVFMsNn0cRcjy6W6PxAK.jpg" alt="A Good Day to Die Hard" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/y4SXcbNl6CEF2t36icuzuBioj7K.jpg" alt="Moonrise Kingdom" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/sNjL6SqErDBE8OUZlrDLkexfsCj.jpg" alt="Looper" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="actor" data-person-index="7">
@@ -2356,7 +2290,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 56.5%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/cpf7vsRZ0MYRQcnLWteD5jK9ymT.jpg" alt="Weapons" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/dKL78O9zxczVgjtNcQ9UkbYLzqX.jpg" alt="The Running Man" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/qCOGGi8JBVEZMc3DVby8rUivyXz.jpg" alt="Wake Up Dead Man" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg" alt="Dune: Part Two" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/d5NXSklXo0qyIYkgV94XAgMIckC.jpg" alt="Dune" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/cpf7vsRZ0MYRQcnLWteD5jK9ymT.jpg" alt="Weapons" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/dKL78O9zxczVgjtNcQ9UkbYLzqX.jpg" alt="The Running Man" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/qCOGGi8JBVEZMc3DVby8rUivyXz.jpg" alt="Wake Up Dead Man" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg" alt="Dune: Part Two" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="actor" data-person-index="8">
@@ -2372,7 +2306,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 30.4%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/tn6gDIrQMwHSivF01igLfbggmYD.jpg" alt="The Electric State" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/oD3Eey4e4Z259XLm3eD3WGcoJAh.jpg" alt="Now You See Me: Now You Don't" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/gjk8YdXpItoC1in53FCrZMFIuBx.jpg" alt="Fly Me to the Moon" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/k9eLozCgCed5FGTSdHu0bBElAV8.jpg" alt="Triangle of Sadness" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/uJgdT1boTSP0dDIjdTgGleg71l4.jpg" alt="Kate" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/tn6gDIrQMwHSivF01igLfbggmYD.jpg" alt="The Electric State" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/oD3Eey4e4Z259XLm3eD3WGcoJAh.jpg" alt="Now You See Me: Now You Don't" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/gjk8YdXpItoC1in53FCrZMFIuBx.jpg" alt="Fly Me to the Moon" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/k9eLozCgCed5FGTSdHu0bBElAV8.jpg" alt="Triangle of Sadness" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="actor" data-person-index="9">
@@ -2388,7 +2322,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 73.9%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/62HCnUTziyWcpDaBO2i1DX17ljH.jpg" alt="Top Gun: Maverick" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/23ILgoPSO5ShKcTZOuiTVfqFAUB.jpg" alt="American Made" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/nBM9MMa2WCwvMG4IJ3eiGUdbPe6.jpg" alt="Edge of Tomorrow" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/5Onf4TW3mZn3oLeKVr9W4FGomQQ.jpg" alt="Oblivion" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/a7JmOBMNj5erYTgt4u1mQgvHItu.jpg" alt="Knight and Day" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/62HCnUTziyWcpDaBO2i1DX17ljH.jpg" alt="Top Gun: Maverick" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/23ILgoPSO5ShKcTZOuiTVfqFAUB.jpg" alt="American Made" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/nBM9MMa2WCwvMG4IJ3eiGUdbPe6.jpg" alt="Edge of Tomorrow" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/5Onf4TW3mZn3oLeKVr9W4FGomQQ.jpg" alt="Oblivion" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="actor" data-person-index="10">
@@ -2404,7 +2338,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 45.5%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg" alt="Thor: Love and Thunder" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/6sJcVzGCwrDCBMV0DU6eRzA2UxM.jpg" alt="Amsterdam" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/dR1Ju50iudrOh3YgfwkAU1g2HZe.jpg" alt="Ford v Ferrari" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/1gCab6rNv1r6V64cwsU4oEr649Y.jpg" alt="Vice" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/rqoezyB51GfhiloOB5ZErg5HXas.jpg" alt="Hostiles" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg" alt="Thor: Love and Thunder" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/6sJcVzGCwrDCBMV0DU6eRzA2UxM.jpg" alt="Amsterdam" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/dR1Ju50iudrOh3YgfwkAU1g2HZe.jpg" alt="Ford v Ferrari" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/1gCab6rNv1r6V64cwsU4oEr649Y.jpg" alt="Vice" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="actor" data-person-index="11">
@@ -2420,7 +2354,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 50.0%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/1RICxzeoNCAO5NpcRMIgg1XT6fm.jpg" alt="Jurassic World Rebirth" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/iRCgqpdVE4wyLQvGYU3ZP7pAtUc.jpg" alt="Transformers One" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/gjk8YdXpItoC1in53FCrZMFIuBx.jpg" alt="Fly Me to the Moon" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/rAkz95CREc3A1qTnwlSQ0jh8Zw8.jpg" alt="Asteroid City" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/ulzhLuWrPK07P1YkdWQLZnQh1JL.jpg" alt="Avengers: Endgame" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/1RICxzeoNCAO5NpcRMIgg1XT6fm.jpg" alt="Jurassic World Rebirth" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/iRCgqpdVE4wyLQvGYU3ZP7pAtUc.jpg" alt="Transformers One" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/gjk8YdXpItoC1in53FCrZMFIuBx.jpg" alt="Fly Me to the Moon" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/rAkz95CREc3A1qTnwlSQ0jh8Zw8.jpg" alt="Asteroid City" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="actor" data-person-index="12">
@@ -2436,7 +2370,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 45.5%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/d8Ryb8AunYAuycVKDp5HpdWPKgC.jpg" alt="Sonic the Hedgehog 3" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/6DrHO1jr3qVrViUO6s6kFiAGM7.jpg" alt="Sonic the Hedgehog 2" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/aQvJ5WPzZgYVDrxLX4R6cLJCEaQ.jpg" alt="Sonic the Hedgehog" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/kKzopOFXz9YfsCTqg3XpF0GoypX.jpg" alt="Jim & Andy: The Great Beyond" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/1go2A3gdQjaMuHWquybgoJlQRcX.jpg" alt="Kick-Ass 2" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/d8Ryb8AunYAuycVKDp5HpdWPKgC.jpg" alt="Sonic the Hedgehog 3" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/6DrHO1jr3qVrViUO6s6kFiAGM7.jpg" alt="Sonic the Hedgehog 2" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/aQvJ5WPzZgYVDrxLX4R6cLJCEaQ.jpg" alt="Sonic the Hedgehog" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/kKzopOFXz9YfsCTqg3XpF0GoypX.jpg" alt="Jim & Andy: The Great Beyond" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="actor" data-person-index="13">
@@ -2452,7 +2386,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 38.1%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/2VUmvqsHb6cEtdfscEA6fqqVzLg.jpg" alt="Ballerina" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/d8Ryb8AunYAuycVKDp5HpdWPKgC.jpg" alt="Sonic the Hedgehog 3" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg" alt="John Wick: Chapter 4" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/8c4a8kE7PizaGQQnditMmI1xbRp.jpg" alt="The Matrix Resurrections" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/w9kR8qbmQ01HwnvK4alvnQ2ca0L.jpg" alt="Toy Story 4" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/2VUmvqsHb6cEtdfscEA6fqqVzLg.jpg" alt="Ballerina" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/d8Ryb8AunYAuycVKDp5HpdWPKgC.jpg" alt="Sonic the Hedgehog 3" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg" alt="John Wick: Chapter 4" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/8c4a8kE7PizaGQQnditMmI1xbRp.jpg" alt="The Matrix Resurrections" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="actor" data-person-index="14">
@@ -2468,12 +2402,12 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 42.9%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/8Sok3HNA3r1GHnK2lCytHyBz1A.jpg" alt="Megalopolis" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/iRCgqpdVE4wyLQvGYU3ZP7pAtUc.jpg" alt="Transformers One" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg" alt="John Wick: Chapter 4" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/hXWBc0ioZP3cN4zCu6SN3YHXZVO.jpg" alt="John Wick: Chapter 2" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/pizynKUzJ9YucGff1O1MYisY1WM.jpg" alt="Last Flag Flying" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/8Sok3HNA3r1GHnK2lCytHyBz1A.jpg" alt="Megalopolis" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/iRCgqpdVE4wyLQvGYU3ZP7pAtUc.jpg" alt="Transformers One" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg" alt="John Wick: Chapter 4" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/hXWBc0ioZP3cN4zCu6SN3YHXZVO.jpg" alt="John Wick: Chapter 2" loading="lazy"></div>
     </div>
 </div></div>
-    </div>
+    </section>
 
-    <div class="people-subcontent" data-people-content="directors">
+    <section class="section">
         <div class="section-header">
             <h2 class="section-title">🎬 Top Directors</h2>
             <span class="section-subtitle">1,005 unique directors — click to see films</span>
@@ -2492,7 +2426,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 50.0%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/h7llKkqkkJtJrTOaDLuVeUYDQ7I.jpg" alt="The Fabelmans" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/yfz3IUoYYSY32tkb97HlUBGFsnh.jpg" alt="West Side Story" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/pU1ULUq8D3iRxl1fdX2lZIzdHuI.jpg" alt="Ready Player One" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/h4XG3g6uMMPIBPjAoQhC2QIMdkl.jpg" alt="The Post" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/fmOOjHAQzxr0c1sfcY4qkiSRBH6.jpg" alt="Bridge of Spies" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/h7llKkqkkJtJrTOaDLuVeUYDQ7I.jpg" alt="The Fabelmans" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/yfz3IUoYYSY32tkb97HlUBGFsnh.jpg" alt="West Side Story" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/pU1ULUq8D3iRxl1fdX2lZIzdHuI.jpg" alt="Ready Player One" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/h4XG3g6uMMPIBPjAoQhC2QIMdkl.jpg" alt="The Post" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="director" data-person-index="1">
@@ -2508,7 +2442,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 72.2%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/dB6Krk806zeqd0YNp2ngQ9zXteH.jpg" alt="Killers of the Flower Moon" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/mbm8k3GFhXS0ROd9AD1gqYbIFbM.jpg" alt="The Irishman" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/kW9LmvYHAaS9iA0tHmZVq8hQYoq.jpg" alt="The Wolf of Wall Street" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/1dxRq3o3l3bVWNRvvSb7rRf68qp.jpg" alt="Hugo" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/nrmXQ0zcZUL8jFLrakWc90IR8z9.jpg" alt="Shutter Island" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/dB6Krk806zeqd0YNp2ngQ9zXteH.jpg" alt="Killers of the Flower Moon" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/mbm8k3GFhXS0ROd9AD1gqYbIFbM.jpg" alt="The Irishman" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/kW9LmvYHAaS9iA0tHmZVq8hQYoq.jpg" alt="The Wolf of Wall Street" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/1dxRq3o3l3bVWNRvvSb7rRf68qp.jpg" alt="Hugo" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="director" data-person-index="2">
@@ -2524,7 +2458,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 66.7%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/u2jxeYLXTYfu0bqJmnLGIgZswib.jpg" alt="The Phoenician Scheme" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/rAkz95CREc3A1qTnwlSQ0jh8Zw8.jpg" alt="Asteroid City" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/fDUywEHwHh6nsLnVXAdPN9m4ZUG.jpg" alt="The Wonderful Story of Henry Sugar" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/IQG49DUJw5DsgcNbW0NfagiDOs.jpg" alt="Poison" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/29WJ7dOHt48AtXK1J1rONEEvIMN.jpg" alt="The Rat Catcher" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/u2jxeYLXTYfu0bqJmnLGIgZswib.jpg" alt="The Phoenician Scheme" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/rAkz95CREc3A1qTnwlSQ0jh8Zw8.jpg" alt="Asteroid City" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/fDUywEHwHh6nsLnVXAdPN9m4ZUG.jpg" alt="The Wonderful Story of Henry Sugar" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/IQG49DUJw5DsgcNbW0NfagiDOs.jpg" alt="Poison" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="director" data-person-index="3">
@@ -2540,7 +2474,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 68.8%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg" alt="Oppenheimer" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/aCIFMriQh8rvhxpN1IWGgvH0Tlg.jpg" alt="Tenet" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/b4Oe15CGLL61Ped0RAS9JpqdmCt.jpg" alt="Dunkirk" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/uluMeKfYFVvfZlmHgFBXqbnHXE2.jpg" alt="Quay" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg" alt="Interstellar" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg" alt="Oppenheimer" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/aCIFMriQh8rvhxpN1IWGgvH0Tlg.jpg" alt="Tenet" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/b4Oe15CGLL61Ped0RAS9JpqdmCt.jpg" alt="Dunkirk" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/uluMeKfYFVvfZlmHgFBXqbnHXE2.jpg" alt="Quay" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="director" data-person-index="4">
@@ -2556,7 +2490,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 42.9%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/2cxhvwyEwRlysAmRH4iodkvo0z5.jpg" alt="Gladiator II" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/ytFOXyghxLzAM4KZyazDdEkM66q.jpg" alt="Napoleon" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/zjrJE0fpzPvX8saJXj8VNfcjBoU.jpg" alt="The Last Duel" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/oJCQjD2byiVF1EG408F9dBn9ndU.jpg" alt="House of Gucci" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/zecMELPbU5YMQpC81Z8ImaaXuf9.jpg" alt="Alien: Covenant" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/2cxhvwyEwRlysAmRH4iodkvo0z5.jpg" alt="Gladiator II" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/ytFOXyghxLzAM4KZyazDdEkM66q.jpg" alt="Napoleon" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/zjrJE0fpzPvX8saJXj8VNfcjBoU.jpg" alt="The Last Duel" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/oJCQjD2byiVF1EG408F9dBn9ndU.jpg" alt="House of Gucci" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="director" data-person-index="5">
@@ -2572,7 +2506,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 78.6%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/LyCOcGqOTyTmaXu2TK8LfGveIb.jpg" alt="Ferrari" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/7zu6HPnKPjNA7NuR4DGRdaH0PdX.jpg" alt="Blackhat" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/3KgtekisQBrHRsm2cD5UOB6Ce3k.jpg" alt="Public Enemies" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/1KGD2g0wOc7WBfHc5G19reLHQxk.jpg" alt="Miami Vice" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/nV5316WUsVij8sVXLCF1g7TFitg.jpg" alt="Collateral" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/LyCOcGqOTyTmaXu2TK8LfGveIb.jpg" alt="Ferrari" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/7zu6HPnKPjNA7NuR4DGRdaH0PdX.jpg" alt="Blackhat" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/3KgtekisQBrHRsm2cD5UOB6Ce3k.jpg" alt="Public Enemies" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/1KGD2g0wOc7WBfHc5G19reLHQxk.jpg" alt="Miami Vice" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="director" data-person-index="6">
@@ -2588,7 +2522,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 64.3%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/kKgQzkUCnQmeTPkyIwHly2t6ZFI.jpg" alt="Beetlejuice Beetlejuice" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/CIlbMFOfYDj0MP23hsIYhFGrL6.jpg" alt="Miss Peregrine's Home for Peculiar Children" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/gAW4J1bkRjZKmFsJsIiOBASeoAp.jpg" alt="Sweeney Todd: The Demon Barber of Fleet Street" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/isb2Qow76GpqYmsSyfdMfsYAjts.jpg" alt="Corpse Bride" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/iKP6wg3c6COUe8gYutoGG7qcPnO.jpg" alt="Charlie and the Chocolate Factory" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/kKgQzkUCnQmeTPkyIwHly2t6ZFI.jpg" alt="Beetlejuice Beetlejuice" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/CIlbMFOfYDj0MP23hsIYhFGrL6.jpg" alt="Miss Peregrine's Home for Peculiar Children" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/gAW4J1bkRjZKmFsJsIiOBASeoAp.jpg" alt="Sweeney Todd: The Demon Barber of Fleet Street" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/isb2Qow76GpqYmsSyfdMfsYAjts.jpg" alt="Corpse Bride" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="director" data-person-index="7">
@@ -2604,7 +2538,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 53.8%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/79euHUJJtfgeGU63ef38KtNjXEn.jpg" alt="Here" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/sV4lXM32quwminL3TP36nlNPp7Q.jpg" alt="Allied" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/tFsHDNclXoCKy2xMxskzXXMaFJS.jpg" alt="Flight" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/7lLJgKnAicAcR5UEuo8xhSMj18w.jpg" alt="Cast Away" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/2L3Cn0CizbSy2E9KJt1SiOSyb6p.jpg" alt="What Lies Beneath" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/79euHUJJtfgeGU63ef38KtNjXEn.jpg" alt="Here" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/sV4lXM32quwminL3TP36nlNPp7Q.jpg" alt="Allied" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/tFsHDNclXoCKy2xMxskzXXMaFJS.jpg" alt="Flight" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/7lLJgKnAicAcR5UEuo8xhSMj18w.jpg" alt="Cast Away" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="director" data-person-index="8">
@@ -2620,7 +2554,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 100.0%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/8j58iEBw9pOXFD2L0nt0ZXeHviB.jpg" alt="Once Upon a Time... in Hollywood" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/jIywvdPjia2t3eKYbjVTcwBQlG8.jpg" alt="The Hateful Eight" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/7oWY8VDWW7thTzWh3OKYRkWUlD5.jpg" alt="Django Unchained" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/7sfbEnaARXDDhKm0CZ7D7uc2sbo.jpg" alt="Inglourious Basterds" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/vtu6H4NWnQVqEp3aanUq3hNeeot.jpg" alt="Death Proof" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/8j58iEBw9pOXFD2L0nt0ZXeHviB.jpg" alt="Once Upon a Time... in Hollywood" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/jIywvdPjia2t3eKYbjVTcwBQlG8.jpg" alt="The Hateful Eight" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/7oWY8VDWW7thTzWh3OKYRkWUlD5.jpg" alt="Django Unchained" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/7sfbEnaARXDDhKm0CZ7D7uc2sbo.jpg" alt="Inglourious Basterds" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="director" data-person-index="9">
@@ -2636,7 +2570,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 72.7%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/e7Jvsry47JJQruuezjU2X1Z6J77.jpg" alt="The Killer" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/4yzTcAtvzyZLLto4z04xobUK9el.jpg" alt="Mank" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/ts996lKsxvjkO2yiYG0ht4qAicO.jpg" alt="Gone Girl" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/8bokS83zGdhaXgN9tjidUKmAftW.jpg" alt="The Girl with the Dragon Tattoo" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/n0ybibhJtQ5icDqTp8eRytcIHJx.jpg" alt="The Social Network" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/e7Jvsry47JJQruuezjU2X1Z6J77.jpg" alt="The Killer" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/4yzTcAtvzyZLLto4z04xobUK9el.jpg" alt="Mank" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/ts996lKsxvjkO2yiYG0ht4qAicO.jpg" alt="Gone Girl" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/8bokS83zGdhaXgN9tjidUKmAftW.jpg" alt="The Girl with the Dragon Tattoo" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="director" data-person-index="10">
@@ -2652,7 +2586,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 72.7%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/m1jFoahEbeQXtx4zArT2FKdbNIj.jpg" alt="One Battle After Another" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/ivXtvzfliGvoJ1DhSHIGyYBToWe.jpg" alt="Licorice Pizza" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/xCBOjFAzsz8d2kABIPfwIAOeJ5t.jpg" alt="Anima" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/hgoWjp9Sh0MI97eAMZCnIoVfgvq.jpg" alt="Phantom Thread" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/pfVua7TzzttOh3RTOuBqT7xN0oY.jpg" alt="Inherent Vice" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/m1jFoahEbeQXtx4zArT2FKdbNIj.jpg" alt="One Battle After Another" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/ivXtvzfliGvoJ1DhSHIGyYBToWe.jpg" alt="Licorice Pizza" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/xCBOjFAzsz8d2kABIPfwIAOeJ5t.jpg" alt="Anima" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/hgoWjp9Sh0MI97eAMZCnIoVfgvq.jpg" alt="Phantom Thread" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="director" data-person-index="11">
@@ -2668,7 +2602,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 81.8%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/llWl3GtNoXosbvYboelmoT459NM.jpg" alt="A Complete Unknown" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/Af4bXE63pVsb2FtbW8uYIyPBadD.jpg" alt="Indiana Jones and the Dial of Destiny" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/dR1Ju50iudrOh3YgfwkAU1g2HZe.jpg" alt="Ford v Ferrari" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/fnbjcRDYn6YviCcePDnGdyAkYsB.jpg" alt="Logan" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/t2wVAcoRlKvEIVSbiYDb8d0QqqS.jpg" alt="The Wolverine" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/llWl3GtNoXosbvYboelmoT459NM.jpg" alt="A Complete Unknown" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/Af4bXE63pVsb2FtbW8uYIyPBadD.jpg" alt="Indiana Jones and the Dial of Destiny" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/dR1Ju50iudrOh3YgfwkAU1g2HZe.jpg" alt="Ford v Ferrari" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/fnbjcRDYn6YviCcePDnGdyAkYsB.jpg" alt="Logan" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="director" data-person-index="12">
@@ -2684,7 +2618,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 63.6%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/euF099slkcbX6CoYvUvfIp0uHdP.jpg" alt="The Piano Accident" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/lc5ZJA4C55n6nzNtkNnDwOvpEtD.jpg" alt="The Second Act" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/vZtteptwaNpZmdB1YwlyXOmUVw9.jpg" alt="Yannick" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/cKMiUOT5rSWt7AJOhStuBpVeIUQ.jpg" alt="Daaaaaalí!" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/yBLlwTXweDzBKgEbYz5ZVTRQaZX.jpg" alt="Incredible But True" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/euF099slkcbX6CoYvUvfIp0uHdP.jpg" alt="The Piano Accident" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/lc5ZJA4C55n6nzNtkNnDwOvpEtD.jpg" alt="The Second Act" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/vZtteptwaNpZmdB1YwlyXOmUVw9.jpg" alt="Yannick" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/cKMiUOT5rSWt7AJOhStuBpVeIUQ.jpg" alt="Daaaaaalí!" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="director" data-person-index="13">
@@ -2700,7 +2634,7 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 60.0%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/jQnUtWaHYfqnXPOIf77K7Ycqk4M.jpg" alt="Ran" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/fJgqj9s8HNZz9zwX6femVJn8HEB.jpg" alt="Kagemusha" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/bIOrDQ3Gg68k3qJAnRU7nIZr0BW.jpg" alt="Dersu Uzala" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/tgNjemQPG96uIezpiUiXFcer5ga.jpg" alt="High and Low" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/tN7kYPjRhDolpui9sc9Eq9n5b2O.jpg" alt="Yojimbo" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/jQnUtWaHYfqnXPOIf77K7Ycqk4M.jpg" alt="Ran" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/fJgqj9s8HNZz9zwX6femVJn8HEB.jpg" alt="Kagemusha" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/bIOrDQ3Gg68k3qJAnRU7nIZr0BW.jpg" alt="Dersu Uzala" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/tgNjemQPG96uIezpiUiXFcer5ga.jpg" alt="High and Low" loading="lazy"></div>
     </div>
 </div>
 <div class="person-card" data-person-type="director" data-person-index="14">
@@ -2716,23 +2650,25 @@ body {
         <div class="like-ratio">
             <div class="like-ratio-fill" style="width: 30.0%"></div>
         </div>
-        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/f4oZTcfGrVTXKTWg157AwikXqmP.jpg" alt="The Boy and the Heron" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/yp8vEZflGynlEylxEesbYasc06i.jpg" alt="Ponyo" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/13kOl2v0nD2OLbVSHnHk8GUFEhO.jpg" alt="Howl's Moving Castle" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/39wmItIWsg5sZMyRUHLkWBcuVCM.jpg" alt="Spirited Away" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/cMYCDADoLKLbB83g4WnJegaZimC.jpg" alt="Princess Mononoke" loading="lazy"></div>
+        <div class="person-posters"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/f4oZTcfGrVTXKTWg157AwikXqmP.jpg" alt="The Boy and the Heron" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/yp8vEZflGynlEylxEesbYasc06i.jpg" alt="Ponyo" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/13kOl2v0nD2OLbVSHnHk8GUFEhO.jpg" alt="Howl's Moving Castle" loading="lazy"><img class="person-mini-poster" src="https://image.tmdb.org/t/p/w185/39wmItIWsg5sZMyRUHLkWBcuVCM.jpg" alt="Spirited Away" loading="lazy"></div>
     </div>
 </div></div>
-    </div>
+    </section>
 
-    <div class="people-subcontent" data-people-content="composers">
+    
+    <section class="section">
         <div class="section-header">
-            <h2 class="section-title">🎵 Top Composers</h2>
-            <span class="section-subtitle">Click to see their filmography</span>
+            <h2 class="section-title">🎼 Behind the Camera</h2>
+            <span class="section-subtitle">Composers, cinematographers & writers — click to see films</span>
         </div>
-        <div class="crew-grid">
+
+        <h3 style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--text-secondary);">🎵 Top Composers</h3>
+        <div class="crew-grid" style="margin-bottom: 1.5rem;">
 <div class="crew-card" data-person-type="composer" data-person-index="0">
     <img class="crew-photo" src="https://image.tmdb.org/t/p/w185//tpQnDeHY15szIXvpnhlprufz4d.jpg" alt="Hans Zimmer" loading="lazy">
     <div class="crew-info">
         <div class="crew-name">Hans Zimmer</div>
         <div class="crew-meta">45 films · ★ 3.93 · ❤️ 29</div>
-        <div class="crew-posters"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/vqBmyAj0Xm9LnS1xe1MSlMAJyHq.jpg" alt="F1" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg" alt="Dune: Part Two" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/sKpkt2O8lQCxBoKyPjXJ5rZirzB.jpg" alt="The Calm" loading="lazy"></div>
     </div>
 </div>
 <div class="crew-card" data-person-type="composer" data-person-index="1">
@@ -2740,7 +2676,6 @@ body {
     <div class="crew-info">
         <div class="crew-name">John Williams</div>
         <div class="crew-meta">35 films · ★ 3.5 · ❤️ 21</div>
-        <div class="crew-posters"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/Af4bXE63pVsb2FtbW8uYIyPBadD.jpg" alt="Indiana Jones and the Dial of Destiny" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/h7llKkqkkJtJrTOaDLuVeUYDQ7I.jpg" alt="The Fabelmans" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/db32LaOibwEliAmSL2jjDF6oDdj.jpg" alt="Star Wars: The Rise of Skywalker" loading="lazy"></div>
     </div>
 </div>
 <div class="crew-card" data-person-type="composer" data-person-index="2">
@@ -2748,7 +2683,6 @@ body {
     <div class="crew-info">
         <div class="crew-name">Alan Silvestri</div>
         <div class="crew-meta">34 films · ★ 3.45 · ❤️ 18</div>
-        <div class="crew-posters"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/tn6gDIrQMwHSivF01igLfbggmYD.jpg" alt="The Electric State" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/79euHUJJtfgeGU63ef38KtNjXEn.jpg" alt="Here" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/ulzhLuWrPK07P1YkdWQLZnQh1JL.jpg" alt="Avengers: Endgame" loading="lazy"></div>
     </div>
 </div>
 <div class="crew-card" data-person-type="composer" data-person-index="3">
@@ -2756,7 +2690,6 @@ body {
     <div class="crew-info">
         <div class="crew-name">Danny Elfman</div>
         <div class="crew-meta">33 films · ★ 3.62 · ❤️ 15</div>
-        <div class="crew-posters"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/kKgQzkUCnQmeTPkyIwHly2t6ZFI.jpg" alt="Beetlejuice Beetlejuice" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/ddJcSKbcp4rKZTmuyWaMhuwcfMz.jpg" alt="Doctor Strange in the Multiverse of Madness" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/smxA8yvZ0LzDPer9BIRd4pyOpx1.jpg" alt="The Grinch" loading="lazy"></div>
     </div>
 </div>
 <div class="crew-card" data-person-type="composer" data-person-index="4">
@@ -2764,7 +2697,6 @@ body {
     <div class="crew-info">
         <div class="crew-name">Michael Giacchino</div>
         <div class="crew-meta">32 films · ★ 3.36 · ❤️ 13</div>
-        <div class="crew-posters"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/abqOz6EL3yXyOOafCPZxjL1M5bQ.jpg" alt="The Fantastic 4: First Steps" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/2e853FDVSIso600RqAMunPxiZjq.jpg" alt="Society of the Snow" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/74xTEgt7R36Fpooo50r9T25onhq.jpg" alt="The Batman" loading="lazy"></div>
     </div>
 </div>
 <div class="crew-card" data-person-type="composer" data-person-index="5">
@@ -2772,23 +2704,16 @@ body {
     <div class="crew-info">
         <div class="crew-name">Howard Shore</div>
         <div class="crew-meta">32 films · ★ 4.0 · ❤️ 18</div>
-        <div class="crew-posters"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/RAFYMC0NgK9In9aGY6k6wsIL8w.jpg" alt="Crimes of the Future" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/8DPGG400FgaFWaqcv11n8mRd2NG.jpg" alt="Spotlight" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/xT98tLqatZPQApyRmlPL12LtiWp.jpg" alt="The Hobbit: The Battle of the Five Armies" loading="lazy"></div>
     </div>
 </div></div>
-    </div>
 
-    <div class="people-subcontent" data-people-content="cinematographers">
-        <div class="section-header">
-            <h2 class="section-title">📸 Top Cinematographers</h2>
-            <span class="section-subtitle">Click to see their filmography</span>
-        </div>
-        <div class="crew-grid">
+        <h3 style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--text-secondary);">📸 Top Cinematographers</h3>
+        <div class="crew-grid" style="margin-bottom: 1.5rem;">
 <div class="crew-card" data-person-type="cinematographer" data-person-index="0">
     <img class="crew-photo" src="https://image.tmdb.org/t/p/w185//gpW5xCOMbWWZKRPHeSIyXg4F3b1.jpg" alt="Matthew Libatique" loading="lazy">
     <div class="crew-info">
         <div class="crew-name">Matthew Libatique</div>
         <div class="crew-meta">18 films · ★ 3.0 · ❤️ 7</div>
-        <div class="crew-posters"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/cvda8s5J8YaHjTyEyXQpvD6f3iV.jpg" alt="Caught Stealing" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/kxj7rMco6RNYsVcNwuGAIlfWu64.jpg" alt="Maestro" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/jOqxKIOC92BVyinYO1Fm73XY7Tc.jpg" alt="Don't Worry Darling" loading="lazy"></div>
     </div>
 </div>
 <div class="crew-card" data-person-type="cinematographer" data-person-index="1">
@@ -2796,7 +2721,6 @@ body {
     <div class="crew-info">
         <div class="crew-name">Janusz Kamiński</div>
         <div class="crew-meta">17 films · ★ 3.0 · ❤️ 7</div>
-        <div class="crew-posters"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/h7llKkqkkJtJrTOaDLuVeUYDQ7I.jpg" alt="The Fabelmans" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/yfz3IUoYYSY32tkb97HlUBGFsnh.jpg" alt="West Side Story" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/pU1ULUq8D3iRxl1fdX2lZIzdHuI.jpg" alt="Ready Player One" loading="lazy"></div>
     </div>
 </div>
 <div class="crew-card" data-person-type="cinematographer" data-person-index="2">
@@ -2804,7 +2728,6 @@ body {
     <div class="crew-info">
         <div class="crew-name">Roger Deakins</div>
         <div class="crew-meta">16 films · ★ 4.5 · ❤️ 10</div>
-        <div class="crew-posters"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/h84SnIQF91Gz2Fv1OpMJ3245t4i.jpg" alt="Empire of Light" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/iZf0KyrE25z1sage4SYFLCCrMi9.jpg" alt="1917" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg" alt="Blade Runner 2049" loading="lazy"></div>
     </div>
 </div>
 <div class="crew-card" data-person-type="cinematographer" data-person-index="3">
@@ -2812,7 +2735,6 @@ body {
     <div class="crew-info">
         <div class="crew-name">Robert Richardson</div>
         <div class="crew-meta">16 films · ★ 4.0 · ❤️ 13</div>
-        <div class="crew-posters"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/76AKQPdH3M8cvsFR9K8JsOzVlY5.jpg" alt="Air" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/pzKsRuKLFmYrW5Q0q8E8G78Tcgo.jpg" alt="Venom: Let There Be Carnage" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/8j58iEBw9pOXFD2L0nt0ZXeHviB.jpg" alt="Once Upon a Time... in Hollywood" loading="lazy"></div>
     </div>
 </div>
 <div class="crew-card" data-person-type="cinematographer" data-person-index="4">
@@ -2820,7 +2742,6 @@ body {
     <div class="crew-info">
         <div class="crew-name">Dean Cundey</div>
         <div class="crew-meta">16 films · ★ 4.17 · ❤️ 11</div>
-        <div class="crew-posters"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/bnKvk04icAyCO1KjqhsaEXBO9aJ.jpg" alt="Flubber" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/tVeKscCm2fY1xDXZk8PgnZ87h9S.jpg" alt="Apollo 13" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/2ah8fNJFZVU3vcXhU5xfAYi2eym.jpg" alt="Casper" loading="lazy"></div>
     </div>
 </div>
 <div class="crew-card" data-person-type="cinematographer" data-person-index="5">
@@ -2828,23 +2749,16 @@ body {
     <div class="crew-info">
         <div class="crew-name">Robert D. Yeoman</div>
         <div class="crew-meta">16 films · ★ 3.33 · ❤️ 10</div>
-        <div class="crew-posters"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/rAkz95CREc3A1qTnwlSQ0jh8Zw8.jpg" alt="Asteroid City" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/fDUywEHwHh6nsLnVXAdPN9m4ZUG.jpg" alt="The Wonderful Story of Henry Sugar" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/IQG49DUJw5DsgcNbW0NfagiDOs.jpg" alt="Poison" loading="lazy"></div>
     </div>
 </div></div>
-    </div>
 
-    <div class="people-subcontent" data-people-content="writers">
-        <div class="section-header">
-            <h2 class="section-title">✍️ Top Writers</h2>
-            <span class="section-subtitle">Click to see their filmography</span>
-        </div>
+        <h3 style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--text-secondary);">✍️ Top Writers</h3>
         <div class="crew-grid">
 <div class="crew-card" data-person-type="writer" data-person-index="0">
     <img class="crew-photo" src="https://image.tmdb.org/t/p/w185//s03CeUeC5yAXyB1acqP0zGNo2SC.jpg" alt="Wes Anderson" loading="lazy">
     <div class="crew-info">
         <div class="crew-name">Wes Anderson</div>
         <div class="crew-meta">18 films · ★ 3.42 · ❤️ 12</div>
-        <div class="crew-posters"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/u2jxeYLXTYfu0bqJmnLGIgZswib.jpg" alt="The Phoenician Scheme" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/rAkz95CREc3A1qTnwlSQ0jh8Zw8.jpg" alt="Asteroid City" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/fDUywEHwHh6nsLnVXAdPN9m4ZUG.jpg" alt="The Wonderful Story of Henry Sugar" loading="lazy"></div>
     </div>
 </div>
 <div class="crew-card" data-person-type="writer" data-person-index="1">
@@ -2852,7 +2766,6 @@ body {
     <div class="crew-info">
         <div class="crew-name">Christopher Nolan</div>
         <div class="crew-meta">14 films · ★ 4.75 · ❤️ 10</div>
-        <div class="crew-posters"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg" alt="Oppenheimer" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/aCIFMriQh8rvhxpN1IWGgvH0Tlg.jpg" alt="Tenet" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/b4Oe15CGLL61Ped0RAS9JpqdmCt.jpg" alt="Dunkirk" loading="lazy"></div>
     </div>
 </div>
 <div class="crew-card" data-person-type="writer" data-person-index="2">
@@ -2860,7 +2773,6 @@ body {
     <div class="crew-info">
         <div class="crew-name">Quentin Tarantino</div>
         <div class="crew-meta">14 films · ★ 3.5 · ❤️ 14</div>
-        <div class="crew-posters"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/8j58iEBw9pOXFD2L0nt0ZXeHviB.jpg" alt="Once Upon a Time... in Hollywood" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/jIywvdPjia2t3eKYbjVTcwBQlG8.jpg" alt="The Hateful Eight" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/7oWY8VDWW7thTzWh3OKYRkWUlD5.jpg" alt="Django Unchained" loading="lazy"></div>
     </div>
 </div>
 <div class="crew-card" data-person-type="writer" data-person-index="3">
@@ -2868,7 +2780,6 @@ body {
     <div class="crew-info">
         <div class="crew-name">Hayao Miyazaki</div>
         <div class="crew-meta">12 films · ★ 2.83 · ❤️ 4</div>
-        <div class="crew-posters"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/f4oZTcfGrVTXKTWg157AwikXqmP.jpg" alt="The Boy and the Heron" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/rRLYX4RZIyloHSJwvZKAhphAjiB.jpg" alt="From Up on Poppy Hill" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/yp8vEZflGynlEylxEesbYasc06i.jpg" alt="Ponyo" loading="lazy"></div>
     </div>
 </div>
 <div class="crew-card" data-person-type="writer" data-person-index="4">
@@ -2876,7 +2787,6 @@ body {
     <div class="crew-info">
         <div class="crew-name">James Cameron</div>
         <div class="crew-meta">12 films · ★ 4.11 · ❤️ 8</div>
-        <div class="crew-posters"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/5bxrxnRaxZooBAxgUVBZ13dpzC7.jpg" alt="Avatar: Fire and Ash" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg" alt="Avatar: The Way of Water" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/xRWht48C2V8XNfzvPehyClOvDni.jpg" alt="Alita: Battle Angel" loading="lazy"></div>
     </div>
 </div>
 <div class="crew-card" data-person-type="writer" data-person-index="5">
@@ -2884,12 +2794,11 @@ body {
     <div class="crew-info">
         <div class="crew-name">David Koepp</div>
         <div class="crew-meta">12 films · ★ 3.88 · ❤️ 7</div>
-        <div class="crew-posters"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/1RICxzeoNCAO5NpcRMIgg1XT6fm.jpg" alt="Jurassic World Rebirth" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/hHPovtU4b96LHcoeEwRkGHI5btw.jpg" alt="Black Bag" loading="lazy"><img class="crew-mini-poster" src="https://image.tmdb.org/t/p/w185/Af4bXE63pVsb2FtbW8uYIyPBadD.jpg" alt="Indiana Jones and the Dial of Destiny" loading="lazy"></div>
     </div>
 </div></div>
-    </div>
-
-    <div class="people-subcontent" data-people-content="studios">
+    </section>
+    
+    <section class="section">
         <div class="section-header">
             <h2 class="section-title">🏢 Top Studios</h2>
             <span class="section-subtitle">Production companies behind your films — click to see their catalog</span>
@@ -2959,7 +2868,7 @@ body {
         <span>❤️ 16</span>
     </div>
 </div></div>
-    </div>
+    </section>
 </div>
             
 <div id="insights" class="tab-content">
@@ -3076,17 +2985,6 @@ document.querySelectorAll('.nav-btn').forEach(btn => {
         // Update content
         document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
         document.getElementById(btn.dataset.tab).classList.add('active');
-    });
-});
-
-// People sub-tab navigation
-document.querySelectorAll('.people-subtab').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.people-subtab').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        document.querySelectorAll('.people-subcontent').forEach(c => c.classList.remove('active'));
-        const target = document.querySelector(`.people-subcontent[data-people-content="${btn.dataset.peopleTab}"]`);
-        if (target) target.classList.add('active');
     });
 });
 
