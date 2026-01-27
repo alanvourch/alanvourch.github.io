@@ -1,61 +1,61 @@
 {
   "basic": {
-    "total_watched": 1994,
-    "total_rated": 590,
-    "total_liked": 1122,
-    "total_watchlist": 109,
-    "total_diary_entries": 599,
+    "total_watched": 2009,
+    "total_rated": 602,
+    "total_liked": 1128,
+    "total_watchlist": 100,
+    "total_diary_entries": 612,
     "avg_rating": 3.55,
-    "rewatches": 83
+    "rewatches": 84
   },
   "genres": {
     "distribution": [
       {
         "genre": "Drama",
-        "count": 850
+        "count": 854
       },
       {
         "genre": "Comedy",
-        "count": 596
+        "count": 598
       },
       {
         "genre": "Action",
-        "count": 538
+        "count": 544
       },
       {
         "genre": "Thriller",
-        "count": 496
+        "count": 500
       },
       {
         "genre": "Adventure",
-        "count": 407
+        "count": 411
       },
       {
         "genre": "Science Fiction",
-        "count": 362
+        "count": 367
       },
       {
         "genre": "Crime",
-        "count": 344
+        "count": 345
       },
       {
         "genre": "Horror",
-        "count": 263
+        "count": 264
       },
       {
         "genre": "Fantasy",
-        "count": 248
+        "count": 251
       },
       {
         "genre": "Romance",
-        "count": 191
+        "count": 194
       }
     ],
     "favorites": [
       {
         "genre": "Documentary",
-        "avg_rating": 3.93,
-        "count": 14
+        "avg_rating": 3.88,
+        "count": 16
       },
       {
         "genre": "Music",
@@ -74,33 +74,33 @@
       },
       {
         "genre": "Romance",
-        "avg_rating": 3.66,
-        "count": 73
-      },
-      {
-        "genre": "Adventure",
-        "avg_rating": 3.64,
-        "count": 99
+        "avg_rating": 3.67,
+        "count": 75
       },
       {
         "genre": "Drama",
+        "avg_rating": 3.63,
+        "count": 291
+      },
+      {
+        "genre": "Adventure",
         "avg_rating": 3.62,
-        "count": 286
-      },
-      {
-        "genre": "Science Fiction",
-        "avg_rating": 3.6,
-        "count": 95
-      },
-      {
-        "genre": "Action",
-        "avg_rating": 3.59,
-        "count": 128
+        "count": 101
       },
       {
         "genre": "Family",
         "avg_rating": 3.59,
         "count": 34
+      },
+      {
+        "genre": "Action",
+        "avg_rating": 3.58,
+        "count": 131
+      },
+      {
+        "genre": "Science Fiction",
+        "avg_rating": 3.58,
+        "count": 99
       }
     ],
     "total_unique": 19
@@ -981,12 +981,20 @@
       },
       {
         "name": "Ralph Fiennes",
-        "count": 23,
+        "count": 24,
         "liked_count": 9,
-        "like_ratio": 39.1,
-        "avg_rating": 3.43,
+        "like_ratio": 37.5,
+        "avg_rating": 3.38,
         "profile_path": "/u29BOqiV5GCQ8k8WUJM50i9xlBf.jpg",
         "films": [
+          {
+            "title": "28 Years Later",
+            "year": 2025,
+            "rating": 3.0,
+            "liked": false,
+            "poster_path": "/n5FygjEppOvac6yEaowi26nTyw3.jpg",
+            "character": "Dr. Ian Kelson"
+          },
           {
             "title": "Conclave",
             "year": 2024,
@@ -3953,7 +3961,7 @@
         "count": 3
       }
     ],
-    "total_unique": 10615
+    "total_unique": 10718
   },
   "directors": {
     "top_by_count": [
@@ -5616,12 +5624,12 @@
         "count": 3
       }
     ],
-    "total_unique": 1005
+    "total_unique": 1010
   },
   "runtime": {
-    "average": 111.4,
-    "total_hours": 3591,
-    "total_minutes": 215488,
+    "average": 111.2,
+    "total_hours": 3612,
+    "total_minutes": 216740,
     "shortest": {
       "title": "There's a Monster in My Kitchen",
       "year": 2020,
@@ -5635,9 +5643,9 @@
     "min_runtime": 2,
     "max_runtime": 229,
     "distribution": {
-      "<90": 249,
-      "90-120": 1005,
-      "120-150": 544,
+      "<90": 256,
+      "90-120": 1012,
+      "120-150": 545,
       "150-180": 108,
       "180+": 28
     }
@@ -5646,23 +5654,23 @@
     "top_countries": [
       {
         "country": "United States of America",
-        "count": 1540
+        "count": 1550
       },
       {
         "country": "United Kingdom",
-        "count": 325
+        "count": 326
       },
       {
         "country": "France",
-        "count": 235
+        "count": 239
       },
       {
         "country": "Germany",
-        "count": 106
+        "count": 105
       },
       {
         "country": "Japan",
-        "count": 97
+        "count": 98
       },
       {
         "country": "Canada",
@@ -5681,22 +5689,22 @@
         "count": 31
       },
       {
-        "country": "Spain",
-        "count": 26
+        "country": "Hong Kong",
+        "count": 29
       }
     ],
     "top_languages": [
       {
         "language": "en",
-        "count": 1636
+        "count": 1644
       },
       {
         "language": "fr",
-        "count": 138
+        "count": 142
       },
       {
         "language": "ja",
-        "count": 63
+        "count": 64
       },
       {
         "language": "it",
@@ -5704,30 +5712,30 @@
       },
       {
         "language": "es",
-        "count": 15
+        "count": 14
       },
       {
         "language": "de",
         "count": 14
       },
       {
-        "language": "ko",
+        "language": "cn",
         "count": 12
       },
       {
-        "language": "cn",
-        "count": 10
+        "language": "ko",
+        "count": 12
       },
       {
         "language": "da",
         "count": 7
       },
       {
-        "language": "sv",
+        "language": "zh",
         "count": 5
       }
     ],
-    "total_countries": 56,
+    "total_countries": 57,
     "total_languages": 17
   },
   "rating_trends": {
@@ -5902,7 +5910,7 @@
       },
       {
         "month": "2026-01",
-        "avg_rating": 3.83
+        "avg_rating": 3.57
       }
     ],
     "yearly": [
@@ -5932,7 +5940,7 @@
       },
       {
         "year": 2026,
-        "avg_rating": 3.83
+        "avg_rating": 3.57
       }
     ]
   },
@@ -5940,22 +5948,22 @@
     "Adventure": {
       "5.0": 17,
       "4.5": 12,
-      "3.5": 23,
+      "3.5": 24,
       "4.0": 13,
       "2.0": 5,
       "3.0": 20,
-      "2.5": 6,
+      "2.5": 7,
       "1.0": 2,
       "1.5": 1
     },
     "Action": {
       "5.0": 22,
-      "4.0": 22,
+      "4.0": 23,
       "4.5": 9,
-      "3.5": 29,
+      "3.5": 30,
       "2.0": 9,
       "3.0": 24,
-      "2.5": 10,
+      "2.5": 11,
       "1.5": 2,
       "1.0": 1
     },
@@ -5964,16 +5972,16 @@
       "4.5": 11,
       "4.0": 12,
       "2.0": 6,
-      "3.0": 18,
-      "3.5": 22,
+      "3.0": 20,
+      "3.5": 23,
       "1.5": 1,
-      "2.5": 10
+      "2.5": 11
     },
     "Drama": {
       "5.0": 23,
       "4.5": 32,
-      "4.0": 69,
-      "3.5": 80,
+      "4.0": 72,
+      "3.5": 82,
       "3.0": 51,
       "1.0": 3,
       "2.5": 19,
@@ -5982,10 +5990,10 @@
     },
     "Crime": {
       "5.0": 9,
-      "4.0": 23,
+      "4.0": 24,
       "3.0": 21,
       "4.5": 6,
-      "3.5": 18,
+      "3.5": 19,
       "2.0": 2,
       "2.5": 6,
       "0.5": 2
@@ -6000,10 +6008,10 @@
     },
     "Thriller": {
       "5.0": 13,
-      "4.0": 30,
-      "3.0": 41,
+      "4.0": 31,
+      "3.0": 42,
       "4.5": 6,
-      "3.5": 32,
+      "3.5": 33,
       "2.5": 14,
       "2.0": 10,
       "0.5": 1,
@@ -6023,7 +6031,7 @@
     "Comedy": {
       "5.0": 14,
       "4.5": 17,
-      "4.0": 41,
+      "4.0": 43,
       "3.5": 45,
       "3.0": 39,
       "2.0": 4,
@@ -6035,8 +6043,8 @@
     "Romance": {
       "4.5": 9,
       "5.0": 9,
-      "4.0": 17,
-      "3.5": 14,
+      "4.0": 18,
+      "3.5": 15,
       "3.0": 14,
       "1.0": 1,
       "2.5": 8,
@@ -6047,7 +6055,7 @@
       "4.5": 6,
       "4.0": 9,
       "3.0": 13,
-      "3.5": 18,
+      "3.5": 19,
       "2.0": 5,
       "2.5": 6,
       "1.0": 2,
@@ -6067,20 +6075,20 @@
       "3.5": 15,
       "4.0": 19,
       "4.5": 5,
-      "3.0": 27,
+      "3.0": 28,
       "2.0": 9,
       "1.0": 1,
       "2.5": 11,
       "0.5": 1
     },
     "Animation": {
-      "3.5": 14,
+      "3.5": 15,
       "5.0": 2,
       "4.0": 6,
       "4.5": 6,
       "1.5": 1,
       "1.0": 1,
-      "3.0": 8,
+      "3.0": 9,
       "2.0": 3,
       "2.5": 1
     },
@@ -6103,10 +6111,10 @@
     },
     "Documentary": {
       "5.0": 2,
-      "3.0": 3,
+      "3.0": 4,
       "4.5": 4,
       "3.5": 4,
-      "4.0": 1
+      "4.0": 2
     },
     "Western": {
       "4.5": 2,
@@ -6151,7 +6159,7 @@
       },
       {
         "year": 2026,
-        "count": 5
+        "count": 18
       }
     ],
     "monthly": [
@@ -6249,7 +6257,7 @@
       },
       {
         "month": "2026-01",
-        "count": 5
+        "count": 18
       }
     ],
     "by_weekday": [
@@ -6258,24 +6266,24 @@
         "count": 98
       },
       {
-        "day": "Thursday",
-        "count": 89
-      },
-      {
         "day": "Saturday",
-        "count": 89
+        "count": 95
       },
       {
         "day": "Sunday",
-        "count": 88
+        "count": 90
+      },
+      {
+        "day": "Thursday",
+        "count": 90
       },
       {
         "day": "Monday",
-        "count": 80
+        "count": 83
       },
       {
         "day": "Tuesday",
-        "count": 78
+        "count": 79
       },
       {
         "day": "Friday",
@@ -6585,16 +6593,51 @@
       ]
     },
     "current_year": {
-      "total_films": 5,
-      "total_liked": 3,
-      "total_rated": 3,
-      "avg_rating": 3.83,
+      "total_films": 18,
+      "total_liked": 11,
+      "total_rated": 15,
+      "avg_rating": 3.57,
       "top_rated": [
         {
           "title": "Singin' in the Rain",
           "year": 1952,
           "rating": 5.0,
           "poster_path": "/w03EiJVHP8Un77boQeE7hg9DVdU.jpg",
+          "liked": true
+        },
+        {
+          "title": "Dazed and Confused",
+          "year": 1993,
+          "rating": 4.0,
+          "poster_path": "/msG9awbLhVZwv1Eh9Ge7SofMexW.jpg",
+          "liked": true
+        },
+        {
+          "title": "A Summer's Tale",
+          "year": 1996,
+          "rating": 4.0,
+          "poster_path": "/l3syqgYqqfqPVheINI5jOBN5hXL.jpg",
+          "liked": true
+        },
+        {
+          "title": "Mishima: A Life in Four Chapters",
+          "year": 1985,
+          "rating": 4.0,
+          "poster_path": "/4kIXsE4SwUjO0eUqpolsHNO5GLH.jpg",
+          "liked": true
+        },
+        {
+          "title": "Streetwise",
+          "year": 1984,
+          "rating": 4.0,
+          "poster_path": "/fW9z3HXWYTKzlqE3CYMMxaXyyy2.jpg",
+          "liked": true
+        },
+        {
+          "title": "City on Fire",
+          "year": 1987,
+          "rating": 4.0,
+          "poster_path": "/uOgCKhHsQvOFVNxOUdewPwc0Z9N.jpg",
           "liked": true
         },
         {
@@ -6605,86 +6648,155 @@
           "liked": false
         },
         {
+          "title": "Before Sunset",
+          "year": 2004,
+          "rating": 3.5,
+          "poster_path": "/gycdE1ARByGQcK4fYR2mgpU6OO.jpg",
+          "liked": true
+        }
+      ],
+      "bottom_rated": [
+        {
+          "title": "Predator: Badlands",
+          "year": 2025,
+          "rating": 2.5,
+          "poster_path": "/pHpq9yNUIo6aDoCXEBzjSolywgz.jpg",
+          "liked": false
+        },
+        {
           "title": "Throne of Blood",
           "year": 1957,
           "rating": 3.0,
           "poster_path": "/zaZFMNxJST0TtPd68yF7fNt1he8.jpg",
           "liked": false
+        },
+        {
+          "title": "28 Years Later",
+          "year": 2025,
+          "rating": 3.0,
+          "poster_path": "/n5FygjEppOvac6yEaowi26nTyw3.jpg",
+          "liked": false
+        },
+        {
+          "title": "Fantastic Planet",
+          "year": 1973,
+          "rating": 3.0,
+          "poster_path": "/prq0j1S0K07UjwLZLF6oMGflRUI.jpg",
+          "liked": false
+        },
+        {
+          "title": "The Competition",
+          "year": 2016,
+          "rating": 3.0,
+          "poster_path": "/ooGSIhWZlxKx5DFebGgnaO3mCKL.jpg",
+          "liked": false
+        },
+        {
+          "title": "Avatar: Fire and Ash",
+          "year": 2025,
+          "rating": 3.5,
+          "poster_path": "/5bxrxnRaxZooBAxgUVBZ13dpzC7.jpg",
+          "liked": false
+        },
+        {
+          "title": "Before Sunset",
+          "year": 2004,
+          "rating": 3.5,
+          "poster_path": "/gycdE1ARByGQcK4fYR2mgpU6OO.jpg",
+          "liked": true
+        },
+        {
+          "title": "Arco",
+          "year": 2025,
+          "rating": 3.5,
+          "poster_path": "/sV5B8qn4HhIPCKNFighAVMjKBtR.jpg",
+          "liked": false
         }
       ],
-      "bottom_rated": [],
       "top_actor": {
-        "name": "Patton Oswalt",
-        "count": 1,
+        "name": "Chow Yun-Fat",
+        "count": 2,
         "films": [
           {
-            "title": "Ratatouille",
-            "year": 2007,
-            "poster_path": "/t3vaWRPSf6WjDSamIkKDs1iQWna.jpg",
-            "rating": null
+            "title": "City on Fire",
+            "year": 1987,
+            "poster_path": "/uOgCKhHsQvOFVNxOUdewPwc0Z9N.jpg",
+            "rating": 4.0
+          },
+          {
+            "title": "The Killer",
+            "year": 1989,
+            "poster_path": "/8hTxlSqMAHBXAh1eB69ir0BXhzE.jpg",
+            "rating": 3.5
           }
         ]
       },
       "top_director": {
-        "name": "Brad Bird",
-        "count": 1,
+        "name": "Richard Linklater",
+        "count": 2,
         "films": [
           {
-            "title": "Ratatouille",
-            "year": 2007,
-            "poster_path": "/t3vaWRPSf6WjDSamIkKDs1iQWna.jpg",
-            "rating": null
+            "title": "Before Sunset",
+            "year": 2004,
+            "poster_path": "/gycdE1ARByGQcK4fYR2mgpU6OO.jpg",
+            "rating": 3.5
+          },
+          {
+            "title": "Dazed and Confused",
+            "year": 1993,
+            "poster_path": "/msG9awbLhVZwv1Eh9Ge7SofMexW.jpg",
+            "rating": 4.0
           }
         ]
       },
       "genre_distribution": [
         {
-          "genre": "Comedy",
-          "count": 2
-        },
-        {
-          "genre": "Fantasy",
-          "count": 2
-        },
-        {
-          "genre": "Adventure",
-          "count": 2
-        },
-        {
-          "genre": "Animation",
-          "count": 1
-        },
-        {
-          "genre": "Family",
-          "count": 1
-        },
-        {
           "genre": "Drama",
-          "count": 1
-        },
-        {
-          "genre": "History",
-          "count": 1
-        },
-        {
-          "genre": "Romance",
-          "count": 1
+          "count": 6
         },
         {
           "genre": "Action",
-          "count": 1
+          "count": 5
         },
         {
           "genre": "Thriller",
-          "count": 1
+          "count": 5
+        },
+        {
+          "genre": "Science Fiction",
+          "count": 5
+        },
+        {
+          "genre": "Comedy",
+          "count": 4
+        },
+        {
+          "genre": "Adventure",
+          "count": 4
+        },
+        {
+          "genre": "Animation",
+          "count": 3
+        },
+        {
+          "genre": "Fantasy",
+          "count": 3
+        },
+        {
+          "genre": "Romance",
+          "count": 3
+        },
+        {
+          "genre": "Crime",
+          "count": 3
         }
       ],
       "most_active_month": 1,
-      "most_active_month_count": 5,
+      "most_active_month_count": 18,
       "monthly_breakdown": [
         {
           "month": 1,
-          "count": 5
+          "count": 18
         }
       ]
     },
@@ -9033,19 +9145,19 @@
     "top_genres": [
       {
         "genre": "Drama",
-        "count": 530
+        "count": 535
       },
       {
         "genre": "Comedy",
-        "count": 347
+        "count": 349
       },
       {
         "genre": "Action",
-        "count": 260
+        "count": 262
       },
       {
         "genre": "Thriller",
-        "count": 251
+        "count": 253
       },
       {
         "genre": "Adventure",
@@ -9053,7 +9165,7 @@
       },
       {
         "genre": "Crime",
-        "count": 200
+        "count": 202
       },
       {
         "genre": "Science Fiction",
@@ -9069,10 +9181,10 @@
       },
       {
         "genre": "Romance",
-        "count": 106
+        "count": 108
       }
     ],
-    "total": 1122
+    "total": 1128
   },
   "rating_distribution": [
     {
@@ -9093,19 +9205,19 @@
     },
     {
       "rating": 2.5,
-      "count": 49
+      "count": 50
     },
     {
       "rating": 3.0,
-      "count": 120
+      "count": 123
     },
     {
       "rating": 3.5,
-      "count": 143
+      "count": 146
     },
     {
       "rating": 4.0,
-      "count": 121
+      "count": 126
     },
     {
       "rating": 4.5,
@@ -9120,9 +9232,9 @@
     "top_by_count": [
       {
         "name": "Hans Zimmer",
-        "count": 45,
+        "count": 46,
         "liked_count": 29,
-        "like_ratio": 64.4,
+        "like_ratio": 63.0,
         "avg_rating": 3.93,
         "profile_path": "/tpQnDeHY15szIXvpnhlprufz4d.jpg",
         "films": [
@@ -9258,6 +9370,13 @@
             "rating": 3.0,
             "liked": false,
             "poster_path": "/keGfSvCmYj7CvdRx36OdVrAEibE.jpg"
+          },
+          {
+            "title": "Pirates of the Caribbean: Tales of the Code: Wedlocked",
+            "year": 2011,
+            "rating": null,
+            "liked": false,
+            "poster_path": "/gJfzdiL6XkFRB5Oh57D7VijT4OK.jpg"
           },
           {
             "title": "Inception",
@@ -11410,7 +11529,7 @@
         ]
       }
     ],
-    "total_unique": 762
+    "total_unique": 771
   },
   "cinematographers": {
     "top_by_count": [
@@ -12579,7 +12698,7 @@
         ]
       }
     ],
-    "total_unique": 806
+    "total_unique": 810
   },
   "writers": {
     "top_by_count": [
@@ -13545,7 +13664,7 @@
         ]
       }
     ],
-    "total_unique": 1848
+    "total_unique": 1860
   },
   "studios": {
     "top_by_count": [
@@ -13554,7 +13673,7 @@
         "count": 121,
         "liked_count": 63,
         "avg_rating": 3.73,
-        "logo_path": null,
+        "logo_path": "/ingPVoHnINIrFR7WHmYux1f5pES.png",
         "films": [
           {
             "title": "Mickey 17",
@@ -14410,7 +14529,7 @@
         "count": 103,
         "liked_count": 58,
         "avg_rating": 3.79,
-        "logo_path": null,
+        "logo_path": "/8lvHyhjr8oUKOOy2dKXoALWKdp0.png",
         "films": [
           {
             "title": "Wolf Man",
@@ -15140,7 +15259,7 @@
         "count": 97,
         "liked_count": 58,
         "avg_rating": 3.59,
-        "logo_path": null,
+        "logo_path": "/jay6WcMgagAklUt7i9Euwj1pzTF.png",
         "films": [
           {
             "title": "Novocaine",
@@ -15825,10 +15944,10 @@
       },
       {
         "name": "Columbia Pictures",
-        "count": 91,
+        "count": 92,
         "liked_count": 52,
-        "avg_rating": 3.63,
-        "logo_path": null,
+        "avg_rating": 3.59,
+        "logo_path": "/71BqEFAF4V3qjjMPCpLuyJFB9A.png",
         "films": [
           {
             "title": "Caught Stealing",
@@ -15836,6 +15955,13 @@
             "rating": 3.0,
             "liked": false,
             "poster_path": "/cvda8s5J8YaHjTyEyXQpvD6f3iV.jpg"
+          },
+          {
+            "title": "28 Years Later",
+            "year": 2025,
+            "rating": 3.0,
+            "liked": false,
+            "poster_path": "/n5FygjEppOvac6yEaowi26nTyw3.jpg"
           },
           {
             "title": "Spider-Man: Across the Spider-Verse",
@@ -16474,7 +16600,7 @@
         "count": 83,
         "liked_count": 42,
         "avg_rating": 4.05,
-        "logo_path": null,
+        "logo_path": "/qZCc1lty5FzX30aOCVRBLzaVmcp.png",
         "films": [
           {
             "title": "Underwater",
@@ -17064,7 +17190,7 @@
         "count": 53,
         "liked_count": 27,
         "avg_rating": 3.7,
-        "logo_path": null,
+        "logo_path": "/2ycs64eqV5rqKYHyQK0GVoKGvfX.png",
         "films": [
           {
             "title": "Companion",
@@ -17444,7 +17570,7 @@
         "count": 38,
         "liked_count": 21,
         "avg_rating": 4.0,
-        "logo_path": null,
+        "logo_path": "/cEaxANEisCqeEoRvODv2dO1I0iI.png",
         "films": [
           {
             "title": "Jurassic World Rebirth",
@@ -17719,7 +17845,7 @@
         "count": 37,
         "liked_count": 16,
         "avg_rating": 3.1,
-        "logo_path": null,
+        "logo_path": "/vru2SssLX3FPhnKZGtYw00pVIS9.png",
         "films": [
           {
             "title": "The Trial of the Chicago 7",
@@ -17987,7 +18113,7 @@
         "count": 34,
         "liked_count": 17,
         "avg_rating": 3.18,
-        "logo_path": null,
+        "logo_path": "/1ZXsGaFPgrgS6ZZGS37AqD5uU12.png",
         "films": [
           {
             "title": "Warfare",
@@ -18234,7 +18360,7 @@
         "count": 31,
         "liked_count": 13,
         "avg_rating": 3.3,
-        "logo_path": null,
+        "logo_path": "/hUzeosd33nzE5MCNsZxCGEKTXaQ.png",
         "films": [
           {
             "title": "Thunderbolts*",
@@ -18456,7 +18582,7 @@
         ]
       }
     ],
-    "total_unique": 1962
+    "total_unique": 1974
   },
   "decades": {
     "distribution": [
@@ -18492,32 +18618,32 @@
       },
       {
         "decade": "1970s",
-        "count": 54,
+        "count": 55,
         "decade_num": 1970
       },
       {
         "decade": "1980s",
-        "count": 147,
+        "count": 151,
         "decade_num": 1980
       },
       {
         "decade": "1990s",
-        "count": 282,
+        "count": 285,
         "decade_num": 1990
       },
       {
         "decade": "2000s",
-        "count": 402,
+        "count": 405,
         "decade_num": 2000
       },
       {
         "decade": "2010s",
-        "count": 621,
+        "count": 623,
         "decade_num": 2010
       },
       {
         "decade": "2020s",
-        "count": 403,
+        "count": 405,
         "decade_num": 2020
       }
     ],
@@ -18560,8 +18686,8 @@
             "poster_path": "/qDOtGWeSQNwB3dG7Amt1K0JW0az.jpg"
           }
         ],
-        "total": 54,
-        "avg_rating": 3.74
+        "total": 55,
+        "avg_rating": 3.7
       },
       "1950s": {
         "films": [
@@ -18642,7 +18768,7 @@
             "poster_path": "/hA2ple9q4qnwxp3hKVNhroipsir.jpg"
           }
         ],
-        "total": 621,
+        "total": 623,
         "avg_rating": 3.57
       },
       "2000s": {
@@ -18683,8 +18809,8 @@
             "poster_path": "/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg"
           }
         ],
-        "total": 402,
-        "avg_rating": 3.77
+        "total": 405,
+        "avg_rating": 3.76
       },
       "1980s": {
         "films": [
@@ -18724,8 +18850,8 @@
             "poster_path": "/6rb24x39vV8n5301IelC8rCPJTH.jpg"
           }
         ],
-        "total": 147,
-        "avg_rating": 3.7
+        "total": 151,
+        "avg_rating": 3.71
       },
       "1990s": {
         "films": [
@@ -18765,8 +18891,8 @@
             "poster_path": "/9CAkQ9nfrDaIAyncWndwg0tfC8g.jpg"
           }
         ],
-        "total": 282,
-        "avg_rating": 3.72
+        "total": 285,
+        "avg_rating": 3.73
       },
       "1960s": {
         "films": [
@@ -18921,8 +19047,8 @@
             "poster_path": "/62HCnUTziyWcpDaBO2i1DX17ljH.jpg"
           }
         ],
-        "total": 403,
-        "avg_rating": 3.36
+        "total": 405,
+        "avg_rating": 3.35
       },
       "1900s": {
         "films": [],
@@ -18934,8 +19060,8 @@
     "favorite_decade_avg": 4.04
   },
   "rewatches": {
-    "total": 83,
-    "unique_films": 78,
+    "total": 84,
+    "unique_films": 79,
     "most_rewatched": [
       {
         "title": "Klaus",
@@ -19027,10 +19153,10 @@
       "poster_path": "/47IXH2iEWwX0F7vIyGXaKQ0psBG.jpg"
     },
     "recent_film": {
-      "title": "Avatar: Fire and Ash",
-      "year": 2025,
-      "date": "January 08, 2026",
-      "poster_path": "/5bxrxnRaxZooBAxgUVBZ13dpzC7.jpg"
+      "title": "The Killer",
+      "year": 1989,
+      "date": "January 27, 2026",
+      "poster_path": "/8hTxlSqMAHBXAh1eB69ir0BXhzE.jpg"
     },
     "milestones": [
       {
@@ -19055,7 +19181,7 @@
         "poster_path": "/aCIFMriQh8rvhxpN1IWGgvH0Tlg.jpg"
       }
     ],
-    "total_diary_entries": 599,
+    "total_diary_entries": 612,
     "max_day": "2019-10-06",
     "max_day_count": 3,
     "max_month": "2023-11",
@@ -19404,8 +19530,8 @@
   "fun_facts": [
     {
       "icon": "⏰",
-      "text": "You've spent 3,591 hours watching films",
-      "subtext": "That's 149.6 days or 21.4 weeks of your life!"
+      "text": "You've spent 3,612 hours watching films",
+      "subtext": "That's 150.5 days or 21.5 weeks of your life!"
     },
     {
       "icon": "🎭",
@@ -19434,7 +19560,7 @@
     },
     {
       "icon": "📊",
-      "text": "You average 85.6 films per year",
+      "text": "You average 87.4 films per year",
       "subtext": "Across 7 years of logging"
     }
   ]

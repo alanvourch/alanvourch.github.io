@@ -323,6 +323,9 @@ class TMDBEnricher:
         else:
             print(f"[OK] All {cached_count} films loaded from cache")
 
+        # Backfill studio logos for old cache entries
+        self._backfill_studio_logos(enriched)
+
         # Save cache after enrichment
         self._save_cache()
 
@@ -334,6 +337,57 @@ class TMDBEnricher:
             self._log_unmatched_films()
 
         return enriched
+
+    def _backfill_studio_logos(self, enriched: Dict):
+        """Backfill logo_path for production_companies stored in old string format"""
+        # Collect studio names missing logos
+        needs_logo = set()
+        for data in enriched.values():
+            for comp in data.get('production_companies', []):
+                if isinstance(comp, str):
+                    needs_logo.add(comp)
+                elif isinstance(comp, dict) and not comp.get('logo_path'):
+                    needs_logo.add(comp['name'])
+
+        if not needs_logo:
+            return
+
+        print(f"Backfilling logos for {len(needs_logo)} studios...")
+
+        # Fetch logos via TMDB company search
+        logo_map = {}
+        for name in needs_logo:
+            result = self._make_request('search/company', {'query': name})
+            if result and result.get('results'):
+                for r in result['results']:
+                    if r['name'].lower() == name.lower() and r.get('logo_path'):
+                        logo_map[name] = r['logo_path']
+                        break
+
+        if not logo_map:
+            return
+
+        # Patch enriched data and cache
+        updated = 0
+        for data in list(enriched.values()) + list(self.cache.values()):
+            companies = data.get('production_companies', [])
+            new_companies = []
+            changed = False
+            for comp in companies:
+                if isinstance(comp, str):
+                    new_companies.append({'name': comp, 'logo_path': logo_map.get(comp)})
+                    changed = True
+                elif isinstance(comp, dict) and not comp.get('logo_path') and comp['name'] in logo_map:
+                    comp['logo_path'] = logo_map[comp['name']]
+                    new_companies.append(comp)
+                    changed = True
+                else:
+                    new_companies.append(comp)
+            if changed:
+                data['production_companies'] = new_companies
+                updated += 1
+
+        print(f"[OK] Updated logos for {len(logo_map)} studios across {updated} films")
 
     def _print_summary(self):
         """Print enrichment summary"""
