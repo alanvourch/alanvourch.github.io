@@ -209,9 +209,10 @@ class TMDBEnricher:
             'revenue': movie.get('revenue'),
         }
 
-        # Production companies
+        # Production companies (with logo)
         details['production_companies'] = [
-            c['name'] for c in movie.get('production_companies', [])
+            {'name': c['name'], 'logo_path': c.get('logo_path')}
+            for c in movie.get('production_companies', [])
         ][:3]
 
         if credits:

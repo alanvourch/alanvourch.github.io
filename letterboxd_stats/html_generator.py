@@ -463,59 +463,78 @@ body {
 }
 
 .person-card .person-mini-poster {
-    width: 55px;
-    height: 82px;
+    width: 48px;
+    height: 72px;
     border-radius: 4px;
     object-fit: cover;
     opacity: 0.85;
     box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
-/* Crew grid (composers, cinematographers, writers) */
+/* Crew grid (composers, cinematographers, writers) - same size as person cards */
 .crew-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 1.25rem;
 }
 
 .crew-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
-    padding: 1.25rem;
+    padding: 1.5rem;
     display: flex;
-    gap: 1rem;
+    gap: 1.25rem;
     align-items: flex-start;
     cursor: pointer;
     transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+}
+
+.crew-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
+    opacity: 0;
+    transition: opacity 0.25s;
 }
 
 .crew-card:hover {
+    background: var(--bg-card-hover);
     border-color: var(--accent-purple);
     transform: translateY(-3px);
     box-shadow: 0 8px 24px rgba(124, 58, 237, 0.15);
 }
 
+.crew-card:hover::before {
+    opacity: 1;
+}
+
 .crew-card .crew-photo {
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     object-fit: cover;
     flex-shrink: 0;
-    border: 2px solid var(--border-color);
+    border: 3px solid var(--border-color);
     background: var(--bg-secondary);
 }
 
 .crew-card .crew-photo-placeholder {
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     flex-shrink: 0;
     background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 2.2rem;
     font-weight: 700;
     color: white;
 }
@@ -527,48 +546,50 @@ body {
 
 .crew-card .crew-name {
     font-weight: 600;
-    font-size: 1rem;
-    margin-bottom: 0.25rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .crew-card .crew-meta {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: var(--text-secondary);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.6rem;
 }
 
 .crew-card .crew-posters {
     display: flex;
-    gap: 0.35rem;
-    overflow: hidden;
+    gap: 0.4rem;
 }
 
 .crew-card .crew-mini-poster {
-    width: 42px;
-    height: 63px;
-    border-radius: 3px;
+    width: 48px;
+    height: 72px;
+    border-radius: 4px;
     object-fit: cover;
     opacity: 0.85;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
 /* Studios section */
 .studio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.25rem;
 }
 
 .studio-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
-    padding: 1.25rem;
+    padding: 1.5rem;
     cursor: pointer;
     transition: all 0.25s;
+    display: flex;
+    gap: 1.25rem;
+    align-items: center;
 }
 
 .studio-card:hover {
@@ -577,9 +598,38 @@ body {
     box-shadow: 0 8px 24px rgba(0, 188, 212, 0.15);
 }
 
+.studio-card .studio-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    flex-shrink: 0;
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 8px;
+}
+
+.studio-card .studio-logo-placeholder {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+}
+
+.studio-card .studio-info {
+    flex: 1;
+    min-width: 0;
+}
+
 .studio-card .studio-name {
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 1.1rem;
     margin-bottom: 0.4rem;
     white-space: nowrap;
     overflow: hidden;
@@ -939,6 +989,8 @@ body {
 .insight-card .insight-sub {
     color: var(--text-secondary);
     font-size: 0.85rem;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .insight-card.accent-cyan .insight-value { color: var(--accent-cyan); }
@@ -1480,7 +1532,7 @@ body {
     <button class="nav-btn" data-tab="year-last">{last_year}<span class="year-badge">Wrap</span></button>
     <button class="nav-btn" data-tab="year-current">{current_year}<span class="year-badge">Live</span></button>
     <button class="nav-btn" data-tab="decades">📅 Decades</button>
-    <button class="nav-btn" data-tab="people">People</button>
+    <button class="nav-btn" data-tab="people">People/Studios</button>
     <button class="nav-btn" data-tab="insights">Insights</button>
 </nav>'''
 
@@ -1838,13 +1890,22 @@ body {
         # Studio cards
         studios_html = ''
         for i, studio in enumerate(studios):
+            logo_path = studio.get('logo_path')
+            if logo_path:
+                logo_html = f'<img class="studio-logo" src="{self.POSTER_BASE_URL.replace(config.POSTER_SIZE, "w185")}/{logo_path}" alt="{studio.get("name", "")}" loading="lazy">'
+            else:
+                initial = studio.get('name', '?')[0]
+                logo_html = f'<div class="studio-logo-placeholder">{initial}</div>'
             studios_html += f'''
 <div class="studio-card" data-person-type="studio" data-person-index="{i}">
-    <div class="studio-name">{studio.get('name', 'Unknown')}</div>
-    <div class="studio-meta">
-        <span><span class="stat-value">{studio.get('count', 0)}</span> films</span>
-        <span>★ {studio.get('avg_rating', 0)}</span>
-        <span>❤️ {studio.get('liked_count', 0)}</span>
+    {logo_html}
+    <div class="studio-info">
+        <div class="studio-name">{studio.get('name', 'Unknown')}</div>
+        <div class="studio-meta">
+            <span><span class="stat-value">{studio.get('count', 0)}</span> films</span>
+            <span>★ {studio.get('avg_rating', 0)}</span>
+            <span>❤️ {studio.get('liked_count', 0)}</span>
+        </div>
     </div>
 </div>'''
 
@@ -1959,12 +2020,12 @@ body {
             <div class="insight-card accent-green">
                 <div class="insight-label">Shortest Film</div>
                 <div class="insight-value">{shortest.get('runtime', 0)} min</div>
-                <div class="insight-sub">{shortest.get('title', 'N/A')[:25]}</div>
+                <div class="insight-sub">{shortest.get('title', 'N/A')}</div>
             </div>
             <div class="insight-card accent-orange">
                 <div class="insight-label">Longest Film</div>
                 <div class="insight-value">{longest.get('runtime', 0)} min</div>
-                <div class="insight-sub">{longest.get('title', 'N/A')[:25]}</div>
+                <div class="insight-sub">{longest.get('title', 'N/A')}</div>
             </div>
         </div>
     </section>

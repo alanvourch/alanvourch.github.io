@@ -1207,6 +1207,7 @@ class StatsCalculator:
         studio_counts = Counter()
         studio_films = defaultdict(list)
         studio_liked = Counter()
+        studio_logos = {}
 
         for (title, year), metadata in self.tmdb_data.items():
             if not self.is_film_watched(title, year):
@@ -1217,12 +1218,20 @@ class StatsCalculator:
             is_liked = self.is_film_liked(title, year)
 
             for company in companies:
-                studio_counts[company] += 1
+                # Handle both old (string) and new (dict) format
+                if isinstance(company, dict):
+                    company_name = company['name']
+                    if company.get('logo_path') and company_name not in studio_logos:
+                        studio_logos[company_name] = company['logo_path']
+                else:
+                    company_name = company
+
+                studio_counts[company_name] += 1
 
                 if is_liked:
-                    studio_liked[company] += 1
+                    studio_liked[company_name] += 1
 
-                studio_films[company].append({
+                studio_films[company_name].append({
                     'title': title,
                     'year': year,
                     'rating': rating if rating else None,
@@ -1241,6 +1250,7 @@ class StatsCalculator:
                 'count': count,
                 'liked_count': liked_count,
                 'avg_rating': avg_rating,
+                'logo_path': studio_logos.get(name),
                 'films': films
             })
 
