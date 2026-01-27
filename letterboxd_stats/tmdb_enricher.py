@@ -209,18 +209,47 @@ class TMDBEnricher:
             'revenue': movie.get('revenue'),
         }
 
+        # Production companies
+        details['production_companies'] = [
+            c['name'] for c in movie.get('production_companies', [])
+        ][:3]
+
         if credits:
-            # Get top actors (up to 10)
+            # Get top actors (up to 10) with profile photos
             cast = credits.get('cast', [])[:10]
             details['actors'] = [
-                {'name': actor['name'], 'character': actor.get('character')}
+                {
+                    'name': actor['name'],
+                    'character': actor.get('character'),
+                    'profile_path': actor.get('profile_path')
+                }
                 for actor in cast
             ]
 
-            # Get directors
+            # Get crew by role
             crew = credits.get('crew', [])
-            directors = [person['name'] for person in crew if person.get('job') == 'Director']
-            details['directors'] = directors[:3]  # Top 3 directors
+            directors = [{'name': p['name'], 'profile_path': p.get('profile_path')}
+                         for p in crew if p.get('job') == 'Director']
+            details['directors'] = [d['name'] for d in directors[:3]]
+            details['director_profiles'] = {d['name']: d['profile_path'] for d in directors[:3]}
+
+            # Cinematographers
+            details['cinematographers'] = [
+                {'name': p['name'], 'profile_path': p.get('profile_path')}
+                for p in crew if p.get('job') == 'Director of Photography'
+            ][:2]
+
+            # Composers
+            details['composers'] = [
+                {'name': p['name'], 'profile_path': p.get('profile_path')}
+                for p in crew if p.get('job') == 'Original Music Composer'
+            ][:2]
+
+            # Writers (Screenplay or Writer)
+            details['writers'] = [
+                {'name': p['name'], 'profile_path': p.get('profile_path')}
+                for p in crew if p.get('job') in ('Screenplay', 'Writer')
+            ][:3]
 
         return details
 

@@ -75,6 +75,8 @@ class StatsCalculator:
         self._calculate_rating_distribution()
 
         # V5.0: New statistics
+        self._calculate_crew_stats()
+        self._calculate_studio_stats()
         self._calculate_decade_stats()
         self._calculate_rewatch_stats()
         self._calculate_journey_stats()
@@ -153,6 +155,7 @@ class StatsCalculator:
         actor_ratings = {}
         actor_films = defaultdict(list)  # Track films per actor
         actor_liked_counts = Counter()  # Track liked films per actor
+        actor_profiles = {}  # Store profile_path per actor
 
         for (title, year), metadata in self.tmdb_data.items():
             # Skip films not in watched list
@@ -166,6 +169,10 @@ class StatsCalculator:
             for actor_info in actors:
                 actor_name = actor_info['name']
                 actor_counts[actor_name] += 1
+
+                # Store profile path (first one found)
+                if actor_name not in actor_profiles and actor_info.get('profile_path'):
+                    actor_profiles[actor_name] = actor_info['profile_path']
 
                 if is_liked:
                     actor_liked_counts[actor_name] += 1
@@ -206,11 +213,16 @@ class StatsCalculator:
         for actor_name, count in top_actors:
             films = sorted(actor_films[actor_name], key=lambda x: x['year'], reverse=True)
             liked_count = actor_liked_counts[actor_name]
+            avg_rating = 0
+            if actor_name in actor_ratings:
+                avg_rating = round(sum(actor_ratings[actor_name]) / len(actor_ratings[actor_name]), 2)
             top_actors_with_films.append({
                 'name': actor_name,
                 'count': count,
                 'liked_count': liked_count,
                 'like_ratio': round(liked_count / count * 100, 1) if count > 0 else 0,
+                'avg_rating': avg_rating,
+                'profile_path': actor_profiles.get(actor_name),
                 'films': films
             })
 
@@ -224,25 +236,28 @@ class StatsCalculator:
         """Calculate director-related statistics with film lists (only for watched films)"""
         director_counts = Counter()
         director_ratings = {}
-        director_films = defaultdict(list)  # Track films per director
-        director_liked_counts = Counter()  # Track liked films per director
+        director_films = defaultdict(list)
+        director_liked_counts = Counter()
+        director_profiles = {}
 
         for (title, year), metadata in self.tmdb_data.items():
-            # Skip films not in watched list
             if not self.is_film_watched(title, year):
                 continue
 
             directors = metadata.get('directors', [])
+            director_profile_map = metadata.get('director_profiles', {})
             rating = self._get_film_rating(title, year)
             is_liked = self.is_film_liked(title, year)
 
             for director in directors:
                 director_counts[director] += 1
 
+                if director not in director_profiles and director_profile_map.get(director):
+                    director_profiles[director] = director_profile_map[director]
+
                 if is_liked:
                     director_liked_counts[director] += 1
 
-                # Store film info for this director
                 director_films[director].append({
                     'title': title,
                     'year': year,
@@ -277,11 +292,16 @@ class StatsCalculator:
         for director_name, count in top_directors:
             films = sorted(director_films[director_name], key=lambda x: x['year'], reverse=True)
             liked_count = director_liked_counts[director_name]
+            avg_rating = 0
+            if director_name in director_ratings:
+                avg_rating = round(sum(director_ratings[director_name]) / len(director_ratings[director_name]), 2)
             top_directors_with_films.append({
                 'name': director_name,
                 'count': count,
                 'liked_count': liked_count,
                 'like_ratio': round(liked_count / count * 100, 1) if count > 0 else 0,
+                'avg_rating': avg_rating,
+                'profile_path': director_profiles.get(director_name),
                 'films': films
             })
 
@@ -1120,3 +1140,111 @@ class StatsCalculator:
                 })
 
         self.stats['fun_facts'] = fun_facts
+
+    def _calculate_crew_stats(self):
+        """Calculate stats for composers, cinematographers, and writers"""
+        crew_roles = {
+            'composers': 'composers',
+            'cinematographers': 'cinematographers',
+            'writers': 'writers'
+        }
+
+        for stat_key, metadata_key in crew_roles.items():
+            person_counts = Counter()
+            person_films = defaultdict(list)
+            person_liked = Counter()
+            person_profiles = {}
+
+            for (title, year), metadata in self.tmdb_data.items():
+                if not self.is_film_watched(title, year):
+                    continue
+
+                crew_list = metadata.get(metadata_key, [])
+                rating = self._get_film_rating(title, year)
+                is_liked = self.is_film_liked(title, year)
+
+                for person in crew_list:
+                    name = person.get('name') if isinstance(person, dict) else person
+                    person_counts[name] += 1
+
+                    if isinstance(person, dict) and person.get('profile_path') and name not in person_profiles:
+                        person_profiles[name] = person['profile_path']
+
+                    if is_liked:
+                        person_liked[name] += 1
+
+                    person_films[name].append({
+                        'title': title,
+                        'year': year,
+                        'rating': rating if rating else None,
+                        'liked': is_liked,
+                        'poster_path': metadata.get('poster_path')
+                    })
+
+            top_people = []
+            for name, count in person_counts.most_common(10):
+                films = sorted(person_films[name], key=lambda x: x['year'], reverse=True)
+                liked_count = person_liked[name]
+                ratings_list = [f['rating'] for f in films if f['rating']]
+                avg_rating = round(sum(ratings_list) / len(ratings_list), 2) if ratings_list else 0
+                top_people.append({
+                    'name': name,
+                    'count': count,
+                    'liked_count': liked_count,
+                    'like_ratio': round(liked_count / count * 100, 1) if count > 0 else 0,
+                    'avg_rating': avg_rating,
+                    'profile_path': person_profiles.get(name),
+                    'films': films
+                })
+
+            self.stats[stat_key] = {
+                'top_by_count': top_people,
+                'total_unique': len(person_counts)
+            }
+
+    def _calculate_studio_stats(self):
+        """Calculate production studio/company statistics"""
+        studio_counts = Counter()
+        studio_films = defaultdict(list)
+        studio_liked = Counter()
+
+        for (title, year), metadata in self.tmdb_data.items():
+            if not self.is_film_watched(title, year):
+                continue
+
+            companies = metadata.get('production_companies', [])
+            rating = self._get_film_rating(title, year)
+            is_liked = self.is_film_liked(title, year)
+
+            for company in companies:
+                studio_counts[company] += 1
+
+                if is_liked:
+                    studio_liked[company] += 1
+
+                studio_films[company].append({
+                    'title': title,
+                    'year': year,
+                    'rating': rating if rating else None,
+                    'liked': is_liked,
+                    'poster_path': metadata.get('poster_path')
+                })
+
+        top_studios = []
+        for name, count in studio_counts.most_common(10):
+            films = sorted(studio_films[name], key=lambda x: x['year'], reverse=True)
+            liked_count = studio_liked[name]
+            ratings_list = [f['rating'] for f in films if f['rating']]
+            avg_rating = round(sum(ratings_list) / len(ratings_list), 2) if ratings_list else 0
+            top_studios.append({
+                'name': name,
+                'count': count,
+                'liked_count': liked_count,
+                'avg_rating': avg_rating,
+                'films': films
+            })
+
+        self.stats['studios'] = {
+            'top_by_count': top_studios,
+            'total_unique': len(studio_counts)
+        }

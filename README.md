@@ -15,6 +15,7 @@ Transform your Letterboxd data into a beautiful, interactive dashboard with insi
 - **✨ Fun Facts** - Personalized insights like time spent with your favorite actor
 - **🏆 Milestones** - Visual cards celebrating your film journey landmarks
 - **📊 Personal Records** - Most films in a day, longest streak, busiest month
+- **🎭 Enhanced People Tab** - Profile photos, avg ratings, mini poster strips, composers, cinematographers, writers, and studios
 
 ## Features
 
@@ -122,6 +123,10 @@ See [CLAUDE.md](CLAUDE.md) for detailed documentation including:
 - NEW: Fun facts with personalized insights (time with favorite actor, etc.)
 - NEW: Milestone cards celebrating 100th, 250th, 500th, 1000th films
 - NEW: Personal records (most films in a day, longest streak, busiest month)
+- ENHANCED: People tab redesigned with profile photos, avg ratings, mini poster strips
+- NEW: Behind the Camera section (composers, cinematographers, writers)
+- NEW: Top Studios section (production companies)
+- All crew/studio cards clickable with film modals
 - Improved visual design with new card styles and animations
 
 ### v4.2

@@ -343,6 +343,11 @@ This project uses data from TMDB. Make sure to comply with TMDB's terms of servi
 - NEW: Decades distribution chart showing films watched by decade
 - NEW: 5-star poster wall showcasing all perfect-rated films
 - NEW: Rewatch tracking with most rewatched films grid
+- ENHANCED: People tab completely redesigned with profile photos from TMDB
+- ENHANCED: Actor/Director cards now show rank, photo, avg rating, mini poster strip, and like ratio bar
+- NEW: Behind the Camera section with top composers, cinematographers, and writers
+- NEW: Top Studios section showing most-watched production companies
+- NEW: All crew and studio cards are clickable to see their film catalogs
 - Improved visual design with new milestone cards, journey hero section, and decade cards
 - Enhanced CSS with gradient effects, hover animations, and better card layouts
 - Dashboard now has 7 tabs: Overview, Journey, [Year] Wrap, [Year] Live, Decades, People, Insights

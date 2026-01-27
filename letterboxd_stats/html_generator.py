@@ -287,10 +287,10 @@ body {
     justify-content: center;
 }
 
-/* People Grid (Actors/Directors) */
+/* People Grid (Actors/Directors) - Enhanced v5.0 */
 .people-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1rem;
 }
 
@@ -298,41 +298,108 @@ body {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
-    padding: 1rem;
+    padding: 1.25rem;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.25s ease;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    position: relative;
+    overflow: hidden;
+}
+
+.person-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+    opacity: 0;
+    transition: opacity 0.25s;
 }
 
 .person-card:hover {
     background: var(--bg-card-hover);
     border-color: var(--accent-purple);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(124, 58, 237, 0.15);
+}
+
+.person-card:hover::before {
+    opacity: 1;
+}
+
+.person-card .person-photo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid var(--border-color);
+    background: var(--bg-secondary);
+}
+
+.person-card .person-photo-placeholder {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+.person-card .person-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.person-card .person-rank {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.15rem;
 }
 
 .person-card .name {
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 1.05rem;
+    margin-bottom: 0.35rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.person-card .person-stats {
+    display: flex;
+    gap: 0.75rem;
+    font-size: 0.8rem;
     margin-bottom: 0.5rem;
 }
 
-.person-card .meta {
+.person-card .person-stat {
     display: flex;
-    gap: 1rem;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
+    align-items: center;
+    gap: 0.25rem;
 }
 
-.person-card .meta .watched {
-    color: var(--accent-cyan);
+.person-card .person-stat .stat-value {
+    font-weight: 600;
 }
 
-.person-card .meta .liked {
-    color: var(--liked-color);
-}
+.person-card .person-stat.watched { color: var(--accent-cyan); }
+.person-card .person-stat.liked { color: var(--liked-color); }
+.person-card .person-stat.rating { color: var(--accent-yellow); }
 
 .person-card .like-ratio {
-    margin-top: 0.5rem;
-    height: 4px;
+    height: 3px;
     background: var(--bg-secondary);
     border-radius: 2px;
     overflow: hidden;
@@ -342,7 +409,129 @@ body {
     height: 100%;
     background: linear-gradient(90deg, var(--accent-cyan), var(--liked-color));
     border-radius: 2px;
-    transition: width 0.3s ease;
+    transition: width 0.5s ease;
+}
+
+.person-card .person-posters {
+    display: flex;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+    overflow: hidden;
+}
+
+.person-card .person-mini-poster {
+    width: 32px;
+    height: 48px;
+    border-radius: 3px;
+    object-fit: cover;
+    opacity: 0.8;
+}
+
+/* Crew mini grid (composers, cinematographers, writers) */
+.crew-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 0.75rem;
+}
+
+.crew-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.crew-card:hover {
+    border-color: var(--accent-purple);
+    transform: translateY(-2px);
+}
+
+.crew-card .crew-photo {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: var(--bg-secondary);
+}
+
+.crew-card .crew-photo-placeholder {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+}
+
+.crew-card .crew-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.crew-card .crew-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.crew-card .crew-meta {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* Studios section */
+.studio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.75rem;
+}
+
+.studio-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.studio-card:hover {
+    border-color: var(--accent-cyan);
+    transform: translateY(-2px);
+}
+
+.studio-card .studio-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.35rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.studio-card .studio-meta {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    display: flex;
+    gap: 0.75rem;
+}
+
+.studio-card .studio-meta .stat-value {
+    font-weight: 600;
+    color: var(--accent-cyan);
 }
 
 /* Film Posters Grid - Fixed 4 per row layout for year wrap */
@@ -1485,47 +1674,147 @@ body {
     <div class="posters-grid-adaptive">{posters_html}</div>
 </div>'''
 
+    def _generate_person_card(self, person: dict, person_type: str, index: int) -> str:
+        """Generate an enhanced person card with photo and stats"""
+        name = person.get('name', 'Unknown')
+        profile_path = person.get('profile_path')
+        like_ratio = person.get('like_ratio', 0)
+        avg_rating = person.get('avg_rating', 0)
+        initial = name[0] if name else '?'
+
+        # Profile photo or placeholder
+        if profile_path:
+            photo_html = f'<img class="person-photo" src="{self.POSTER_BASE_URL.replace(config.POSTER_SIZE, "w185")}/{profile_path}" alt="{name}" loading="lazy">'
+        else:
+            photo_html = f'<div class="person-photo-placeholder">{initial}</div>'
+
+        # Mini poster strip (first 4 films)
+        films = person.get('films', [])[:4]
+        posters_html = ''
+        for f in films:
+            posters_html += f'<img class="person-mini-poster" src="{self._poster_url(f.get("poster_path"))}" alt="{f.get("title")}" loading="lazy">'
+
+        return f'''
+<div class="person-card" data-person-type="{person_type}" data-person-index="{index}">
+    {photo_html}
+    <div class="person-info">
+        <div class="person-rank">#{index + 1}</div>
+        <div class="name">{name}</div>
+        <div class="person-stats">
+            <span class="person-stat watched"><span class="stat-value">{person.get('count', 0)}</span> films</span>
+            <span class="person-stat liked">❤️ <span class="stat-value">{person.get('liked_count', 0)}</span></span>
+            <span class="person-stat rating">★ <span class="stat-value">{avg_rating}</span></span>
+        </div>
+        <div class="like-ratio">
+            <div class="like-ratio-fill" style="width: {like_ratio}%"></div>
+        </div>
+        <div class="person-posters">{posters_html}</div>
+    </div>
+</div>'''
+
+    def _generate_crew_card(self, person: dict, person_type: str, index: int) -> str:
+        """Generate a compact crew card for composers, cinematographers, writers"""
+        name = person.get('name', 'Unknown')
+        profile_path = person.get('profile_path')
+        initial = name[0] if name else '?'
+
+        if profile_path:
+            photo_html = f'<img class="crew-photo" src="{self.POSTER_BASE_URL.replace(config.POSTER_SIZE, "w185")}/{profile_path}" alt="{name}" loading="lazy">'
+        else:
+            photo_html = f'<div class="crew-photo-placeholder">{initial}</div>'
+
+        return f'''
+<div class="crew-card" data-person-type="{person_type}" data-person-index="{index}">
+    {photo_html}
+    <div class="crew-info">
+        <div class="crew-name">{name}</div>
+        <div class="crew-meta">{person.get('count', 0)} films · ★ {person.get('avg_rating', 0)} · ❤️ {person.get('liked_count', 0)}</div>
+    </div>
+</div>'''
+
     def _generate_people_tab(self) -> str:
-        """Generate people (actors/directors) tab"""
+        """Generate enhanced people tab with photos, crew, and studios"""
         actors = self.stats.get('actors', {}).get('top_by_count', [])[:15]
         directors = self.stats.get('directors', {}).get('top_by_count', [])[:15]
+        composers = self.stats.get('composers', {}).get('top_by_count', [])[:6]
+        cinematographers = self.stats.get('cinematographers', {}).get('top_by_count', [])[:6]
+        writers = self.stats.get('writers', {}).get('top_by_count', [])[:6]
+        studios = self.stats.get('studios', {}).get('top_by_count', [])[:8]
 
+        # Actor cards
         actors_html = ''
         for i, actor in enumerate(actors):
-            like_ratio = actor.get('like_ratio', 0)
-            actors_html += f'''
-<div class="person-card" data-person-type="actor" data-person-index="{i}">
-    <div class="name">{actor.get('name', 'Unknown')}</div>
-    <div class="meta">
-        <span class="watched">{actor.get('count', 0)} watched</span>
-        <span class="liked">❤️ {actor.get('liked_count', 0)} liked</span>
-    </div>
-    <div class="like-ratio">
-        <div class="like-ratio-fill" style="width: {like_ratio}%"></div>
+            actors_html += self._generate_person_card(actor, 'actor', i)
+
+        # Director cards
+        directors_html = ''
+        for i, director in enumerate(directors):
+            directors_html += self._generate_person_card(director, 'director', i)
+
+        # Crew cards
+        composers_html = ''
+        for i, person in enumerate(composers):
+            composers_html += self._generate_crew_card(person, 'composer', i)
+
+        cinematographers_html = ''
+        for i, person in enumerate(cinematographers):
+            cinematographers_html += self._generate_crew_card(person, 'cinematographer', i)
+
+        writers_html = ''
+        for i, person in enumerate(writers):
+            writers_html += self._generate_crew_card(person, 'writer', i)
+
+        # Studio cards
+        studios_html = ''
+        for i, studio in enumerate(studios):
+            studios_html += f'''
+<div class="studio-card" data-person-type="studio" data-person-index="{i}">
+    <div class="studio-name">{studio.get('name', 'Unknown')}</div>
+    <div class="studio-meta">
+        <span><span class="stat-value">{studio.get('count', 0)}</span> films</span>
+        <span>★ {studio.get('avg_rating', 0)}</span>
+        <span>❤️ {studio.get('liked_count', 0)}</span>
     </div>
 </div>'''
 
-        directors_html = ''
-        for i, director in enumerate(directors):
-            like_ratio = director.get('like_ratio', 0)
-            directors_html += f'''
-<div class="person-card" data-person-type="director" data-person-index="{i}">
-    <div class="name">{director.get('name', 'Unknown')}</div>
-    <div class="meta">
-        <span class="watched">{director.get('count', 0)} watched</span>
-        <span class="liked">❤️ {director.get('liked_count', 0)} liked</span>
-    </div>
-    <div class="like-ratio">
-        <div class="like-ratio-fill" style="width: {like_ratio}%"></div>
-    </div>
-</div>'''
+        # Build crew section (only if data available)
+        crew_section = ''
+        if composers or cinematographers or writers:
+            crew_section = f'''
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">🎼 Behind the Camera</h2>
+            <span class="section-subtitle">Composers, cinematographers & writers — click to see films</span>
+        </div>
+
+        {f"""<h3 style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--text-secondary);">🎵 Top Composers</h3>
+        <div class="crew-grid" style="margin-bottom: 1.5rem;">{composers_html}</div>""" if composers_html else ""}
+
+        {f"""<h3 style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--text-secondary);">📸 Top Cinematographers</h3>
+        <div class="crew-grid" style="margin-bottom: 1.5rem;">{cinematographers_html}</div>""" if cinematographers_html else ""}
+
+        {f"""<h3 style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--text-secondary);">✍️ Top Writers</h3>
+        <div class="crew-grid">{writers_html}</div>""" if writers_html else ""}
+    </section>'''
+
+        # Studios section
+        studios_section = ''
+        if studios_html:
+            studios_section = f'''
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">🏢 Top Studios</h2>
+            <span class="section-subtitle">Production companies behind your films — click to see their catalog</span>
+        </div>
+        <div class="studio-grid">{studios_html}</div>
+    </section>'''
 
         return f'''
 <div id="people" class="tab-content">
     <section class="section">
         <div class="section-header">
             <h2 class="section-title">🎭 Top Actors</h2>
-            <span class="section-subtitle">Click to see films</span>
+            <span class="section-subtitle">{self.stats.get('actors', {}).get('total_unique', 0):,} unique actors — click to see films</span>
         </div>
         <div class="people-grid">{actors_html}</div>
     </section>
@@ -1533,10 +1822,13 @@ body {
     <section class="section">
         <div class="section-header">
             <h2 class="section-title">🎬 Top Directors</h2>
-            <span class="section-subtitle">Click to see films</span>
+            <span class="section-subtitle">{self.stats.get('directors', {}).get('total_unique', 0):,} unique directors — click to see films</span>
         </div>
         <div class="people-grid">{directors_html}</div>
     </section>
+
+    {crew_section}
+    {studios_section}
 </div>'''
 
     def _generate_insights_tab(self) -> str:
@@ -1882,12 +2174,20 @@ body {
         # Prepare data for JavaScript
         actors_data = json.dumps(self.stats.get('actors', {}).get('top_by_count', []))
         directors_data = json.dumps(self.stats.get('directors', {}).get('top_by_count', []))
+        composers_data = json.dumps(self.stats.get('composers', {}).get('top_by_count', []))
+        cinematographers_data = json.dumps(self.stats.get('cinematographers', {}).get('top_by_count', []))
+        writers_data = json.dumps(self.stats.get('writers', {}).get('top_by_count', []))
+        studios_data = json.dumps(self.stats.get('studios', {}).get('top_by_count', []))
 
         return f'''
 <script>
 // Data for modals
 const actorsData = {actors_data};
 const directorsData = {directors_data};
+const composersData = {composers_data};
+const cinematographersData = {cinematographers_data};
+const writersData = {writers_data};
+const studiosData = {studios_data};
 const POSTER_BASE = "{self.POSTER_BASE_URL}";
 const POSTER_PLACEHOLDER = "{self.POSTER_PLACEHOLDER}";
 
@@ -1904,13 +2204,21 @@ document.querySelectorAll('.nav-btn').forEach(btn => {{
     }});
 }});
 
-// Person card clicks (open modal)
-document.querySelectorAll('.person-card').forEach(card => {{
+// Person/crew/studio card clicks (open modal)
+const dataMap = {{
+    actor: actorsData,
+    director: directorsData,
+    composer: composersData,
+    cinematographer: cinematographersData,
+    writer: writersData,
+    studio: studiosData
+}};
+document.querySelectorAll('.person-card, .crew-card, .studio-card').forEach(card => {{
     card.addEventListener('click', () => {{
         const type = card.dataset.personType;
         const index = parseInt(card.dataset.personIndex);
-        const data = type === 'actor' ? actorsData[index] : directorsData[index];
-        openModal(data, type);
+        const data = dataMap[type] ? dataMap[type][index] : null;
+        if (data) openModal(data, type);
     }});
 }});
 
