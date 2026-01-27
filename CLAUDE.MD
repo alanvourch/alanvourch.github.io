@@ -1,4 +1,4 @@
-# Letterboxd Stats Visualizer v5.0
+# Letterboxd Stats Visualizer v5.4
 
 A Python-based tool that generates beautiful, interactive HTML visualizations of your Letterboxd movie watching data, enhanced with metadata from The Movie Database (TMDB).
 
@@ -333,6 +333,17 @@ This project uses data from TMDB. Make sure to comply with TMDB's terms of servi
 - Built with Python, pandas, and Chart.js
 
 ## Changelog
+
+### v5.4 (2026-01)
+- PERF: 10-20x faster TMDB fetching using `append_to_response` (1 API call instead of 2 per film)
+- PERF: Concurrent fetching with ThreadPoolExecutor (8 workers) and connection pooling
+- PERF: Separate cached vs uncached films upfront to skip unnecessary processing
+- ENHANCED: People tab renamed to People/Studios with sub-tab navigation (pill buttons)
+- ENHANCED: Larger person cards — 100px profile photos, 48x72px mini posters (5 shown)
+- ENHANCED: Crew cards (composers, cinematographers, writers) now match actor/director card size with poster strips
+- ENHANCED: Studio cards now show TMDB logos with white background
+- FIX: Film names no longer truncated in Insights tab (shortest/longest film)
+- FIX: Poster strip no longer clips 5th poster on person cards
 
 ### v5.0 (2026-01)
 - NEW: Journey tab with film milestones (100th, 250th, 500th, 1000th films)

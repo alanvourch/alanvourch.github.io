@@ -11,8 +11,8 @@ load_dotenv()
 TMDB_API_KEY = os.getenv('TMDB_API_KEY', '')
 TMDB_BASE_URL = 'https://api.themoviedb.org/3'
 TMDB_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p'
-TMDB_RATE_LIMIT = 40  # requests per 10 seconds
-TMDB_RATE_WINDOW = 10  # seconds
+TMDB_RATE_LIMIT = 50  # requests per second (TMDB allows ~50/s per official forum)
+TMDB_RATE_WINDOW = 1  # seconds
 
 # Poster Configuration
 # Available sizes: w92, w154, w185, w342, w500, w780, original

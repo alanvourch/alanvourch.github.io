@@ -1,11 +1,14 @@
 """
-TMDB API integration for enriching Letterboxd data with metadata
+TMDB API integration for enriching Letterboxd data with metadata.
+v5.4: Optimized with append_to_response, connection pooling, and concurrent fetching.
 """
 import requests
 import json
 import time
 from typing import Dict, List, Optional, Tuple
 from datetime import datetime, timedelta
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import threading
 import os
 from tqdm import tqdm
 from . import config
@@ -19,7 +22,9 @@ class TMDBEnricher:
         self.cache_file = cache_file or config.CACHE_FILE
         self.base_url = config.TMDB_BASE_URL
         self.cache = {}
-        self.request_times = []
+        self._lock = threading.Lock()
+        self._rate_lock = threading.Lock()
+        self._request_times: List[float] = []
         self.stats = {
             'total': 0,
             'matched': 0,
@@ -27,6 +32,20 @@ class TMDBEnricher:
             'failed': 0,
             'unmatched_films': []
         }
+
+        # Connection-pooled session
+        self.session = requests.Session()
+        adapter = requests.adapters.HTTPAdapter(
+            pool_connections=20,
+            pool_maxsize=20,
+            max_retries=requests.adapters.Retry(
+                total=2,
+                backoff_factor=0.3,
+                status_forcelist=[429, 500, 502, 503, 504]
+            )
+        )
+        self.session.mount('https://', adapter)
+        self.session.params = {'api_key': self.api_key}
 
         if not self.api_key:
             raise ValueError("TMDB API key is required")
@@ -55,42 +74,34 @@ class TMDBEnricher:
 
     def _rate_limit(self):
         """Enforce TMDB rate limiting (40 requests per 10 seconds)"""
-        now = time.time()
-
-        # Remove requests older than the rate window
-        self.request_times = [
-            t for t in self.request_times
-            if now - t < config.TMDB_RATE_WINDOW
-        ]
-
-        # If we're at the limit, wait
-        if len(self.request_times) >= config.TMDB_RATE_LIMIT:
-            sleep_time = config.TMDB_RATE_WINDOW - (now - self.request_times[0])
-            if sleep_time > 0:
-                time.sleep(sleep_time)
-            self.request_times = []
-
-        self.request_times.append(now)
+        with self._rate_lock:
+            now = time.time()
+            self._request_times = [
+                t for t in self._request_times
+                if now - t < config.TMDB_RATE_WINDOW
+            ]
+            if len(self._request_times) >= config.TMDB_RATE_LIMIT:
+                sleep_time = config.TMDB_RATE_WINDOW - (now - self._request_times[0])
+                if sleep_time > 0:
+                    time.sleep(sleep_time)
+                self._request_times = []
+            self._request_times.append(time.time())
 
     def _make_request(self, endpoint: str, params: Dict = None) -> Optional[Dict]:
-        """Make a rate-limited request to TMDB API"""
+        """Make a rate-limited request to TMDB API using pooled session"""
         self._rate_limit()
 
         url = f"{self.base_url}/{endpoint}"
-        params = params or {}
-        params['api_key'] = self.api_key
 
         try:
-            response = requests.get(url, params=params, timeout=10)
+            response = self.session.get(url, params=params, timeout=10)
             response.raise_for_status()
             return response.json()
-        except requests.exceptions.RequestException as e:
-            print(f"API request failed: {e}")
+        except requests.exceptions.RequestException:
             return None
 
     def _normalize_cache_key(self, title: str, year: int) -> str:
         """Create normalized cache key from title and year"""
-        # Normalize title: lowercase, remove special chars
         normalized = title.lower().strip()
         return f"{normalized}_{year}"
 
@@ -112,14 +123,14 @@ class TMDBEnricher:
 
     def search_movie(self, title: str, year: int) -> Optional[Dict]:
         """Search for a movie by title and year"""
-        # Check cache first
         cache_key = self._normalize_cache_key(title, year)
 
-        if cache_key in self.cache:
-            cached = self.cache[cache_key]
-            if self._is_cache_valid(cached):
-                self.stats['cached'] += 1
-                return cached
+        with self._lock:
+            if cache_key in self.cache:
+                cached = self.cache[cache_key]
+                if self._is_cache_valid(cached):
+                    self.stats['cached'] += 1
+                    return cached
 
         # Search TMDB
         params = {
@@ -136,23 +147,22 @@ class TMDBEnricher:
             result = self._make_request('search/movie', params)
 
         if result and result.get('results'):
-            # Get first (best) match
             movie = result['results'][0]
 
-            # Validate it's a reasonable match
             if self._validate_match(title, year, movie):
-                # Get full details
+                # Get full details + credits in ONE call
                 full_details = self.get_movie_details(movie['id'])
                 if full_details:
-                    # Cache the result
                     full_details['cached_at'] = datetime.now().isoformat()
-                    self.cache[cache_key] = full_details
-                    self.stats['matched'] += 1
+                    with self._lock:
+                        self.cache[cache_key] = full_details
+                        self.stats['matched'] += 1
                     return full_details
 
         # No match found
-        self.stats['failed'] += 1
-        self.stats['unmatched_films'].append({'title': title, 'year': year})
+        with self._lock:
+            self.stats['failed'] += 1
+            self.stats['unmatched_films'].append({'title': title, 'year': year})
         return None
 
     def _validate_match(self, search_title: str, search_year: int, tmdb_result: Dict) -> bool:
@@ -160,14 +170,11 @@ class TMDBEnricher:
         result_title = tmdb_result.get('title', '').lower()
         search_title_lower = search_title.lower()
 
-        # Check if titles are similar (simple check)
         if search_title_lower not in result_title and result_title not in search_title_lower:
-            # Check original title as well
             original_title = tmdb_result.get('original_title', '').lower()
             if search_title_lower not in original_title and original_title not in search_title_lower:
                 return False
 
-        # Check year is within reasonable range (±1 year for release date differences)
         release_date = tmdb_result.get('release_date', '')
         if release_date:
             try:
@@ -180,14 +187,15 @@ class TMDBEnricher:
         return True
 
     def get_movie_details(self, tmdb_id: int) -> Optional[Dict]:
-        """Get full movie details including credits"""
-        # Get movie details
-        movie = self._make_request(f'movie/{tmdb_id}')
+        """Get full movie details including credits in a single API call"""
+        # Use append_to_response to get movie + credits in ONE request
+        movie = self._make_request(f'movie/{tmdb_id}', params={
+            'append_to_response': 'credits'
+        })
         if not movie:
             return None
 
-        # Get credits (cast and crew)
-        credits = self._make_request(f'movie/{tmdb_id}/credits')
+        credits = movie.get('credits')
 
         # Extract relevant metadata
         details = {
@@ -254,9 +262,16 @@ class TMDBEnricher:
 
         return details
 
+    def _fetch_single_film(self, title: str, year: int) -> Tuple[Optional[str], Optional[str], Optional[Dict]]:
+        """Fetch a single film - returns (title, year, metadata) for thread pool"""
+        if year == 0:
+            return (title, year, None)
+        metadata = self.search_movie(title, year)
+        return (title, year, metadata)
+
     def enrich_films(self, films_df) -> Dict[str, Dict]:
         """
-        Enrich a dataframe of films with TMDB metadata
+        Enrich a dataframe of films with TMDB metadata using concurrent requests.
 
         Args:
             films_df: DataFrame with 'Name' and 'Year' columns
@@ -269,16 +284,44 @@ class TMDBEnricher:
 
         print(f"\nEnriching {len(films_df)} films with TMDB data...")
 
-        for _, row in tqdm(films_df.iterrows(), total=len(films_df), desc="Fetching metadata"):
+        # Separate cached vs uncached films
+        to_fetch = []
+        for _, row in films_df.iterrows():
             title = row['Name']
             year = int(row['Year']) if row['Year'] else 0
-
             if year == 0:
                 continue
 
-            metadata = self.search_movie(title, year)
-            if metadata:
-                enriched[(title, year)] = metadata
+            cache_key = self._normalize_cache_key(title, year)
+            if cache_key in self.cache and self._is_cache_valid(self.cache[cache_key]):
+                enriched[(title, year)] = self.cache[cache_key]
+                self.stats['cached'] += 1
+            else:
+                to_fetch.append((title, year))
+
+        # Show cached progress immediately
+        cached_count = len(enriched)
+        total = len(films_df)
+
+        if to_fetch:
+            print(f"[OK] {cached_count} films from cache, fetching {len(to_fetch)} from TMDB...")
+
+            # Use thread pool for concurrent API requests
+            max_workers = min(8, len(to_fetch))
+            with tqdm(total=len(to_fetch), desc="Fetching metadata") as pbar:
+                with ThreadPoolExecutor(max_workers=max_workers) as executor:
+                    futures = {
+                        executor.submit(self._fetch_single_film, title, year): (title, year)
+                        for title, year in to_fetch
+                    }
+
+                    for future in as_completed(futures):
+                        title, year, metadata = future.result()
+                        if metadata:
+                            enriched[(title, year)] = metadata
+                        pbar.update(1)
+        else:
+            print(f"[OK] All {cached_count} films loaded from cache")
 
         # Save cache after enrichment
         self._save_cache()

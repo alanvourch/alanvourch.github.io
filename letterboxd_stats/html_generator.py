@@ -1,6 +1,6 @@
 """
 Generate HTML dashboard with modern tabbed layout, modals, and movie posters
-Dashboard v5.0 - Decades analysis, journey milestones, 5-star wall, fun facts, enhanced visuals
+Dashboard v5.4 - Optimized TMDB fetching, enhanced People/Studios tab, sub-tabs navigation
 """
 from typing import Dict
 import json
@@ -2315,7 +2315,7 @@ body {
 <footer class="footer">
     <p>Data from <a href="https://letterboxd.com" target="_blank">Letterboxd</a> |
        Enhanced with <a href="https://www.themoviedb.org" target="_blank">TMDB</a></p>
-    <p>Letterboxd Stats v5.0</p>
+    <p>Letterboxd Stats v5.4</p>
 </footer>'''
 
     def _generate_scripts(self) -> str:
