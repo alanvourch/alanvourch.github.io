@@ -5,7 +5,13 @@
       "Bash(start \"\" \"C:\\\\Users\\\\snip1\\\\Documents\\\\GitHub\\\\Claude CODE\\\\letterboxd_stats.html\")",
       "Bash(wc:*)",
       "Bash(python run.py:*)",
-      "Bash(set PYTHONIOENCODING=utf-8:*)"
+      "Bash(set PYTHONIOENCODING=utf-8:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run build:*)",
+      "Bash(pip install:*)",
+      "Bash(python:*)",
+      "Bash(curl:*)",
+      "Bash(npm run dev:*)"
     ]
   }
 }
