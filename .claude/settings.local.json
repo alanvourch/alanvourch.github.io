@@ -11,7 +11,15 @@
       "Bash(pip install:*)",
       "Bash(python:*)",
       "Bash(curl:*)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(npm install:*)",
+      "Bash(git add:*)",
+      "Bash(git rm:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd frontend source files and clean up gitignore\n\n- Add all React/TypeScript source files \\(pages, components, hooks, lib\\)\n- Add frontend config \\(package.json, vite.config, tsconfig\\)\n- Remove node_modules and dist from tracking\n- Update .gitignore with proper exclusions\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nFix CORS: add Vercel domain to allowed origins\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git commit:*)",
+      "WebFetch(domain:ylgyfvuepscmnqqcugyl.supabase.co)"
     ]
   }
 }
