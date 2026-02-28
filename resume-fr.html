@@ -3,179 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alan Vourc'h: CV</title>
+  <title>Alan Vourc&#x27;h : CV</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --navy: #1a2744;
-      --amber: #c9922a;
-      --text: #1a1a2e;
-      --muted: #5c5b63;
-      --border: #dde0e8;
-      --light: #f5f6fa;
-    }
+    :root { --navy: #1a2744; --amber: #c9922a; --text: #1a1a2e; --muted: #5c5b63; --border: #dde0e8; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      font-size: 10pt;
-      color: var(--text);
-      background: #fff;
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-    }
+    body { font-family: 'Inter', system-ui, sans-serif; font-size: 10pt; color: var(--text); background: #fff; line-height: 1.5; -webkit-font-smoothing: antialiased; }
     a { color: var(--navy); text-decoration: none; }
     ul { list-style: none; }
-
-    .page {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 40px 48px;
-    }
-
-    .print-btn-bar {
-      background: var(--navy);
-      color: #fff;
-      text-align: center;
-      padding: 12px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    .print-btn {
-      display: inline-block;
-      padding: 8px 24px;
-      background: var(--amber);
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      font-family: inherit;
-      font-size: 0.875rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-left: 16px;
-    }
+    .page { max-width: 780px; margin: 0 auto; padding: 40px 48px; }
+    .print-btn-bar { background: var(--navy); color: #fff; text-align: center; padding: 12px; position: sticky; top: 0; z-index: 10; }
+    .print-btn { display: inline-block; padding: 8px 24px; background: var(--amber); color: #fff; border: none; border-radius: 6px; font-family: inherit; font-size: 0.875rem; font-weight: 600; cursor: pointer; margin-left: 16px; }
     .print-btn-bar span { font-size: 0.875rem; opacity: 0.85; }
-
-    header {
-      border-bottom: 2.5px solid var(--navy);
-      padding-bottom: 18px;
-      margin-bottom: 22px;
-    }
-    h1 {
-      font-size: 22pt;
-      font-weight: 700;
-      color: var(--navy);
-      letter-spacing: -0.5px;
-      margin-bottom: 4px;
-    }
-    .tagline {
-      font-size: 10.5pt;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-    .contact-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px 18px;
-      font-size: 9pt;
-      color: var(--muted);
-    }
+    header { border-bottom: 2.5px solid var(--navy); padding-bottom: 18px; margin-bottom: 22px; }
+    h1 { font-size: 22pt; font-weight: 700; color: var(--navy); letter-spacing: -0.5px; margin-bottom: 4px; }
+    .tagline { font-size: 10.5pt; color: var(--muted); margin-bottom: 10px; }
+    .contact-row { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 9pt; color: var(--muted); }
     .contact-row a { color: var(--muted); }
-
+    .contact-row a:hover { color: var(--navy); }
     section { margin-bottom: 20px; }
-    h2 {
-      font-size: 9.5pt;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--amber);
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 4px;
-      margin-bottom: 12px;
-    }
-
-    .summary p {
-      font-size: 10pt;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
+    h2 { font-size: 9.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--amber); border-bottom: 1px solid var(--border); padding-bottom: 4px; margin-bottom: 12px; }
+    .summary p { font-size: 10pt; color: var(--muted); line-height: 1.6; }
     .job { margin-bottom: 14px; }
-    .job-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      flex-wrap: wrap;
-      gap: 4px;
-      margin-bottom: 2px;
-    }
-    .job-title {
-      font-size: 10.5pt;
-      font-weight: 700;
-      color: var(--navy);
-    }
-    .job-date {
-      font-size: 9pt;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-    .job-company {
-      font-size: 9.5pt;
-      font-weight: 600;
-      color: var(--amber);
-      margin-bottom: 5px;
-    }
-    .job ul {
-      padding-left: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-    .job li {
-      font-size: 9.5pt;
-      color: var(--muted);
-      padding-left: 14px;
-      position: relative;
-      line-height: 1.5;
-    }
-    .job li::before {
-      content: '▸';
-      position: absolute;
-      left: 0;
-      color: var(--amber);
-      font-size: 8pt;
-      top: 1px;
-    }
-
+    .job-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 4px; margin-bottom: 2px; }
+    .job-title { font-size: 10.5pt; font-weight: 700; color: var(--navy); }
+    .job-date { font-size: 9pt; color: var(--muted); white-space: nowrap; }
+    .job-company { font-size: 9.5pt; font-weight: 600; color: var(--amber); margin-bottom: 5px; }
+    .job ul { padding-left: 0; display: flex; flex-direction: column; gap: 3px; }
+    .job li { font-size: 9.5pt; color: var(--muted); padding-left: 14px; position: relative; line-height: 1.5; }
+    .job li::before { content: '\25B8'; position: absolute; left: 0; color: var(--amber); font-size: 8pt; top: 1px; }
     .edu-item { margin-bottom: 10px; }
-    .edu-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      flex-wrap: wrap;
-      gap: 4px;
-    }
+    .edu-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 4px; }
     .edu-degree { font-size: 10pt; font-weight: 700; color: var(--navy); }
     .edu-date { font-size: 9pt; color: var(--muted); }
     .edu-school { font-size: 9.5pt; color: var(--muted); margin-top: 1px; }
-
-    .skills-cols {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px 32px;
-    }
+    .skills-list { display: flex; flex-direction: column; gap: 6px; }
     .skill-row { font-size: 9.5pt; color: var(--muted); }
     .skill-label { font-weight: 600; color: var(--navy); }
-
-    .lang-row {
-      display: flex;
-      gap: 28px;
-      font-size: 9.5pt;
-      color: var(--muted);
-    }
+    .lang-row { display: flex; gap: 28px; font-size: 9.5pt; color: var(--muted); }
     .lang-row strong { color: var(--navy); }
-
     @media print {
       .print-btn-bar { display: none !important; }
       body { font-size: 10pt; }
@@ -184,6 +51,10 @@
       a { color: inherit; }
       section { page-break-inside: avoid; }
       @page { margin: 1.5cm 1.8cm; size: A4; }
+    }
+    @media (max-width: 600px) {
+      .page { padding: 24px 20px; }
+      .job-header { flex-direction: column; gap: 0; }
     }
   </style>
 </head>
@@ -197,8 +68,8 @@
   <div class="page">
 
     <header>
-      <h1>Alan Vourc'h</h1>
-      <p class="tagline">Contr&ocirc;le de gestion &bull; Mod&eacute;lisation financi&egrave;re &bull; Data Analytics &bull; Outils IA</p>
+      <h1>Alan Vourc&#x27;h</h1>
+      <p class="tagline">Responsable Contr&ocirc;le de Gestion &bull; Mod&eacute;lisation financi&egrave;re &bull; Data Analytics &bull; Outils IA</p>
       <div class="contact-row">
         <a href="mailto:alan.vourch@gmail.com">alan.vourch@gmail.com</a>
         <a href="https://www.linkedin.com/in/alanvourch/" target="_blank">linkedin.com/in/alanvourch</a>
@@ -208,7 +79,7 @@
 
     <section class="summary">
       <h2>Profil</h2>
-      <p>Contr&ocirc;leur de gestion avec plus de 7 ans d'exp&eacute;rience en banque d'investissement et en finance d'entreprise. Je construis des mod&egrave;les financiers, des tableaux de bord et des syst&egrave;mes de pr&eacute;vision que les &eacute;quipes utilisent vraiment. Ces deux derni&egrave;res ann&eacute;es, j'ai renforc&eacute; mes comp&eacute;tences en data: SQL, Python, Power BI, et int&eacute;gr&eacute; des outils d'IA dans mon travail analytique. Candidat au niveau 2 du CFA. Je recherche des postes en CDG/FP&amp;A au Canada, en t&eacute;l&eacute;travail ou en pr&eacute;sentiel.</p>
+      <p>Neuf ans en contr&ocirc;le de gestion, entre la banque d&#x27;investissement (Soci&eacute;t&eacute; G&eacute;n&eacute;rale, Newedge) et la finance d&#x27;entreprise (Auditoire, Groupe TBWA). J&#x27;ai consolid&eacute; 7 Md&euro; de charges annuelles chez SG et pilot&eacute; l&#x27;ensemble de la fonction CDG pour une structure de 100 M&euro; de chiffre d&#x27;affaires et 150 collaborateurs. Mes r&eacute;sultats sont mesur&eacute;s : un mod&egrave;le de pr&eacute;vision &agrave; 1,5 % d&#x27;&eacute;cart moyen, un tableau de bord pass&eacute; de 33 % &agrave; 80 % d&#x27;utilisation, un cycle de cl&ocirc;ture r&eacute;duit de 40 %. J&#x27;ai ajout&eacute; SQL, Python et Power BI parce que &ccedil;a rendait le travail financier plus rapide et plus fiable. Candidat CFA Niveau 3. Je recherche des postes en CDG / FP&amp;A au Canada.</p>
     </section>
 
     <section>
@@ -216,55 +87,57 @@
 
       <div class="job">
         <div class="job-header">
-          <span class="job-title">Projets ind&eacute;pendants: Data &amp; IA</span>
-          <span class="job-date">2023 – Aujourd'hui</span>
+          <span class="job-title">Projets ind&eacute;pendants : Data &amp; IA</span>
+          <span class="job-date">2023 &ndash; Aujourd&#x27;hui</span>
         </div>
         <p class="job-company">Activit&eacute; ind&eacute;pendante</p>
         <ul>
-          <li>D&eacute;veloppement de pipelines multi-agents IA pour automatiser des workflows d'analyse financi&egrave;re</li>
-          <li>Publications sur Kaggle (plus de 50 000 t&eacute;l&eacute;chargements de datasets) et analyses sur Medium</li>
-          <li>Candidat CFA Niveau 2 ; certifi&eacute; Google Advanced Data Analytics</li>
+          <li>Construit le plus grand dataset de films accessible publiquement sur Kaggle : 1 million de films, 30 dimensions, mise &agrave; jour automatique quotidienne ; 25 000 vues, 7 000 t&eacute;l&eacute;chargements, 100 likes</li>
+          <li>D&eacute;velopp&eacute; MovieMate, une application web de d&eacute;couverte de films avec suivi du box-office quotidien et veille IA sur l&#x27;actualit&eacute; cin&eacute;ma</li>
+          <li>Construction de pipelines multi-agents IA pour automatiser la recherche, l&#x27;enrichissement de donn&eacute;es et le reporting financier</li>
+          <li>Certifi&eacute; Google Advanced Data Analytics (Python, SQL, machine learning) ; Candidat CFA Niveau 3</li>
         </ul>
       </div>
 
       <div class="job">
         <div class="job-header">
           <span class="job-title">Responsable Contr&ocirc;le de Gestion</span>
-          <span class="job-date">Nov. 2020 – Juin 2023</span>
+          <span class="job-date">Nov. 2020 &ndash; Juin 2023</span>
         </div>
         <p class="job-company">Auditoire (Groupe TBWA) &mdash; Paris</p>
         <ul>
-          <li>Management d'une &eacute;quipe de 3 personnes, responsabilit&eacute; compl&egrave;te du contr&ocirc;le de gestion pour une structure de 100 M&euro; de CA et 150 collaborateurs</li>
-          <li>Construction d'une base de donn&eacute;es de paie en temps r&eacute;el : am&eacute;lioration de la pr&eacute;cision des pr&eacute;visions de 25 %</li>
-          <li>R&eacute;duction du cycle de cl&ocirc;ture mensuelle de 40 % gr&acirc;ce &agrave; l'automatisation VBA</li>
-          <li>D&eacute;ploiement de tableaux de bord Power BI adopt&eacute;s par l'ensemble des directions</li>
-          <li>Gestion du risque de cr&eacute;dit, exposition aux devises, conformit&eacute; r&eacute;glementaire ; obtention des aides COVID-19</li>
+          <li>Responsabilit&eacute; compl&egrave;te du contr&ocirc;le de gestion pour une structure de 100 M&euro; de CA et 150 collaborateurs ; management d&#x27;une &eacute;quipe de 3 analystes en charge du P&amp;L, de la paie, du budget et des pr&eacute;visions</li>
+          <li>R&eacute;duction du cycle de cl&ocirc;ture mensuelle de 40 % gr&acirc;ce &agrave; l&#x27;automatisation VBA ; refonte du processus de bons de commande r&eacute;duisant les erreurs de 80 % et &eacute;conomisant une demi-journ&eacute;e par cl&ocirc;ture</li>
+          <li>Refonte des contr&ocirc;les internes SOX : r&eacute;duction de 30 % du temps de cl&ocirc;ture et diminution de moiti&eacute; des questions des auditeurs externes</li>
+          <li>Construction d&#x27;une base de donn&eacute;es de paie en temps r&eacute;el am&eacute;liorant la pr&eacute;cision des pr&eacute;visions de 25 % ; d&eacute;ploiement de tableaux de bord Power BI adopt&eacute;s par toutes les directions</li>
+          <li>Obtention d&#x27;environ 6 M&euro; d&#x27;aides gouvernementales COVID-19 sur deux ans ; remplacement du Directeur Financier lors de la cl&ocirc;ture annuelle et de l&#x27;audit, livr&eacute;s dans les d&eacute;lais sans heure suppl&eacute;mentaire pour l&#x27;&eacute;quipe</li>
         </ul>
       </div>
 
       <div class="job">
         <div class="job-header">
-          <span class="job-title">Analyste Contr&ocirc;le de Gestion: Banque de financement et d'investissement</span>
-          <span class="job-date">Avr. 2015 – Jan. 2019</span>
+          <span class="job-title">Analyste CDG &mdash; Banque de financement et d&#x27;investissement</span>
+          <span class="job-date">Avr. 2015 &ndash; Jan. 2019</span>
         </div>
         <p class="job-company">Soci&eacute;t&eacute; G&eacute;n&eacute;rale &mdash; Paris</p>
         <ul>
-          <li>Consolidation de 7 Md&euro; de charges annuelles sur 12 p&ocirc;les m&eacute;tiers, reporting direct au CFO</li>
-          <li>Gestion de 400 M&euro;/an d'op&eacute;rations fiscales et construction de tableaux de bord des co&ucirc;ts</li>
-          <li>Pilotage de la conception d'une application mobile de suivi des co&ucirc;ts (budget 1 M&euro;) et impl&eacute;mentation ERP IBM Analytics</li>
-          <li>Construction de mod&egrave;les de pr&eacute;vision strat&eacute;gique &agrave; long terme pour le comit&eacute; de direction</li>
+          <li>Consolidation de 7 Md&euro; de charges annuelles sur 12 p&ocirc;les m&eacute;tiers &agrave; l&#x27;&eacute;chelle mondiale ; reporting mensuel &agrave; la direction FP&amp;A et coordination avec les contr&ocirc;leurs en Am&eacute;riques, Asie et Europe</li>
+          <li>Gestion de 400 M&euro;/an d&#x27;op&eacute;rations fiscales (C3S, CVAE, CFE, taxe syst&eacute;mique, FRU) ; refonte du tableau de bord fiscal ayant fait passer le taux d&#x27;utilisation de 33 % &agrave; 80 %</li>
+          <li>Construction d&#x27;un mod&egrave;le de pr&eacute;vision &eacute;tendue &agrave; r&eacute;gression multiple atteignant 1,5 % d&#x27;&eacute;cart moyen ; pr&eacute;sentation des r&eacute;sultats au CFO, au COO et &agrave; la direction, conduisant &agrave; une r&eacute;vision du processus budg&eacute;taire</li>
+          <li>Pilotage du d&eacute;veloppement d&#x27;une application web interne de suivi des co&ucirc;ts adopt&eacute;e par plus de 50 responsables op&eacute;rationnels, avec r&eacute;duction mesurable des co&ucirc;ts directs</li>
+          <li>Conception et animation de pr&eacute;sentations fiscales pour les Heads of Business et COOs, r&eacute;duisant de 70 % les questions ad hoc des parties prenantes</li>
         </ul>
       </div>
 
       <div class="job">
         <div class="job-header">
-          <span class="job-title">Analyste Contr&ocirc;le de Gestion: Prime Broker</span>
-          <span class="job-date">Sep. 2014 – Avr. 2015</span>
+          <span class="job-title">Analyste CDG &mdash; Prime Broker</span>
+          <span class="job-date">Sep. 2014 &ndash; Avr. 2015</span>
         </div>
         <p class="job-company">Newedge &mdash; Paris</p>
         <ul>
-          <li>Suivi quotidien du P&amp;L du groupe, analyse des &eacute;carts, reporting au CFO</li>
-          <li>Consolidation financi&egrave;re lors de l'acquisition par Soci&eacute;t&eacute; G&eacute;n&eacute;rale : co&ucirc;ts d'int&eacute;gration et suivi des synergies</li>
+          <li>Suivi quotidien du P&amp;L groupe, analyse des &eacute;carts et reporting direct au CFO d&#x27;une activit&eacute; de prime brokerage</li>
+          <li>Consolidation financi&egrave;re lors de l&#x27;acquisition de Newedge par Soci&eacute;t&eacute; G&eacute;n&eacute;rale : suivi des co&ucirc;ts d&#x27;int&eacute;gration et des synergies r&eacute;alis&eacute;es</li>
         </ul>
       </div>
 
@@ -275,7 +148,7 @@
 
       <div class="edu-item">
         <div class="edu-header">
-          <span class="edu-degree">Master 2 Finance d'entreprise, Audit &amp; Conseil</span>
+          <span class="edu-degree">Master 2 Finance d&#x27;entreprise, Audit &amp; Conseil</span>
           <span class="edu-date">2014</span>
         </div>
         <p class="edu-school">Kedge Business School, France</p>
@@ -283,7 +156,7 @@
 
       <div class="edu-item">
         <div class="edu-header">
-          <span class="edu-degree">Candidat CFA Niveau 2</span>
+          <span class="edu-degree">Candidat CFA Niveau 3</span>
           <span class="edu-date">En cours</span>
         </div>
         <p class="edu-school">CFA Institute</p>
@@ -294,26 +167,26 @@
           <span class="edu-degree">Google Advanced Data Analytics Professional Certificate</span>
           <span class="edu-date">2023</span>
         </div>
-        <p class="edu-school">Google / Coursera, 7 cours : statistiques, Python, machine learning</p>
+        <p class="edu-school">Google / Coursera &mdash; 7 cours : statistiques, Python, r&eacute;gression, classification, machine learning</p>
       </div>
 
     </section>
 
     <section>
       <h2>Comp&eacute;tences</h2>
-      <div class="skills-cols">
-        <div class="skill-row"><span class="skill-label">Finance :</span> Mod&eacute;lisation financi&egrave;re, CDG/FP&amp;A, P&amp;L, budgets, pr&eacute;visions, analyse des &eacute;carts</div>
-        <div class="skill-row"><span class="skill-label">Data :</span> SQL, Python (Pandas, Scikit-learn), Power BI, Tableau, Machine Learning, Excel/VBA</div>
-        <div class="skill-row"><span class="skill-label">ERP/Outils :</span> HFM, Essbase, IBM Analytics</div>
-        <div class="skill-row"><span class="skill-label">IA :</span> Syst&egrave;mes multi-agents, automatisation de workflows, API</div>
+      <div class="skills-list">
+        <div class="skill-row"><span class="skill-label">Finance :</span> Contr&ocirc;le de gestion / FP&amp;A, mod&eacute;lisation financi&egrave;re, budget, pr&eacute;visions, analyse des &eacute;carts, gestion du P&amp;L, reporting direction, business partnering</div>
+        <div class="skill-row"><span class="skill-label">Data &amp; Analyse :</span> SQL, Python (Pandas, Scikit-learn), Power BI, Tableau, Machine Learning, pr&eacute;vision de s&eacute;ries temporelles, Excel / VBA</div>
+        <div class="skill-row"><span class="skill-label">ERP / Outils :</span> HFM, Essbase, IBM Analytics, SAP (notions)</div>
+        <div class="skill-row"><span class="skill-label">IA &amp; Productivit&eacute; :</span> Syst&egrave;mes multi-agents, automatisation de workflows, int&eacute;gration API</div>
       </div>
     </section>
 
     <section>
       <h2>Langues</h2>
       <div class="lang-row">
-        <span><strong>Fran&ccedil;ais</strong>: Langue maternelle</span>
-        <span><strong>Anglais</strong>: Courant (professionnel)</span>
+        <span><strong>Fran&ccedil;ais</strong> : Langue maternelle</span>
+        <span><strong>Anglais</strong> : Courant (professionnel)</span>
       </div>
     </section>
 
