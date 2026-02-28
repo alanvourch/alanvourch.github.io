@@ -118,3 +118,16 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 
 // ── Init ──
 renderCards('all');
+
+// Film & Entertainment tab note
+(function() {
+  const filmNote = document.getElementById('film-note');
+  if (!filmNote) return;
+  function updateFilmNote() {
+    const activeTab = document.querySelector('.tab-btn.active');
+    const show = activeTab && (activeTab.dataset.filter === 'film' || activeTab.dataset.filter === 'all');
+    filmNote.style.display = show ? 'block' : 'none';
+  }
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', updateFilmNote));
+  updateFilmNote();
+})();
