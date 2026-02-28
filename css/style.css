@@ -952,6 +952,7 @@ ul { list-style: none; }
   .contact-links { grid-template-columns: 1fr; }
   .hero-tags { justify-content: center; }
   .hero-text { text-align: center; }
+  .timeline-tags span { font-size: 0.75rem; }
 }
 
 /* ── TIMELINE BULLETS ── */
