@@ -951,3 +951,117 @@ ul { list-style: none; }
   .hero-tags { justify-content: center; }
   .hero-text { text-align: center; }
 }
+
+/* ── TIMELINE BULLETS ── */
+.timeline-bullets {
+  list-style: none;
+  margin: 12px 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.timeline-bullets li {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  padding-left: 18px;
+  position: relative;
+  line-height: 1.55;
+}
+.timeline-bullets li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--amber);
+  font-size: 0.75rem;
+  top: 1px;
+}
+
+/* ── EXTRA BADGES ── */
+.timeline-badge.edu-badge { background: #e8eaf6; color: #3949ab; }
+.timeline-badge.cfa-badge { background: #fce4ec; color: #c62828; font-weight: 700; }
+
+/* ── RESUME LINKS IN HERO ── */
+.hero-resume-links {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.resume-link {
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--amber);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition);
+}
+.resume-link:hover { color: var(--amber-light); }
+
+/* ── NAV RESUME BUTTON ── */
+.nav-resume-btn {
+  padding: 6px 16px;
+  background: var(--navy);
+  color: var(--white) !important;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: background var(--transition);
+}
+.nav-resume-btn:hover { background: var(--navy-light) !important; color: var(--white) !important; }
+
+/* ── RESUME DOWNLOAD SECTION (contact) ── */
+.resume-download-section {
+  margin-top: 40px;
+  text-align: center;
+}
+.resume-download-label {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 14px;
+}
+.resume-download-links {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-resume-dl {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: rgba(255,255,255,0.1);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  border-radius: var(--radius-sm);
+  color: var(--white);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all var(--transition);
+}
+.btn-resume-dl:hover {
+  background: var(--amber);
+  border-color: var(--amber);
+  transform: translateY(-2px);
+}
+
+/* ── PROJECT CARD DESC — ensure clean truncation ── */
+.project-desc {
+  /* Override: cards show truncated preview, modal shows full text */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-height: none; /* remove any conflicting max-height */
+}
+
+/* ── MODAL DESC — always show full text ── */
+.modal-description {
+  overflow: visible;
+  display: block;
+  -webkit-line-clamp: unset;
+  max-height: none;
+}
+
+@media (max-width: 480px) {
+  .hero-resume-links { justify-content: center; }
+}
