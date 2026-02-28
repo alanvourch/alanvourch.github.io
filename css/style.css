@@ -1,5 +1,5 @@
 /* =============================================
-   ALAN VOURC'H PORTFOLIO — v2
+   ALAN VOURC'H PORTFOLIO - v2
    Palette: White / Navy / Amber
    ============================================= */
 
@@ -920,8 +920,9 @@ ul { list-style: none; }
     box-shadow: var(--shadow);
   }
   .nav-links.open { display: flex; }
-  .nav-links li a { display: block; padding: 10px 0; font-size: 0.95rem; border-bottom: 1px solid var(--gray-100); }
+  .nav-links li a { display: block; padding: 10px 16px; font-size: 0.95rem; border-bottom: 1px solid var(--gray-100); }
   .nav-links li:last-child a { border-bottom: none; }
+  .nav-links li a.nav-resume-btn { margin: 8px 16px; display: inline-block; }
   .nav-toggle { display: flex; }
 
   .hero-inner { gap: 32px; }
@@ -1044,7 +1045,7 @@ ul { list-style: none; }
   transform: translateY(-2px);
 }
 
-/* ── PROJECT CARD DESC — ensure clean truncation ── */
+/* PROJECT CARD DESC - ensure clean truncation */
 .project-desc {
   /* Override: cards show truncated preview, modal shows full text */
   display: -webkit-box;
@@ -1054,7 +1055,7 @@ ul { list-style: none; }
   max-height: none; /* remove any conflicting max-height */
 }
 
-/* ── MODAL DESC — always show full text ── */
+/* MODAL DESC - always show full text */
 .modal-description {
   overflow: visible;
   display: block;

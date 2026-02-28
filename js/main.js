@@ -1,5 +1,5 @@
 /* ──────────────────────────────────────
-   ALAN VOURC'H PORTFOLIO — main.js
+   ALAN VOURC'H PORTFOLIO, main.js
    ────────────────────────────────────── */
 
 // ── NAV scroll shadow ──
