@@ -1067,3 +1067,9 @@ ul { list-style: none; }
 @media (max-width: 480px) {
   .hero-resume-links { justify-content: center; }
 }
+
+/* Mobile card tap-to-flip */
+@media (hover: none) {
+  .project-card.flipped .project-front { opacity: 0; transform: rotateY(180deg); }
+  .project-card.flipped .project-back { opacity: 1; transform: rotateY(0deg); }
+}

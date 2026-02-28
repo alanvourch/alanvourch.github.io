@@ -124,10 +124,22 @@ renderCards('all');
   const filmNote = document.getElementById('film-note');
   if (!filmNote) return;
   function updateFilmNote() {
-    const activeTab = document.querySelector('.tab-btn.active');
+    const activeTab = document.querySelector('.tab.active');
     const show = activeTab && (activeTab.dataset.filter === 'film' || activeTab.dataset.filter === 'all');
     filmNote.style.display = show ? 'block' : 'none';
   }
-  document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', updateFilmNote));
+  document.querySelectorAll('.tab').forEach(btn => btn.addEventListener('click', updateFilmNote));
   updateFilmNote();
+})();
+
+// Mobile card tap-to-flip
+(function() {
+  function isTouchDevice() { return ('ontouchstart' in window) || navigator.maxTouchPoints > 0; }
+  if (!isTouchDevice()) return;
+  document.querySelectorAll('.project-card').forEach(function(card) {
+    card.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') return;
+      card.classList.toggle('flipped');
+    });
+  });
 })();
