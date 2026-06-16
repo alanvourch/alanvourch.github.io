@@ -13,7 +13,7 @@ const projects = [
       'Workforce planning model for headcount and compensation forecasting',
       'Exec-ready slide deck with clear storytelling and visual clarity'
     ],
-    skills: ['Financial Modeling', 'P&L Analysis', 'Budgeting', 'PowerPoint', 'Excel'],
+    skills: ['Financial Modeling', 'P&L Analysis', 'Budgeting', 'Exec Presentation', 'Excel'],
     thumb: 'images/projects/businesscase_thumb.webp',
     hover: 'images/projects/businesscase_hover.webp',
     link: 'https://better-lobster-21e.notion.site/Business-Case-Strategic-Workforce-Planning-for-a-Hypergrowth-Fintech-239a918b45eb8089a6c6fdb737f6cd5f',
@@ -24,7 +24,7 @@ const projects = [
     category: 'finance',
     title: 'Power BI: FP&A Dashboard',
     shortDesc: 'A Power BI dashboard I built as FP&A Manager at Auditoire. Connects business and payroll databases for live performance tracking used by senior leadership.',
-    fullDesc: 'Built in production during my time as FP&A Manager at Auditoire. This dashboard pulls from multiple data sources, business operations and payroll, to give leadership a real-time view of company performance. It became a core reporting tool for both the CFO and operational managers.',
+    fullDesc: 'Built in production during my time as FP&A Manager at Auditoire. This dashboard pulls from multiple data sources, business operations and payroll, to give leadership a real-time view of company performance. It became a core reporting tool for both the CFO and operational managers. All data in the published version has been replaced with anonymized figures for confidentiality.',
     highlights: [
       'Live connection to business and payroll databases',
       'Multi-page report: P&L summary, headcount, project margins, and trends',
@@ -32,7 +32,7 @@ const projects = [
       'Used monthly for executive reporting and budget review sessions',
       'Built to replace manual Excel reporting, cut prep time significantly'
     ],
-    skills: ['Power BI', 'DAX', 'Financial Reporting', 'Data Modeling', 'SQL'],
+    skills: ['Power BI', 'DAX', 'Data Visualization', 'Financial Reporting', 'Data Modeling', 'SQL'],
     thumb: 'images/projects/fpadash.webp',
     hover: 'images/projects/pbi_fpa.webp',
     link: 'https://app.powerbi.com/view?r=eyJrIjoiM2VjMmRkMjItN2IxYS00MDliLWIxM2QtYmIzYjAzNmMxMWVkIiwidCI6Ijg5NTkwMmNlLTUzMWMtNDJjNi05YTMwLTA3YjRkZjUxYzNiMyJ9',
@@ -70,7 +70,7 @@ const projects = [
       'Final model: 94% accuracy on holdout set with strong precision/recall',
       'Translated model outputs into actionable HR and cost recommendations'
     ],
-    skills: ['Python', 'Machine Learning', 'Classification', 'Pandas', 'Matplotlib'],
+    skills: ['Python', 'Machine Learning', 'HR', 'Financial Modeling', 'Classification', 'Pandas', 'Matplotlib'],
     thumb: 'images/projects/hr.webp',
     hover: 'images/projects/hr2.webp',
     link: 'https://www.kaggle.com/code/alanvourch/salifort-motors-hr-analysis',
@@ -78,25 +78,6 @@ const projects = [
   },
 
   // ── DATA & ANALYTICS ─────────────────────────────────
-  {
-    id: 'sql-tech',
-    category: 'data',
-    title: 'SQL: Tech Layoffs Analysis',
-    shortDesc: 'SQL deep dive on public tech layoffs data. Data cleaning, EDA, and trend analysis across companies, sectors, and geographies.',
-    fullDesc: 'Used raw public data on tech layoffs to explore workforce shift patterns across the 2022-2024 cycle. Full pipeline from messy raw data to clean analytical views, all in SQL. No Python, no Excel, just good query design.',
-    highlights: [
-      'Multi-step data cleaning: deduplication, null handling, standardization',
-      'Company and sector-level ranking by total layoffs',
-      'Rolling 3-month trends using window functions',
-      'Geographic breakdowns: US vs international layoff patterns',
-      'Written up with annotated SQL for readability'
-    ],
-    skills: ['SQL', 'Data Cleaning', 'EDA', 'Window Functions', 'CTEs'],
-    thumb: 'images/projects/sql-tech.webp',
-    hover: 'images/projects/sql2.webp',
-    link: 'https://better-lobster-21e.notion.site/SQL-Data-Cleaning-EDA-Layoffs-data-dbd0891e61454310901253c8faa767d3',
-    linkLabel: 'Open on Notion'
-  },
   {
     id: 'sql-remote',
     category: 'data',
@@ -115,6 +96,25 @@ const projects = [
     hover: 'images/projects/job_salaries_chart.png',
     link: 'https://github.com/alanvourch/SQL-Project',
     linkLabel: 'View on GitHub'
+  },
+  {
+    id: 'sql-tech',
+    category: 'data',
+    title: 'SQL: Tech Layoffs Analysis',
+    shortDesc: 'SQL deep dive on public tech layoffs data. Data cleaning, EDA, and trend analysis across companies, sectors, and geographies.',
+    fullDesc: 'Used raw public data on tech layoffs to explore workforce shift patterns across the 2022–2024 cycle. Full pipeline from messy raw data to clean analytical views, all in SQL.',
+    highlights: [
+      'Multi-step data cleaning: deduplication, null handling, standardization',
+      'Company and sector-level ranking by total layoffs',
+      'Rolling 3-month trends using window functions',
+      'Geographic breakdowns: US vs international layoff patterns',
+      'Written up with annotated SQL for readability'
+    ],
+    skills: ['SQL', 'Data Cleaning', 'EDA', 'Window Functions', 'CTEs'],
+    thumb: 'images/projects/sql-tech.webp',
+    hover: 'images/projects/sql2.webp',
+    link: 'https://better-lobster-21e.notion.site/SQL-Data-Cleaning-EDA-Layoffs-data-dbd0891e61454310901253c8faa767d3',
+    linkLabel: 'Open on Notion'
   },
 
   // ── FILM & ENTERTAINMENT ─────────────────────────────
@@ -218,7 +218,7 @@ const projects = [
     category: 'film',
     title: 'A24 Movies Analysis',
     shortDesc: "Deep analytical look at A24's film portfolio, what makes their strategy different, how their films perform, and what the data reveals about their creative and commercial formula.",
-    fullDesc: "A24 is the most interesting studio of the last decade. This analysis digs into why, using data. Genre mix, budget strategy, box office vs critical reception, international performance, and talent patterns. Built as a serious analytical project, not a fan piece.",
+    fullDesc: "A24 is one of the most interesting studios of the last decade. This analysis digs into why, using data. Genre mix, budget strategy, box office vs critical reception, international performance, and talent patterns.",
     highlights: [
       "Full catalog analysis: 130+ A24 films across genres, years, and budgets",
       "Budget efficiency: revenue multiples vs major studio comparisons",

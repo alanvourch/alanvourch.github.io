@@ -125,7 +125,7 @@ renderCards('all');
   if (!filmNote) return;
   function updateFilmNote() {
     const activeTab = document.querySelector('.tab.active');
-    const show = activeTab && (activeTab.dataset.filter === 'film' || activeTab.dataset.filter === 'all');
+    const show = activeTab && activeTab.dataset.filter === 'film';
     filmNote.style.display = show ? 'block' : 'none';
   }
   document.querySelectorAll('.tab').forEach(btn => btn.addEventListener('click', updateFilmNote));

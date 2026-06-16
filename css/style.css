@@ -74,11 +74,11 @@ ul { list-style: none; }
 }
 
 .nav-logo {
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
   color: var(--navy);
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.01em;
   white-space: nowrap;
 }
 
@@ -93,8 +93,20 @@ ul { list-style: none; }
   font-weight: 500;
   color: var(--gray-600);
   transition: color var(--transition);
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--amber);
+  transition: width var(--transition);
 }
 .nav-links a:hover { color: var(--navy); }
+.nav-links a:hover::after { width: 100%; }
 
 .nav-toggle {
   display: none;
