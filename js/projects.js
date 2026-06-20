@@ -59,7 +59,7 @@ const projects = [
   },
   {
     id: 'hr-predictor',
-    category: 'finance',
+    category: 'data',
     title: 'HR Insights & Predictive Model',
     shortDesc: 'Machine learning applied to employee turnover prediction, identifying drivers and building a classification model. The kind of analysis modern HR finance teams actually need.',
     fullDesc: 'Turnover is expensive. This project quantifies it. Starting from a real HR dataset, I built a classification model to predict which employees are at risk of leaving, and surfaced the key variables driving churn. Goes beyond the model to include business recommendations and cost impact estimates.',
