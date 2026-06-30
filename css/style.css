@@ -74,11 +74,11 @@ ul { list-style: none; }
 }
 
 .nav-logo {
-  font-family: var(--font-serif);
-  font-size: 1.2rem;
+  font-family: 'Plus Jakarta Sans', var(--font-sans);
+  font-size: 1.1rem;
   color: var(--navy);
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.01em;
   white-space: nowrap;
 }
 
@@ -702,7 +702,7 @@ ul { list-style: none; }
 
 .contact-links {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   max-width: 900px;
   margin: 0 auto;
@@ -948,7 +948,7 @@ ul { list-style: none; }
   .skills-grid { grid-template-columns: 1fr; }
   .projects-grid { grid-template-columns: 1fr; }
   .contact-links { grid-template-columns: repeat(2, 1fr); }
-  .tabs { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+  .tabs { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 16px; -webkit-overflow-scrolling: touch; scrollbar-gutter: stable; }
   .tab { flex-shrink: 0; }
 
   .timeline::before { left: 14px; }

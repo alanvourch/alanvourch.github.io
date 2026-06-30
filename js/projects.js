@@ -210,7 +210,7 @@ const projects = [
     skills: ['Power BI', 'DAX', 'Data Modeling', 'Visualization'],
     thumb: 'images/projects/pbi-movie.webp',
     hover: 'images/projects/pbi_cinema.webp',
-    link: 'https://app.powerbi.com/view?r=eyJrIjoiN2MzZjI5OTgtNmI2OC00ZDkzLWJjM2YtMWZmYmIyYzQzMWMzIiwidCI6Ijg5NTkwMmNlLTUzMWMtNDJjNi05YTMwLTA3YjRkZjUxYzNiMyJ9',
+    link: 'https://app.powerbi.com/view?r=eyJrIjoiN2MzZjI5OTgtNmI2OC00ZDkzLWJjM2YtMWZmYmIyYzQzMWMzIiwidCI6Ijg5NTkwMmNlLTUzMWMtNDJjNi05YTMwLTA3YjRkZjUxYzNiMyJ9&pageName=5981d12bcd3a65531c02',
     linkLabel: 'Open in Power BI'
   },
   {

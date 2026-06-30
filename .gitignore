@@ -1,0 +1,4 @@
+# Private files — never commit
+.private/
+
+.vercel
