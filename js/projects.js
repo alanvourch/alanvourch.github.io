@@ -1,17 +1,37 @@
 const projects = [
   // ── FINANCE & FP&A ──────────────────────────────────
   {
+    id: 'fpa-agent-team',
+    category: 'finance',
+    featured: true,
+    title: 'FP&A Agent Team: Monthly Close, Run End to End',
+    shortDesc: 'A five-agent pipeline that runs the monthly Budget vs Actual close for a €100M organization: the budget-to-actual walk reconciles to the euro, every commentary figure traces back to source, and the board pack stops at a human sign-off.',
+    fullDesc: 'This pipeline does the work of a monthly close and shows its work. It cleans the raw export, computes 840 variances with a three-rule materiality test, explains a variance only when a dated business note corroborates it, refreshes a rolling 3-month forecast from a normalized history, and drafts the executive commentary. A planted 10x revenue typo, the classic fat-finger that becomes a fake growth story, was caught at ingestion and reported as a data issue instead. Four of the five agents are plain, auditable Python; exactly one step calls an LLM, and a QA agent verifies that boundary on every run by scanning the source code.',
+    highlights: [
+      'FY2025 budget-to-actual walk reconciles to the euro, with named drivers and an explicitly unexplained block',
+      '16 of 20 material variances reported as "no clear driver identified" rather than dressed up with invented causes',
+      'Planted 10x data-entry trap caught at ingestion and excluded before it could become a business narrative',
+      'Every figure in the AI-drafted commentary machine-verified against source (0.5% and €15k tolerance, both required)',
+      'Board pack always ends at a DRAFT banner and human sign-off block; nothing is distributed by code'
+    ],
+    skills: ['FP&A Automation', 'Variance Analysis', 'Rolling Forecast', 'AI Agents', 'Python', 'Data Governance'],
+    thumb: 'images/projects/fpa-agents-bridge.webp',
+    hover: 'images/projects/fpa-agents-variances.webp',
+    link: 'https://github.com/alanvourch/fpa-project',
+    linkLabel: 'View on GitHub'
+  },
+  {
     id: 'scaleup-expenses',
     category: 'finance',
     title: 'FP&A Business Case: FinTech Scaleup',
     shortDesc: 'End-to-end business case replicating an FP&A Expenses Manager role at a hypergrowth FinTech: P&L modeling, cost-to-serve, budget planning, and exec slides.',
-    fullDesc: 'This business case replicates the real-life responsibilities of an FP&A Expenses Manager in a FinTech scaleup. It covers the full analytical lifecycle: from raw data to board-ready presentations. Built as a showcase of what modern FP&A looks like when done rigorously.',
+    fullDesc: 'This business case replicates the real-life responsibilities of an FP&A Expenses Manager in a FinTech scaleup. It covers the full analytical lifecycle, from raw data to board-ready presentations.',
     highlights: [
       'Full P&L model with scenario analysis and sensitivity tables',
       'Cost-to-serve framework breaking down unit economics by product line',
       'Budget planning with actuals-vs-budget variance tracking',
       'Workforce planning model for headcount and compensation forecasting',
-      'Exec-ready slide deck with clear storytelling and visual clarity'
+      'Exec-ready slide deck summarizing the findings and recommendations'
     ],
     skills: ['Financial Modeling', 'P&L Analysis', 'Budgeting', 'Exec Presentation', 'Excel'],
     thumb: 'images/projects/businesscase_thumb.webp',
@@ -23,14 +43,14 @@ const projects = [
     id: 'fpa-dashboard',
     category: 'finance',
     title: 'Power BI: FP&A Dashboard',
-    shortDesc: 'A Power BI dashboard I built as FP&A Manager at Auditoire. Connects business and payroll databases for live performance tracking used by senior leadership.',
-    fullDesc: 'Built in production during my time as FP&A Manager at Auditoire. This dashboard pulls from multiple data sources, business operations and payroll, to give leadership a real-time view of company performance. It became a core reporting tool for both the CFO and operational managers. All data in the published version has been replaced with anonymized figures for confidentiality.',
+    shortDesc: 'A Power BI dashboard I built as Head of FP&A at Auditoire. Connects business and payroll databases for live performance tracking used by senior leadership.',
+    fullDesc: 'Built in production during my time as Head of FP&A at Auditoire. This dashboard pulls from the business operations and payroll databases to give leadership a real-time view of company performance. It became a core reporting tool for both the CFO and operational managers. All data in the published version has been replaced with anonymized figures for confidentiality.',
     highlights: [
       'Live connection to business and payroll databases',
       'Multi-page report: P&L summary, headcount, project margins, and trends',
       'Role-level filtering, different views for CFO, HR, and ops managers',
       'Used monthly for executive reporting and budget review sessions',
-      'Built to replace manual Excel reporting, cut prep time significantly'
+      'Replaced the manual Excel reporting pack for monthly executive reviews'
     ],
     skills: ['Power BI', 'DAX', 'Data Visualization', 'Financial Reporting', 'Data Modeling', 'SQL'],
     thumb: 'images/projects/fpadash.webp',
@@ -43,13 +63,13 @@ const projects = [
     category: 'finance',
     title: 'Time Series Forecasting',
     shortDesc: 'A forecasting deep dive on real retail sales data, from simple trend models through machine learning hybrids. Practical guide to getting forecasts that actually hold up.',
-    fullDesc: 'Forecasting is the core of FP&A. This project walks through the full forecasting toolkit on real retail sales data: decomposition, ARIMA, exponential smoothing, and finally ML hybrid models. Written as a practical guide, not a theory paper, every method is benchmarked on real data.',
+    fullDesc: 'Forecasting is the core of FP&A. This project walks through the full forecasting toolkit on real retail sales data: decomposition, ARIMA, exponential smoothing, and finally ML hybrid models. Written as a practical guide rather than a theory paper: every method is benchmarked on real data.',
     highlights: [
       'Seasonal decomposition and trend isolation on 3 years of retail data',
       'Classical methods: ARIMA, Holt-Winters, moving averages, compared head-to-head',
       'ML hybrid: XGBoost with lag features and calendar variables',
       'Error analysis: MAE, RMSE, and visual residual inspection',
-      'Published on Medium, practical, readable, finance-oriented'
+      'Published on Medium as a practical, finance-oriented guide'
     ],
     skills: ['Python', 'Time Series', 'Machine Learning', 'Pandas', 'Scikit-learn'],
     thumb: 'images/projects/forecast.webp',
@@ -61,7 +81,7 @@ const projects = [
     id: 'hr-predictor',
     category: 'data',
     title: 'HR Insights & Predictive Model',
-    shortDesc: 'Machine learning applied to employee turnover prediction, identifying drivers and building a classification model. The kind of analysis modern HR finance teams actually need.',
+    shortDesc: 'Machine learning applied to employee turnover: identifying churn drivers, predicting at-risk employees, and estimating the cost impact for HR and finance.',
     fullDesc: 'Turnover is expensive. This project quantifies it. Starting from a real HR dataset, I built a classification model to predict which employees are at risk of leaving, and surfaced the key variables driving churn. Goes beyond the model to include business recommendations and cost impact estimates.',
     highlights: [
       'Exploratory analysis of 14,000+ employee records across departments',
@@ -83,7 +103,7 @@ const projects = [
     category: 'data',
     title: 'SQL: Top Paying Remote Data Jobs',
     shortDesc: 'A job market analysis using SQL to surface the highest-paying remote data roles, required skills, and salary patterns by title and tech stack.',
-    fullDesc: 'Analyzed a public dataset of 2024 data job postings to identify the best-paying remote opportunities. Focused on what actually drives salary, the specific skills, tools, and titles that command premium compensation.',
+    fullDesc: 'Analyzed a public dataset of 2024 data job postings to identify the best-paying remote opportunities. Focused on what actually drives salary: the specific skills, tools, and titles that command premium compensation.',
     highlights: [
       'Filtered and ranked top 100 remote data roles by median salary',
       'Skill demand matrix: which tools appear most in high-salary postings',
@@ -123,13 +143,13 @@ const projects = [
     category: 'film',
     title: 'MovieMate: Movie Web App',
     shortDesc: 'A React web app I built from scratch using my own 50k-movie database. Browse, filter, check box office results, upcoming releases, and movie news.',
-    fullDesc: 'MovieMate started as a personal project to make sense of my movie dataset and turned into a fully functional web app. Users can search and filter movies, track box office performance, follow upcoming releases, and read curated movie news, all from a clean, fast interface.',
+    fullDesc: 'MovieMate started as a personal project to make sense of my movie dataset and turned into a fully functional web app. Users can search and filter movies, track box office performance, follow upcoming releases, and read curated movie news from a clean, fast interface.',
     highlights: [
       'Built with React, component architecture, hooks, routing',
       'Powered by my own TMDB-sourced 50k+ movie database',
       'Live box office data and upcoming release tracking',
       'Movie news aggregation from film media sources',
-      'Deployed on Vercel, live and accessible'
+      'Deployed on Vercel'
     ],
     skills: ['React', 'JavaScript', 'API Integration', 'UI/UX', 'Vercel'],
     thumb: 'images/projects/moviemate-thumb.webp',
@@ -142,7 +162,7 @@ const projects = [
     category: 'film',
     title: 'Netflix Content Strategy Analysis',
     shortDesc: 'Analyzed Netflix\'s movie catalog to surface how genre trends, regional preferences, and audience ratings shape content investment decisions.',
-    fullDesc: 'An analytical deep dive into Netflix\'s movie strategy through the lens of data. What genres dominate? Which regions are prioritized? How do audience ratings align with volume and investment patterns? Published as a data storytelling piece on Medium.',
+    fullDesc: 'An analytical deep dive into Netflix\'s movie strategy. What genres dominate? Which regions are prioritized? How do audience ratings align with volume and investment patterns? Published as a data storytelling piece on Medium.',
     highlights: [
       'Analysis of 8,000+ Netflix titles across genres, countries, and release years',
       'Genre market share trends over time, identifying strategic pivots',
@@ -161,13 +181,13 @@ const projects = [
     category: 'film',
     title: 'Ultimate Movies Dataset',
     shortDesc: 'A daily-updated Kaggle dataset of 1 million movies, tracking box office, ratings, production data, and global trends at scale.',
-    fullDesc: 'The backbone of most of my film projects. A comprehensive, daily-refreshed dataset of 1 million+ movies sourced from TMDB. Covers revenue, ratings, genres, languages, cast, crew, and production company, 30+ fields per title. Used by data analysts worldwide on Kaggle.',
+    fullDesc: 'The backbone of most of my film projects. A comprehensive, daily-refreshed dataset of 1 million+ movies sourced from TMDB, covering revenue, ratings, genres, languages, cast, and crew across 30+ fields per title. 25k views and 7k downloads on Kaggle.',
     highlights: [
       '1 million+ movie records, updated daily via automated pipeline',
       '30+ data fields: revenue, budget, cast, crew, genres, ratings, languages',
       'Built the extraction and update pipeline from scratch (Python + TMDB API)',
       'One of the most comprehensive public movie datasets on Kaggle',
-      'Used by the film data community for research and visualization projects'
+      '25k views and 7k downloads from the Kaggle data community'
     ],
     skills: ['Python', 'API', 'Data Engineering', 'Kaggle', 'Pandas'],
     thumb: 'images/projects/moviedataset.webp',
@@ -199,7 +219,7 @@ const projects = [
     category: 'film',
     title: 'Power BI: Cinema Dashboard',
     shortDesc: 'Interactive Power BI dashboard combining live box office and IMDb data, studio rankings, genre breakdowns, trend tracking across years.',
-    fullDesc: 'A Power BI dashboard built on top of my movie dataset, combining live box office and IMDb data for dynamic, interactive analysis. Designed with an executive audience in mind, clear visuals, smart filtering, and fast drill-down.',
+    fullDesc: 'A Power BI dashboard built on top of my movie dataset, combining live box office and IMDb data for dynamic, interactive analysis. Designed for an executive audience: clear visuals, smart filtering, and fast drill-down.',
     highlights: [
       'Studio performance ranking by revenue, volume, and average rating',
       'Genre breakdowns with year-over-year trend comparisons',
@@ -236,7 +256,7 @@ const projects = [
     id: 'movies-update',
     category: 'film',
     title: 'Movies Dataset: Daily Update Pipeline',
-    shortDesc: 'Automated Python pipeline that refreshes the Ultimate Movies Dataset daily with new releases and updated IMDb ratings. Set it up once, it runs itself.',
+    shortDesc: 'Automated Python pipeline that refreshes the Ultimate Movies Dataset daily with new releases and updated IMDb ratings. Set up once, it runs itself.',
     fullDesc: 'Keeping a 1M+ movie dataset fresh requires automation. This pipeline runs daily, pulls new releases and rating updates from TMDB, and merges them into the master dataset without duplication or data loss. Designed for reliability over cleverness.',
     highlights: [
       'Automated scheduling via Kaggle notebooks, zero infrastructure overhead',
@@ -256,7 +276,7 @@ const projects = [
     category: 'film',
     title: 'Movies Data Extraction',
     shortDesc: 'The extraction engine behind the Ultimate Movies Dataset, collecting 1 million movies across 30 fields from the TMDB API with rate limiting and data quality controls.',
-    fullDesc: 'This is the foundation of the entire movie data project. Pulling 1 million records from an API cleanly requires more than a simple loop, rate limiting, pagination, partial failure recovery, field normalization, and quality validation. All of that is handled here.',
+    fullDesc: 'This is the foundation of the entire movie data project. Pulling 1 million records from an API cleanly requires more than a simple loop: rate limiting, pagination, partial failure recovery, field normalization, and quality validation. All of that is handled here.',
     highlights: [
       'API-first design with rate limit handling and retry logic',
       'Paginated extraction covering 1M+ titles across all TMDB categories',

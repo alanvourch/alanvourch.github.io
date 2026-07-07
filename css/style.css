@@ -1,13 +1,17 @@
 /* =============================================
    ALAN VOURC'H PORTFOLIO - v2
    Palette: White / Navy / Amber
+   Type: Plus Jakarta Sans (headings), Inter (body),
+         IBM Plex Mono (figures, eyebrows, dates)
+   Signature: budget-vs-actual style figures, tabular numerals
    ============================================= */
 
 :root {
   --navy: #1a2744;
   --navy-light: #243460;
-  --amber: #c9922a;
+  --amber: #c9922a;          /* decorative only: borders, rules, dots */
   --amber-light: #e8b84b;
+  --amber-text: #8f6512;     /* 5.2:1 on white; use for all amber text */
   --white: #ffffff;
   --off-white: #f8f7f4;
   --gray-50: #f9f9f9;
@@ -25,7 +29,15 @@
   --shadow-lg: 0 12px 48px rgba(26,39,68,0.15);
   --transition: 0.25s ease;
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-heading: 'Plus Jakarta Sans', var(--font-sans);
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', monospace;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  vertical-align: -0.12em;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -159,29 +171,63 @@ ul { list-style: none; }
 }
 
 .hero-eyebrow {
-  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--amber);
+  color: var(--amber-text);
   margin-bottom: 16px;
 }
 
 .hero-title {
-  font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 4.5vw, 3.6rem);
   color: var(--navy);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
   margin-bottom: 20px;
 }
 
 .hero-sub {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: var(--gray-600);
   line-height: 1.7;
-  margin-bottom: 28px;
-  max-width: 480px;
+  margin-bottom: 24px;
+  max-width: 500px;
+}
+.hero-sub strong { color: var(--navy); font-weight: 600; }
+
+/* Signature element: budget-vs-actual style figures strip */
+.hero-figures {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  justify-content: start;
+  border-top: 2px solid var(--navy);
+  border-bottom: 1px solid var(--gray-200);
+  margin-bottom: 24px;
+  max-width: 560px;
+}
+.hero-figure {
+  padding: 12px 16px 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.hero-figure + .hero-figure { border-left: 1px solid var(--gray-200); padding-left: 16px; }
+.figure-value {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.2;
+}
+.figure-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.35;
 }
 
 .hero-tags {
@@ -295,20 +341,22 @@ ul { list-style: none; }
 
 .section-eyebrow {
   display: block;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--amber);
+  color: var(--amber-text);
   margin-bottom: 12px;
 }
 
 .section-title {
-  font-family: var(--font-serif);
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(1.7rem, 2.8vw, 2.3rem);
   color: var(--navy);
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
   margin-bottom: 16px;
 }
 
@@ -355,7 +403,8 @@ ul { list-style: none; }
 }
 
 .about-card-icon {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
+  color: var(--amber-text);
   margin-bottom: 10px;
 }
 .about-card h3 {
@@ -398,7 +447,7 @@ ul { list-style: none; }
   border-bottom: 2px solid var(--amber);
 }
 
-.skill-icon { font-size: 1.2rem; }
+.skill-icon { font-size: 1.1rem; color: var(--amber-text); display: inline-flex; }
 
 .skill-list li {
   padding: 8px 0;
@@ -476,6 +525,18 @@ ul { list-style: none; }
 
 .project-card.hidden { display: none; }
 
+@media (min-width: 721px) {
+  .project-card.featured { grid-column: 1 / -1; }
+  .project-card.featured .project-thumb { height: 300px; }
+}
+
+/* Charts are data: show them whole, never cropped */
+.project-card.featured .project-thumb img {
+  object-fit: contain;
+  background: var(--white);
+  padding: 12px;
+}
+
 .project-thumb {
   position: relative;
   height: 200px;
@@ -514,8 +575,36 @@ ul { list-style: none; }
   backdrop-filter: blur(4px);
 }
 .badge-finance { background: rgba(26,39,68,0.85); color: #fff; }
-.badge-data { background: rgba(201,146,42,0.9); color: #fff; }
-.badge-film { background: rgba(120,60,120,0.85); color: #fff; }
+.badge-data { background: rgba(143,101,18,0.9); color: #fff; }
+.badge-film { background: rgba(92,91,99,0.85); color: #fff; }
+
+/* Featured (flagship) card */
+.project-card.featured { border-top: 3px solid var(--amber); }
+.project-flagship-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--amber-light);
+  color: var(--navy);
+}
+
+/* Film tab context note */
+.projects-film-note {
+  background: var(--off-white);
+  border-left: 3px solid var(--amber);
+  padding: 12px 18px;
+  margin-bottom: 24px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: var(--gray-600);
+}
 
 .project-body {
   padding: 20px 22px;
@@ -571,7 +660,7 @@ ul { list-style: none; }
 .project-more-btn {
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--amber);
+  color: var(--amber-text);
   display: flex;
   align-items: center;
   gap: 4px;
@@ -638,10 +727,11 @@ ul { list-style: none; }
 }
 
 .timeline-date {
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 500;
   color: var(--text-muted);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
 }
 
 .timeline-badge {
@@ -664,7 +754,7 @@ ul { list-style: none; }
 
 .timeline-company {
   font-size: 0.875rem;
-  color: var(--amber);
+  color: var(--amber-text);
   font-weight: 600;
   margin-bottom: 12px;
 }
@@ -682,11 +772,12 @@ ul { list-style: none; }
   gap: 6px;
 }
 .timeline-tags span {
-  min-font-size: 11px;
   padding: 3px 10px;
   background: var(--gray-100);
   border-radius: 100px;
-  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.72rem;
   font-weight: 500;
   color: var(--gray-600);
 }
@@ -762,12 +853,14 @@ ul { list-style: none; }
   justify-content: center;
   padding: 24px;
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
   backdrop-filter: blur(4px);
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 .modal-overlay.active {
   opacity: 1;
+  visibility: visible;
   pointer-events: all;
 }
 
@@ -806,24 +899,32 @@ ul { list-style: none; }
   object-fit: cover;
   border-radius: 16px 16px 0 0;
 }
+.modal-image.modal-image-contain {
+  object-fit: contain;
+  background: var(--white);
+  padding: 12px 12px 0;
+}
 
 .modal-body {
   padding: 32px 36px 40px;
 }
 
 .modal-eyebrow {
-  font-size: 0.72rem;
-  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--amber);
+  letter-spacing: 0.1em;
+  color: var(--amber-text);
   margin-bottom: 10px;
 }
 
 .modal-title {
-  font-family: var(--font-serif);
-  font-size: 1.65rem;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.55rem;
   color: var(--navy);
+  letter-spacing: -0.02em;
   line-height: 1.2;
   margin-bottom: 20px;
 }
@@ -909,9 +1010,9 @@ ul { list-style: none; }
 @media (max-width: 1024px) {
   .hero-inner { grid-template-columns: 1fr; gap: 48px; }
   .hero { min-height: auto; padding: 100px 24px 72px; }
-  .hero-photo { order: -1; }
   .hero-photo-frame { width: 220px; height: 260px; margin: 0 auto; }
   .hero-sub { max-width: 100%; }
+  .hero-figures { max-width: 100%; }
   .about-grid { grid-template-columns: 1fr; gap: 48px; }
   .skills-grid { grid-template-columns: repeat(2, 1fr); }
   .projects-grid { grid-template-columns: repeat(2, 1fr); }
@@ -942,6 +1043,11 @@ ul { list-style: none; }
   .hero-photo-frame { width: 160px; height: 200px; }
   .hero-cta { flex-direction: column; }
   .btn-primary, .btn-secondary { text-align: center; justify-content: center; }
+  .hero-figures { grid-template-columns: repeat(2, 1fr); }
+  .hero-figure { padding: 10px 12px 10px 0; }
+  .hero-figure + .hero-figure { border-left: none; padding-left: 0; }
+  .hero-figure:nth-child(even) { border-left: 1px solid var(--gray-200); padding-left: 12px; }
+  .hero-figure:nth-child(n+3) { border-top: 1px solid var(--gray-100); }
 
   .section { padding: 72px 0; }
   .section-header { margin-bottom: 40px; }
@@ -1005,12 +1111,12 @@ ul { list-style: none; }
 .resume-link {
   font-size: 0.83rem;
   font-weight: 600;
-  color: var(--amber);
+  color: var(--amber-text);
   text-decoration: underline;
   text-underline-offset: 3px;
   transition: color var(--transition);
 }
-.resume-link:hover { color: var(--amber-light); }
+.resume-link:hover { color: var(--navy); }
 
 /* ── NAV RESUME BUTTON ── */
 .nav-resume-btn {
@@ -1059,30 +1165,6 @@ ul { list-style: none; }
   transform: translateY(-2px);
 }
 
-/* PROJECT CARD DESC - ensure clean truncation */
-.project-desc {
-  /* Override: cards show truncated preview, modal shows full text */
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  max-height: none; /* remove any conflicting max-height */
-}
-
-/* MODAL DESC - always show full text */
-.modal-description {
-  overflow: visible;
-  display: block;
-  -webkit-line-clamp: unset;
-  max-height: none;
-}
-
 @media (max-width: 480px) {
   .hero-resume-links { justify-content: center; }
-}
-
-/* Mobile card tap-to-flip */
-@media (hover: none) {
-  .project-card.flipped .project-front { opacity: 0; transform: rotateY(180deg); }
-  .project-card.flipped .project-back { opacity: 1; transform: rotateY(0deg); }
 }

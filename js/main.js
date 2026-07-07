@@ -32,7 +32,7 @@ function renderCards(filter) {
 
   list.forEach(p => {
     const card = document.createElement('div');
-    card.className = 'project-card';
+    card.className = p.featured ? 'project-card featured' : 'project-card';
     card.setAttribute('data-id', p.id);
     card.setAttribute('role', 'button');
     card.setAttribute('tabindex', '0');
@@ -47,6 +47,7 @@ function renderCards(filter) {
         <img class="img-default" src="${p.thumb}" alt="${p.title}" loading="lazy" />
         <img class="img-hover" src="${p.hover}" alt="${p.title} detail" loading="lazy" />
         <span class="project-category-badge ${categoryClass[p.category]}">${categoryLabel[p.category]}</span>
+        ${p.featured ? '<span class="project-flagship-badge">Flagship</span>' : ''}
       </div>
       <div class="project-body">
         <h3 class="project-title">${p.title}</h3>
@@ -59,7 +60,12 @@ function renderCards(filter) {
     `;
 
     card.addEventListener('click', () => openModal(p));
-    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openModal(p); });
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal(p);
+      }
+    });
 
     grid.appendChild(card);
   });
@@ -67,9 +73,14 @@ function renderCards(filter) {
 
 // ── Tabs ──
 document.querySelectorAll('.tab').forEach(tab => {
+  tab.setAttribute('aria-selected', tab.classList.contains('active') ? 'true' : 'false');
   tab.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => {
+      t.classList.remove('active');
+      t.setAttribute('aria-selected', 'false');
+    });
     tab.classList.add('active');
+    tab.setAttribute('aria-selected', 'true');
     renderCards(tab.dataset.filter);
   });
 });
@@ -87,7 +98,7 @@ function openModal(p) {
   const skillTags = p.skills.map(s => `<span class="modal-skill-tag">${s}</span>`).join('');
 
   modalInner.innerHTML = `
-    <img class="modal-image" src="${p.hover}" alt="${p.title}" />
+    <img class="modal-image${p.featured ? ' modal-image-contain' : ''}" src="${p.hover}" alt="${p.title}" />
     <div class="modal-body">
       <p class="modal-eyebrow">${categoryLabel[p.category]}</p>
       <h2 class="modal-title">${p.title}</h2>
@@ -116,6 +127,22 @@ modalClose.addEventListener('click', closeModal);
 overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
+// Keep Tab focus inside the modal while it is open
+overlay.addEventListener('keydown', e => {
+  if (e.key !== 'Tab' || !overlay.classList.contains('active')) return;
+  const focusables = overlay.querySelectorAll('button, a[href]');
+  if (!focusables.length) return;
+  const first = focusables[0];
+  const last = focusables[focusables.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
+});
+
 // ── Init ──
 renderCards('finance');
 
@@ -130,16 +157,4 @@ renderCards('finance');
   }
   document.querySelectorAll('.tab').forEach(btn => btn.addEventListener('click', updateFilmNote));
   updateFilmNote();
-})();
-
-// Mobile card tap-to-flip
-(function() {
-  function isTouchDevice() { return ('ontouchstart' in window) || navigator.maxTouchPoints > 0; }
-  if (!isTouchDevice()) return;
-  document.querySelectorAll('.project-card').forEach(function(card) {
-    card.addEventListener('click', function(e) {
-      if (e.target.tagName === 'A') return;
-      card.classList.toggle('flipped');
-    });
-  });
 })();

@@ -2,3 +2,8 @@
 .private/
 
 .vercel
+
+# Local backups and test artifacts — never ship
+28.02.2026/
+index 15.06.26.html
+test-results/

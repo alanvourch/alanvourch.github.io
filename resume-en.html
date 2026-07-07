@@ -7,14 +7,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    :root { --navy: #1a2744; --amber: #c9922a; --text: #1a1a2e; --muted: #5c5b63; --border: #dde0e8; }
+    :root { --navy: #1a2744; --amber: #c9922a; --amber-text: #8f6512; --amber-light: #e8b84b; --text: #1a1a2e; --muted: #5c5b63; --border: #dde0e8; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Inter', system-ui, sans-serif; font-size: 10pt; color: var(--text); background: #fff; line-height: 1.5; -webkit-font-smoothing: antialiased; }
     a { color: var(--navy); text-decoration: none; }
     ul { list-style: none; }
     .page { max-width: 780px; margin: 0 auto; padding: 40px 48px; }
     .print-btn-bar { background: var(--navy); color: #fff; text-align: center; padding: 12px; position: sticky; top: 0; z-index: 10; }
-    .print-btn { display: inline-block; padding: 8px 24px; background: var(--amber); color: #fff; border: none; border-radius: 6px; font-family: inherit; font-size: 0.875rem; font-weight: 600; cursor: pointer; margin-left: 16px; }
+    .print-btn { display: inline-block; padding: 8px 24px; background: var(--amber-light, #e8b84b); color: var(--navy); border: none; border-radius: 6px; font-family: inherit; font-size: 0.875rem; font-weight: 600; cursor: pointer; margin-left: 16px; }
     .print-btn-bar span { font-size: 0.875rem; opacity: 0.85; }
     header { border-bottom: 2.5px solid var(--navy); padding-bottom: 18px; margin-bottom: 22px; }
     h1 { font-size: 22pt; font-weight: 700; color: var(--navy); letter-spacing: -0.5px; margin-bottom: 4px; }
@@ -26,13 +26,13 @@
     .ci { color: var(--amber); font-weight: 700; font-size: 9pt; }
     .ci-badge { display: inline-block; background: var(--navy); color: #fff !important; padding: 0 3px 1px; border-radius: 2px; font-size: 6.5pt; font-weight: 700; line-height: 1.5; }
     section { margin-bottom: 20px; }
-    h2 { font-size: 9.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--amber); border-bottom: 1px solid var(--border); padding-bottom: 4px; margin-bottom: 12px; }
+    h2 { font-size: 9.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--amber-text); border-bottom: 1px solid var(--border); padding-bottom: 4px; margin-bottom: 12px; }
     .summary p { font-size: 10pt; color: var(--muted); line-height: 1.6; }
     .job { margin-bottom: 14px; }
     .job-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 4px; margin-bottom: 2px; }
     .job-title { font-size: 10.5pt; font-weight: 700; color: var(--navy); }
     .job-date { font-size: 9pt; color: var(--muted); white-space: nowrap; }
-    .job-company { font-size: 9.5pt; font-weight: 600; color: var(--amber); margin-bottom: 5px; }
+    .job-company { font-size: 9.5pt; font-weight: 600; color: var(--amber-text); margin-bottom: 5px; }
     .job ul { padding-left: 0; display: flex; flex-direction: column; gap: 3px; }
     .job li { font-size: 9.5pt; color: var(--muted); padding-left: 14px; position: relative; line-height: 1.5; }
     .job li::before { content: '\25B8'; position: absolute; left: 0; color: var(--amber); font-size: 8pt; top: 1px; }
@@ -65,7 +65,7 @@
 
   <div class="print-btn-bar">
     <span>To save as PDF: </span>
-    <button class="print-btn" onclick="window.print()">&#128196; Download PDF</button>
+    <button class="print-btn" onclick="window.print()">Download PDF</button>
   </div>
 
   <div class="page">
@@ -117,7 +117,7 @@
 
       <div class="job">
         <div class="job-header">
-          <span class="job-title">FP&amp;A Manager</span>
+          <span class="job-title">Head of FP&amp;A</span>
           <span class="job-date">Nov 2020 &ndash; Jun 2023</span>
         </div>
         <p class="job-company">Auditoire (TBWA Group) | Paris, France</p>
@@ -153,7 +153,7 @@
         <p class="job-company">Newedge | Paris, France</p>
         <ul>
           <li>Daily Group P&amp;L monitoring, variance analysis, and direct reporting to the CFO for a prime brokerage operation</li>
-          <li>Supported financial consolidation during Soci&eacute;t&eacute; G&eacute;n&eacute;rale&#x27;s acquisition of Newedge: tracked integration costs and synergy realization</li>
+          <li>Supported financial consolidation during Soci&eacute;t&eacute; G&eacute;n&eacute;rale&#x27;s acquisition of Newedge: tracked integration costs and merger cost savings</li>
         </ul>
       </div>
 

@@ -8,7 +8,7 @@ This is a **static portfolio website** for Alan Vourc'h, an FP&A professional. B
 
 **Tech stack:**
 - Pure HTML5, CSS3, Vanilla JavaScript
-- Google Fonts: Plus Jakarta Sans (nav logo, weight 700), Inter (body), Playfair Display (headings/hero)
+- Google Fonts: Plus Jakarta Sans (headings + nav logo), Inter (body), IBM Plex Mono (figures, eyebrows, dates, metric chips)
 - No npm, no build tools, no transpilation
 - Direct deployment: `git push` to `main` → live on GitHub Pages
 
@@ -55,6 +55,7 @@ This is a **static portfolio website** for Alan Vourc'h, an FP&A professional. B
 **Project filtering system:**
 - Projects stored as object array in `js/projects.js`
 - Each project: `{ id, category, title, shortDesc, fullDesc, highlights[], skills[], thumb, hover, link, linkLabel }`
+- Optional `featured: true` renders a full-width card with a "Flagship" badge (used by fpa-agent-team)
 - Categories: `finance`, `data`, `film`
 - Tab-based filtering in UI, instant re-render on click
 - Modal system for detailed project view
@@ -65,7 +66,8 @@ This is a **static portfolio website** for Alan Vourc'h, an FP&A professional. B
 - CSS custom properties for theming (colors, spacing, shadows, transitions)
 - Color scheme:
   - Primary: Navy (`#1a2744`), Navy Light (`#243460`)
-  - Accent: Amber (`#c9922a`), Amber Light (`#e8b84b`)
+  - Accent: Amber (`#c9922a`) and Amber Light (`#e8b84b`) for borders/decoration; Amber Text (`#8f6512`) for text
+  - Signature element: budget-vs-actual style figures (hero strip, timeline chips) in IBM Plex Mono, tabular numerals
   - Neutrals: white, off-white, grays
 - Responsive breakpoints: `1024px`, `720px`, `480px`
 - Mobile-first approach with progressive enhancement
@@ -83,12 +85,12 @@ This is a **static portfolio website** for Alan Vourc'h, an FP&A professional. B
 2. **Project filtering**: Render cards based on active tab (All/Finance/Data/Film)
 3. **Modal system**: Click card → open modal with full details, close on ESC/overlay click, body scroll lock
 4. **Film note**: Show/hide contextual note when Film tab is active
-5. **Mobile enhancements**: Touch device detection, card flip animation on tap
+5. **Featured project**: `featured: true` renders a full-width card with a Flagship badge
 
 **Event handling:**
 - Keyboard accessibility: Enter/Space to open project modals
 - Passive scroll listeners for performance
-- Touch event handling for mobile flip animations
+- Tab focus trapped inside the modal while open; aria-selected kept in sync on tabs
 
 ## Content Management
 
@@ -142,8 +144,8 @@ The portfolio has Notion workspace integration via MCP (Model Context Protocol):
 
 **Mobile considerations:**
 - Hamburger menu for navigation
-- Touch-optimized tap-to-flip on project cards
-- Hero photo hidden on small screens
+- Tapping a project card opens its modal (no flip animation)
+- Hero photo shown below the text on small screens (220px/160px)
 - Single-column layouts below 720px
 - Font size adjustments for readability
 
@@ -153,7 +155,7 @@ The portfolio has Notion workspace integration via MCP (Model Context Protocol):
 - ARIA labels on interactive elements (`aria-label`, `role="button"`)
 - Keyboard navigation: Tab, Enter, Space, Escape
 - Focus management in modals (auto-focus close button)
-- Color contrast meets WCAG AA standards
+- Color contrast meets WCAG AA: any amber-colored text must use `--amber-text` (#8f6512); the brighter ambers are decorative only (2.75:1 on white)
 - Alt text on all images
 
 ## Bilingual Content
