@@ -1096,6 +1096,13 @@ ul { list-style: none; }
   font-size: 0.75rem;
   top: 1px;
 }
+.timeline-bullets a {
+  color: var(--amber-text);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.timeline-bullets a:hover { color: var(--navy); }
 
 /* ── EXTRA BADGES ── */
 .timeline-badge.edu-badge { background: #e8eaf6; color: #3949ab; }
