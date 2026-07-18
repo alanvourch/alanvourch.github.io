@@ -248,7 +248,7 @@ Targets modern browsers (Chrome, Firefox, Safari, Edge):
 - Head of FP&A title (Auditoire, TBWA Group) — direct CFO/CEO reporting
 - CFA Level 3 candidate (Private Markets pathway)
 - Société Générale IB division — cost consolidation, NOT direct CFO reporting (financial direction + investor relations)
-- 7+ years FP&A
+- 10 years FP&A
 
 **Writing rules (enforced in v2):**
 - No em dashes (—) — AI writing signal
