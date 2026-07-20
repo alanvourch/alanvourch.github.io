@@ -4,8 +4,8 @@ const projects = [
     id: 'fpa-agent-team',
     category: 'finance',
     featured: true,
-    title: 'FP&A Agent Team: Monthly Close, Run End to End',
-    shortDesc: 'A five-agent pipeline that runs the monthly Budget vs Actual close for a €100M organization: the budget-to-actual walk reconciles to the euro, every commentary figure traces back to source, and the board pack stops at a human sign-off.',
+    title: 'Automated FP&A Close: From Actuals to Board Pack',
+    shortDesc: 'An auditable monthly Budget vs Actual pipeline for a €100M organization, from source-data checks to board-ready commentary and human approval.',
     fullDesc: 'This pipeline does the work of a monthly close and shows its work. It cleans the raw export, computes 840 variances with a three-rule materiality test, explains a variance only when a dated business note corroborates it, refreshes a rolling 3-month forecast from a normalized history, and drafts the executive commentary. A planted 10x revenue typo, the classic fat-finger that becomes a fake growth story, was caught at ingestion and reported as a data issue instead. Four of the five agents are plain, auditable Python; exactly one step calls an LLM, and a QA agent verifies that boundary on every run by scanning the source code. The full case study is live on this domain: results, charts, methodology, and the board pack itself.',
     highlights: [
       'FY2025 budget-to-actual walk reconciles to the euro, with named drivers and an explicitly unexplained block',
