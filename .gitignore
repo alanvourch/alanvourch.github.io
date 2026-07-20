@@ -1,3 +1,22 @@
 # Private files — never commit
 .private/
-.vercel
+.vercel/
+
+# Local AI agent and editor configuration
+.agents/
+.claude/
+.codex/
+.openai/
+.vscode/
+AGENTS.md
+CLAUDE.md
+
+# Private profile source and temporary review files
+profile-linkedin.md
+tmp/
+
+# Unused local design assets
+images/background.webp
+images/projects/businesscase_hover(1).webp
+images/projects/hr2.png
+images/projects/unused/
