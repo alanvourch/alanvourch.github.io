@@ -31,6 +31,7 @@
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-heading: 'Plus Jakarta Sans', var(--font-sans);
   --font-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', monospace;
+  --font-numeric: 'Inter', var(--font-sans);
 }
 
 .icon {
@@ -217,7 +218,7 @@ ul { list-style: none; }
 }
 .hero-figure + .hero-figure { border-left: 1px solid var(--gray-200); padding-left: 16px; }
 .figure-value {
-  font-family: var(--font-mono);
+  font-family: var(--font-numeric);
   font-variant-numeric: tabular-nums;
   font-size: 1.25rem;
   font-weight: 600;
@@ -675,7 +676,7 @@ ul { list-style: none; }
 
 /* ── TIMELINE ── */
 .timeline {
-  max-width: 980px;
+  max-width: 860px;
   margin: 0 auto;
   border-top: 1px solid var(--gray-200);
 }
@@ -702,8 +703,8 @@ ul { list-style: none; }
 
 .timeline-content {
   display: grid;
-  grid-template-columns: 180px 1fr;
-  column-gap: 36px;
+  grid-template-columns: 150px 1fr;
+  column-gap: 30px;
   background: transparent;
   border: 0;
   border-radius: 0;
@@ -722,7 +723,8 @@ ul { list-style: none; }
 }
 
 .timeline-date {
-  font-family: var(--font-mono);
+  font-family: var(--font-numeric);
+  font-variant-numeric: tabular-nums;
   font-size: 0.76rem;
   font-weight: 500;
   color: var(--text-muted);
@@ -774,7 +776,7 @@ ul { list-style: none; }
   padding: 3px 10px;
   background: var(--gray-100);
   border-radius: 100px;
-  font-family: var(--font-mono);
+  font-family: var(--font-numeric);
   font-variant-numeric: tabular-nums;
   font-size: 0.72rem;
   font-weight: 500;
@@ -790,7 +792,7 @@ ul { list-style: none; }
 }
 
 .credentials {
-  max-width: 980px;
+  max-width: 860px;
   margin: 48px auto 0;
 }
 
