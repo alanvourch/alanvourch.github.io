@@ -879,7 +879,7 @@ ul { list-style: none; }
   transform: translateY(-3px);
 }
 
-.contact-icon { font-size: 1.6rem; }
+.contact-icon { font-size: 1.6rem; color: var(--white); }
 .contact-label {
   font-size: 0.72rem;
   font-weight: 700;
