@@ -17,8 +17,8 @@ const projects = [
       'CFO memo, board pack and Excel workbook generated from the same model; tests check that hires, cash and the bridge reconcile'
     ],
     skills: ['Driver-Based Planning', 'Headcount Planning', 'Scenario Analysis', 'Cash Runway', 'SaaS Metrics', 'Excel', 'Python'],
-    thumb: 'images/projects/fpa-planning-card.webp',
-    hover: 'images/projects/fpa-planning-scenarios.webp',
+    thumb: 'images/projects/fpa-planning-thumb.webp',
+    hover: 'images/projects/fpa-planning-card.webp',
     link: 'https://alanvourch.com/fpa-planning-model/',
     linkLabel: 'Open the Case Study'
   },
@@ -38,23 +38,22 @@ const projects = [
       'Draft board pack ends at a sign-off block; nothing is sent automatically'
     ],
     skills: ['Variance Analysis', 'Board Reporting', 'Rolling Forecast', 'Data Controls', 'Python', 'AI (one step)'],
-    thumb: 'images/projects/fpa-close-card.webp',
-    hover: 'images/projects/fpa-agents-bridge.webp',
+    thumb: 'images/projects/fpa-close-thumb.webp',
+    hover: 'images/projects/fpa-close-card.webp',
     link: 'https://alanvourch.com/fpa-project/',
     linkLabel: 'Open the Case Study'
   },
   {
     id: 'fpa-dashboard',
     category: 'finance',
-    title: 'Auditoire Management Reporting in Power BI',
-    shortDesc: 'The management reporting I ran as Head of FP&A at Auditoire, rebuilt with synthetic data: project margin, payroll and headcount by team, and a manager view.',
-    fullDesc: 'Management at Auditoire needed one view of project margin and payroll across a 150-person business. As Head of FP&A I built the business and payroll databases and the Power BI reporting on top, including a restricted version so each business unit manager saw only their own perimeter. The core views were used and reviewed by the CFO, the CEO and the finance team. This published version is a rebuild on synthetic data: it keeps the structure of what was used, adds a few pages and leaves others out. Best viewed on a computer.',
+    title: 'Power BI Reporting for an Event Company',
+    shortDesc: 'Dashboards I built for an event company in France: project margin, payroll and headcount by team, with a restricted view for each manager.',
+    fullDesc: 'Management wanted one view of project margin and payroll across the business. I built the business and payroll databases and the Power BI reporting on top, including a restricted version so each manager saw only their own teams. I presented it to the executive and finance teams in my last months there, so I never saw it run for long. What is published here is a selection of those dashboards rebuilt on synthetic data, not the full set: a few pages were added and others left out. Best viewed on a computer.',
     highlights: [
       'Business and payroll databases built in-house, with the Power BI reporting on top',
       'Project margin, activity, team and client views, plus a restricted manager view',
-      'The core views were used and reviewed by the CFO, the CEO and the finance team',
-      'The payroll base behind the 25% improvement in payroll forecast accuracy',
-      'Published as a rebuild on synthetic data, eight pages'
+      'Presented to the executive and finance teams, built in my last months at the company',
+      'A selection of the dashboards, rebuilt on synthetic data rather than the full set'
     ],
     skills: ['Power BI', 'Management Reporting', 'Payroll & Headcount', 'Data Modeling', 'DAX'],
     thumb: 'images/projects/pbi-activity.webp',
@@ -103,19 +102,19 @@ const projects = [
   {
     id: 'hr-predictor',
     category: 'data',
-    title: 'HR Insights & Predictive Model',
-    shortDesc: 'Employee turnover model: which staff are at risk of leaving, what drives it, and what the churn costs HR and finance.',
-    fullDesc: 'Starting from an HR dataset, I built a classification model to predict which employees are at risk of leaving and identified the variables driving churn, then turned the results into business recommendations and cost impact estimates.',
+    title: 'Predicting Employee Churn on an HR Dataset',
+    shortDesc: 'Overwork is what the data shows: all 145 employees carrying seven projects left. The model flags who is at risk with 90% recall.',
+    fullDesc: 'A public HR dataset of 14,999 records, 11,991 once 3,008 duplicate rows are removed, in which 16.6% of employees left. I compared logistic regression, a decision tree and a random forest, then rebuilt the tree models without the self-reported satisfaction score because it leaks the outcome. The random forest still holds: 96% accuracy and 90% recall on the holdout set. What drives the prediction is workload rather than sentiment: evaluation score, number of projects, tenure, and whether someone works more than 175 hours a month.',
     highlights: [
-      'Exploratory analysis of 14,000+ employee records across departments',
-      'Feature engineering: satisfaction scores, tenure, workload proxies',
-      'Compared Logistic Regression, Random Forest, and XGBoost',
-      'Final model: 94% accuracy on the holdout set',
-      'Model outputs turned into HR and cost recommendations'
+      'All 145 employees on seven projects left; the pattern is workload, not pay',
+      'Champion random forest, fitted without the leaky satisfaction score: 96% accuracy, 90% recall, 94% AUC on the holdout set',
+      'Logistic regression and a decision tree compared on the same split',
+      '3,008 duplicate rows removed before any model was fitted',
+      'Recommendations: cap projects per person, look at why four-year tenures leave, make overtime expectations explicit'
     ],
-    skills: ['Python', 'Machine Learning', 'HR', 'Financial Modeling', 'Classification', 'Pandas', 'Matplotlib'],
-    thumb: 'images/projects/hr.webp',
-    hover: 'images/projects/hr2.webp',
+    skills: ['Python', 'Machine Learning', 'Classification', 'Pandas', 'HR Analytics'],
+    thumb: 'images/projects/hr2.webp',
+    hover: 'images/projects/hr-feature-importance.webp',
     link: 'https://www.kaggle.com/code/alanvourch/salifort-motors-hr-analysis',
     linkLabel: 'Open on Kaggle'
   },

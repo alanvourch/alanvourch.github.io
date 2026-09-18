@@ -173,10 +173,10 @@ ul { list-style: none; }
 }
 
 .hero-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--amber-text);
   margin-bottom: 16px;
@@ -343,10 +343,10 @@ ul { list-style: none; }
 
 .section-eyebrow {
   display: block;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--amber-text);
   margin-bottom: 12px;
@@ -531,16 +531,12 @@ ul { list-style: none; }
 
 .project-card.hidden { display: none; }
 
-@media (min-width: 721px) {
-  .project-card.featured { grid-column: 1 / -1; }
-  .project-card.featured .project-thumb { height: 300px; }
-}
-
-/* Charts are data: show them whole, never cropped */
+/* Every card is the same size; the flagships are marked by their border and badge.
+   Charts are data, so they are fitted whole against a matching background
+   instead of being cropped. */
 .project-card.featured .project-thumb img {
   object-fit: contain;
   background: var(--white);
-  padding: 12px;
 }
 
 .project-thumb {
@@ -592,10 +588,10 @@ ul { list-style: none; }
   right: 12px;
   padding: 4px 10px;
   border-radius: 100px;
-  font-family: var(--font-mono);
+  font-family: var(--font-heading);
   font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-weight: 700;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   background: var(--amber-light);
   color: var(--navy);
@@ -824,10 +820,10 @@ ul { list-style: none; }
 .credential-item:last-child { border-right: 0; }
 
 .credential-label {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--amber-text);
 }
