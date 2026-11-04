@@ -49,6 +49,7 @@ function projectVisual(project) {
   if (project.preview) {
     return `<div class="project-preview">
       <p class="preview-eyebrow">${escapeHtml(project.preview.eyebrow)}</p>
+      <div class="preview-chart"><img src="${escapeHtml(project.id === 'fpa-agent-team' ? 'images/projects/fpa-close-bridge.png' : 'images/projects/fpa-planning-runway.svg')}" alt="${escapeHtml(project.id === 'fpa-agent-team' ? 'FY2025 operating result bridge from budget to provisional result, with an explicit zero baseline' : 'Minimum downside runway by hiring and cloud option, compared with the 18-month floor')}" loading="lazy" width="1680" height="960" /></div>
       <p class="preview-headline">${escapeHtml(project.preview.headline)}</p>
       <div class="preview-metrics">${project.preview.metrics.map(metric =>
         `<div><strong>${escapeHtml(metric.value)}</strong><span>${escapeHtml(metric.label)}</span></div>`
@@ -156,7 +157,11 @@ dialog.addEventListener('close', () => {
 const archiveList = document.getElementById('archiveList');
 projects.filter(project => project.archived).forEach(project => {
   const item = document.createElement('li');
-  item.innerHTML = `<button type="button" aria-haspopup="dialog">${escapeHtml(project.title)}</button><span>${escapeHtml(categoryLabel[project.category])}</span>`;
+  item.className = 'archive-card';
+  item.innerHTML = `<button class="archive-open" type="button" aria-haspopup="dialog" aria-label="${escapeHtml(project.title)}">
+    <span class="archive-thumb"><img src="${escapeHtml(project.thumb)}" alt="" loading="lazy" width="600" height="320" /></span>
+    <span class="archive-body"><span class="archive-category">${escapeHtml(categoryLabel[project.category])}</span><span class="archive-title">${escapeHtml(project.title)}</span><span class="archive-desc">${escapeHtml(project.shortDesc)}</span><span class="archive-cta">Explore the project <span aria-hidden="true">↗</span></span></span>
+  </button>`;
   const trigger = item.querySelector('button');
   trigger.addEventListener('click', () => openModal(project, trigger));
   archiveList.appendChild(item);

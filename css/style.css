@@ -93,6 +93,8 @@ a:hover { text-underline-offset: 4px; }
 .project-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .project-preview { min-height: 224px; padding: 26px 28px 20px; background: linear-gradient(120deg, #f3f5fa, var(--off-white)); color: var(--navy); }
 .preview-eyebrow { color: var(--amber-text); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; margin-bottom: 10px; }
+.preview-chart { height: 248px; padding: 8px; margin: 12px -12px 20px; border: 1px solid var(--gray-200); border-radius: var(--radius-sm); background: var(--white); overflow: hidden; }
+.preview-chart img { width: 100%; height: 100%; object-fit: contain; }
 .preview-headline { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; line-height: 1.4; margin-bottom: 22px; }
 .preview-metrics { display: grid; grid-template-columns: 1fr 1.2fr; gap: 16px; margin-bottom: 16px; }
 .preview-metrics div { display: flex; flex-direction: column; gap: 3px; }
@@ -116,9 +118,17 @@ a:hover { text-underline-offset: 4px; }
 .project-archive summary { width: fit-content; min-height: 44px; cursor: pointer; color: var(--navy); font-weight: 600; font-size: 0.9rem; }
 .project-archive summary span { font-weight: 400; color: var(--text-muted); }
 .project-archive > p { font-size: 0.9rem; color: var(--gray-600); margin: 10px 0 16px; }
-.project-archive li { display: flex; justify-content: space-between; gap: 12px; align-items: center; border-bottom: 1px solid var(--gray-100); }
-.project-archive button { text-align: left; min-height: 48px; padding: 8px 0; border: 0; background: transparent; color: var(--navy); text-decoration: underline; text-underline-offset: 3px; font-size: 0.88rem; cursor: pointer; }
-.project-archive li span { color: var(--text-muted); font-size: 0.76rem; }
+#archiveList { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-top: 22px; }
+.archive-card { min-width: 0; }
+.archive-open { display: flex; flex-direction: column; width: 100%; height: 100%; padding: 0; border: 1px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; text-align: left; background: var(--white); cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; }
+.archive-open:hover { border-color: var(--amber); box-shadow: var(--shadow); }
+.archive-thumb { display: block; width: 100%; height: 166px; overflow: hidden; background: var(--gray-100); }
+.archive-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.archive-body { display: flex; flex-direction: column; flex: 1; gap: 10px; padding: 20px; }
+.archive-category { color: var(--amber-text); font-size: 0.72rem; font-weight: 600; }
+.archive-title { color: var(--navy); font-size: 1rem; font-weight: 700; line-height: 1.4; }
+.archive-desc { color: var(--gray-600); font-size: 0.85rem; line-height: 1.65; flex: 1; }
+.archive-cta { color: var(--amber-text); font-size: 0.8rem; font-weight: 600; padding-top: 6px; }
 .noscript-note { padding: 20px 0; }
 .noscript-note a { text-decoration: underline; }
 
@@ -224,8 +234,8 @@ a:hover { text-underline-offset: 4px; }
   .project-preview { min-height: 216px; padding: 22px; }
   .project-body { padding: 22px; }
   .project-footer { padding: 10px 22px 16px; }
-  .project-archive li { align-items: flex-start; flex-direction: column; gap: 0; padding-bottom: 10px; }
-  .project-archive li span { padding-bottom: 3px; }
+  #archiveList { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .preview-chart { height: 220px; margin-left: -8px; margin-right: -8px; }
   .timeline-content { display: block; }
   .timeline-meta { margin-bottom: 10px; }
   .timeline-item { padding: 24px 0; }
@@ -233,6 +243,7 @@ a:hover { text-underline-offset: 4px; }
   .modal-title { font-size: 1.3rem; }
 }
 @media (max-width: 480px) {
+  #archiveList { grid-template-columns: 1fr; }
   .container, .nav-inner { padding-left: 20px; padding-right: 20px; }
   .hero-sub { font-size: 0.96rem; }
   .hero-search { font-size: 0.9rem; }
@@ -245,4 +256,5 @@ a:hover { text-underline-offset: 4px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .archive-open { transition: none; }
 }
