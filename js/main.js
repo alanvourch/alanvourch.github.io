@@ -1,160 +1,165 @@
-/* ──────────────────────────────────────
-   ALAN VOURC'H PORTFOLIO, main.js
-   ────────────────────────────────────── */
-
-// ── NAV scroll shadow ──
 const nav = document.getElementById('nav');
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+const tabs = Array.from(document.querySelectorAll('.tab'));
+const grid = document.getElementById('projectsGrid');
+const panel = document.getElementById('projectsPanel');
+const dialog = document.getElementById('projectDialog');
+const modalInner = document.getElementById('modalInner');
+const modalClose = document.getElementById('modalClose');
+const categoryLabel = { finance: 'Finance & FP&A', data: 'Data & Analytics', film: 'Personal projects' };
+let modalTrigger = null;
+
+const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({
+  '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+})[character]);
+
+function setMenu(open) {
+  navLinks.classList.toggle('open', open);
+  navToggle.setAttribute('aria-expanded', String(open));
+  navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+}
+
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 20);
 }, { passive: true });
-
-// ── Mobile nav toggle ──
-const navToggle = document.getElementById('navToggle');
-const navLinks  = document.getElementById('navLinks');
-navToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
+navToggle.addEventListener('click', () => setMenu(navToggle.getAttribute('aria-expanded') !== 'true'));
+navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+document.querySelector('.nav-logo').addEventListener('click', () => setMenu(false));
+document.addEventListener('click', event => {
+  if (!nav.contains(event.target)) setMenu(false);
 });
-// Close nav on link click (mobile)
-navLinks.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => navLinks.classList.remove('open'));
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && navToggle.getAttribute('aria-expanded') === 'true') {
+    setMenu(false);
+    navToggle.focus();
+  }
+});
+window.matchMedia('(min-width: 901px)').addEventListener('change', event => {
+  if (event.matches) setMenu(false);
 });
 
-// ── Category labels ──
-const categoryLabel = { finance: 'Finance & FP&A', data: 'Data & Analytics', film: 'Film & Entertainment' };
-const categoryClass  = { finance: 'badge-finance',   data: 'badge-data',       film: 'badge-film' };
-
-// ── Render project cards ──
-function renderCards(filter) {
-  const grid = document.getElementById('projectsGrid');
-  grid.innerHTML = '';
-
-  const list = filter === 'all' ? projects : projects.filter(p => p.category === filter);
-
-  list.forEach(p => {
-    const card = document.createElement('div');
-    card.className = p.featured ? 'project-card featured' : 'project-card';
-    card.setAttribute('data-id', p.id);
-    card.setAttribute('role', 'button');
-    card.setAttribute('tabindex', '0');
-    card.setAttribute('aria-label', 'View details: ' + p.title);
-
-    const skillTagsPreview = p.skills.slice(0, 3).map(s =>
-      `<span class="project-skill-tag">${s}</span>`
-    ).join('');
-
-    card.innerHTML = `
-      <div class="project-thumb">
-        <img class="img-default" src="${p.thumb}" alt="${p.title}" loading="lazy" />
-        <img class="img-hover" src="${p.hover}" alt="${p.title} detail" loading="lazy" />
-        <span class="project-category-badge ${categoryClass[p.category]}">${categoryLabel[p.category]}</span>
-        ${p.featured ? '<span class="project-flagship-badge">Flagship</span>' : ''}
-      </div>
-      <div class="project-body">
-        <h3 class="project-title">${p.title}</h3>
-        <p class="project-desc">${p.shortDesc}</p>
-      </div>
-      <div class="project-footer">
-        <div class="project-skills">${skillTagsPreview}</div>
-        <span class="project-more-btn">Details</span>
-      </div>
-    `;
-
-    card.addEventListener('click', () => openModal(p));
-    card.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openModal(p);
-      }
-    });
-
-    grid.appendChild(card);
-  });
+function resourceLinks(project, className) {
+  return (project.resources || []).map(resource =>
+    `<a class="${className}" href="${escapeHtml(resource.url)}" target="_blank" rel="noopener">${escapeHtml(resource.label)}</a>`
+  ).join('');
 }
 
-// ── Tabs ──
-document.querySelectorAll('.tab').forEach(tab => {
-  tab.setAttribute('aria-selected', tab.classList.contains('active') ? 'true' : 'false');
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(t => {
-      t.classList.remove('active');
-      t.setAttribute('aria-selected', 'false');
-    });
-    tab.classList.add('active');
-    tab.setAttribute('aria-selected', 'true');
-    renderCards(tab.dataset.filter);
+function projectVisual(project) {
+  if (project.preview) {
+    return `<div class="project-preview">
+      <p class="preview-eyebrow">${escapeHtml(project.preview.eyebrow)}</p>
+      <p class="preview-headline">${escapeHtml(project.preview.headline)}</p>
+      <div class="preview-metrics">${project.preview.metrics.map(metric =>
+        `<div><strong>${escapeHtml(metric.value)}</strong><span>${escapeHtml(metric.label)}</span></div>`
+      ).join('')}</div>
+      <p class="preview-note">${escapeHtml(project.preview.note)}</p>
+    </div>`;
+  }
+  return `<div class="project-thumb"><img src="${escapeHtml(project.thumb)}" alt="" loading="lazy" width="600" height="320" /></div>`;
+}
+
+function renderCards(filter) {
+  const list = projects.filter(project => !project.archived && !project.bundledInto && (filter === 'all' || project.category === filter));
+  grid.replaceChildren();
+  list.forEach(project => {
+    const card = document.createElement('article');
+    const titleId = `project-${project.id}`;
+    card.className = `project-card${project.featured ? ' featured' : ''}`;
+    card.dataset.id = project.id;
+    card.setAttribute('aria-labelledby', titleId);
+    card.innerHTML = `
+      <a class="project-visual-link" href="${escapeHtml(project.link)}" tabindex="-1"${project.preview ? '' : ` aria-label="Open ${escapeHtml(project.title)}"`}${project.featured ? '' : ' target="_blank" rel="noopener"'}>${projectVisual(project)}</a>
+      <div class="project-body">
+        <p class="project-type">${escapeHtml(project.type)}</p>
+        <h3 class="project-title" id="${titleId}"><a href="${escapeHtml(project.link)}"${project.featured ? '' : ' target="_blank" rel="noopener"'}>${escapeHtml(project.title)}</a></h3>
+        <p class="project-desc">${escapeHtml(project.shortDesc)}</p>
+        <ul class="project-skills" aria-label="Skills">${project.skills.slice(0, 3).map(skill => `<li class="project-skill-tag">${escapeHtml(skill)}</li>`).join('')}</ul>
+      </div>
+      <div class="project-footer">
+        <a class="project-open" href="${escapeHtml(project.link)}"${project.featured ? '' : ' target="_blank" rel="noopener"'}>${escapeHtml(project.linkLabel)}<span aria-hidden="true"> ↗</span></a>
+        ${project.featured ? '' : `<button class="project-details" type="button" aria-haspopup="dialog" aria-label="About ${escapeHtml(project.title)}">About this project</button>`}
+        ${project.resources && project.resources.length ? `<div class="project-resources">${resourceLinks(project, 'resource-link')}</div>` : ''}
+      </div>`;
+    const details = card.querySelector('.project-details');
+    if (details) details.addEventListener('click', () => openModal(project, details));
+    grid.appendChild(card);
+  });
+  const countLabel = { finance: 'finance projects', data: 'analytics projects', film: 'personal projects', all: 'projects' };
+  document.getElementById('projectCount').textContent = `${list.length} selected ${countLabel[filter]}`;
+}
+
+function activateTab(tab, focus = false) {
+  tabs.forEach(item => {
+    const selected = item === tab;
+    item.classList.toggle('active', selected);
+    item.setAttribute('aria-selected', String(selected));
+    item.tabIndex = selected ? 0 : -1;
+  });
+  panel.setAttribute('aria-labelledby', tab.id);
+  renderCards(tab.dataset.filter);
+  if (focus) tab.focus();
+}
+
+tabs.forEach((tab, index) => {
+  tab.addEventListener('click', () => activateTab(tab));
+  tab.addEventListener('keydown', event => {
+    let next;
+    if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+    if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
+    if (event.key === 'Home') next = 0;
+    if (event.key === 'End') next = tabs.length - 1;
+    if (next === undefined) return;
+    event.preventDefault();
+    activateTab(tabs[next], true);
   });
 });
 
-// ── Modal ──
-const overlay   = document.getElementById('modalOverlay');
-const modalInner = document.getElementById('modalInner');
-const modalClose = document.getElementById('modalClose');
-
-function openModal(p) {
-  const highlightItems = p.highlights
-    ? p.highlights.map(h => `<li>${h}</li>`).join('')
-    : '';
-
-  const skillTags = p.skills.map(s => `<span class="modal-skill-tag">${s}</span>`).join('');
-
-  modalInner.innerHTML = `
-    <img class="modal-image${p.featured ? ' modal-image-contain' : ''}" src="${p.hover}" alt="${p.title}" />
-    <div class="modal-body">
-      <p class="modal-eyebrow">${categoryLabel[p.category]}</p>
-      <h2 class="modal-title">${p.title}</h2>
-      <p class="modal-description">${p.fullDesc}</p>
-      ${highlightItems ? `
-      <div class="modal-highlights">
-        <h4>Key highlights</h4>
-        <ul>${highlightItems}</ul>
-      </div>` : ''}
-      <div class="modal-skills">${skillTags}</div>
-      <a href="${p.link}" target="_blank" rel="noopener" class="modal-cta">${p.linkLabel}</a>
-    </div>
-  `;
-
-  overlay.classList.add('active');
-  document.body.style.overflow = 'hidden';
+function openModal(project, trigger) {
+  modalTrigger = trigger;
+  modalInner.innerHTML = `<div class="modal-body">
+    <p class="project-type">${escapeHtml(project.type)}</p>
+    <h2 class="modal-title" id="modalTitle">${escapeHtml(project.title)}</h2>
+    <a href="${escapeHtml(project.link)}" target="_blank" rel="noopener" class="modal-cta">${escapeHtml(project.linkLabel)}<span aria-hidden="true"> ↗</span></a>
+    <p class="modal-description">${escapeHtml(project.fullDesc)}</p>
+    <ul class="modal-highlights">${project.highlights.map(highlight => `<li>${escapeHtml(highlight)}</li>`).join('')}</ul>
+    ${project.resources && project.resources.length ? `<div class="modal-resources">${resourceLinks(project, 'resource-link')}</div>` : ''}
+  </div>`;
+  document.body.classList.add('dialog-open');
+  dialog.showModal();
+  dialog.scrollTop = 0;
   modalClose.focus();
 }
 
-function closeModal() {
-  overlay.classList.remove('active');
-  document.body.style.overflow = '';
-}
-
-modalClose.addEventListener('click', closeModal);
-overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-// Keep Tab focus inside the modal while it is open
-overlay.addEventListener('keydown', e => {
-  if (e.key !== 'Tab' || !overlay.classList.contains('active')) return;
-  const focusables = overlay.querySelectorAll('button, a[href]');
-  if (!focusables.length) return;
-  const first = focusables[0];
-  const last = focusables[focusables.length - 1];
-  if (e.shiftKey && document.activeElement === first) {
-    e.preventDefault();
+modalClose.addEventListener('click', () => dialog.close());
+dialog.addEventListener('click', event => {
+  if (event.target === dialog) dialog.close();
+});
+dialog.addEventListener('keydown', event => {
+  if (event.key !== 'Tab') return;
+  const controls = Array.from(dialog.querySelectorAll('button:not([disabled]), a[href]'));
+  const first = controls[0];
+  const last = controls[controls.length - 1];
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
     last.focus();
-  } else if (!e.shiftKey && document.activeElement === last) {
-    e.preventDefault();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
     first.focus();
   }
 });
+dialog.addEventListener('close', () => {
+  document.body.classList.remove('dialog-open');
+  if (modalTrigger && modalTrigger.isConnected) modalTrigger.focus();
+});
 
-// ── Init ──
+const archiveList = document.getElementById('archiveList');
+projects.filter(project => project.archived).forEach(project => {
+  const item = document.createElement('li');
+  item.innerHTML = `<button type="button" aria-haspopup="dialog">${escapeHtml(project.title)}</button><span>${escapeHtml(categoryLabel[project.category])}</span>`;
+  const trigger = item.querySelector('button');
+  trigger.addEventListener('click', () => openModal(project, trigger));
+  archiveList.appendChild(item);
+});
+
 renderCards('finance');
-
-// Film & Entertainment tab note
-(function() {
-  const filmNote = document.getElementById('film-note');
-  if (!filmNote) return;
-  function updateFilmNote() {
-    const activeTab = document.querySelector('.tab.active');
-    const show = activeTab && activeTab.dataset.filter === 'film';
-    filmNote.style.display = show ? 'block' : 'none';
-  }
-  document.querySelectorAll('.tab').forEach(btn => btn.addEventListener('click', updateFilmNote));
-  updateFilmNote();
-})();

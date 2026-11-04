@@ -1,311 +1,400 @@
+// Selected work appears first; earlier analyses remain available in the archive.
 const projects = [
-  // ── FINANCE & FP&A ──────────────────────────────────
-  // Two flagships, in the order of the FP&A cycle: plan first, then report.
   {
     id: 'fpa-planning-model',
     category: 'finance',
     featured: true,
-    title: 'Hiring and Cloud Decision for a USD 24M ARR SaaS Company',
-    shortDesc: 'Recommendation: hire in phases and sign a one-year cloud commitment. Front-loading adds USD 1.7M of ARR but leaves 16.9 months of downside runway against an 18-month floor.',
-    fullDesc: 'Northlight is a fictional software company at USD 24M of ARR, growing 41% a year and burning USD 762k a month, with teams in Montréal, Paris and Austin. Gross margin has slipped two points below budget because customers of its data add-on use a third more compute than planned. The CFO has to decide how fast to hire and whether to commit on cloud. I compared three hiring plans and two cloud options under base, upside and downside cases against two board guardrails: at least 18 months of runway in the downside and gross margin never below 74%. The phased plan with a cloud commitment is the fastest-growing option that passes both. Every hire is costed by role and location, and new revenue comes from sales capacity after ramp, so moving a start date moves the cash. The output is a one-page CFO memo, a five-slide board pack and an Excel workbook with live formulas. The data is synthetic.',
+    title: 'SaaS hiring and cloud investment plan',
+    shortDesc: 'Compared six hiring and cloud options. Recommended phased hiring with a one-year cloud commitment to meet the cash and margin limits.',
+    fullDesc: 'A synthetic planning case for a USD 24M ARR software company. I compared three hiring plans and two cloud options across base, upside and downside scenarios. The recommendation balances revenue growth with an 18-month downside runway floor and a 74% forecast gross margin floor. The case includes a CFO memo, a board pack and an Excel export; Python runs the planning engine.',
     highlights: [
-      'Recommended: 22 planned hires from October 2026 to May 2027 and a one-year cloud commitment. USD 40.5M of ARR by February 2028 in the base case, runway never below 23 months in the downside',
-      'Rejected: front-loading 29 planned hires plus contractors. It adds USD 1.7M of ARR and breaks the runway floor by 1.1 months in the downside',
-      'Rejected: cloud on demand. Gross margin bottoms at 72.9% against the 74% floor; the commitment saves USD 0.8M over 18 months and strands USD 178k of units in the downside',
-      'The trade-off to defend: the phased plan burns USD 4.5M more than holding hiring for USD 2.2M more ARR',
-      'Under the budget\'s original 12-month runway floor the model picks the front-loaded plan; the board\'s move to 18 months changed the answer',
-      'CFO memo, board pack and Excel workbook generated from the same model; tests check that hires, cash and the bridge reconcile'
+      'Recommended 22 planned hires from October 2026 to May 2027 and a one-year cloud commitment. Base-case ARR reaches USD 40.5M by February 2028; minimum downside runway is about 23 months',
+      'Hiring 29 people up front adds USD 1.7M of ARR but misses the downside runway floor by 1.1 months',
+      'On-demand cloud pricing takes gross margin down to 72.9%. The commitment saves USD 0.8M over 18 months, even after USD 178k of unused units in the downside case',
+      'Phased hiring uses USD 4.5M more cash than holding hiring and produces USD 2.2M more ARR',
+      'With the original 12-month runway floor, the model selects front-loaded hiring. Raising the floor to 18 months changes the answer',
+      'The CFO memo, board pack and Excel workbook all use the same model. Automated checks reconcile hires, cash and the bridge'
     ],
     skills: ['Driver-Based Planning', 'Headcount Planning', 'Scenario Analysis', 'Cash Runway', 'SaaS Metrics', 'Excel', 'Python'],
     thumb: 'images/projects/fpa-planning-thumb.webp',
     hover: 'images/projects/fpa-planning-card.webp',
     link: 'https://alanvourch.com/fpa-planning-model/',
-    linkLabel: 'Open the Case Study'
+    linkLabel: 'Open the case study',
+    type: 'Synthetic case study',
+    archived: false,
+    preview: {
+      eyebrow: 'Resource allocation',
+      headline: 'Phased hiring with a cloud commitment',
+      metrics: [
+        {
+          value: '22',
+          label: 'planned hires'
+        },
+        {
+          value: '23 months',
+          label: 'minimum downside runway'
+        }
+      ],
+      note: 'Recommended plan · synthetic SaaS case'
+    },
+    resources: [
+      {
+        label: 'CFO memo (PDF)',
+        url: 'https://alanvourch.com/fpa-planning-model/assets/cfo_memo.pdf'
+      },
+      {
+        label: 'Excel workbook',
+        url: 'https://alanvourch.com/fpa-planning-model/assets/northlight_planning_model.xlsx'
+      }
+    ]
   },
   {
     id: 'fpa-agent-team',
     category: 'finance',
     featured: true,
-    title: 'Monthly Budget vs Actual Pack: Variances, Forecast, Board Commentary',
-    shortDesc: 'FY2025 came in €2.4M under budget. A €1.64M project overrun explains most of it, and a billings entry ten times too large was caught before the board pack.',
-    fullDesc: 'EventCo is a fictional events agency with about €100M of annual net billings and four business lines, modelled on the monthly reporting I ran as Head of FP&A. The pipeline takes a messy monthly export and flags a billings figure ten times too large as an entry error instead of a growth story. It runs 1,320 budget-versus-actual tests and keeps 19 material variances: 4 explained by a dated business note, 13 by the analyst after follow-up, and 2 left open and labelled as such. It refreshes next quarter\'s forecast with one-off events taken out, builds a one-page review for each business line and assembles a draft board pack that stops at a sign-off block. One step uses a language model to word the executive summary, and a check traces every figure in that text back to the variance tables. The data and the analyst explanations are written for the demo.',
+    title: 'Budget vs actual review and forecast',
+    shortDesc: 'A monthly management review with variance analysis, a provisional forecast and business-line reports. Source checks and analyst approval remain visible.',
+    fullDesc: 'EventCo is a fictional events agency. The workflow combines Python calculations and checks with AI-assisted investigation and drafting. It prepares business-line reports, a provisional forecast and a management pack for analyst review. Missing source values and an unusual billings entry remain explicit: estimates are not corrected accounting amounts. Historical effects are adjusted only with evidence and approval. The published page shows a recorded agent run on synthetic data.',
     highlights: [
-      'FY2025 walk from a €4.8M budgeted operating result to €2.4M actual, reconciled to the euro: €1.64M cost-of-sales overrun on one client project, €197k currency effect on a USD contract, €69k in-housing savings',
-      'Gross margin slipped €956k below plan in months that never cleared a materiality test: 3.6% of budgeted gross margin, and a fifth of the year\'s planned operating result',
-      '19 material variances: 4 backed by a business note, 13 explained by the analyst, 2 still open, each labelled with its source',
-      'A €52M billings entry in a €5M month flagged as a typo at ingestion and kept out of every figure and sentence',
-      'One-page review per business line splitting payroll into headcount and rate, and billings into volume and price',
-      'Draft board pack ends at a sign-off block; nothing is sent automatically'
+      'FY2025 provisional operating result of about €2.4M against a €4.8M budget comparator; both include estimated cells',
+      'Nineteen historical material variances, with documented notes, illustrative analyst explanations and unresolved items kept distinct',
+      'An unusual November billings entry requires source verification; the report identifies the unapproved budget placeholder',
+      'A three-month provisional forecast with historical holdout comparisons and visible assumptions',
+      'Business-line reviews separate payroll into headcount and rate, and billings into volume and price/mix; decompositions do not independently establish causes',
+      'The management pack remains a draft pending analyst review'
     ],
-    skills: ['Variance Analysis', 'Board Reporting', 'Rolling Forecast', 'Data Controls', 'Python', 'AI (one step)'],
+    skills: ['Variance Analysis', 'Management Reporting', 'Rolling Forecast', 'Data Controls', 'Python', 'AI Workflows'],
     thumb: 'images/projects/fpa-close-thumb.webp',
     hover: 'images/projects/fpa-close-card.webp',
     link: 'https://alanvourch.com/fpa-project/',
-    linkLabel: 'Open the Case Study'
+    linkLabel: 'Open the case study',
+    type: 'Synthetic case study',
+    archived: false,
+    preview: {
+      eyebrow: 'Monthly management review',
+      headline: 'Variance analysis and a provisional forecast',
+      metrics: [
+        {
+          value: '19',
+          label: 'historical material variances'
+        },
+        {
+          value: '3 months',
+          label: 'provisional forecast'
+        }
+      ],
+      note: 'Synthetic data · reports pending analyst review'
+    },
+    resources: [
+      {
+        label: 'Business-line report (PDF)',
+        url: 'https://alanvourch.com/fpa-project/assets/brand_events.pdf'
+      },
+      {
+        label: 'Forecast and assumptions',
+        url: 'https://alanvourch.com/fpa-project/reports/forecast_report.html'
+      }
+    ]
   },
   {
     id: 'fpa-dashboard',
     category: 'finance',
-    title: 'Power BI Reporting for an Event Company',
-    shortDesc: 'Dashboards I built for an event company in France: project margin, payroll and headcount by team, with a restricted view for each manager.',
-    fullDesc: 'Management wanted one view of project margin and payroll across the business. I built the business and payroll databases and the Power BI reporting on top, including a restricted version so each manager saw only their own teams. I presented it to the executive and finance teams in my last months there, so I never saw it run for long. What is published here is a selection of those dashboards rebuilt on synthetic data, not the full set: a few pages were added and others left out. Best viewed on a computer.',
+    title: 'Power BI management reporting',
+    shortDesc: 'Project margin, payroll and headcount reporting, with views tailored to Finance, executives and business managers.',
+    fullDesc: 'Management needed a single view of project margin and payroll across the business. I built the business and payroll databases, then the Power BI reports on top. Each manager had a restricted view of their own teams. I presented the reports to the executive and finance teams during my final months at the company, so I did not see their long-term use. The published version is a selection rebuilt with synthetic data. Some pages were added and others left out. It is best viewed on a computer.',
     highlights: [
-      'Business and payroll databases built in-house, with the Power BI reporting on top',
-      'Project margin, activity, team and client views, plus a restricted manager view',
-      'Presented to the executive and finance teams, built in my last months at the company',
-      'A selection of the dashboards, rebuilt on synthetic data rather than the full set'
+      'Built the business and payroll databases in-house, then connected the Power BI reports',
+      'Covered project margin, activity, teams and clients, with a restricted view for each manager',
+      'Presented the reports to the executive and finance teams during my final months at the company',
+      'Rebuilt a selection of the original dashboards with synthetic data'
     ],
     skills: ['Power BI', 'Management Reporting', 'Payroll & Headcount', 'Data Modeling', 'DAX'],
     thumb: 'images/projects/pbi-activity.webp',
     hover: 'images/projects/pbi-manager.webp',
     link: 'https://app.powerbi.com/view?r=eyJrIjoiM2VjMmRkMjItN2IxYS00MDliLWIxM2QtYmIzYjAzNmMxMWVkIiwidCI6Ijg5NTkwMmNlLTUzMWMtNDJjNi05YTMwLTA3YjRkZjUxYzNiMyJ9',
-    linkLabel: 'Open in Power BI (desktop)'
+    linkLabel: 'Open in Power BI (desktop)',
+    type: 'Professional work rebuilt with synthetic data',
+    archived: false,
+    resources: []
   },
   {
     id: 'scaleup-expenses',
     category: 'finance',
-    title: 'Workforce Plan for a FinTech Scale-Up: Q3 Hiring and Cost to Serve',
-    shortDesc: 'Cost to serve fell €1.5 per customer from January to March. Recommendation: hire quarterly, favour junior and mid-level roles, and convert recurring contractor work to employees.',
-    fullDesc: 'A business case for an FP&A Expenses Manager role at a fintech scale-up, on synthetic data. Three months of general ledger rebuilt into a monthly P&L, a definition of cost to serve and its monthly movement, the cost of a Q3 plan to hire 50 engineers and 20 customer success reps against a 20% cut in contractors, and a one-page recommendation for the leadership team.',
+    title: 'Fintech workforce planning case',
+    shortDesc: 'Rebuilt a P&L from ledger data and costed a Q3 hiring plan, including contractor savings and monthly cost to serve.',
+    fullDesc: 'I prepared this business case for an FP&A Expenses Manager role at a fintech scale-up using synthetic data. I rebuilt three months of general ledger data into a monthly P&L, defined cost to serve and explained its movement. I then costed a Q3 plan to hire 50 engineers and 20 customer success representatives alongside a 20% reduction in contractors. The final page gives the leadership team a clear recommendation.',
     highlights: [
-      'P&L rebuilt from three months of general ledger, with the account mapping documented',
+      'Rebuilt the P&L from three months of general ledger data and documented the account mapping',
       'Cost to serve down 11.8% from January to February and up 2.8% in March, explained by onboarding spend, headcount and customer growth',
       'Q3 hiring plan costed month by month, with contractor savings set against new hire costs',
-      'Recommendation: quarterly hiring against customer growth, a junior and mid-level hiring mix, and contractors converted to employees at about €150 a day less'
+      'Recommended quarterly hiring linked to customer growth and a different employee/contractor mix; implementation would require review of the skills and capacity needed'
     ],
     skills: ['Workforce Planning', 'Cost to Serve', 'P&L Build', 'Excel'],
     thumb: 'images/projects/businesscase_hover.webp',
     hover: 'images/projects/businesscase_hover.webp',
     link: 'https://better-lobster-21e.notion.site/Business-Case-Strategic-Workforce-Planning-for-a-Hypergrowth-Fintech-239a918b45eb8089a6c6fdb737f6cd5f',
-    linkLabel: 'Open on Notion'
+    linkLabel: 'Open on Notion',
+    type: 'Synthetic business case',
+    archived: false
   },
-
-  // ── DATA & ANALYTICS ─────────────────────────────────
   {
     id: 'retail-forecast',
     category: 'data',
-    title: 'Forecasting Daily Sales: From Trend to a Hybrid Model',
-    shortDesc: 'Daily sales forecast for an Ecuadorian grocery chain (Kaggle Store Sales data), built up from trend and seasonality to lag features and a linear plus XGBoost hybrid.',
-    fullDesc: 'A step-by-step forecasting walkthrough on public retail data, written up as an 11-minute guide on Medium. Each step adds one piece a finance forecast also needs: trend, seasonality, the effect of recent history, promotions and holidays, then a hybrid model and multi-step forecasts.',
+    title: 'Daily retail sales forecasting',
+    shortDesc: 'A practical forecasting guide using public retail data, from trend and seasonality to lag features and a linear plus XGBoost model.',
+    fullDesc: 'This is a practical forecasting walkthrough using public retail data from Kaggle. The 11-minute Medium guide starts with trend and seasonality, then adds recent history, promotions and holidays. It finishes with a hybrid model and forecasts across several future periods.',
     highlights: [
       'Trend with moving averages and polynomial regression',
       'Seasonality with indicator variables and Fourier terms',
       'Lag features, promotions and holidays as regressors',
-      'Linear regression and XGBoost hybrid, with multi-step forecasts using the DirRec strategy'
+      'Linear regression and XGBoost hybrid, with forecasts across several periods using the DirRec strategy',
+      'A learning walkthrough on public data, rather than a production forecast or a claim of performance in a new business'
     ],
     skills: ['Python', 'Time Series', 'XGBoost', 'Pandas', 'Scikit-learn'],
     thumb: 'images/projects/forecast.webp',
     hover: 'images/projects/forecast2.webp',
     link: 'https://medium.com/@alan.vourch/forecasting-a-practical-guide-6173f421c1ed',
-    linkLabel: 'Read on Medium'
+    linkLabel: 'Read on Medium',
+    type: 'Public-data analysis',
+    archived: false
   },
   {
     id: 'hr-predictor',
     category: 'data',
-    title: 'Predicting Employee Churn on an HR Dataset',
-    shortDesc: 'Overwork is what the data shows: all 145 employees carrying seven projects left. The model flags who is at risk with 90% recall.',
-    fullDesc: 'A public HR dataset of 14,999 records, 11,991 once 3,008 duplicate rows are removed, in which 16.6% of employees left. I compared logistic regression, a decision tree and a random forest, then rebuilt the tree models without the self-reported satisfaction score because it leaks the outcome. The random forest still holds: 96% accuracy and 90% recall on the holdout set. What drives the prediction is workload rather than sentiment: evaluation score, number of projects, tenure, and whether someone works more than 175 hours a month.',
+    title: 'Employee attrition analysis',
+    shortDesc: 'Compared classification models on a public HR dataset. The final random forest achieved 90% recall on its holdout sample.',
+    fullDesc: 'I cleaned a public HR dataset, removing 3,008 duplicate rows before comparing logistic regression, a decision tree and a random forest. The final random forest excluded the self-reported satisfaction score and achieved 96% accuracy, 90% recall and 94% AUC on the holdout sample. Project count, evaluation score and tenure were associated with departures. These results describe this dataset: they do not establish why employees left or validate individual employment decisions.',
     highlights: [
-      'All 145 employees on seven projects left; the pattern is workload, not pay',
-      'Champion random forest, fitted without the leaky satisfaction score: 96% accuracy, 90% recall, 94% AUC on the holdout set',
-      'Logistic regression and a decision tree compared on the same split',
-      '3,008 duplicate rows removed before any model was fitted',
-      'Recommendations: cap projects per person, look at why four-year tenures leave, make overtime expectations explicit'
+      'All 145 records with seven assigned projects were departures; this association does not establish a causal workload effect',
+      'The final random forest excluded satisfaction score; its collection timing would need validation before use in a prospective model',
+      'Compared logistic regression and tree models on the same split',
+      'Removed duplicates before fitting the models',
+      'Suggested further investigation of workload, tenure and overtime expectations, rather than treating model associations as proven interventions'
     ],
     skills: ['Python', 'Machine Learning', 'Classification', 'Pandas', 'HR Analytics'],
     thumb: 'images/projects/hr2.webp',
     hover: 'images/projects/hr-feature-importance.webp',
     link: 'https://www.kaggle.com/code/alanvourch/salifort-motors-hr-analysis',
-    linkLabel: 'Open on Kaggle'
+    linkLabel: 'Open on Kaggle',
+    type: 'Public-data analysis',
+    archived: false
   },
   {
     id: 'sql-remote',
     category: 'data',
-    title: 'SQL: Top Paying Remote Data Analyst Jobs',
-    shortDesc: 'Five SQL questions on 2023 data analyst job postings: the top-paying remote roles, the highest-paying skills and the most in-demand ones.',
-    fullDesc: 'A PostgreSQL analysis of a public dataset of 2023 data analyst job postings, asking which remote roles pay the most and which skills go with the highest salaries and the most demand.',
+    title: 'SQL analysis of top-paying remote data analyst jobs',
+    shortDesc: 'Five SQL queries answer which remote data analyst roles paid the most in 2023, which skills commanded the highest salaries and which were most in demand.',
+    fullDesc: 'I used PostgreSQL to analyse a public dataset of 2023 data analyst job postings. The queries compare remote salaries, the skills attached to the highest-paying roles and the skills employers requested most often.',
     highlights: [
-      'Top 10 highest-paying remote data analyst jobs by average yearly salary',
-      'Skills required by those top-paying roles',
-      'Most in-demand skills and highest-paying skills across data analyst postings',
-      'Skills that combine high demand with high salary',
-      'Joins and CTEs across job, company and skills tables, documented on GitHub'
+      'Ranked the 10 highest-paying remote data analyst roles by average annual salary',
+      'Identified the skills required for those roles',
+      'Compared the most requested skills with the highest-paying ones',
+      'Found the skills that combine strong demand with high salaries',
+      'Used joins and CTEs across job, company and skills tables, with the queries documented on GitHub'
     ],
     skills: ['SQL', 'PostgreSQL', 'JOINs', 'CTEs', 'Data Analysis'],
     thumb: 'images/projects/sql-remote.webp',
     hover: 'images/projects/job_salaries_chart.png',
     link: 'https://github.com/alanvourch/SQL-Project',
-    linkLabel: 'View on GitHub'
+    linkLabel: 'View on GitHub',
+    type: 'Public-data analysis',
+    archived: true
   },
   {
     id: 'sql-tech',
     category: 'data',
-    title: 'SQL: Tech Layoffs Analysis',
-    shortDesc: 'SQL cleaning and analysis of public tech layoffs data: trends across companies, sectors and geographies.',
-    fullDesc: 'Used raw public data on tech layoffs to explore workforce shift patterns across the 2022–2024 cycle, from messy raw data to clean analytical views, all in SQL.',
+    title: 'SQL analysis of tech layoffs',
+    shortDesc: 'I cleaned and analysed public tech layoff data in SQL to compare trends across companies, sectors and regions.',
+    fullDesc: 'I used SQL to turn raw public layoff data into clean analytical views, then examined how workforce reductions changed across companies, sectors and regions from 2022 to 2024.',
     highlights: [
-      'Multi-step data cleaning: deduplication, null handling, standardization',
-      'Company and sector-level ranking by total layoffs',
+      'Cleaned duplicates, handled missing values and standardized the raw fields',
+      'Ranked companies and sectors by total layoffs',
       'Rolling 3-month trends using window functions',
-      'Geographic breakdowns: US vs international layoff patterns',
-      'Written up with annotated SQL'
+      'Compared layoff patterns in the US with other markets',
+      'Documented the analysis with annotated SQL'
     ],
     skills: ['SQL', 'Data Cleaning', 'EDA', 'Window Functions', 'CTEs'],
     thumb: 'images/projects/sql-tech.webp',
     hover: 'images/projects/sql2.webp',
     link: 'https://better-lobster-21e.notion.site/SQL-Data-Cleaning-EDA-Layoffs-data-dbd0891e61454310901253c8faa767d3',
-    linkLabel: 'Open on Notion'
+    linkLabel: 'Open on Notion',
+    type: 'Public-data analysis',
+    archived: true
   },
-
-  // ── FILM & ENTERTAINMENT ─────────────────────────────
   {
     id: 'moviemate',
     category: 'film',
-    title: 'MovieMate: Movie Web App',
-    shortDesc: 'A React web app built on my own 50k-movie database: browse and filter films, box office results, upcoming releases and movie news.',
-    fullDesc: 'MovieMate started as a way to explore my movie dataset and became a working web app. Users can search and filter movies, track box office performance, follow upcoming releases, and read movie news.',
+    title: 'MovieMate: film discovery app',
+    shortDesc: 'Built and maintain a film discovery app with search, filters, box office results, upcoming releases and film news.',
+    fullDesc: 'MovieMate began as a way to explore my movie dataset and grew into a working film discovery app. I built the interface and data integrations, then iterated on search, filters and the mobile experience. Users can explore films, follow box office results, check upcoming releases and read film news.',
     highlights: [
-      'Built with React, component architecture, hooks, routing',
-      'Powered by my own TMDB-sourced 50k+ movie database',
-      'Live box office data and upcoming release tracking',
-      'Movie news aggregation from film media sources',
-      'Deployed on Vercel'
+      'Search and filters backed by a TMDB-sourced movie database',
+      'Box office results, upcoming releases and film news in one application',
+      'Ongoing work on navigation, readability and mobile use',
+      'React and API integrations, deployed on Vercel'
     ],
     skills: ['React', 'JavaScript', 'API Integration', 'UI/UX', 'Vercel'],
     thumb: 'images/projects/moviemate-thumb.webp',
     hover: 'images/projects/moviemate_hover.webp',
     link: 'https://themoviemate.vercel.app/',
-    linkLabel: 'Open Live App'
+    linkLabel: 'Open the live app',
+    type: 'Personal application',
+    archived: false
   },
   {
     id: 'netflix',
     category: 'film',
-    title: 'Netflix Content Strategy Analysis',
-    shortDesc: 'Netflix\'s movie catalog analysed by genre, region and audience rating, to show where the content investment goes.',
-    fullDesc: 'An analysis of Netflix\'s movie strategy: which genres dominate, which regions are prioritized, and how audience ratings line up with volume and investment. Published on Medium with the charts.',
+    title: 'Netflix catalogue analysis',
+    shortDesc: 'Explored the catalogue by genre, country, release year and audience rating.',
+    fullDesc: 'An exploratory analysis of Netflix catalogue composition and audience ratings. I compared title counts across genres, countries and release years. Catalogue volume does not measure content investment, and audience ratings are not a complete measure of quality or commercial success.',
     highlights: [
-      'Analysis of 8,000+ Netflix titles across genres, countries, and release years',
-      'Genre market share trends over time, identifying strategic pivots',
-      'Regional production breakdown: where Netflix invests and why',
-      'Rating distribution analysis: the quality vs quantity trade-off',
-      'Published on Medium with embedded visualizations'
+      'Compared more than 8,000 catalogue titles across genres, countries and release years',
+      'Tracked genre shares and regional title counts',
+      'Compared audience ratings with release volume',
+      'Published the analysis and charts on Medium'
     ],
     skills: ['Python', 'Pandas', 'Matplotlib', 'Data Visualization', 'Storytelling'],
     thumb: 'images/projects/netflix.jpg',
     hover: 'images/projects/netflix-verso.png',
     link: 'https://medium.com/@alan.vourch/netflix-by-the-numbers-a-content-strategy-perspective-4fb88789f476',
-    linkLabel: 'Read on Medium'
+    linkLabel: 'Read on Medium',
+    type: 'Public-data analysis',
+    archived: true
   },
   {
     id: 'movies-dataset',
     category: 'film',
-    title: 'Ultimate Movies Dataset',
-    shortDesc: 'A daily-updated Kaggle dataset of 1 million movies with 25k views and 7k downloads: box office, ratings and production data.',
-    fullDesc: 'The dataset behind most of my film projects: 1 million+ movies sourced from TMDB and refreshed daily, covering revenue, ratings, genres, languages, cast, and crew across 30+ fields per title. 25k views and 7k downloads on Kaggle.',
+    title: 'Movie dataset and daily pipeline',
+    shortDesc: 'Built a public dataset of more than one million films, with an automated Python pipeline for extraction, updates and data checks.',
+    fullDesc: 'A public TMDB-sourced dataset covering more than one million films and over 30 fields, including revenue, budgets, ratings, genres, languages, cast and crew. I built the initial extraction and the daily update pipeline in Python. The work handles rate limits, partial failures, duplicates and field validation. Current usage figures and update history are available on Kaggle.',
     highlights: [
-      '1 million+ movie records, updated daily via automated pipeline',
-      '30+ data fields: revenue, budget, cast, crew, genres, ratings, languages',
-      'Built the extraction and update pipeline from scratch (Python + TMDB API)',
-      '25k views and 7k downloads from the Kaggle data community'
+      'More than one million film records, with a scheduled daily update pipeline',
+      'Initial extraction handles pagination, API rate limits and recovery after partial failures',
+      'Incremental updates process new and changed records, with merge checks and error logging',
+      'Supports my film analyses and MovieMate; dataset access and current usage figures are public on Kaggle'
     ],
     skills: ['Python', 'API', 'Data Engineering', 'Kaggle', 'Pandas'],
     thumb: 'images/projects/moviedataset.webp',
     hover: 'images/projects/dataset4.webp',
     link: 'https://www.kaggle.com/datasets/alanvourch/tmdb-movies-daily-updates/data',
-    linkLabel: 'Explore Dataset on Kaggle'
+    linkLabel: 'Explore the dataset on Kaggle',
+    type: 'Personal data project',
+    archived: false,
+    resources: [
+      {
+        label: 'Daily update code',
+        url: 'https://www.kaggle.com/code/alanvourch/tmdb-movies-daily-update/notebook'
+      },
+      {
+        label: 'Initial extraction code',
+        url: 'https://www.kaggle.com/code/alanvourch/tmdb-movies-data-extraction/notebook'
+      }
+    ]
   },
   {
     id: 'tableau-boxoffice',
     category: 'film',
-    title: 'Tableau: Box Office & IMDb Trends',
-    shortDesc: 'Tableau dashboard of box office revenue and IMDb ratings by genre and decade over 60 years.',
-    fullDesc: 'How movie genres have performed at the box office across six decades, and how audience ratings have tracked or diverged from commercial success.',
+    title: 'Tableau: box office and IMDb trends',
+    shortDesc: 'A Tableau dashboard comparing box office revenue and IMDb ratings by genre and decade over 60 years.',
+    fullDesc: 'The dashboard follows box office performance by genre across six decades and compares commercial results with audience ratings. Box office revenue is not profit, and comparisons across decades require care with inflation and data coverage.',
     highlights: [
-      'Genre revenue trends from the 1960s to present, animated timeline view',
-      'IMDb ratings vs box office: the quality/profitability correlation',
-      'Decade-by-decade genre market share comparison',
-      'Interactive filters for genre, decade, and budget tier',
+      'Animated view of genre revenue over the historical period covered by the dataset',
+      'Comparison of IMDb ratings with box office results',
+      'Genre market share by decade',
+      'Interactive filters for genre, decade and budget tier',
       'Published on Tableau Public'
     ],
     skills: ['Tableau', 'Data Visualization', 'Storytelling', 'Film Data'],
     thumb: 'images/projects/tableaucine.webp',
     hover: 'images/projects/tableaubo2.webp',
     link: 'https://public.tableau.com/app/profile/alan.vourch/viz/BoxOfficeHitsbyGenreandDecade/Dashboard',
-    linkLabel: 'Open in Tableau'
+    linkLabel: 'Open in Tableau',
+    type: 'Public-data analysis',
+    archived: true
   },
   {
     id: 'pbi-cinema',
     category: 'film',
-    title: 'Power BI: Cinema Dashboard',
-    shortDesc: 'Power BI dashboard of box office and IMDb data: studio rankings, genre breakdowns and trends across years.',
-    fullDesc: 'A Power BI dashboard built on my movie dataset, combining box office and IMDb data, with filters and drill-down across studios, genres and years.',
+    title: 'Power BI cinema dashboard',
+    shortDesc: 'A Power BI dashboard that ranks studios and tracks box office and IMDb results across genres and years.',
+    fullDesc: 'I built this Power BI dashboard on my film dataset. It combines box office and IMDb data, with filters and drill-downs for studios, genres and years.',
     highlights: [
-      'Studio performance ranking by revenue, volume, and average rating',
+      'Ranks studio performance by revenue, volume and average rating',
       'Genre breakdowns with year-over-year trend comparisons',
       'IMDb ratings alongside commercial performance',
-      'Cross-filtering across all visuals'
+      'Cross-filters every visual on the page'
     ],
     skills: ['Power BI', 'DAX', 'Data Modeling', 'Visualization'],
     thumb: 'images/projects/pbi-movie.webp',
     hover: 'images/projects/pbi_cinema.webp',
     link: 'https://app.powerbi.com/view?r=eyJrIjoiN2MzZjI5OTgtNmI2OC00ZDkzLWJjM2YtMWZmYmIyYzQzMWMzIiwidCI6Ijg5NTkwMmNlLTUzMWMtNDJjNi05YTMwLTA3YjRkZjUxYzNiMyJ9&pageName=5981d12bcd3a65531c02',
-    linkLabel: 'Open in Power BI'
+    linkLabel: 'Open in Power BI',
+    type: 'Public-data analysis',
+    archived: true
   },
   {
     id: 'a24-analysis',
     category: 'film',
-    title: 'A24 Movies Analysis',
-    shortDesc: "Data analysis of A24's 130+ films: genre mix, budgets, box office against critical reception, and recurring talent.",
-    fullDesc: "A look at A24's catalogue with data: genre mix, budget strategy, box office against critical reception, international performance, and talent patterns.",
+    title: 'A24 film analysis',
+    shortDesc: 'An analysis of more than 130 A24 films, covering genres, budgets, box office, reviews and recurring talent.',
+    fullDesc: 'I analysed A24\'s catalogue to understand its genre mix, budget choices, box office performance, critical reception and recurring creative talent. Revenue-to-budget multiples do not account for marketing, distribution shares or all other costs, so they are not measures of net profitability.',
     highlights: [
-      "Full catalog analysis: 130+ A24 films across genres, years, and budgets",
-      "Budget efficiency: revenue multiples vs major studio comparisons",
-      "Critical vs commercial success: the A24 pattern",
-      "Director and actor network, identifying recurring talent",
-      "Genre evolution: how A24's output has shifted since 2010"
+      'Analysed more than 130 A24 films across genres, years and budget levels',
+      'Compared revenue multiples with major studios',
+      'Compared critical reception with commercial performance',
+      'Mapped recurring directors and actors',
+      'Tracked changes in A24\'s genre mix across the dataset\'s release years'
     ],
     skills: ['Python', 'Pandas', 'Matplotlib', 'Seaborn', 'Data Analysis'],
     thumb: 'images/projects/a24.jpg',
     hover: 'images/projects/a241.webp',
     link: 'https://www.kaggle.com/code/alanvourch/a24-movies-analysis',
-    linkLabel: 'Open on Kaggle'
+    linkLabel: 'Open on Kaggle',
+    type: 'Public-data analysis',
+    archived: true
   },
   {
     id: 'movies-update',
     category: 'film',
-    title: 'Movies Dataset: Daily Update Pipeline',
-    shortDesc: 'Python pipeline that refreshes the Ultimate Movies Dataset every day with new releases and updated ratings, about 500 records a run.',
-    fullDesc: 'The pipeline runs daily, pulls new releases and rating updates from TMDB, and merges them into the 1M+ movie dataset without duplication or data loss.',
+    title: 'Daily update pipeline for the movies dataset',
+    shortDesc: 'A Python pipeline that refreshes about 500 film records each day with new releases and updated ratings.',
+    fullDesc: 'The pipeline runs every day, pulls new releases and rating changes from TMDB, then merges them into the dataset of more than 1 million films without duplicates or lost records.',
     highlights: [
-      'Scheduled through Kaggle notebooks, with no separate infrastructure',
-      'Incremental update logic: only processes changes, not full re-scrapes',
-      'Deduplication and merge logic with conflict resolution',
-      'Error handling and logging to monitor each run',
-      'Handles 500+ new or updated records per daily run'
+      'Runs on a schedule in Kaggle notebooks without separate infrastructure',
+      'Processes only new and changed records instead of scraping the full dataset again',
+      'Handles duplicates and conflicting updates during the merge',
+      'Logs errors and run status',
+      'Processes more than 500 new or updated records on a typical day'
     ],
     skills: ['Python', 'API', 'Pipeline Engineering', 'Automation', 'Pandas'],
     thumb: 'images/projects/update.webp',
     hover: 'images/projects/update1.webp',
     link: 'https://www.kaggle.com/code/alanvourch/tmdb-movies-daily-update/notebook',
-    linkLabel: 'View Pipeline on Kaggle'
+    linkLabel: 'View the pipeline on Kaggle',
+    type: 'Public-data analysis',
+    archived: false,
+    bundledInto: 'movies-dataset'
   },
   {
     id: 'movies-extraction',
     category: 'film',
-    title: 'Movies Data Extraction',
-    shortDesc: 'The extraction behind the Ultimate Movies Dataset: 1 million movies and 30 fields from the TMDB API, with rate limiting and data quality checks.',
-    fullDesc: 'The first full extract of the movie dataset: 1 million records pulled from the TMDB API with rate limiting, pagination, recovery from partial failures, field normalization, and validation.',
+    title: 'Movie data extraction',
+    shortDesc: 'The initial extraction behind the movies dataset: more than 1 million titles and 30 fields from the TMDB API, with rate limits and data-quality checks built in.',
+    fullDesc: 'This was the first full extraction for the dataset. It pulled more than 1 million records from the TMDB API and handled rate limits, pagination and recovery after partial failures. The process also standardized and validated each field.',
     highlights: [
-      'Rate limit handling and retry logic',
-      'Paginated extraction covering 1M+ titles across all TMDB categories',
-      '30 fields per movie: revenue, budget, cast, crew, genres, ratings, languages, production',
-      'Field normalization and type validation built into the pipeline',
-      'Runs once for the full extract, then the update pipeline takes over'
+      'Handles API rate limits and retries failed requests',
+      'Uses pagination to extract more than 1 million titles across TMDB categories',
+      'Collects 30 fields per film, including revenue, budget, cast, crew, genres, ratings and languages',
+      'Standardizes fields and validates data types during extraction',
+      'Runs once for the full extract, after which the daily update pipeline takes over'
     ],
     skills: ['Python', 'API Engineering', 'Data Extraction', 'Pandas', 'Error Handling'],
     thumb: 'images/projects/extraction.webp',
     hover: 'images/projects/extraction1.webp',
     link: 'https://www.kaggle.com/code/alanvourch/tmdb-movies-data-extraction/notebook',
-    linkLabel: 'View on Kaggle'
+    linkLabel: 'View on Kaggle',
+    type: 'Public-data analysis',
+    archived: false,
+    bundledInto: 'movies-dataset'
   }
 ];
